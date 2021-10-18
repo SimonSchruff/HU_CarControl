@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="40"
+   height="40"
+   viewBox="0 0 10.583333 10.583333"
+   version="1.1"
+   id="svg5"
+   inkscape:export-filename="C:\Users\gamml\Documents\UnityCar\Unity\CarControl\Assets\InGameObjects\Boat\BridgetSprite.png"
+   inkscape:export-xdpi="76.800003"
+   inkscape:export-ydpi="76.800003"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="EmergencySprite.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="true"
+     width="40px"
+     inkscape:zoom="4.4166667"
+     inkscape:cx="22.075472"
+     inkscape:cy="18.226415"
+     inkscape:window-width="1366"
+     inkscape:window-height="715"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid31" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient852">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop848" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop850" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient852"
+       id="radialGradient854"
+       cx="5.2916665"
+       cy="5.2916665"
+       fx="5.2916665"
+       fy="5.2916665"
+       r="5.2916665"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect33"
+       style="fill:#ffffff;stroke-width:0.209172"
+       d="m 2.910417,-6.6145831 -5.2916666,2.645833 5.2916666,2.6458333 h 11.641666 v -5.2916663 z"
+       inkscape:export-filename="C:\Users\gamml\Documents\UnityCar\Unity\CarControl\Assets\InGameObjects\Boat\BoatSprite.png"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="rect2089"
+       width="18.520834"
+       height="17.197916"
+       x="21.166666"
+       y="0" />
+    <circle
+       style="fill:url(#radialGradient854);stroke-width:0.264583;fill-opacity:1"
+       id="path31"
+       cx="5.2916665"
+       cy="5.2916665"
+       r="5.2916665"
+       inkscape:export-filename="C:\Users\gamml\Documents\UnityCar\Unity\CarControl\Assets\InGameObjects\Cars\Emergency\EmergencyLightsSprite.png"
+       inkscape:export-xdpi="153.60001"
+       inkscape:export-ydpi="153.60001" />
+  </g>
+</svg>

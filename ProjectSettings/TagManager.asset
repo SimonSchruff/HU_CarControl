@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - TrafficLight
+  - TrafficLightClick
+  - CarInner
+  - CarOuter
+  - BoatDetect
+  - BoatCollider
+  - Boat
+  - ChangeLane
+  - SpotDetect
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - ContinueLane
+  - Water
+  - UI
+  - CarInner
+  - CarInFrontDetect
+  - BridgeCarDetect
+  - BridgetBoatDetect
+  - TrafficLight
+  - Boat
+  - Spot
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
