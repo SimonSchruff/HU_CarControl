@@ -7,6 +7,7 @@ public class NBackGameManager : MonoBehaviour
 {
     public static NBackGameManager Instance; 
 
+    
     public enum GameState
     {
         instructions, 
@@ -15,30 +16,34 @@ public class NBackGameManager : MonoBehaviour
     }
     public GameState gameState; 
 
-    GameObject letterObject; 
-    Text letterTextObj; 
-
-    [Header("Variables")]
-
+    
+    
+    
+    [Header("Timer")]
+    public float letterShowSec = 0.5f; 
+    public float letterWaitSec = 2.5f; 
     float timer; 
     float hideTimer; 
 
 
-    public float letterShowSec = 0.5f; 
-    public float letterWaitSec = 2.5f; 
-
+    [Header("Letter Objects, Lists, and Variables")]
+    public string currentLetter; 
     //Letters that are randomly selected are directly assigned to List in inspector
     public List<string> lettersOfChoice = new List<string>(); 
-    List<string> usedLetters = new List<string>(); 
-    string currentLetter; 
+    public List<string> usedLetters = new List<string>(); 
+    string correctLetter = "A";
+    public bool inputHappened; 
 
-
+    bool newLetterRdy = true; 
 
 
 
     [Header("UI References")]
     public GameObject InstructionObjects; 
     public GameObject RunningGameObjects; 
+    GameObject letterObject; 
+    Text letterTextObj; 
+
     
     void Awake()
     {
@@ -75,7 +80,11 @@ public class NBackGameManager : MonoBehaviour
             case GameState.running: 
             InstructionObjects.SetActive(false); 
             RunningGameObjects.SetActive(true); 
+
             //Start Game Logic
+            if(newLetterRdy == true)
+                StartCoroutine(OneLetterPeriod()); 
+
             break; 
 
             case GameState.gameOver: 
@@ -85,36 +94,39 @@ public class NBackGameManager : MonoBehaviour
         }
 
 
+        // OLD VERSION 
+        /*
         if(gameState == GameState.running)
         {
-
+            
             timer += Time.deltaTime;  
-            hideTimer += Time.deltaTime; 
-
+            hideTimer += Time.deltaTime;
             
-            // TO DO: 
-
-            // Show Numbers for .5s 
-            // Black period in between of 2.5s 
-            // Total of 3s for people to respond to number
-
-            //Show Number
-            //Save Current Letter, that is being shown and add to usedLetters list
-
-            
-
-
             if ( timer > letterShowSec ) //Hide Letter after .5sec
             {
                 
                 timer = 0; 
+
+                if(currentLetter == correctLetter && inputHappened == false)
+                    Debug.Log("Correct Letter Missed"); 
+                else if ( currentLetter != correctLetter && inputHappened == false )
+                    Debug.Log(" No Input "); 
+
                 letterObject.SetActive(false); 
 
                 if ( hideTimer >= letterWaitSec ) // Show new Letter after Wait Period 
                 {
                     hideTimer = 0; 
 
+                    // If very first letter "correct" usedLetters.count - 2 is out of Range
+                    if( usedLetters.Count > 1 )
+                        correctLetter = usedLetters[usedLetters.Count - 2]; 
+
                     letterTextObj.text = RandomizeLetter(); 
+                    currentLetter = letterTextObj.text; 
+                    usedLetters.Add(currentLetter); 
+                    
+                    inputHappened = false; 
                     letterObject.SetActive(true); 
                 }
 
@@ -123,37 +135,73 @@ public class NBackGameManager : MonoBehaviour
 
             
 
-        }
+        }*/
         
+    }
+
+    IEnumerator OneLetterPeriod()
+    {
+        newLetterRdy = false; 
+
+        // If very first letter "correct" usedLetters.count - 2 is out of Range
+            if( usedLetters.Count > 1 )
+                correctLetter = usedLetters[usedLetters.Count - 2]; 
+
+        letterTextObj.text = RandomizeLetter(); 
+        currentLetter = letterTextObj.text; 
+        usedLetters.Add(currentLetter); 
+
+        inputHappened = false; 
+        letterObject.SetActive(true); 
+
+        yield return new WaitForSeconds(letterShowSec); 
+
+        letterObject.SetActive(false); 
+
+        yield return new WaitForSeconds(letterWaitSec); 
+
+        //Events if no Input happened during one letter period
+        if(!inputHappened && currentLetter == correctLetter)
+            Debug.Log("Match missed! "); 
+        if(!inputHappened && currentLetter != correctLetter)
+            Debug.Log("Mismatch missed!"); 
+
+
+        newLetterRdy = true; 
+
+
     }
 
     string RandomizeLetter()
     {
-        // Get Random Letter of list usedLetters
-        // 33 % chance of correcct letter ( From 2 steps ago )
-
         string newLetter = "A"; 
-
+     
+        // Create 1/3 chance of "correct" letter 
         int rand = Random.Range(1,4); 
-        
+        if(usedLetters.Count < 2 )
+            rand = 1; 
+
         switch(rand)
         {
             case 1: 
             case 2: 
-                //show new random letter
-                //newLetter = lettersOfChoice[Random.Range(0, lettersOfChoice.Count + 1)]; 
-                newLetter = "B"; 
-                //TO DO: Filter for random selection of correct letter
+                //Create new random letter
+                string tempLetter = "A"; 
+                tempLetter = lettersOfChoice[Random.Range(0, lettersOfChoice.Count)]; 
+                // If random letter is the same as correct letter, repeat randomizing until different letter
+                while( tempLetter  == correctLetter )
+                {
+                    tempLetter = lettersOfChoice[Random.Range(0, lettersOfChoice.Count)]; 
+                }
+                newLetter = tempLetter; 
             break; 
 
             case 3: 
+                //Show "Correct" Letter
                 Debug.Log("Correct Letter"); 
-                newLetter = "A"; 
+                newLetter = correctLetter; 
             break; 
 
-            default: 
-                newLetter = "C";
-                break; 
         }
 
         return newLetter; 
@@ -161,14 +209,9 @@ public class NBackGameManager : MonoBehaviour
         
     }
 
-    void GetNewLetter()
-    {
-        letterTextObj.text = RandomizeLetter(); 
-        currentLetter = letterTextObj.ToString(); 
-        usedLetters.Add(currentLetter); 
 
-         
-    }
+
+   
 
     public void ChangeGameState(int i)
     {
@@ -180,6 +223,42 @@ public class NBackGameManager : MonoBehaviour
             break; 
             case 1 : 
             gameState = GameState.running; 
+            break; 
+        }
+    }
+
+    public void MatchMismatchButtonEvent ( int i )
+    {
+        if( inputHappened )
+            return; 
+        else
+            inputHappened = true; 
+
+        switch(i)
+        {
+            //Match Button 
+            case 0: 
+                if ( currentLetter == correctLetter)
+                {
+                    Debug.Log("Correct Answer"); 
+                }
+                else
+                {
+                    Debug.Log("False Answer"); 
+                }
+
+            break; 
+            //Mismatch Button 
+            case 1: 
+                if ( currentLetter == correctLetter)
+                    {
+                        Debug.Log("False Answer"); 
+                    }
+                    else
+                    {
+                        Debug.Log("Correct Answer"); 
+                    }
+
             break; 
         }
     }
