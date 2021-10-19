@@ -13,6 +13,7 @@ TagManager:
   - Boat
   - ChangeLane
   - SpotDetect
+  - letterObj
   layers:
   - Default
   - TransparentFX
