@@ -11,6 +11,8 @@ public class SpotSimScript : SimulatedParent
     [SerializeField] Text textRef;
     public int id;
 
+    public bool wasFallInWaterCauseJam = false;
+
     public float spotSize = 1f;
     CircleCollider2D col;
     public List<TrafficLightScript> trafficLights = new List<TrafficLightScript>();
@@ -21,6 +23,7 @@ public class SpotSimScript : SimulatedParent
         UpdateColRadius();
     }
 
+
     public override void InitSimulation()
     {
         base.InitSimulation();
@@ -30,6 +33,7 @@ public class SpotSimScript : SimulatedParent
     private void UpdateColRadius()
     {
         col = GetComponent<CircleCollider2D>();
+        col.enabled = true;
 
         col.radius = spotSize / 2;
 
@@ -52,10 +56,7 @@ public class SpotSimScript : SimulatedParent
                 trafficLights.Add(tls);
             } 
         }
-        if (editorPositioning)
-            col.enabled = true;
-        else
-            col.enabled = simState == simulationState.game ? false : true;
+
 
         try
         {
@@ -66,6 +67,12 @@ public class SpotSimScript : SimulatedParent
         catch {}
         ChangeText("");
 
+        StartCoroutine(WaitFrame());
+    }
+    IEnumerator WaitFrame ()
+    {
+        yield return null;
+        col.enabled = simState == simulationState.game ? false : true;
     }
 
     public override void UpdateSimulation(float simStep)

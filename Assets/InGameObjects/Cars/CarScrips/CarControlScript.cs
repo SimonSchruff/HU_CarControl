@@ -9,8 +9,6 @@ public class CarControlScript : SimulatedParent
     [SerializeField] Score.PointTypes crashPointTyp = Score.PointTypes.carCrash;
     [SerializeField] Score.PointTypes inWaterPointTyp = Score.PointTypes.carInWater;
 
-    [SerializeField] int maxCarsInRow = 4;
-
     public bool isEmergency = false;
     PathCreator pathRef;
     public int pathCounter;
@@ -33,6 +31,10 @@ public class CarControlScript : SimulatedParent
     public int actualWaitingLightID;
     public int carsInRowCounter;
     TrafficLightScript waitForGreenTrafLightRef;
+
+    //CarInFront
+    public double waitCarInFrontStartTime = 0;
+    public float minBridgeCrossTime = .5f;
 
     //SIM
     float simSteps;
@@ -317,6 +319,7 @@ public class CarControlScript : SimulatedParent
         if(stop)
         {
             state = driveState.waitingCarInFront;
+            waitCarInFrontStartTime = Time.realtimeSinceStartupAsDouble;
             StopEmergency();
         }
         else
@@ -408,7 +411,7 @@ public class CarControlScript : SimulatedParent
             }
             if(found && spot != null)
             {
-                SimulationControlScript.sim.AddCrash(spot, amount);
+                SimulationControlScript.sim.AddCrash(spot, amount, this);
             }
 
 
