@@ -14,6 +14,9 @@ TagManager:
   - ChangeLane
   - SpotDetect
   - letterObj
+  - levelTextObj
+  - timerTextObj
+  - letterTextObj
   layers:
   - Default
   - TransparentFX

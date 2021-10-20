@@ -8,13 +8,25 @@ public class NBackGameManager : MonoBehaviour
     public static NBackGameManager Instance; 
 
     
+    [HideInInspector]
     public enum GameState
     {
+        timer,
         instructions, 
         running, 
         gameOver
     }
     public GameState gameState; 
+
+    [HideInInspector]
+    public enum CurrentLevel
+    {
+        training,
+        level01,
+        level02,
+        level03
+    }
+    public CurrentLevel currentLevel;
 
     
     
@@ -27,24 +39,36 @@ public class NBackGameManager : MonoBehaviour
 
 
     [Header("Letter Objects, Lists, and Variables")]
+    public int n = 2; 
     public string currentLetter; 
     //Letters that are randomly selected are directly assigned to List in inspector
     public List<string> lettersOfChoice = new List<string>(); 
     public List<string> usedLetters = new List<string>(); 
     string correctLetter = "A";
     public bool inputHappened; 
-
     bool newLetterRdy = true; 
+    bool newTimerRdy = true; 
 
 
 
     [Header("UI References")]
     public GameObject InstructionObjects; 
     public GameObject RunningGameObjects; 
-    GameObject letterObject; 
-    Text letterTextObj; 
+    public GameObject TimerGameObjects; 
+    public Text levelTextObj; 
+    public Text timerTextObj; 
+    public GameObject letterObject; 
+    public Text letterTextObj; 
+    public Button[] Buttons = new Button[2]; 
 
     
+    /*
+        [] Create Timer before game starts
+        [] Functionality of levels / trial level
+        [] Update Instructions UI 
+        [] Visually Disable Buttons for first n Numbers
+    */
+
     void Awake()
     {
         //Singleton
@@ -61,8 +85,13 @@ public class NBackGameManager : MonoBehaviour
     
         gameState = GameState.instructions; 
 
-        letterObject = GameObject.FindGameObjectWithTag("letterObj"); 
-        letterTextObj = letterObject.GetComponentInChildren<Text>(); 
+        
+        //letterObject = GameObject.FindGameObjectWithTag("letterObj"); 
+        //letterTextObj = letterObject.GetComponentInChildren<Text>();
+
+        //levelTextObj = GameObject.FindGameObjectWithTag("levelTextObj").GetComponent<Text>();
+        //timerTextObj = GameObject.FindGameObjectWithTag("timerTextObj").GetComponent<Text>();
+
     }
 
     void Update()
@@ -71,20 +100,29 @@ public class NBackGameManager : MonoBehaviour
 
         switch(gameState)
         {
+            case GameState.timer: 
+                TimerGameObjects.SetActive(true); 
+                InstructionObjects.SetActive(false); 
+                RunningGameObjects.SetActive(false);
+                
+                if(newTimerRdy)
+                    StartCoroutine(Timer()); 
+            break; 
+
             case GameState.instructions: 
-            //Show Instructions UI
-            InstructionObjects.SetActive(true); 
-            RunningGameObjects.SetActive(false); 
+                TimerGameObjects.SetActive(false);
+                InstructionObjects.SetActive(true); 
+                RunningGameObjects.SetActive(false); 
             break; 
 
             case GameState.running: 
-            InstructionObjects.SetActive(false); 
-            RunningGameObjects.SetActive(true); 
+                TimerGameObjects.SetActive(false);
+                InstructionObjects.SetActive(false); 
+                RunningGameObjects.SetActive(true); 
 
-            //Start Game Logic
-            if(newLetterRdy == true)
-                StartCoroutine(OneLetterPeriod()); 
-
+                //Start Game Logic
+                if(newLetterRdy)
+                    StartCoroutine(OneLetterPeriod()); 
             break; 
 
             case GameState.gameOver: 
@@ -94,48 +132,7 @@ public class NBackGameManager : MonoBehaviour
         }
 
 
-        // OLD VERSION 
-        /*
-        if(gameState == GameState.running)
-        {
-            
-            timer += Time.deltaTime;  
-            hideTimer += Time.deltaTime;
-            
-            if ( timer > letterShowSec ) //Hide Letter after .5sec
-            {
-                
-                timer = 0; 
-
-                if(currentLetter == correctLetter && inputHappened == false)
-                    Debug.Log("Correct Letter Missed"); 
-                else if ( currentLetter != correctLetter && inputHappened == false )
-                    Debug.Log(" No Input "); 
-
-                letterObject.SetActive(false); 
-
-                if ( hideTimer >= letterWaitSec ) // Show new Letter after Wait Period 
-                {
-                    hideTimer = 0; 
-
-                    // If very first letter "correct" usedLetters.count - 2 is out of Range
-                    if( usedLetters.Count > 1 )
-                        correctLetter = usedLetters[usedLetters.Count - 2]; 
-
-                    letterTextObj.text = RandomizeLetter(); 
-                    currentLetter = letterTextObj.text; 
-                    usedLetters.Add(currentLetter); 
-                    
-                    inputHappened = false; 
-                    letterObject.SetActive(true); 
-                }
-
-
-            }
-
-            
-
-        }*/
+        
         
     }
 
@@ -144,8 +141,21 @@ public class NBackGameManager : MonoBehaviour
         newLetterRdy = false; 
 
         // If very first letter "correct" usedLetters.count - 2 is out of Range
-            if( usedLetters.Count > 1 )
-                correctLetter = usedLetters[usedLetters.Count - 2]; 
+        // Disable Buttons if (Match/Mismatch is not possible)
+            if( usedLetters.Count >= n )
+            {
+                correctLetter = usedLetters[usedLetters.Count - n]; 
+                foreach(Button b in Buttons)
+                    b.interactable = true;
+                
+            }
+            else
+            {
+                foreach(Button b in Buttons)
+                    b.interactable = false;
+            }
+        
+        
 
         letterTextObj.text = RandomizeLetter(); 
         currentLetter = letterTextObj.text; 
@@ -163,8 +173,13 @@ public class NBackGameManager : MonoBehaviour
         //Events if no Input happened during one letter period
         if(!inputHappened && currentLetter == correctLetter)
             Debug.Log("Match missed! "); 
-        if(!inputHappened && currentLetter != correctLetter)
-            Debug.Log("Mismatch missed!"); 
+
+        if( usedLetters.Count > n )
+        {
+            if(!inputHappened && currentLetter != correctLetter)
+            Debug.Log("Mismatch missed!");
+        }
+         
 
 
         newLetterRdy = true; 
@@ -172,13 +187,31 @@ public class NBackGameManager : MonoBehaviour
 
     }
 
+
+    
+    IEnumerator Timer()
+    {
+        newTimerRdy = false; 
+
+        // Set to three
+        timerTextObj.text = "3"; 
+        yield return new WaitForSeconds(1); 
+        timerTextObj.text = "2";    
+        yield return new WaitForSeconds(1); 
+        timerTextObj.text = "1"; 
+        yield return new WaitForSeconds(1); 
+
+        gameState = GameState.running; 
+    }
+    
+
     string RandomizeLetter()
     {
         string newLetter = "A"; 
      
         // Create 1/3 chance of "correct" letter 
         int rand = Random.Range(1,4); 
-        if(usedLetters.Count < 2 )
+        if(usedLetters.Count <= n )
             rand = 1; 
 
         switch(rand)
@@ -189,15 +222,16 @@ public class NBackGameManager : MonoBehaviour
                 string tempLetter = "A"; 
                 tempLetter = lettersOfChoice[Random.Range(0, lettersOfChoice.Count)]; 
                 // If random letter is the same as correct letter, repeat randomizing until different letter
+                //Does this affect randomness of letters ? 
                 while( tempLetter  == correctLetter )
                 {
                     tempLetter = lettersOfChoice[Random.Range(0, lettersOfChoice.Count)]; 
                 }
                 newLetter = tempLetter; 
             break; 
-
+            //Show "Correct" Letter
             case 3: 
-                //Show "Correct" Letter
+                
                 Debug.Log("Correct Letter"); 
                 newLetter = correctLetter; 
             break; 
@@ -209,20 +243,39 @@ public class NBackGameManager : MonoBehaviour
         
     }
 
-
-
-   
-
     public void ChangeGameState(int i)
     {
         //Assign int in button etc. 
         switch(i)
         {
             case 0 : 
-            gameState = GameState.instructions; 
+            newTimerRdy = true; 
+            gameState = GameState.timer; 
             break; 
             case 1 : 
+            gameState = GameState.instructions; 
+            break; 
+            case 2 : 
             gameState = GameState.running; 
+            break; 
+        }
+    }
+
+    public void ChangeLevels(int i)
+    {
+        switch(i)
+        {
+            case 0 : 
+            currentLevel = CurrentLevel.training; 
+            break; 
+            case 1 : 
+            currentLevel = CurrentLevel.level01; 
+            break; 
+            case 2 : 
+            currentLevel = CurrentLevel.level02; 
+            break; 
+            case 3 : 
+            currentLevel = CurrentLevel.level03; 
             break; 
         }
     }
