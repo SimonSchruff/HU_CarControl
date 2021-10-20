@@ -52,12 +52,13 @@ public class SimulationControlScript : MonoBehaviour
     // Automatic Sim control
     public List<int> trafficLightsToTest = new List<int>();
     [SerializeField] int actualDepth = 0;
-    SpotSimScript actualSpotRef;
     int checkLightsCounter = 0;
     [SerializeField] List<int> changeTrafficLights = new List<int>();
     [SerializeField] Dictionary<int, float> durationMap = new Dictionary<int, float>();
 
     public List<TrafficLightScript> lightsToChangeInThisRun = new List<TrafficLightScript>();
+
+    public List<int> lightsToIgnore = new List<int>();
 
     bool wasCrash = false;
 
@@ -121,19 +122,19 @@ public class SimulationControlScript : MonoBehaviour
             if (actualDepth < simulationDepth)
             {
                 // Go One Layer deeper in simulation
-                if (actualSpotRef != null)
-                {
-                    foreach (TrafficLightScript tls in actualSpotRef.trafficLights)
-                    {
-                        trafficLightsToTest.Add(tls.trafficLightID);
-                    }
-                    actualDepth++;
-                }
-                else    // When no ref given
-                {
-                    FinishSim();
-                    finished = true;
-                }
+           //     if (actualSpotRef != null)
+          //      {
+           //         foreach (TrafficLightScript tls in actualSpotRef.trafficLights)
+           //         {
+         //              trafficLightsToTest.Add(tls.trafficLightID);
+         //           }
+          //          actualDepth++;
+          //      }
+              //  else    // When no ref given
+              //  {
+              //      FinishSim();
+             //       finished = true;
+             //   }
             }
             else
             {
@@ -250,7 +251,7 @@ public class SimulationControlScript : MonoBehaviour
 
     void RecommendTrafficLight (int id)
     {
-        GetTrafficLightRefFromID(id).LightClicked();
+       GetTrafficLightRefFromID(id).LightClicked();
     }
 
     int GetMaxScoreIndexFromTLScoreDict()
@@ -308,6 +309,7 @@ public class SimulationControlScript : MonoBehaviour
         checkedTL.Clear();
         trafficLightsToTest.Clear();
         trafficLightTestCounter = 0;
+        lightsToIgnore.Clear();
 
     }
 
@@ -374,7 +376,6 @@ public class SimulationControlScript : MonoBehaviour
 
 
         trafficLightScores.Clear();
-        actualSpotRef = null;
         actualSimRepeats = 0;
         IdPriorityMap.Clear();
         simObjects.Clear();
@@ -393,29 +394,23 @@ public class SimulationControlScript : MonoBehaviour
         trafficLightCounter = 0f;
     }
 
-    public void AddCrash (SpotSimScript spotRef, int priority)
+    public void AddCrash (SpotSimScript spotRef, int priority, CarControlScript carRef)
     {
-        /*    int i;
-                   if(IdPriorityMap.TryGetValue(spotRef.id, out i))
-                   {
-                       i += priority;
-                       IdPriorityMap[spotRef.id] = i;
-                   }
-                   else
-                   {
-                       i = priority;
-                       IdPriorityMap.Add(spotRef.id, priority);
-                   }   
-            */
-        //   wasCrash = true;
+        if(carRef.state == CarControlScript.driveState.waitingCarInFront)
+        {
+    //        if(Time.realtimeSinceStartupAsDouble - carRef.waitCarInFrontStartTime > carRef.minBridgeCrossTime)
+   //         {
+                AddScoreToTrafficLight(carRef.actualWaitingLightID, priority);
+                return;
+     //       }
+        }
 
+        
         foreach (TrafficLightScript tl in spotRef.trafficLights)
         {
             AddScoreToTrafficLight(tl.trafficLightID, priority*10);
         } 
 
-        actualSpotRef = spotRef;
-        SpotSimScript tempSpotRef;
     //    if (GameManager.GM.spotsInGame.TryGetValue(spotRef.id, out tempSpotRef))
     //        tempSpotRef.ChangeText(i.ToString());
     }
@@ -424,10 +419,11 @@ public class SimulationControlScript : MonoBehaviour
     {
         if(id == 0)
         {
-            UnityEngine.Debug.Log("0-ID");
+            Debug.Log("0-ID");
             return 0;
-
-        }    
+        }
+        if (lightsToIgnore.Exists(id))
+            return;
 
         int i = 0;
         try
