@@ -14,19 +14,11 @@ public class NBackGameManager : MonoBehaviour
         timer,
         instructions, 
         running, 
+        levelFinished, 
         gameOver
     }
     public GameState gameState; 
 
-    [HideInInspector]
-    public enum CurrentLevel
-    {
-        training,
-        level01,
-        level02,
-        level03
-    }
-    public CurrentLevel currentLevel;
 
     
     
@@ -39,6 +31,7 @@ public class NBackGameManager : MonoBehaviour
 
 
     [Header("Letter Objects, Lists, and Variables")]
+    public int currentLevel = 0; 
     public int n = 2; 
     public string currentLetter; 
     //Letters that are randomly selected are directly assigned to List in inspector
@@ -46,8 +39,13 @@ public class NBackGameManager : MonoBehaviour
     public List<string> usedLetters = new List<string>(); 
     string correctLetter = "A";
     public bool inputHappened; 
+    int stimuli = 0; 
+    public int stimuliShown = 25; 
+    int levelInt = 0; 
+    
     bool newLetterRdy = true; 
     bool newTimerRdy = true; 
+    bool switchedLevels = false; 
 
 
 
@@ -55,6 +53,8 @@ public class NBackGameManager : MonoBehaviour
     public GameObject InstructionObjects; 
     public GameObject RunningGameObjects; 
     public GameObject TimerGameObjects; 
+    public GameObject LevelFinishedGameObjects; 
+    public GameObject GameOverObjects; 
     public Text levelTextObj; 
     public Text timerTextObj; 
     public GameObject letterObject; 
@@ -63,10 +63,10 @@ public class NBackGameManager : MonoBehaviour
 
     
     /*
-        [] Create Timer before game starts
-        [] Functionality of levels / trial level
+        [x] Create Timer before game starts
+        [x] Functionality of levels / trial level
         [] Update Instructions UI 
-        [] Visually Disable Buttons for first n Numbers
+        [x] Visually Disable Buttons for first n Numbers
     */
 
     void Awake()
@@ -78,20 +78,8 @@ public class NBackGameManager : MonoBehaviour
             return;
         }
         Instance = this;
-    }
 
-    void Start()
-    {
-    
         gameState = GameState.instructions; 
-
-        
-        //letterObject = GameObject.FindGameObjectWithTag("letterObj"); 
-        //letterTextObj = letterObject.GetComponentInChildren<Text>();
-
-        //levelTextObj = GameObject.FindGameObjectWithTag("levelTextObj").GetComponent<Text>();
-        //timerTextObj = GameObject.FindGameObjectWithTag("timerTextObj").GetComponent<Text>();
-
     }
 
     void Update()
@@ -104,6 +92,8 @@ public class NBackGameManager : MonoBehaviour
                 TimerGameObjects.SetActive(true); 
                 InstructionObjects.SetActive(false); 
                 RunningGameObjects.SetActive(false);
+                LevelFinishedGameObjects.SetActive(false); 
+                GameOverObjects.SetActive(false); 
                 
                 if(newTimerRdy)
                     StartCoroutine(Timer()); 
@@ -113,55 +103,111 @@ public class NBackGameManager : MonoBehaviour
                 TimerGameObjects.SetActive(false);
                 InstructionObjects.SetActive(true); 
                 RunningGameObjects.SetActive(false); 
+                LevelFinishedGameObjects.SetActive(false); 
+                GameOverObjects.SetActive(false); 
             break; 
 
             case GameState.running: 
                 TimerGameObjects.SetActive(false);
                 InstructionObjects.SetActive(false); 
-                RunningGameObjects.SetActive(true); 
+                RunningGameObjects.SetActive(true);
+                LevelFinishedGameObjects.SetActive(false);
+                GameOverObjects.SetActive(false);   
 
-                //Start Game Logic
+                if(stimuli > stimuliShown)
+                {
+                    switchedLevels = false; 
+                    currentLevel++; 
+                }
+
+                //One Letter shown equals one run of coroutine
                 if(newLetterRdy)
                     StartCoroutine(OneLetterPeriod()); 
             break; 
 
+            case GameState.levelFinished:
+                TimerGameObjects.SetActive(false); 
+                InstructionObjects.SetActive(false); 
+                RunningGameObjects.SetActive(false);
+                LevelFinishedGameObjects.SetActive(true); 
+                GameOverObjects.SetActive(false); 
+
+            break; 
+
             case GameState.gameOver: 
-            //Show Restart Button ? 
-            //Save Score etc. 
+                TimerGameObjects.SetActive(false); 
+                InstructionObjects.SetActive(false); 
+                RunningGameObjects.SetActive(false);
+                LevelFinishedGameObjects.SetActive(false); 
+                GameOverObjects.SetActive(true); 
             break; 
         }
 
+        //After 25 Stimuli is reached level will be changed -> reset stimuli, change gameState etc. 
+        if(!switchedLevels)
+        {
+            switch(currentLevel)
+            {
+                case 0: //Training Level
 
+                break; 
+                case 1: 
+                levelTextObj.text = "Level 01"; 
+                stimuli = 0; 
+                gameState = GameState.levelFinished; 
+                switchedLevels = true; 
+                usedLetters.Clear(); 
+                break; 
+                case 2: 
+                levelTextObj.text = "Level 02"; 
+                stimuli = 0; 
+                gameState = GameState.levelFinished; 
+                switchedLevels = true; 
+                usedLetters.Clear(); 
+                break;  
+                case 3: 
+                levelTextObj.text = "Level 03"; 
+                stimuli = 0; 
+                gameState = GameState.gameOver; 
+                switchedLevels = true; 
+                
+                break; 
+            }
+        }
+
+
+        // Disable Button if input happened, or at beginning when no correct answer is possible
+        if( inputHappened || usedLetters.Count < n + 1)
+        {
+            foreach(Button b in Buttons)
+                b.interactable = false;
+        }
+        else if ( !inputHappened )
+        {
+            foreach(Button b in Buttons)
+                b.interactable = true;
+        }
         
         
     }
 
     IEnumerator OneLetterPeriod()
     {
-        newLetterRdy = false; 
-
-        // If very first letter "correct" usedLetters.count - 2 is out of Range
-        // Disable Buttons if (Match/Mismatch is not possible)
-            if( usedLetters.Count >= n )
-            {
-                correctLetter = usedLetters[usedLetters.Count - n]; 
-                foreach(Button b in Buttons)
-                    b.interactable = true;
-                
-            }
-            else
-            {
-                foreach(Button b in Buttons)
-                    b.interactable = false;
-            }
+        newLetterRdy = false;
+        inputHappened = false;  
+     
+        // Disable Buttons if (Match/Mismatch is not possible) 
+        // Correct letter only possible if usedLetters.Count is >= then n 
+        if( usedLetters.Count >= n )
+        {
+            correctLetter = usedLetters[usedLetters.Count - n]; 
+        }
         
-        
-
+        //Get new random letter, add it to list and show it
         letterTextObj.text = RandomizeLetter(); 
         currentLetter = letterTextObj.text; 
         usedLetters.Add(currentLetter); 
 
-        inputHappened = false; 
         letterObject.SetActive(true); 
 
         yield return new WaitForSeconds(letterShowSec); 
@@ -170,7 +216,7 @@ public class NBackGameManager : MonoBehaviour
 
         yield return new WaitForSeconds(letterWaitSec); 
 
-        //Events if no Input happened during one letter period
+        // If no Input happened during full letter period
         if(!inputHappened && currentLetter == correctLetter)
             Debug.Log("Match missed! "); 
 
@@ -181,10 +227,8 @@ public class NBackGameManager : MonoBehaviour
         }
          
 
-
+        stimuli++; 
         newLetterRdy = true; 
-
-
     }
 
 
@@ -201,15 +245,17 @@ public class NBackGameManager : MonoBehaviour
         timerTextObj.text = "1"; 
         yield return new WaitForSeconds(1); 
 
-        gameState = GameState.running; 
+        gameState = GameState.running;
+        newTimerRdy = true;  
     }
     
 
     string RandomizeLetter()
     {
-        string newLetter = "A"; 
+        string newLetter = "X"; 
      
         // Create 1/3 chance of "correct" letter 
+        // For first n letters no "correct" letter is possible
         int rand = Random.Range(1,4); 
         if(usedLetters.Count <= n )
             rand = 1; 
@@ -218,8 +264,7 @@ public class NBackGameManager : MonoBehaviour
         {
             case 1: 
             case 2: 
-                //Create new random letter
-                string tempLetter = "A"; 
+                string tempLetter = "X"; 
                 tempLetter = lettersOfChoice[Random.Range(0, lettersOfChoice.Count)]; 
                 // If random letter is the same as correct letter, repeat randomizing until different letter
                 //Does this affect randomness of letters ? 
@@ -229,18 +274,14 @@ public class NBackGameManager : MonoBehaviour
                 }
                 newLetter = tempLetter; 
             break; 
-            //Show "Correct" Letter
             case 3: 
-                
-                Debug.Log("Correct Letter"); 
+                //Debug.Log("Correct Letter"); 
                 newLetter = correctLetter; 
             break; 
 
         }
 
         return newLetter; 
-
-        
     }
 
     public void ChangeGameState(int i)
@@ -249,39 +290,26 @@ public class NBackGameManager : MonoBehaviour
         switch(i)
         {
             case 0 : 
-            newTimerRdy = true; 
-            gameState = GameState.timer; 
+                gameState = GameState.timer; 
             break; 
             case 1 : 
-            gameState = GameState.instructions; 
+                gameState = GameState.instructions; 
             break; 
             case 2 : 
-            gameState = GameState.running; 
+                gameState = GameState.running; 
             break; 
-        }
-    }
-
-    public void ChangeLevels(int i)
-    {
-        switch(i)
-        {
-            case 0 : 
-            currentLevel = CurrentLevel.training; 
+            case 3: 
+                gameState = GameState.levelFinished; 
             break; 
-            case 1 : 
-            currentLevel = CurrentLevel.level01; 
-            break; 
-            case 2 : 
-            currentLevel = CurrentLevel.level02; 
-            break; 
-            case 3 : 
-            currentLevel = CurrentLevel.level03; 
+            case 4: 
+                gameState = GameState.gameOver; 
             break; 
         }
     }
 
     public void MatchMismatchButtonEvent ( int i )
     {
+        // No double clicking of button during one full letter period
         if( inputHappened )
             return; 
         else
