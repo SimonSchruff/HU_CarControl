@@ -2471,7 +2471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offsetFromOriginal: 10
   simulationSteps: 0.035
-  simulationStepsAmount: 100
+  simulationStepsAmount: 150
   simulationStepRepeat: 1
   timeScale: 1
   isDelaySim: 0
