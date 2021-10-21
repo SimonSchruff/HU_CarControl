@@ -96,8 +96,11 @@ public class SimulationControlScript : MonoBehaviour
         {
             if (Assistance.assi.actualAssistance != Assistance.AssistanceTypes.Manual)
                 StartSim();
+            else
+                StartCoroutine(StartSimCoroutine());
         }
-        StartCoroutine(StartSimCoroutine());
+        else
+            StartCoroutine(StartSimCoroutine());
     }
 
     void FinishPart_Old()
@@ -172,7 +175,6 @@ public class SimulationControlScript : MonoBehaviour
 
     void FinishPart()
     {
-
         if (trafficLightsToTest.Count == 0)
         {
             if(trafficLightScores.Count == 0)
@@ -182,8 +184,8 @@ public class SimulationControlScript : MonoBehaviour
                 return;
             }
 
-            if (trafficLightTestCounter == 0)
-                copyOfStartScores = new Dictionary<int, int>(trafficLightScores);
+         //   if (trafficLightTestCounter == 0)
+        //        copyOfStartScores = new Dictionary<int, int>(trafficLightScores);
 
             int oldTLId = GetMaxScoreIndexFromTLScoreDict();
             if(oldTLId != 0)
@@ -208,9 +210,11 @@ public class SimulationControlScript : MonoBehaviour
             }
             else
             {
+                // When Score not better after change - ignore Light and start next sim
+                lightsToIgnore.Add(trafficLightsToTest[0]);
                 trafficLightsToTest.Clear();
                 ClearSimCache();
-                FinishSim();
+                StartCoroutine(ContinueSimAfterFrame());        
                 return;
 
 
@@ -231,13 +235,13 @@ public class SimulationControlScript : MonoBehaviour
 
         ClearSimCache();
 
-        if(trafficLightTestCounter > 1)
-        {
-            FinishSim();
+   //     if(trafficLightTestCounter > 1)
+  //      {
+   //         FinishSim();
            // Debug.Log("Finished Cause counter");
-        }
-        else
-        {
+   //     }
+  //      else
+   //     {
             if(trafficLightsToTest.Count > 0)
             {
                 StartCoroutine(ContinueSimAfterFrame());
@@ -246,7 +250,7 @@ public class SimulationControlScript : MonoBehaviour
             {
                 FinishSim();
             }
-        }
+  //      }
     }
 
     void RecommendTrafficLight (int id)
@@ -258,15 +262,15 @@ public class SimulationControlScript : MonoBehaviour
     {
         int maxTrafficLight = 0;
 
-        if (copyOfStartScores.Count >= 2)
+        if (trafficLightScores.Count >= 2)
         {
-            int temp = copyOfStartScores.Values.Max();
-            int tempIndex = copyOfStartScores.Values.ToList().IndexOf(temp);
-            maxTrafficLight = copyOfStartScores.Keys.ElementAt(tempIndex);
+            int temp = trafficLightScores.Values.Max();
+            int tempIndex = trafficLightScores.Values.ToList().IndexOf(temp);
+            maxTrafficLight = trafficLightScores.Keys.ElementAt(tempIndex);
         }
-        else if (copyOfStartScores.Count == 1)
+        else if (trafficLightScores.Count == 1)
         {
-            maxTrafficLight = copyOfStartScores.Keys.ElementAt(0);
+            maxTrafficLight = trafficLightScores.Keys.ElementAt(0);
         }
         return maxTrafficLight;
     } 
@@ -296,14 +300,7 @@ public class SimulationControlScript : MonoBehaviour
             cou++;
         //    GetTrafficLightRefFromID(i).ChangeText(cou.ToString());
         }
-        if (startSim)
-        {
-            startSim = false;
-            StartSim();
-        }
-        else
-            simFinished = true;
-
+        
         // Clear old Data
         oldTLHighestScore = 0;
         checkedTL.Clear();
@@ -311,6 +308,7 @@ public class SimulationControlScript : MonoBehaviour
         trafficLightTestCounter = 0;
         lightsToIgnore.Clear();
 
+        StartCoroutine(StartSimCoroutine());
     }
 
     public TrafficLightScript GetTrafficLightRefFromID (int id)
@@ -372,7 +370,7 @@ public class SimulationControlScript : MonoBehaviour
                 int temp = trafficLightScores[id];
                 GetTrafficLightRefFromID(id).ChangeText(temp.ToString());
             }
-        } catch { UnityEngine.Debug.LogError("Saved Debug"); }
+        } catch { Debug.LogError("Saved Debug"); }
 
 
         trafficLightScores.Clear();
@@ -453,141 +451,133 @@ public class SimulationControlScript : MonoBehaviour
 
     public void StartSim()
     {
-        if (simFinished)
+        SimulatedParent[] copyObj = FindObjectsOfType<SimulatedParent>();
+        foreach (SimulatedParent sp in copyObj)
         {
-            SimulatedParent[] copyObj = FindObjectsOfType<SimulatedParent>();
-            foreach (SimulatedParent sp in copyObj)
+            CarInFrontDetect CarInFrontCheck;
+            BoatColliderScript boatColScript;
+
+
+            if (sp.TryGetComponent<CarInFrontDetect>(out CarInFrontCheck))      // Car in Front Obj was created twice!
+            { }
+            else if (sp.TryGetComponent<BoatColliderScript>(out boatColScript)) //No spawn of additional boatCollider
+            { }
+
+            else
             {
-                CarInFrontDetect CarInFrontCheck;
-                BoatColliderScript boatColScript;
+                SimulatedParent tempRef = Instantiate(sp, sp.transform.position + new Vector3(0, offsetFromOriginal, 0), sp.transform.rotation);
+                simObjects.Add(tempRef);
+                tempRef.simState = SimulatedParent.simulationState.simulated;
 
-
-                if (sp.TryGetComponent<CarInFrontDetect>(out CarInFrontCheck))      // Car in Front Obj was created twice!
-                { }
-                else if (sp.TryGetComponent<BoatColliderScript>(out boatColScript)) //No spawn of additional boatCollider
-                { }
-
-                else
+                //DestroySpriteRenderers
+                if (destroyRenderers)
                 {
-                    SimulatedParent tempRef = Instantiate(sp, sp.transform.position + new Vector3(0, offsetFromOriginal, 0), sp.transform.rotation);
-                    simObjects.Add(tempRef);
-                    tempRef.simState = SimulatedParent.simulationState.simulated;
-
-                    //DestroySpriteRenderers
-                    if (destroyRenderers)
-                    {
-                        SpriteRenderer sr;
-                        if (tempRef.gameObject.TryGetComponent<SpriteRenderer>(out sr))
-                            Destroy(sr);
-                        try
-                        {
-                            Destroy(tempRef.gameObject.GetComponentInChildren<SpriteRenderer>());
-                        }
-                        catch { }
-                    }
-
-                    try         // Check if is car and then give probs over
-                    {
-                        CarControlScript car = (CarControlScript)tempRef;
-                        CarControlScript copyCar = (CarControlScript)sp;
-
-                        //Set settings of detect in front obj.
-                        CarInFrontDetect tempCarInFront = car.GetComponentInChildren<CarInFrontDetect>();
-                        tempCarInFront.simState = SimulatedParent.simulationState.simulated;
-                        simObjects.Add(tempCarInFront);
-                        //
-                        simCars.Add(car);
-                        car.state = copyCar.state;
-                        car.timeCounter = copyCar.timeCounter;
-                        car.carSpeed = copyCar.carSpeed;
-                        car.actualWaitingLightID = copyCar.actualWaitingLightID;
-                    }
-                    catch { }
-
+                    SpriteRenderer sr;
+                    if (tempRef.gameObject.TryGetComponent<SpriteRenderer>(out sr))
+                        Destroy(sr);
                     try
                     {
-                        BridgeScript bridge = (BridgeScript)tempRef;
-
-                        BoatColliderScript tempBoatCol = bridge.GetComponentInChildren<BoatColliderScript>();
-                        tempBoatCol.simState = SimulatedParent.simulationState.simulated;
-                        simObjects.Add(tempBoatCol);
-                    }
-                    catch { }
-
-                    try         // Check if is trafffic light
-                    {
-                        TrafficLightScript light = (TrafficLightScript)tempRef;
-                        simTrafficLights.Add(light);
-                    }
-                    catch { }
-
-                    try         // Check if is boatSpawner
-                    {
-                        BoatSpawnerScript boatSpawn = (BoatSpawnerScript)tempRef;
-                        boatSpawnerSim = boatSpawn;
-                    }
-                    catch { }
-
-                    try         // Check if is carSpawner
-                    {
-                        CarSpawner carSpawn = (CarSpawner)tempRef;
-                        carSpawnerList.Add(carSpawn);
+                        Destroy(tempRef.gameObject.GetComponentInChildren<SpriteRenderer>());
                     }
                     catch { }
                 }
-            }
-            // Assign Data from GameManager
-            SetStuffFromGameManager();
 
-            //Add traffic lights to change in Simulation
-            if (changeTrafficLights.Count > 0)
-            {
-                foreach (int tlID in changeTrafficLights)
+                try         // Check if is car and then give probs over
                 {
-                    foreach (TrafficLightScript tlRef in simTrafficLights)
-                    {
-                        if (tlRef.trafficLightID == tlID)
-                        {
-                            lightsToChangeInThisRun.Add(tlRef);
-                            break;
-                        }
-                    }
-                }
-            }
+                    CarControlScript car = (CarControlScript)tempRef;
+                    CarControlScript copyCar = (CarControlScript)sp;
 
-            if (trafficLightsToTest.Count > 0)      //Add the traffic light ref of the actual test Light
+                    //Set settings of detect in front obj.
+                    CarInFrontDetect tempCarInFront = car.GetComponentInChildren<CarInFrontDetect>();
+                    tempCarInFront.simState = SimulatedParent.simulationState.simulated;
+                    simObjects.Add(tempCarInFront);
+                    //
+                    simCars.Add(car);
+                    car.state = copyCar.state;
+                    car.timeCounter = copyCar.timeCounter;
+                    car.carSpeed = copyCar.carSpeed;
+                    car.actualWaitingLightID = copyCar.actualWaitingLightID;
+                }
+                catch { }
+
+                try
+                {
+                    BridgeScript bridge = (BridgeScript)tempRef;
+
+                    BoatColliderScript tempBoatCol = bridge.GetComponentInChildren<BoatColliderScript>();
+                    tempBoatCol.simState = SimulatedParent.simulationState.simulated;
+                    simObjects.Add(tempBoatCol);
+                }
+                catch { }
+
+                try         // Check if is trafffic light
+                {
+                    TrafficLightScript light = (TrafficLightScript)tempRef;
+                    simTrafficLights.Add(light);
+                }
+                catch { }
+
+                try         // Check if is boatSpawner
+                {
+                    BoatSpawnerScript boatSpawn = (BoatSpawnerScript)tempRef;
+                    boatSpawnerSim = boatSpawn;
+                }
+                catch { }
+
+                try         // Check if is carSpawner
+                {
+                    CarSpawner carSpawn = (CarSpawner)tempRef;
+                    carSpawnerList.Add(carSpawn);
+                }
+                catch { }
+            }
+        }
+        // Assign Data from GameManager
+        SetStuffFromGameManager();
+
+        //Add traffic lights to change in Simulation
+        if (changeTrafficLights.Count > 0)
+        {
+            foreach (int tlID in changeTrafficLights)
             {
-                int tempID = trafficLightsToTest[trafficLightsToTest.Count - 1];
                 foreach (TrafficLightScript tlRef in simTrafficLights)
                 {
-                    if (tlRef.trafficLightID == tempID)
+                    if (tlRef.trafficLightID == tlID)
                     {
                         lightsToChangeInThisRun.Add(tlRef);
                         break;
                     }
                 }
             }
+        }
 
-            foreach (SimulatedParent sp in simObjects)      // init Sim of all objects
+        if (trafficLightsToTest.Count > 0)      //Add the traffic light ref of the actual test Light
+        {
+            int tempID = trafficLightsToTest[trafficLightsToTest.Count - 1];
+            foreach (TrafficLightScript tlRef in simTrafficLights)
             {
-
-                if (sp != null)
+                if (tlRef.trafficLightID == tempID)
                 {
-                    sp.InitSimulation();
-                }
-                else
-                {
-                    toDeleteList.Add(sp);
+                    lightsToChangeInThisRun.Add(tlRef);
+                    break;
                 }
             }
-
-            if (isDelaySim)
-                StartCoroutine(OneSecDelay());
-            else
-                StartCoroutine(WaitOneFrame());
         }
-        else
-            startSim = true;
+
+        foreach (SimulatedParent sp in simObjects)      // init Sim of all objects
+        {
+
+            if (sp != null)
+            {
+                sp.InitSimulation();
+            }
+            else
+            {
+                toDeleteList.Add(sp);
+            }
+        }
+
+        StartCoroutine(WaitOneFrame());
     }
         
 

@@ -172,6 +172,7 @@ public class CarControlScript : SimulatedParent
                         if (waitForGreenTrafLightRef.state == TrafficLightScript.lightState.green)
                         {
                             carsInRowCounter = 0;
+                            actualWaitingLightID = 0;
                             state = driveState.driving;
                         }
                     }
@@ -298,21 +299,28 @@ public class CarControlScript : SimulatedParent
         bool wasCrossed = false;
         foreach (int tempTLid in crossedTrafficLightIDs)        //Check if Traffic light was already crossed
         {
-            if(trafficLightScript.trafficLightID == tempTLid)
+            if (trafficLightScript.trafficLightID == tempTLid)
             {
                 wasCrossed = true;
                 return;
             }
         }
-        if(!wasCrossed)
+        if (!wasCrossed)
         {
             state = driveState.waitingAtTrafficLight;
             waitForGreenTrafLightRef = trafficLightScript;
             actualWaitingLightID = trafficLightScript.trafficLightID;
 
             StopEmergency();
+
+            if (simState == simulationState.simulated)
+            {
+                if (actualWaitingLightID != 0)
+                    SimulationControlScript.sim.AddScoreToTrafficLight(actualWaitingLightID, 1);
+            }
         }
     }
+
 
     public void StopCarInFront (bool stop)
     {
@@ -325,6 +333,7 @@ public class CarControlScript : SimulatedParent
         else
         {
             state = driveState.driving;
+            actualWaitingLightID = 0;
         }
     }
 
@@ -342,9 +351,10 @@ public class CarControlScript : SimulatedParent
         {
             Score.sc.AddPoints(Score.PointTypes.emergencyWait, simState);
             StartCoroutine(ReduceScoreEmergency());
+        
         }
     }
-
+    
     public void CrashHappened (crashState crashReason, Collider2D otherCol = null)
     {
         if (crashReason == crashState.crashCar && otherCol != null)     //Make sure other car gets destroyed as well
@@ -412,6 +422,16 @@ public class CarControlScript : SimulatedParent
             if(found && spot != null)
             {
                 SimulationControlScript.sim.AddCrash(spot, amount, this);
+            }
+            else
+            {   //CheckIfKilledCauseOfJamTillSpawnPoint
+                if (simState == simulationState.simulated)
+                {
+                    if (actualWaitingLightID != 0 && state == driveState.waitingCarInFront)
+                    {
+                        SimulationControlScript.sim.AddScoreToTrafficLight(actualWaitingLightID, s.carCrash*10);
+                    }
+                }
             }
 
 
