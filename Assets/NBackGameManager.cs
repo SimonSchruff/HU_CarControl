@@ -31,21 +31,41 @@ public class NBackGameManager : MonoBehaviour
 
 
     [Header("Letter Objects, Lists, and Variables")]
-    public int currentLevel = 0; 
-    public int n = 2; 
-    public string currentLetter; 
+    // PUBLIC VARIABLES
+    public int n = 2;
+    public int stimuliShown = 25;  
+    
+    // LISTS
     //Letters that are randomly selected are directly assigned to List in inspector
     public List<string> lettersOfChoice = new List<string>(); 
     public List<string> usedLetters = new List<string>(); 
+
+    //  VARIABLES
+    [HideInInspector]
+    public int currentLevel = 0; 
+    [HideInInspector]
+    public string currentLetter; 
     string correctLetter = "A";
-    public bool inputHappened; 
     int stimuli = 0; 
-    public int stimuliShown = 25; 
     int levelInt = 0; 
-    
+
+    //BOOLS
+    [HideInInspector]
+    public bool inputHappened; 
     bool newLetterRdy = true; 
     bool newTimerRdy = true; 
     bool switchedLevels = false; 
+
+    // All possible score events
+    [Header("Score")]
+    public int correctMatch; 
+    public int wrongMatch; 
+    public int correctMismatch; 
+    public int wrongMismatch;
+    public int missedMatch; 
+    public int missedMismatch; 
+    public int totalCorrectLetter; 
+
 
 
 
@@ -63,9 +83,12 @@ public class NBackGameManager : MonoBehaviour
 
     
     /*
+        [] Save Percentage scores for each level
+        [] Upload to 000webhost in own .php file
+        [] Clean UP Inspector Window 
+        [] Update Instructions UI 
         [x] Create Timer before game starts
         [x] Functionality of levels / trial level
-        [] Update Instructions UI 
         [x] Visually Disable Buttons for first n Numbers
     */
 
@@ -114,14 +137,15 @@ public class NBackGameManager : MonoBehaviour
                 LevelFinishedGameObjects.SetActive(false);
                 GameOverObjects.SetActive(false);   
 
-                if(stimuli > stimuliShown)
+                if(stimuli >= stimuliShown)
                 {
                     switchedLevels = false; 
                     currentLevel++; 
+                    
                 }
 
                 //One Letter shown equals one run of coroutine
-                if(newLetterRdy)
+                if(newLetterRdy && stimuli < stimuliShown)
                     StartCoroutine(OneLetterPeriod()); 
             break; 
 
@@ -152,11 +176,12 @@ public class NBackGameManager : MonoBehaviour
 
                 break; 
                 case 1: 
-                levelTextObj.text = "Level 01"; 
-                stimuli = 0; 
                 gameState = GameState.levelFinished; 
+                levelTextObj.text = "Level 01"; 
+                SaveScoreData(); 
+                stimuli = 0; 
                 switchedLevels = true; 
-                usedLetters.Clear(); 
+                //usedLetters.Clear(); 
                 break; 
                 case 2: 
                 levelTextObj.text = "Level 02"; 
@@ -203,6 +228,7 @@ public class NBackGameManager : MonoBehaviour
             correctLetter = usedLetters[usedLetters.Count - n]; 
         }
         
+        
         //Get new random letter, add it to list and show it
         letterTextObj.text = RandomizeLetter(); 
         currentLetter = letterTextObj.text; 
@@ -218,12 +244,18 @@ public class NBackGameManager : MonoBehaviour
 
         // If no Input happened during full letter period
         if(!inputHappened && currentLetter == correctLetter)
+        {
             Debug.Log("Match missed! "); 
-
+            CountScore(4); 
+        }
+            
         if( usedLetters.Count > n )
         {
             if(!inputHappened && currentLetter != correctLetter)
-            Debug.Log("Mismatch missed!");
+            {
+                Debug.Log("Mismatch missed!");
+                CountScore(5); 
+            }
         }
          
 
@@ -247,6 +279,87 @@ public class NBackGameManager : MonoBehaviour
 
         gameState = GameState.running;
         newTimerRdy = true;  
+    }
+
+    public void CountScore(int i)
+    {
+        
+        switch(i)
+        {
+            case 0: // Correct Match
+                correctMatch++; 
+            break; 
+            case 1: // False Match
+                wrongMatch++; 
+            break; 
+            case 2: // Correct Mismatch
+                correctMismatch++; 
+            break; 
+            case 3: // False Mismatch
+                wrongMismatch++; 
+            break; 
+            case 4: // Missed Match
+                missedMatch++; 
+            break; 
+            case 5: // Missed Mismatch
+                missedMismatch++; 
+            break; 
+        }
+        
+    }
+
+    public void SaveScoreData()
+    {
+        int totalMatches = totalCorrectLetter; 
+        int totalMismatches = (stimuli - n) - totalMatches; 
+
+        int numberCorrectMatch = correctMatch; 
+        int numberWrongMatch = wrongMatch; 
+        int numberMissedMatch = missedMatch; 
+
+        int numberCorrectMismatch = correctMismatch; 
+        int numberWrongMismatch = wrongMismatch; 
+        int numberMissedMismatch = missedMismatch; 
+
+        // All percentages for matches -> Should equal one
+        float correctlyMatchedP = 0f; 
+        float wronglyMatchedP = 0f; 
+        float missedMatchP = 0f; 
+
+        // All percentages for mismatched
+        float correctlyMismatchedP = 0f; 
+        float wronglyMismatchedP = 0f; 
+        float missedMismatchP = 0f; 
+        
+        
+        
+        
+        if(totalMatches > 0 )
+        {
+            correctlyMatchedP = (float)numberCorrectMatch / (float)totalMatches; 
+            missedMatchP = (float)numberMissedMatch / (float)totalMatches;
+
+            wronglyMismatchedP = (float)numberWrongMismatch / (float)totalMatches; // False alarm Reversed
+        }
+        else if(totalMismatches > 0 )
+        {
+            
+            correctlyMismatchedP = (float)correctMismatch / (float)totalMismatches; 
+            missedMismatchP = (float)numberMissedMismatch / (float)totalMismatches; 
+
+            wronglyMatchedP = (float)numberWrongMatch / (float)totalMismatches; // -> False alarm; Divides from mismatched instead of matches, according to example website
+        }
+            
+        
+        
+
+         
+
+        
+        Debug.Log("totalMatches: " + totalMatches + "; " + "totalMismatches: " + totalMismatches + "; "); 
+        Debug.Log("correctly Matched % : " + correctlyMatchedP + "; "); 
+        Debug.Log("correctly Mismatched % : " + correctlyMismatchedP + "; "); 
+        
     }
     
 
@@ -277,6 +390,7 @@ public class NBackGameManager : MonoBehaviour
             case 3: 
                 //Debug.Log("Correct Letter"); 
                 newLetter = correctLetter; 
+                totalCorrectLetter++; 
             break; 
 
         }
@@ -321,11 +435,13 @@ public class NBackGameManager : MonoBehaviour
             case 0: 
                 if ( currentLetter == correctLetter)
                 {
-                    Debug.Log("Correct Answer"); 
+                    Debug.Log("Correct Match"); 
+                    CountScore(0); 
                 }
                 else
                 {
-                    Debug.Log("False Answer"); 
+                    Debug.Log("False Match");
+                    CountScore(1);  
                 }
 
             break; 
@@ -333,11 +449,13 @@ public class NBackGameManager : MonoBehaviour
             case 1: 
                 if ( currentLetter == correctLetter)
                     {
-                        Debug.Log("False Answer"); 
+                        Debug.Log("False Mismatch"); 
+                        CountScore(3); 
                     }
                     else
                     {
-                        Debug.Log("Correct Answer"); 
+                        Debug.Log("Correct Mismatch"); 
+                        CountScore(2); 
                     }
 
             break; 
