@@ -2493,6 +2493,7 @@ MonoBehaviour:
   actualDepth: 0
   changeTrafficLights: 
   lightsToChangeInThisRun: []
+  lightsToIgnore: 09000000
   trafficLightsToChangeIDs: 
   toDeleteList: []
 --- !u!4 &1232684540

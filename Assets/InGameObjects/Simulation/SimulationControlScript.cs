@@ -422,8 +422,8 @@ public class SimulationControlScript : MonoBehaviour
             Debug.Log("0-ID");
             return 0;
         }
-        if (lightsToIgnore.Exists(id))
-            return;
+        if (lightsToIgnore.Contains(id))
+            return 0;
 
         int i = 0;
         try
