@@ -8,6 +8,7 @@ public class NBackGameManager : MonoBehaviour
 {
     public static NBackGameManager Instance; 
 
+
     [System.Serializable]
     public struct LevelData
     {
@@ -100,11 +101,11 @@ public class NBackGameManager : MonoBehaviour
 
     
     /*
-        [] Reset Level Fct()
-        [] Save Percentage scores for each level and send to server
+        [x] Reset Level Fct()
+        [x] Save Percentage scores for each level 
         [] Upload to 000webhost in own .php file
         [x] Clean UP Inspector Window 
-        [] Update Instructions UI 
+        [x] Update Instructions UI 
         [x] Create Timer before game starts
         [x] Functionality of levels / trial level
         [x] Visually Disable Buttons for first n Numbers
@@ -118,7 +119,8 @@ public class NBackGameManager : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
-        Instance = this;
+        else
+            Instance = this;
 
         gameState = GameState.instructions; 
     }
@@ -379,6 +381,7 @@ public class NBackGameManager : MonoBehaviour
         }
             
         // Send levelData to server; Include User ID
+        SQLSaveManager.instance.StartNBackPostCoroutine(levelData); 
         
     }
     
