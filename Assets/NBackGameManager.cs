@@ -3,9 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
 
+
 public class NBackGameManager : MonoBehaviour
 {
     public static NBackGameManager Instance; 
+
+    [System.Serializable]
+    public struct LevelData
+    {
+        public int playerID; 
+        public int level; 
+        public float totalMatches;  
+        public float totalMismatches;
+        public float correctlyMatched; 
+        public float falseAlarm; 
+        public float correctlyMismatched; 
+        public float falseAlarmMismatch;
+        public float missedMatches; 
+        public float missedMismatches; 
+        
+    }
+
+    public LevelData levelData; 
 
     
     [HideInInspector]
@@ -20,9 +39,6 @@ public class NBackGameManager : MonoBehaviour
     public GameState gameState; 
 
 
-    
-    
-    
     [Header("Timer")]
     public float letterShowSec = 0.5f; 
     public float letterWaitSec = 2.5f; 
@@ -80,12 +96,14 @@ public class NBackGameManager : MonoBehaviour
     public GameObject letterObject; 
     public Text letterTextObj; 
     public Button[] Buttons = new Button[2]; 
+    public Text[] scoreUINumbers = new Text[8]; 
 
     
     /*
-        [] Save Percentage scores for each level
+        [] Reset Level Fct()
+        [] Save Percentage scores for each level and send to server
         [] Upload to 000webhost in own .php file
-        [] Clean UP Inspector Window 
+        [x] Clean UP Inspector Window 
         [] Update Instructions UI 
         [x] Create Timer before game starts
         [x] Functionality of levels / trial level
@@ -139,9 +157,9 @@ public class NBackGameManager : MonoBehaviour
 
                 if(stimuli >= stimuliShown)
                 {
+                    SaveScoreData(); 
                     switchedLevels = false; 
                     currentLevel++; 
-                    
                 }
 
                 //One Letter shown equals one run of coroutine
@@ -154,6 +172,19 @@ public class NBackGameManager : MonoBehaviour
                 InstructionObjects.SetActive(false); 
                 RunningGameObjects.SetActive(false);
                 LevelFinishedGameObjects.SetActive(true); 
+                //Set Score UI 
+                {
+                    //Match Numbers
+                    scoreUINumbers[0].text = levelData.totalMatches.ToString(); 
+                    scoreUINumbers[1].text = levelData.correctlyMatched.ToString(); 
+                    scoreUINumbers[2].text = levelData.falseAlarm.ToString(); 
+                    scoreUINumbers[3].text = levelData.missedMatches.ToString(); 
+                    //Mismatch Numbers
+                    scoreUINumbers[4].text = levelData.totalMismatches.ToString(); 
+                    scoreUINumbers[5].text = levelData.correctlyMismatched.ToString(); 
+                    scoreUINumbers[6].text = levelData.falseAlarmMismatch.ToString(); 
+                    scoreUINumbers[7].text = levelData.missedMismatches.ToString(); 
+                }
                 GameOverObjects.SetActive(false); 
 
             break; 
@@ -173,29 +204,21 @@ public class NBackGameManager : MonoBehaviour
             switch(currentLevel)
             {
                 case 0: //Training Level
-
                 break; 
                 case 1: 
-                gameState = GameState.levelFinished; 
-                levelTextObj.text = "Level 01"; 
-                SaveScoreData(); 
-                stimuli = 0; 
-                switchedLevels = true; 
-                //usedLetters.Clear(); 
+                    gameState = GameState.levelFinished; 
+                    levelTextObj.text = "Level 01"; 
+                    ResetForNewLevel(); 
                 break; 
                 case 2: 
-                levelTextObj.text = "Level 02"; 
-                stimuli = 0; 
-                gameState = GameState.levelFinished; 
-                switchedLevels = true; 
-                usedLetters.Clear(); 
+                    levelTextObj.text = "Level 02"; 
+                    gameState = GameState.levelFinished;
+                    ResetForNewLevel(); 
                 break;  
                 case 3: 
-                levelTextObj.text = "Level 03"; 
-                stimuli = 0; 
-                gameState = GameState.gameOver; 
-                switchedLevels = true; 
-                
+                    levelTextObj.text = "Level 03"; 
+                    gameState = GameState.gameOver; 
+                    ResetForNewLevel(); 
                 break; 
             }
         }
@@ -214,6 +237,26 @@ public class NBackGameManager : MonoBehaviour
         }
         
         
+    }
+
+    void ResetForNewLevel()
+    {
+        
+        correctMatch = 0; 
+        wrongMatch = 0; 
+        correctMismatch = 0; 
+        wrongMismatch = 0;
+        missedMatch = 0; 
+        missedMismatch = 0; 
+        totalCorrectLetter = 0; 
+        
+
+        stimuli = 0; 
+
+        switchedLevels = true; 
+        usedLetters.Clear(); 
+
+
     }
 
     IEnumerator OneLetterPeriod()
@@ -310,55 +353,32 @@ public class NBackGameManager : MonoBehaviour
 
     public void SaveScoreData()
     {
-        int totalMatches = totalCorrectLetter; 
-        int totalMismatches = (stimuli - n) - totalMatches; 
-
-        int numberCorrectMatch = correctMatch; 
-        int numberWrongMatch = wrongMatch; 
-        int numberMissedMatch = missedMatch; 
-
-        int numberCorrectMismatch = correctMismatch; 
-        int numberWrongMismatch = wrongMismatch; 
-        int numberMissedMismatch = missedMismatch; 
-
-        // All percentages for matches -> Should equal one
-        float correctlyMatchedP = 0f; 
-        float wronglyMatchedP = 0f; 
-        float missedMatchP = 0f; 
-
-        // All percentages for mismatched
-        float correctlyMismatchedP = 0f; 
-        float wronglyMismatchedP = 0f; 
-        float missedMismatchP = 0f; 
         
+        levelData = new LevelData(); 
         
+        levelData.level = currentLevel; 
+        levelData.totalMatches = totalCorrectLetter; 
+        levelData.totalMismatches = (stimuli-n) - totalCorrectLetter; 
         
-        
-        if(totalMatches > 0 )
+        if(levelData.totalMatches > 0 )
         {
-            correctlyMatchedP = (float)numberCorrectMatch / (float)totalMatches; 
-            missedMatchP = (float)numberMissedMatch / (float)totalMatches;
+            levelData.correctlyMatched = (float)correctMatch / levelData.totalMatches; 
+            levelData.missedMatches = (float)missedMatch / levelData.totalMatches; 
 
-            wronglyMismatchedP = (float)numberWrongMismatch / (float)totalMatches; // False alarm Reversed
+            levelData.falseAlarmMismatch = (float)wrongMismatch / levelData.totalMatches; 
         }
-        else if(totalMismatches > 0 )
+       
+        
+        if(levelData.totalMismatches > 0 )
         {
             
-            correctlyMismatchedP = (float)correctMismatch / (float)totalMismatches; 
-            missedMismatchP = (float)numberMissedMismatch / (float)totalMismatches; 
+            levelData.correctlyMismatched = (float)correctMismatch / levelData.totalMismatches; 
+            levelData.missedMismatches = (float)missedMismatch / levelData.totalMismatches;
 
-            wronglyMatchedP = (float)numberWrongMatch / (float)totalMismatches; // -> False alarm; Divides from mismatched instead of matches, according to example website
+            levelData.falseAlarm = (float)wrongMatch / levelData.totalMismatches;  
         }
             
-        
-        
-
-         
-
-        
-        Debug.Log("totalMatches: " + totalMatches + "; " + "totalMismatches: " + totalMismatches + "; "); 
-        Debug.Log("correctly Matched % : " + correctlyMatchedP + "; "); 
-        Debug.Log("correctly Mismatched % : " + correctlyMismatchedP + "; "); 
+        // Send levelData to server; Include User ID
         
     }
     
