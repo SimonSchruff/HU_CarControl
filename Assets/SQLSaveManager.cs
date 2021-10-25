@@ -24,7 +24,8 @@ public class SQLSaveManager : MonoBehaviour
         DontDestroyOnLoad(gameObject); 
 
         //Create Unique Player ID ?
-        playerID = SystemInfo.deviceUniqueIdentifier; 
+        //playerID = SystemInfo.deviceUniqueIdentifier; 
+        playerID = "simon_test"; 
     }
 
     void Update()
@@ -60,7 +61,7 @@ public class SQLSaveManager : MonoBehaviour
         postForm.AddField("false Mismatch Alarm", data.falseAlarmMismatch.ToString()); 
         postForm.AddField("missed Mismatches", data.missedMismatches.ToString());
         
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("LINK", postForm))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("https://marki.fun/home/u799449553/domains/marki.fun/public_html/exdata/exDataManager.php", postForm))
         {
             yield return webRequest.SendWebRequest(); 
 

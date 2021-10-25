@@ -72,6 +72,7 @@ public class NBackGameManager : MonoBehaviour
     bool newLetterRdy = true; 
     bool newTimerRdy = true; 
     bool switchedLevels = false; 
+    
 
     // All possible score events
     [Header("Score")]
@@ -81,13 +82,17 @@ public class NBackGameManager : MonoBehaviour
     public int wrongMismatch;
     public int missedMatch; 
     public int missedMismatch; 
-    public int totalCorrectLetter; 
+    int totalCorrectLetter; 
+    public int totalMatchesPerRound;  
+    public int currentMatchesPerRound; 
+    public float matchProbability = 0.3333333333f; 
 
 
 
 
     [Header("UI References")]
     public GameObject InstructionObjects; 
+    public GameObject InstructionsObjExample; 
     public GameObject RunningGameObjects; 
     public GameObject TimerGameObjects; 
     public GameObject LevelFinishedGameObjects; 
@@ -122,7 +127,14 @@ public class NBackGameManager : MonoBehaviour
         else
             Instance = this;
 
+        //Calculate Total correct matches
+        float tempFloat =  (float)stimuliShown * matchProbability;
+        totalMatchesPerRound = Mathf.RoundToInt(tempFloat); 
+        Debug.Log("Total Matches per Round: "+totalMatchesPerRound) ;
+        currentMatchesPerRound = totalMatchesPerRound; 
+
         gameState = GameState.instructions; 
+        InstructionObjects.SetActive(true); 
     }
 
     void Update()
@@ -133,7 +145,7 @@ public class NBackGameManager : MonoBehaviour
         {
             case GameState.timer: 
                 TimerGameObjects.SetActive(true); 
-                InstructionObjects.SetActive(false); 
+                InstructionsObjExample.SetActive(false);  
                 RunningGameObjects.SetActive(false);
                 LevelFinishedGameObjects.SetActive(false); 
                 GameOverObjects.SetActive(false); 
@@ -143,8 +155,7 @@ public class NBackGameManager : MonoBehaviour
             break; 
 
             case GameState.instructions: 
-                TimerGameObjects.SetActive(false);
-                InstructionObjects.SetActive(true); 
+                TimerGameObjects.SetActive(false); 
                 RunningGameObjects.SetActive(false); 
                 LevelFinishedGameObjects.SetActive(false); 
                 GameOverObjects.SetActive(false); 
@@ -153,9 +164,12 @@ public class NBackGameManager : MonoBehaviour
             case GameState.running: 
                 TimerGameObjects.SetActive(false);
                 InstructionObjects.SetActive(false); 
+                InstructionsObjExample.SetActive(false); 
                 RunningGameObjects.SetActive(true);
                 LevelFinishedGameObjects.SetActive(false);
                 GameOverObjects.SetActive(false);   
+
+                
 
                 if(stimuli >= stimuliShown)
                 {
@@ -205,22 +219,25 @@ public class NBackGameManager : MonoBehaviour
         {
             switch(currentLevel)
             {
-                case 0: //Training Level
+                case 0: //Round 1 of 4
                 break; 
-                case 1: 
+                case 1: //Round 2 of 4
                     gameState = GameState.levelFinished; 
-                    levelTextObj.text = "Level 01"; 
+                    levelTextObj.text = "Level 2 of 4"; 
                     ResetForNewLevel(); 
                 break; 
-                case 2: 
-                    levelTextObj.text = "Level 02"; 
+                case 2: //Round 3 of 4
+                    levelTextObj.text = "Level 3 of 4"; 
                     gameState = GameState.levelFinished;
                     ResetForNewLevel(); 
                 break;  
-                case 3: 
-                    levelTextObj.text = "Level 03"; 
-                    gameState = GameState.gameOver; 
+                case 3: //Round 4 of 4
+                    levelTextObj.text = "Level 4 of 4"; 
+                    gameState = GameState.levelFinished; 
                     ResetForNewLevel(); 
+                break; 
+                case 4: // Game Over
+                    gameState = GameState.gameOver; 
                 break; 
             }
         }
@@ -241,6 +258,30 @@ public class NBackGameManager : MonoBehaviour
         
     }
 
+    IEnumerator WaitForSeconds(float s)
+    {
+        yield return new WaitForSeconds(s); 
+    }
+
+    public void SwitchInstructionsPage(int i)
+    {
+        
+
+        switch(i)
+        {
+            case 1: //Instructions
+                InstructionObjects.SetActive(true); 
+                InstructionsObjExample.SetActive(false); 
+            break;
+            case 2: //Example
+                InstructionObjects.SetActive(false); 
+                InstructionsObjExample.SetActive(true); 
+            break; 
+            
+
+        }
+    }
+
     void ResetForNewLevel()
     {
         
@@ -251,6 +292,8 @@ public class NBackGameManager : MonoBehaviour
         missedMatch = 0; 
         missedMismatch = 0; 
         totalCorrectLetter = 0; 
+
+        currentMatchesPerRound = totalMatchesPerRound; 
         
 
         stimuli = 0; 
@@ -308,7 +351,6 @@ public class NBackGameManager : MonoBehaviour
         newLetterRdy = true; 
     }
 
-
     
     IEnumerator Timer()
     {
@@ -359,8 +401,8 @@ public class NBackGameManager : MonoBehaviour
         levelData = new LevelData(); 
         
         levelData.level = currentLevel; 
-        levelData.totalMatches = totalCorrectLetter; 
-        levelData.totalMismatches = (stimuli-n) - totalCorrectLetter; 
+        levelData.totalMatches = totalMatchesPerRound; 
+        levelData.totalMismatches = (stimuli-n) - totalMatchesPerRound; 
         
         if(levelData.totalMatches > 0 )
         {
@@ -381,7 +423,7 @@ public class NBackGameManager : MonoBehaviour
         }
             
         // Send levelData to server; Include User ID
-        SQLSaveManager.instance.StartNBackPostCoroutine(levelData); 
+        //SQLSaveManager.instance.StartNBackPostCoroutine(levelData); 
         
     }
     
@@ -389,12 +431,24 @@ public class NBackGameManager : MonoBehaviour
     string RandomizeLetter()
     {
         string newLetter = "X"; 
-     
-        // Create 1/3 chance of "correct" letter 
-        // For first n letters no "correct" letter is possible
-        int rand = Random.Range(1,4); 
+        
+        /*
+            ---- HANDLE EDGE CASES FOR PROBABILITY ----
+            - First two letters can`t be match/mismatch
+            - If amount of matches per current round already shown, dont show correct letter
+            - If number of remaining stimuli is <= matches still to be shown, show them at the end
+        */
+
+        int rand; 
         if(usedLetters.Count <= n )
             rand = 1; 
+        else if(currentMatchesPerRound == 0)
+            rand = 1; 
+        else if((stimuliShown - usedLetters.Count ) <=  currentMatchesPerRound)
+            rand = 3;
+        else
+            rand = Random.Range(1,4); 
+
 
         switch(rand)
         {
@@ -413,11 +467,11 @@ public class NBackGameManager : MonoBehaviour
             case 3: 
                 //Debug.Log("Correct Letter"); 
                 newLetter = correctLetter; 
-                totalCorrectLetter++; 
+                currentMatchesPerRound--; 
             break; 
 
         }
-
+        
         return newLetter; 
     }
 
