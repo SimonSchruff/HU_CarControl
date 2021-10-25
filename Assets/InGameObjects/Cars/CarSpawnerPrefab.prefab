@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4906712042261331962}
   - component: {fileID: 4906712042261331963}
-  m_Layer: 0
+  - component: {fileID: 3752192393702463324}
+  m_Layer: 13
   m_Name: StartPos
-  m_TagString: Untagged
+  m_TagString: CarSpawnCol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,6 +83,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &3752192393702463324
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4906712042261331957}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8557091, y: 0.8557091}
+  m_EdgeRadius: 0
 --- !u!1 &4906712042657252492
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +190,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 1
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -196,6 +223,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f2eebe99f4f1143a1fa2a7723acec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  simState: 0
+  filterCollision:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  colliderList: []
+  selfCol: {fileID: 0}
+  hasCollider: 0
   startPosSpirte: {fileID: 4906712042261331957}
   carPrefabRef: {fileID: 8680897238021860060, guid: d17c37f634420af49a433229667ce377, type: 3}
   emergencyCarPrefabRef: {fileID: 6523635107601565134, guid: c74581727d354e5479ed46e0ebbcfb42, type: 3}

@@ -405,6 +405,12 @@ public class CarControlScript : SimulatedParent
 //                    break;
             }
 
+            if (actualWaitingLightID != 0 && state == driveState.waitingCarInFront) // Check if crash cause of 
+            {
+                SimulationControlScript.sim.AddScoreToTrafficLight(actualWaitingLightID, s.carCrash * 10);
+                return;
+            }
+
             List<Collider2D> otherCol = new List<Collider2D>();
             selfCol.OverlapCollider(filterCollision, otherCol);
 
@@ -419,24 +425,51 @@ public class CarControlScript : SimulatedParent
                     break;
                 }
             }
+
+
             if(found && spot != null)
             {
                 SimulationControlScript.sim.AddCrash(spot, amount, this);
             }
             else
-            {   //CheckIfKilledCauseOfJamTillSpawnPoint
-                if (simState == simulationState.simulated)
+            {
+
+            //CheckIfKilledCauseOfJamTillSpawnPoint
+                Collider2D colSpawnCar = null;
+                bool found2 = false;
+                foreach(Collider2D col in otherCol)
                 {
-                    if (actualWaitingLightID != 0 && state == driveState.waitingCarInFront)
+                    if (col.CompareTag("CarSpawnCol"))
                     {
-                        SimulationControlScript.sim.AddScoreToTrafficLight(actualWaitingLightID, s.carCrash*10);
+                        colSpawnCar = col.GetComponent<Collider2D>();
+                        found2 = true;
+                        break;
                     }
                 }
+                if(found2)  //Find other car in Row thats stock at traffic light and add priority
+                {
+                    List<Collider2D> otherSpawnCol = new List<Collider2D>();
+                    colSpawnCar.OverlapCollider(filterCollision, otherSpawnCol);
+                    foreach (Collider2D coll in otherSpawnCol)
+                    {
+                        CarControlScript ccs;
+                        if(coll.gameObject.TryGetComponent<CarControlScript>(out ccs))
+                        {
+                            if (ccs.actualWaitingLightID != 0 && ccs.state == driveState.waitingCarInFront)
+                            {
+                                SimulationControlScript.sim.AddScoreToTrafficLight(ccs.actualWaitingLightID, s.carCrash*10);
+                                break;
+
+                            }
+                        }
+                    }
+                }
+                
             }
-
-
         }
     }
+
+
 
     IEnumerator DestroyAfterFeedback ()
     {

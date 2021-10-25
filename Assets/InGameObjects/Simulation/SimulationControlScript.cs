@@ -175,11 +175,13 @@ public class SimulationControlScript : MonoBehaviour
 
     void FinishPart()
     {
-        if (trafficLightsToTest.Count == 0)
+        bool isFirstTLTest = trafficLightsToTest.Count == 0;
+        int tempTrafficLightToTest = 0;
+        if (isFirstTLTest)
         {
             if(trafficLightScores.Count == 0)
             {
-                ClearSimCache();
+                ClearSimCache(isFirstTLTest);
                 FinishSim();
                 return;
             }
@@ -196,6 +198,7 @@ public class SimulationControlScript : MonoBehaviour
         }
         else
         {
+            tempTrafficLightToTest = trafficLightsToTest[0];
             int actualMaxLocal = 0;
             try
             {
@@ -203,7 +206,7 @@ public class SimulationControlScript : MonoBehaviour
             } 
             catch {}
 
-            if(actualMaxLocal < oldTLHighestScore)
+            if(actualMaxLocal < oldTLHighestScore)      //Old score was better so change
             {
                 RecommendTrafficLight(trafficLightsToTest[0]);
                 trafficLightsToTest.Clear();
@@ -213,7 +216,7 @@ public class SimulationControlScript : MonoBehaviour
                 // When Score not better after change - ignore Light and start next sim
                 lightsToIgnore.Add(trafficLightsToTest[0]);
                 trafficLightsToTest.Clear();
-                ClearSimCache();
+                ClearSimCache(isFirstTLTest, tempTrafficLightToTest);
                 StartCoroutine(ContinueSimAfterFrame());        
                 return;
 
@@ -233,7 +236,7 @@ public class SimulationControlScript : MonoBehaviour
         }
         trafficLightTestCounter++;
 
-        ClearSimCache();
+        ClearSimCache(isFirstTLTest, tempTrafficLightToTest);
 
    //     if(trafficLightTestCounter > 1)
   //      {
@@ -255,7 +258,14 @@ public class SimulationControlScript : MonoBehaviour
 
     void RecommendTrafficLight (int id)
     {
-       GetTrafficLightRefFromID(id).LightClicked();
+        StartCoroutine(ChangeTrafficLight(id));
+     //  GetTrafficLightRefFromID(id).LightClicked();
+    }
+
+    IEnumerator ChangeTrafficLight (int trafficLightID)
+    {
+        yield return new WaitForSecondsRealtime(reactionTime);
+        GetTrafficLightRefFromID(trafficLightID).LightClicked();
     }
 
     int GetMaxScoreIndexFromTLScoreDict()
@@ -348,7 +358,7 @@ public class SimulationControlScript : MonoBehaviour
         durationMap.Clear();
     }
 
-    void ClearSimCache()
+    void ClearSimCache(bool isSecondText = false, int testedTrafficLightID = 0)
     {
         foreach (SimulatedParent sp in simObjects)
         {
@@ -362,13 +372,25 @@ public class SimulationControlScript : MonoBehaviour
         {
             foreach (TrafficLightScript tl in GameManager.GM.trafficLights)
             {
-                tl.ChangeText("");
+            //    tl.ChangeText("");
+            //    tl.ChangeText("",false);
             }
 
             foreach (int id in trafficLightScores.Keys)
             {
-                int temp = trafficLightScores[id];
-                GetTrafficLightRefFromID(id).ChangeText(temp.ToString());
+                if(isSecondText)
+                {
+                    int temp = trafficLightScores[id];
+                    GetTrafficLightRefFromID(id).ChangeText(temp.ToString(),isSecondText);
+                }
+                else 
+                {
+                    if (id == testedTrafficLightID)
+                    {
+                        int temp = trafficLightScores[testedTrafficLightID];
+                        GetTrafficLightRefFromID(testedTrafficLightID).ChangeText(temp.ToString()+"*",isSecondText);
+                    }
+                }
             }
         } catch { Debug.LogError("Saved Debug"); }
 
@@ -394,16 +416,7 @@ public class SimulationControlScript : MonoBehaviour
 
     public void AddCrash (SpotSimScript spotRef, int priority, CarControlScript carRef)
     {
-        if(carRef.state == CarControlScript.driveState.waitingCarInFront)
-        {
-    //        if(Time.realtimeSinceStartupAsDouble - carRef.waitCarInFrontStartTime > carRef.minBridgeCrossTime)
-   //         {
-                AddScoreToTrafficLight(carRef.actualWaitingLightID, priority);
-                return;
-     //       }
-        }
-
-        
+       
         foreach (TrafficLightScript tl in spotRef.trafficLights)
         {
             AddScoreToTrafficLight(tl.trafficLightID, priority*10);
@@ -451,6 +464,13 @@ public class SimulationControlScript : MonoBehaviour
 
     public void StartSim()
     {
+        /*   foreach (TrafficLightScript tl in GameManager.GM.trafficLights)     // Clear debug text
+           {
+               tl.ChangeText("", true);
+               tl.ChangeText("", false); ;
+     }
+         */
+
         SimulatedParent[] copyObj = FindObjectsOfType<SimulatedParent>();
         foreach (SimulatedParent sp in copyObj)
         {

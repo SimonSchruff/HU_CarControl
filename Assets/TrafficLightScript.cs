@@ -17,6 +17,7 @@ public class TrafficLightScript : SimulatedParent
     public lightState stateAfterOrange;
 
     [SerializeField] Text text;
+    [SerializeField] Text text2;
 
     Camera camRef;
     public enum lightState
@@ -32,11 +33,11 @@ public class TrafficLightScript : SimulatedParent
         camRef = Camera.main;
         ChangeText("");
     }
-    public void ChangeText (string changeTo)
+    public void ChangeText (string changeTo, bool changeTextOne = true)
     {
         try
         {
-            text.text = changeTo;
+            (changeTextOne?text:text2).text = changeTo;
         }
         catch {}
     }
