@@ -50,8 +50,8 @@ public class SQLSaveManager : MonoBehaviour
         postForm.AddField("id", playerID); 
 
         postForm.AddField("level", data.level.ToString()); 
-        postForm.AddField("total Matches", data.totalMatches.ToString()); 
-        postForm.AddField("total Mismatches", data.totalMismatches.ToString()); 
+        //postForm.AddField("total Matches", data.totalMatches.ToString()); 
+        //postForm.AddField("total Mismatches", data.totalMismatches.ToString()); 
 
         postForm.AddField("correctly Matched", data.correctlyMatched.ToString()); 
         postForm.AddField("false Alarm", data.falseAlarm.ToString()); 
