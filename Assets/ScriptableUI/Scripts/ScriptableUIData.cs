@@ -7,6 +7,9 @@ using UnityEngine.UI;
 [CreateAssetMenu(menuName = "ScriptableUIData")]
 public class ScriptableUIData : ScriptableObject
 {
-    public string text; 
-    
+    public string text;
+
+    [Header("Toggles")]
+    public int toggleAmount;
+    public string[] toggleDescriptions; 
 }
