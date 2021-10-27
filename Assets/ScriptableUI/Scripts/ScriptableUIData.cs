@@ -9,7 +9,19 @@ public class ScriptableUIData : ScriptableObject
 {
     public string text;
 
-    [Header("Toggles")]
-    public int toggleAmount;
-    public string[] toggleDescriptions; 
+    
+    [System.Serializable]
+    public struct ToggleData
+    {
+        public Vector2 startPos;
+        public Color textColor; 
+        public bool hasFreeTextField;
+        public bool vertical;
+        public string objName; 
+        public int toggleAmount;
+        public string[] toggleDescriptions;
+        
+
+    }
+    public ToggleData toggleData; 
 }

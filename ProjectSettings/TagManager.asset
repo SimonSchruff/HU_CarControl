@@ -18,6 +18,7 @@ TagManager:
   - timerTextObj
   - letterTextObj
   - CarSpawnCol
+  - Canvas
   layers:
   - Default
   - TransparentFX

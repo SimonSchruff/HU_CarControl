@@ -9,6 +9,7 @@ public class NBackGameManager : MonoBehaviour
     public static NBackGameManager Instance; 
 
 
+
     [System.Serializable]
     public struct LevelData
     {
