@@ -138,9 +138,9 @@ public class NBackGameManager : MonoBehaviour
             Instance = this;
 
         //Calculate Total correct matches
-        float tempFloat =  (float)stimuliShown * matchProbability;
+        float tempFloat =  (float)(stimuliShown - n) * matchProbability;
         totalMatchesPerRound = Mathf.RoundToInt(tempFloat); 
-        Debug.Log("Total Matches per Round: "+totalMatchesPerRound) ;
+        Debug.Log("Total Matches per Round: " + totalMatchesPerRound) ;
         currentMatchesPerRound = totalMatchesPerRound; 
 
         gameState = GameState.instructions; 

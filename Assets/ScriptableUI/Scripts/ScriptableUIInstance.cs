@@ -10,9 +10,14 @@ public class ScriptableUIInstance : Editor
     {
         Create("TextObject"); 
     }
-
-
     static GameObject textObject; 
+
+    [MenuItem("GameObject/ScriptableUI/ToggleGroup", priority = 0)]
+    public static void AddToggleGroup()
+    {
+        Create("ToggleGroup"); 
+    }
+    static GameObject toggleGroupObj; 
 
     private static GameObject Create(string objName)
     {

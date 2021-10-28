@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 
 
-
+[RequireComponent(typeof(ToggleGroup))]
 public class ScriptableUIScale : ScriptableUI
 {
     //Variables etc
@@ -17,39 +17,57 @@ public class ScriptableUIScale : ScriptableUI
 
     //Obj Ref
     Canvas canvas;
-    GameObject inputField; 
+    Toggle[] toggleChildren; 
+    InputField inputField; 
+    Toggle inputFieldToggle; 
+    ToggleGroup toggleGroup; 
 
     //Bools
     bool hasFreeTextField = false;
     bool vertical; 
 
-    public void SetInputFieldInteractable(bool interactable)
+    public override void Awake()
     {
-        
+        base.Awake(); 
+
+
+        //Look for all Children Toggles etc.
+        if(GetComponentsInChildren<Toggle>() != null) 
+            toggleChildren = GetComponentsInChildren<Toggle>(); 
+
+        if(GetComponentInChildren<InputField>() != null)
+        {
+            inputField = GetComponentInChildren<InputField>(); 
+            inputField.interactable = false; 
+
+            inputFieldToggle = inputField.GetComponentInParent<Toggle>(); 
+            inputFieldToggle.isOn = false; 
+            
+            inputFieldToggle.onValueChanged.AddListener(delegate { SetInputFieldInteractable(); }); 
+        }
+            
+
+
+    }
+
+    public override void Update()
+    {
+        base.Update(); 
+
+    }
+
+    public void SetInputFieldInteractable()
+    {   // Called from Toggle.OnValueChanged Event in Awake()
         if(inputField != null)
-        {
-            InputField iF = inputField.GetComponentInChildren<InputField>();
-
-            if (interactable)
-                iF.interactable = true;
-            else
-                iF.interactable = false;
-
-
-        }
+            inputField.interactable = !inputField.interactable;
         else
-        {
             Debug.Log("No Input Field Set!"); 
-        }
-
-
-
     }
 
 
 
 
-    #region Inspector Button Events
+    #region Editor/Inspector Button Events
     public void CreateToggles()
     {
         //Get All variables from ScriptableUIData
@@ -61,6 +79,8 @@ public class ScriptableUIScale : ScriptableUI
         color = skinData.toggleData.textColor;
         canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>(); 
 
+        toggleGroup = GetComponent<ToggleGroup>(); 
+
         
         for (int i = 0; i < toggleNumber; i++)
         {
@@ -70,6 +90,7 @@ public class ScriptableUIScale : ScriptableUI
             instance.GetComponentInChildren<Text>().text = texts[i];
             instance.GetComponentInChildren<Text>().color = color;
             instance.GetComponent<Toggle>().isOn = false; 
+            instance.GetComponent<Toggle>().group = toggleGroup; 
             instance.transform.SetParent(gameObject.transform, false);
 
             //Spacing als variabel
@@ -94,10 +115,11 @@ public class ScriptableUIScale : ScriptableUI
         {
             Vector3 fieldPos = new Vector3(startPos.x, startPos.y - (toggleNumber * 50), 0);
             
-            inputField = Instantiate(Resources.Load<GameObject>("ToggleTextInputObj"), fieldPos, Quaternion.identity );
-            inputField.GetComponent<Toggle>().isOn = false;
-            inputField.GetComponentInChildren<InputField>().interactable = false; 
-            inputField.transform.SetParent(gameObject.transform, false);
+            GameObject instance = Instantiate(Resources.Load<GameObject>("ToggleTextInputObj"), fieldPos, Quaternion.identity );
+            instance.GetComponent<Toggle>().isOn = false;
+            instance.GetComponent<Toggle>().group = toggleGroup; 
+            instance.GetComponentInChildren<InputField>().interactable = false; 
+            instance.transform.SetParent(gameObject.transform, false);
             
         }
 
