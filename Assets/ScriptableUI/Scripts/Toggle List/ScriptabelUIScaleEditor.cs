@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor; 
 
+#if(UNITY_EDITOR)
+using UnityEditor ;
 
 [CustomEditor(typeof(ScriptableUIScale))]
-public class CustomEditorUIScale : Editor
+public class ScriptabelUIScaleEditor : Editor
 {
+   
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
@@ -25,5 +27,9 @@ public class CustomEditorUIScale : Editor
             scriptableUIScale.RemoveToggles(); 
         }
     }
+
+
 }
 
+
+#endif

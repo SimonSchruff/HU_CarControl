@@ -1,7 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor; 
+
+// Prevents Build Errors
+#if (UNITY_EDITOR)
+
+using UnityEditor;
+
+
 
 public class ScriptableUIInstance : Editor
 {
@@ -35,3 +41,5 @@ public class ScriptableUIInstance : Editor
         return instance; 
     }
 }
+
+#endif

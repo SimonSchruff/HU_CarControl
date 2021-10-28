@@ -65,6 +65,7 @@ public class NBackGameManager : MonoBehaviour
     //Letters that are randomly selected are directly assigned to List in inspector
     public List<string> lettersOfChoice = new List<string>(); 
     public List<string> usedLetters = new List<string>(); 
+    
 
     //  VARIABLES
     [HideInInspector]
@@ -74,7 +75,7 @@ public class NBackGameManager : MonoBehaviour
     
     string correctLetter = "A";
     int stimuli = 0; 
-    int levelInt = 0; 
+   
 
     //BOOLS
     [HideInInspector]
@@ -92,9 +93,9 @@ public class NBackGameManager : MonoBehaviour
     public int wrongMismatch;
     public int missedMatch; 
     public int missedMismatch; 
-    int totalCorrectLetter; 
-    public int totalMatchesPerRound;  
-    public int currentMatchesPerRound; 
+    public int totalMatchesPerRound;
+    public float accurateTotalMatches; 
+    public int currentMatches; 
     
 
 
@@ -139,9 +140,10 @@ public class NBackGameManager : MonoBehaviour
 
         //Calculate Total correct matches
         float tempFloat =  (float)(stimuliShown - n) * matchProbability;
+        accurateTotalMatches = tempFloat; 
         totalMatchesPerRound = Mathf.RoundToInt(tempFloat); 
         Debug.Log("Total Matches per Round: " + totalMatchesPerRound) ;
-        currentMatchesPerRound = totalMatchesPerRound; 
+        currentMatches = totalMatchesPerRound; 
 
         gameState = GameState.instructions; 
         InstructionObjects.SetActive(true); 
@@ -201,12 +203,12 @@ public class NBackGameManager : MonoBehaviour
                 //Set Score UI 
                 {
                     //Match Numbers
-                    scoreUINumbers[0].text = totalMatchesPerRound.ToString(); 
+                    scoreUINumbers[0].text = levelData.totalCorrectPercentage.ToString(); 
                     scoreUINumbers[1].text = levelData.correctlyMatched.ToString(); 
                     scoreUINumbers[2].text = levelData.falseAlarm.ToString(); 
                     scoreUINumbers[3].text = levelData.missedMatches.ToString(); 
                     //Mismatch Numbers
-                    scoreUINumbers[4].text = totalMatchesPerRound.ToString(); 
+                    scoreUINumbers[4].text = currentMatches.ToString(); 
                     scoreUINumbers[5].text = levelData.correctlyMismatched.ToString(); 
                     scoreUINumbers[6].text = levelData.falseAlarmMismatch.ToString(); 
                     scoreUINumbers[7].text = levelData.missedMismatches.ToString(); 
@@ -234,6 +236,7 @@ public class NBackGameManager : MonoBehaviour
                 case 1: //Round 2 of 4
                     gameState = GameState.levelFinished; 
                     levelTextObj.text = "Level 2 of 4"; 
+                    currentMatches = Mathf.RoundToInt(accurateTotalMatches * 3); 
                     ResetForNewLevel(); 
                 break; 
                 case 2: //Round 3 of 4
@@ -301,11 +304,8 @@ public class NBackGameManager : MonoBehaviour
         wrongMismatch = 0;
         missedMatch = 0; 
         missedMismatch = 0; 
-        totalCorrectLetter = 0; 
 
-        currentMatchesPerRound = totalMatchesPerRound; 
         
-
         stimuli = 0; 
 
         switchedLevels = true; 
@@ -411,7 +411,10 @@ public class NBackGameManager : MonoBehaviour
         levelData = new LevelData(); 
         
         levelData.level = currentLevel; 
-        float totalMismatches = (stimuli-n) - totalMatchesPerRound; 
+        float totalMatches = correctMatch + missedMatch + wrongMismatch; 
+        print(totalMatches); 
+        float totalMismatches = (stimuli-n) - totalMatches; 
+        print(totalMismatches) ;
         //levelData.totalMismatches = (stimuli-n) - totalMatchesPerRound;
 
         //Numeric Int amount of Matches etc. Per Round
@@ -427,10 +430,10 @@ public class NBackGameManager : MonoBehaviour
         //Percentages of correctly identified matches etc. per Round
         if(totalMatchesPerRound > 0 )
         {
-            levelData.correctlyMatched = (float)correctMatch / (float)totalMatchesPerRound; 
-            levelData.missedMatches = (float)missedMatch / (float)totalMatchesPerRound; 
+            levelData.correctlyMatched = (float)correctMatch / (float)totalMatches; 
+            levelData.missedMatches = (float)missedMatch / (float)totalMatches; 
 
-            levelData.falseAlarmMismatch = (float)wrongMismatch / (float)totalMatchesPerRound; 
+            levelData.falseAlarmMismatch = (float)wrongMismatch / (float)totalMatches; 
         }
 
         if(totalMismatches > 0 )
@@ -444,7 +447,7 @@ public class NBackGameManager : MonoBehaviour
 
         //Total Percentage score of correctly identified Matches and Mismatches
         levelData.totalCorrectPercentage = ((float)correctMatch + (float)correctMismatch) / (float)(stimuliShown-n); 
-        Debug.Log(levelData.totalCorrectPercentage); 
+        //Debug.Log(levelData.totalCorrectPercentage); 
             
         // Send levelData to server; Include User ID
         //SQLSaveManager.instance.StartNBackPostCoroutine(levelData); 
@@ -464,14 +467,29 @@ public class NBackGameManager : MonoBehaviour
         */
 
         int rand; 
-        if(usedLetters.Count <= n )
-            rand = 1; 
-        else if(currentMatchesPerRound == 0)
-            rand = 1; 
-        else if((stimuliShown - usedLetters.Count ) <=  currentMatchesPerRound)
-            rand = 3;
-        else
-            rand = Random.Range(1,4); 
+        if(currentLevel > 0) // Level 02 - 04
+        {
+            if(usedLetters.Count <= n )
+                rand = 1; 
+            else if(currentMatches == 0)
+                rand = 1; 
+            else if((stimuliShown - usedLetters.Count ) <=  currentMatches && currentLevel == 3)
+                rand = 3;
+            else
+                rand = Random.Range(1,4);
+        }
+        else // Level 01 
+        {
+            if(usedLetters.Count <= n )
+                rand = 1; 
+            else if(currentMatches == 0)
+                rand = 1; 
+            else if((stimuliShown - usedLetters.Count ) <=  currentMatches)
+                rand = 3;
+            else
+                rand = Random.Range(1,4);
+        }
+         
 
 
         switch(rand)
@@ -491,7 +509,7 @@ public class NBackGameManager : MonoBehaviour
             case 3: 
                 //Debug.Log("Correct Letter"); 
                 newLetter = correctLetter; 
-                currentMatchesPerRound--; 
+                currentMatches--; 
             break; 
 
         }
@@ -561,6 +579,17 @@ public class NBackGameManager : MonoBehaviour
 
             break; 
         }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit(); 
+
+    }
+
+    public void ReloadScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name); 
     }
 
     
