@@ -128,6 +128,7 @@ public class ScriptableUIScale : ScriptableUI
             instance.GetComponent<Toggle>().isOn = false;
             instance.GetComponent<Toggle>().group = toggleGroup; 
             instance.GetComponentInChildren<InputField>().interactable = false; 
+            instance.GetComponentInChildren<InputField>().contentType = InputField.ContentType.Alphanumeric; 
             instance.transform.SetParent(gameObject.transform, false);
             
         }
