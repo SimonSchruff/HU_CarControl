@@ -10,24 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337bdfdab755c4445bc6c5628f49144d, type: 3}
-  m_Name: newToggle
+  m_Name: Frage06 - Yes or No
   m_EditorClassIdentifier: 
   text: 
   toggleData:
-    startPos: {x: 200, y: 200}
-    textColor: {r: 1, g: 0, b: 0, a: 1}
+    startPos: {x: 0, y: 100}
+    spacing: 50
+    textColor: {r: 1, g: 1, b: 1, a: 1}
     hasFreeTextField: 0
     vertical: 0
     objName: ToggleObj
-    toggleAmount: 10
+    toggleAmount: 2
     toggleDescriptions:
-    - Hallo
-    - Ich
-    - Bin
-    - Amatzing
-    - 'Mit '
-    - Scriptablwe
-    - Object
-    - 'This '
-    - is
-    - so cool
+    - Yes
+    - No

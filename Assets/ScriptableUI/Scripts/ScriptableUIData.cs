@@ -14,6 +14,7 @@ public class ScriptableUIData : ScriptableObject
     public struct ToggleData
     {
         public Vector2 startPos;
+        public int spacing; 
         public Color textColor; 
         public bool hasFreeTextField;
         public bool vertical;

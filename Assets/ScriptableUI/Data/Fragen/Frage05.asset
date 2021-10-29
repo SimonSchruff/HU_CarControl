@@ -10,18 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337bdfdab755c4445bc6c5628f49144d, type: 3}
-  m_Name: Frage01
+  m_Name: Frage05
   m_EditorClassIdentifier: 
   text: 
   toggleData:
-    startPos: {x: 0, y: 0}
-    spacing: 50
+    startPos: {x: 0, y: 100}
+    spacing: 42
     textColor: {r: 1, g: 1, b: 1, a: 1}
-    hasFreeTextField: 0
+    hasFreeTextField: 1
     vertical: 0
     objName: ToggleObj
-    toggleAmount: 3
+    toggleAmount: 9
     toggleDescriptions:
-    - Female
-    - Male
-    - Diverse
+    - Full-time employment
+    - Part-time employment
+    - Self-employed
+    - Freelancing
+    - 'Unemployed ( Looking for work ) '
+    - Homemaker
+    - Student
+    - Inability to work
+    - Retired

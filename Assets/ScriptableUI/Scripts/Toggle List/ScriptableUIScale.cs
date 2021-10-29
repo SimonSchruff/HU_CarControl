@@ -14,6 +14,7 @@ public class ScriptableUIScale : ScriptableUI
     Vector2 startPos;
     string objName;
     Color color; 
+    int spacing; 
 
     //Obj Ref
     Canvas canvas;
@@ -33,7 +34,14 @@ public class ScriptableUIScale : ScriptableUI
 
         //Look for all Children Toggles etc.
         if(GetComponentsInChildren<Toggle>() != null) 
+        {
             toggleChildren = GetComponentsInChildren<Toggle>(); 
+            foreach(Toggle toggle in toggleChildren)
+            {
+                toggle.isOn = false; 
+            }
+        }
+            
 
         if(GetComponentInChildren<InputField>() != null)
         {
@@ -77,6 +85,7 @@ public class ScriptableUIScale : ScriptableUI
         startPos = skinData.toggleData.startPos;
         objName = skinData.toggleData.objName;
         color = skinData.toggleData.textColor;
+        spacing = skinData.toggleData.spacing; 
         canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>(); 
 
         toggleGroup = GetComponent<ToggleGroup>(); 
@@ -102,7 +111,7 @@ public class ScriptableUIScale : ScriptableUI
             Vector3 canvasPos = new Vector3(canvas.transform.position.x, canvas.transform.position.y , 0 );
             print(canvasPos);
 
-            instance.transform.localPosition = new Vector3(startPos.x, startPos.y - (i * 50), 0); 
+            instance.transform.localPosition = new Vector3(startPos.x, startPos.y - (i * spacing), 0); 
             
             print(instance.transform.position); 
 
@@ -113,7 +122,7 @@ public class ScriptableUIScale : ScriptableUI
 
         if(hasFreeTextField)
         {
-            Vector3 fieldPos = new Vector3(startPos.x, startPos.y - (toggleNumber * 50), 0);
+            Vector3 fieldPos = new Vector3(startPos.x, startPos.y - (toggleNumber * spacing), 0);
             
             GameObject instance = Instantiate(Resources.Load<GameObject>("ToggleTextInputObj"), fieldPos, Quaternion.identity );
             instance.GetComponent<Toggle>().isOn = false;

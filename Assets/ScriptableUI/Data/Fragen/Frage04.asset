@@ -10,19 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337bdfdab755c4445bc6c5628f49144d, type: 3}
-  m_Name: newScale
+  m_Name: Frage04
   m_EditorClassIdentifier: 
   text: 
   toggleData:
-    startPos: {x: 100, y: 100}
+    startPos: {x: 0, y: 100}
+    spacing: 50
     textColor: {r: 1, g: 1, b: 1, a: 1}
     hasFreeTextField: 1
     vertical: 0
     objName: ToggleObj
-    toggleAmount: 5
+    toggleAmount: 8
     toggleDescriptions:
-    - Test
-    - Jesus
-    - Christus
-    - Marki
-    - Carmen
+    - North America / Central America
+    - South America
+    - Europe
+    - Africa
+    - Asia
+    - Australia
+    - Caribbean Islands
+    - Pacific Islands

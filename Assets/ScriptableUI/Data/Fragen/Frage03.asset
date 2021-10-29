@@ -10,18 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337bdfdab755c4445bc6c5628f49144d, type: 3}
-  m_Name: Frage01
+  m_Name: Frage03
   m_EditorClassIdentifier: 
   text: 
   toggleData:
-    startPos: {x: 0, y: 0}
+    startPos: {x: 0, y: 100}
     spacing: 50
     textColor: {r: 1, g: 1, b: 1, a: 1}
-    hasFreeTextField: 0
+    hasFreeTextField: 1
     vertical: 0
     objName: ToggleObj
-    toggleAmount: 3
+    toggleAmount: 7
     toggleDescriptions:
-    - Female
-    - Male
-    - Diverse
+    - Finished school without a degree
+    - Still at school
+    - High school degree or equivalent
+    - Associate degree
+    - Bachelor`s degree or equivalent
+    - Master`s degree or equivalent
+    - Doctorate degree or equivalent
