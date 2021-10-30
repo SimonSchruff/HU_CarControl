@@ -32,6 +32,7 @@ public class TrafficLightScript : SimulatedParent
         UpdateTrafficLight(false, lightState.green);
         camRef = Camera.main;
         ChangeText("");
+        ChangeText("",false);
     }
     public void ChangeText (string changeTo, bool changeTextOne = true)
     {

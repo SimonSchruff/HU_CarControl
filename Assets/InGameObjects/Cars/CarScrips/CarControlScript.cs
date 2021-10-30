@@ -169,6 +169,11 @@ public class CarControlScript : SimulatedParent
                 {
                     try         //Check if traffic light is green, when no ref to the light - cause sim then searches for the simulated
                     {
+                        if(actualWaitingLightID == 0)       //Bug fix - no traffic light ID assigned
+                        {
+                            actualWaitingLightID = waitForGreenTrafLightRef.trafficLightID;
+                        }
+
                         if (waitForGreenTrafLightRef.state == TrafficLightScript.lightState.green)
                         {
                             carsInRowCounter = 0;
@@ -191,15 +196,38 @@ public class CarControlScript : SimulatedParent
                         }
                     }
                 }
-                if (isEmergency)
-                {
-                    if(state == driveState.waitingAtTrafficLight || state == driveState.waitingCarInFront)
-                    {
-                        emergencyCounter += simState == simulationState.game ? Time.deltaTime : simSteps;
 
+                if (state == driveState.waitingCarInFront)
+                {
+                    if(actualWaitingLightID == 0)
+                        {
+                            Debug.Log("FuckOFF");
+                        }
+                }
+
+                if(state == driveState.waitingAtTrafficLight || state == driveState.waitingCarInFront)
+                {
+                    emergencyCounter += simState == simulationState.game ? Time.deltaTime : simSteps;
+
+                    if (isEmergency)
+                    {
                         if(emergencyCounter >= emergencyReduceScoreDelay)
                         {
                             Score.sc.AddPoints(Score.PointTypes.emergencyWait, simState);
+                            emergencyCounter = 0f;
+                            if (simState == simulationState.simulated)  // Add Priority to traffic light for waitng
+                            {
+                                if (actualWaitingLightID != 0)
+                                    SimulationControlScript.sim.AddScoreToTrafficLight(actualWaitingLightID, 10);
+                                else
+                                    Debug.Log("Emergency Error Here");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if(emergencyCounter >= emergencyReduceScoreDelay)
+                        {
                             emergencyCounter = 0f;
                             if (simState == simulationState.simulated)  // Add Priority to traffic light for waitng
                             {
@@ -458,6 +486,7 @@ public class CarControlScript : SimulatedParent
                             if (ccs.actualWaitingLightID != 0 && ccs.state == driveState.waitingCarInFront)
                             {
                                 SimulationControlScript.sim.AddScoreToTrafficLight(ccs.actualWaitingLightID, s.carCrash*10);
+                                Debug.DrawLine(SimulationControlScript.sim.GetTrafficLightRefFromID(ccs.actualWaitingLightID).transform.position,transform.position, Color.red, 1f);
                                 break;
 
                             }

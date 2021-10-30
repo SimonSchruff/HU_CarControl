@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class SimulationControlScript : MonoBehaviour
 {
+    public bool debug = true;
+
     public static SimulationControlScript sim;
 
     [SerializeField] float offsetFromOriginal = 20;
@@ -35,7 +37,8 @@ public class SimulationControlScript : MonoBehaviour
     [SerializeField] bool nextCarEmergency = false;
     [SerializeField] int actualSimRepeats = 0;
 
-
+    List<GameObject> debugTrafficLightsScores = new List<GameObject>();
+    [SerializeField] GameObject debugTrafficLightPrefab;
 
     Score scoreRef;
     public int simScore;
@@ -43,7 +46,7 @@ public class SimulationControlScript : MonoBehaviour
     float trafficLightCounter;
 
     bool simFinished = true;
-    bool startSim = false;
+    public bool inNotTryChangeTrafficLight = false;
 
     public Dictionary<int, int> IdPriorityMap = new Dictionary<int, int>();
 
@@ -176,6 +179,7 @@ public class SimulationControlScript : MonoBehaviour
     void FinishPart()
     {
         bool isFirstTLTest = trafficLightsToTest.Count == 0;
+        inNotTryChangeTrafficLight = isFirstTLTest;
         int tempTrafficLightToTest = 0;
         if (isFirstTLTest)
         {
@@ -206,9 +210,19 @@ public class SimulationControlScript : MonoBehaviour
             } 
             catch {}
 
+            if(debug)       //DEBUG
+            {
+                bool picked = actualMaxLocal < oldTLHighestScore;
+                var pos = GetTrafficLightRefFromID(tempTrafficLightToTest).transform.position;
+                var go = Instantiate(debugTrafficLightPrefab,pos,Quaternion.Euler(0,0,0)).GetComponent<DebugTrafficScoreScript>();
+                go.ManualStart("o"+oldTLHighestScore,"s" +actualMaxLocal, picked);
+            }
+
             if(actualMaxLocal < oldTLHighestScore)      //Old score was better so change
             {
                 RecommendTrafficLight(trafficLightsToTest[0]);
+
+
                 trafficLightsToTest.Clear();
             }
             else
@@ -310,8 +324,9 @@ public class SimulationControlScript : MonoBehaviour
             cou++;
         //    GetTrafficLightRefFromID(i).ChangeText(cou.ToString());
         }
-        
+
         // Clear old Data
+        inNotTryChangeTrafficLight = true;
         oldTLHighestScore = 0;
         checkedTL.Clear();
         trafficLightsToTest.Clear();
@@ -358,8 +373,10 @@ public class SimulationControlScript : MonoBehaviour
         durationMap.Clear();
     }
 
-    void ClearSimCache(bool isSecondText = false, int testedTrafficLightID = 0)
+    void ClearSimCache(bool isFirstText = false, int testedTrafficLightID = 0)
     {
+
+
         foreach (SimulatedParent sp in simObjects)
         {
             if (sp != null)
@@ -372,23 +389,25 @@ public class SimulationControlScript : MonoBehaviour
         {
             foreach (TrafficLightScript tl in GameManager.GM.trafficLights)
             {
-            //    tl.ChangeText("");
-            //    tl.ChangeText("",false);
+                //    tl.ChangeText("",false);
+                //    tl.ChangeText("");
             }
+
 
             foreach (int id in trafficLightScores.Keys)
             {
-                if(isSecondText)
+                if(isFirstText)
                 {
                     int temp = trafficLightScores[id];
-                    GetTrafficLightRefFromID(id).ChangeText(temp.ToString(),isSecondText);
+                    GetTrafficLightRefFromID(id).ChangeText(temp.ToString(),isFirstText);
                 }
                 else 
                 {
+                    Debug.Log("ID was: " + id);
                     if (id == testedTrafficLightID)
                     {
                         int temp = trafficLightScores[testedTrafficLightID];
-                        GetTrafficLightRefFromID(testedTrafficLightID).ChangeText(temp.ToString()+"*",isSecondText);
+                        GetTrafficLightRefFromID(testedTrafficLightID).ChangeText(temp.ToString()+"*",isFirstText);
                     }
                 }
             }
@@ -419,7 +438,15 @@ public class SimulationControlScript : MonoBehaviour
        
         foreach (TrafficLightScript tl in spotRef.trafficLights)
         {
-            AddScoreToTrafficLight(tl.trafficLightID, priority*10);
+            if (tl.stateAfterOrange == TrafficLightScript.lightState.red && tl.state == TrafficLightScript.lightState.orange)
+            { }
+            else if (tl.state == TrafficLightScript.lightState.red)
+            { }
+            else
+            {
+                AddScoreToTrafficLight(tl.trafficLightID, priority*10);
+            }
+
         } 
 
     //    if (GameManager.GM.spotsInGame.TryGetValue(spotRef.id, out tempSpotRef))
@@ -464,12 +491,15 @@ public class SimulationControlScript : MonoBehaviour
 
     public void StartSim()
     {
-        /*   foreach (TrafficLightScript tl in GameManager.GM.trafficLights)     // Clear debug text
-           {
-               tl.ChangeText("", true);
-               tl.ChangeText("", false); ;
-     }
-         */
+        if(lightsToIgnore.Count == 0)
+        {
+            foreach (TrafficLightScript tl in GameManager.GM.trafficLights)     // Clear debug text
+            {
+                tl.ChangeText("", true);
+                tl.ChangeText("", false); ;
+            }
+        }
+         
 
         SimulatedParent[] copyObj = FindObjectsOfType<SimulatedParent>();
         foreach (SimulatedParent sp in copyObj)
@@ -738,6 +768,32 @@ public class SimulationControlScript : MonoBehaviour
 
     IEnumerator WaitOneFrame()
     {
+        if (debug)
+        {
+            foreach (GameObject debugg in debugTrafficLightsScores)      //DEBUG!
+            {
+                Destroy(debugg);
+            }
+            debugTrafficLightsScores.Clear();
+
+
+
+            foreach (TrafficLightScript tl in simTrafficLights)
+            {
+                int tempScore = 0;
+                if (trafficLightScores.TryGetValue(tl.trafficLightID, out tempScore))
+                {
+                    GameObject debugTrafL = Instantiate(debugTrafficLightPrefab, tl.transform.position, Quaternion.Euler(0, 0, 0));
+                    debugTrafficLightsScores.Add(debugTrafL);
+                    if(trafficLightsToTest.Count == 0)
+                        debugTrafL.GetComponent<DebugTrafficScoreScript>().ManualStart(tempScore.ToString(), "");
+                    else
+                        debugTrafL.GetComponent<DebugTrafficScoreScript>().ManualStart("", tempScore.ToString());
+
+                }
+            }
+        }
+
         yield return null;
         actualSimRepeats++;
 

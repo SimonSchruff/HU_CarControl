@@ -316,7 +316,9 @@ public class GameManager : MonoBehaviour
         }
         if(canGameStart)
         {
-            timeCounter = Time.realtimeSinceStartup - startTime;
+
+            //timeCounter = Time.realtimeSinceStartup - startTime;
+            timeCounter += Time.deltaTime;
 
             if(carSpawnTimes[0]<= timeCounter)      //Check if spawn car
             {
