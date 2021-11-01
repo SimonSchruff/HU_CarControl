@@ -94,9 +94,9 @@ public class AnswerSaver : MonoBehaviour
     }
 
 
-    public void SaveAnswer(int questionID)
+    public void SaveAnswer(int questionID, string name)
     {
-        print(currentAnswer + " with the ID " + questionID + " has been saved!"); 
+        print("The question : "+ name + ", ID : " + questionID + " with the answer " + currentAnswer + " has been saved!"); 
         //Save to SQL Database with SQL Save Manager
     }
 }

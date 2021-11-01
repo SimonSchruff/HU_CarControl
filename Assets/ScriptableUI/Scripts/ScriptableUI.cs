@@ -22,8 +22,11 @@ public class ScriptableUI : MonoBehaviour
    {
        //Allows changes in Editor
        //If performance issues, its better to build custom editor script with Update fct
-       if(Application.isEditor)
-            OnSkinUI(); 
+       //if(Application.isEditor)
+       {
+           //OnSkinUI(); 
+       }
+            
    }
 
 }
