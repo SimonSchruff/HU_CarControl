@@ -235,17 +235,17 @@ public class NBackGameManager : MonoBehaviour
                 break; 
                 case 1: //Round 2 of 4
                     gameState = GameState.levelFinished; 
-                    levelTextObj.text = "Level 2 of 4"; 
+                    levelTextObj.text = "Round 2 of 4"; 
                     currentMatches = Mathf.RoundToInt(accurateTotalMatches * 3); 
                     ResetForNewLevel(); 
                 break; 
                 case 2: //Round 3 of 4
-                    levelTextObj.text = "Level 3 of 4"; 
+                    levelTextObj.text = "Round 3 of 4"; 
                     gameState = GameState.levelFinished;
                     ResetForNewLevel(); 
                 break;  
                 case 3: //Round 4 of 4
-                    levelTextObj.text = "Level 4 of 4"; 
+                    levelTextObj.text = "Round 4 of 4"; 
                     gameState = GameState.levelFinished; 
                     ResetForNewLevel(); 
                 break; 
@@ -581,16 +581,7 @@ public class NBackGameManager : MonoBehaviour
         }
     }
 
-    public void QuitGame()
-    {
-        Application.Quit(); 
-
-    }
-
-    public void ReloadScene()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name); 
-    }
+    
 
     
 }

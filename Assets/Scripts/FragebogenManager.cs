@@ -9,10 +9,6 @@ using UnityEngine.UI;
 public class FragebogenManager : MonoBehaviour
 {  
 
-    [Header("Events for Certain Question ID`s")]
-    public int[] IDToExcludeAnswerSave; 
-    public int IDToNBack; 
-
     // Dictionary not able to be shown in inspector -> Workaround
     [Serializable] 
     public struct Questions
@@ -25,38 +21,34 @@ public class FragebogenManager : MonoBehaviour
     [Header("Questions List")]
     public Questions[] questions;
 
-    public void Awake()
-    {
-        FragebogenManager.DontDestroyOnLoad(gameObject); 
-    }
 
 
 
     public void NextQuestion(int currentID) //Called by Continue Button
     {
+        
 
-        if(currentID != IDToExcludeAnswerSave[0] && currentID != IDToExcludeAnswerSave[1]&& currentID != IDToExcludeAnswerSave[2]) // Exclude start screen
+
+        if(questions[currentID].questionObj.GetComponent<AnswerSaver>() != null) // Exclude start screen
         {
-           AnswerSaver answer = questions[currentID].questionObj.GetComponent<AnswerSaver>(); 
-           string name = questions[currentID].name; 
+            AnswerSaver answer = questions[currentID].questionObj.GetComponent<AnswerSaver>(); 
+            string name = questions[currentID].name;
+            int id = questions[currentID].id; 
 
-            if(answer.questionType == AnswerSaver.QuestionType.freeInputNumber || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
+            if (answer.questionType == AnswerSaver.QuestionType.freeInputNumber || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
             {
             
                 if(answer.currentAnswer == null || answer.currentAnswer == "") // If no input happened in free input field dont allow continue
                     return; 
                 else
                 {   
-                    answer.SaveAnswer(currentID, name);     
+                    answer.SaveAnswer(id, name);     
                     
                 }
-                    
-               
             }
             else
             {
-                answer.SaveAnswer(currentID,name); 
-                
+                answer.SaveAnswer(id,name);
             }
         }
         
@@ -66,7 +58,7 @@ public class FragebogenManager : MonoBehaviour
         //Continue to next question
         questions[currentID].questionObj.gameObject.SetActive(false); 
 
-        if(currentID != IDToNBack)
+        if(currentID != (questions.Length - 1) ) // Last question -> Dont activate next UI
             questions[currentID + 1].questionObj.gameObject.SetActive(true); 
         
         

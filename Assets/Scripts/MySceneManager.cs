@@ -12,7 +12,7 @@ public class MySceneManager : MonoBehaviour
     
     void Awake()
     {
-        DontDestroyOnLoad(gameObject); 
+        
 
         //Singleton
         if (Instance != null)

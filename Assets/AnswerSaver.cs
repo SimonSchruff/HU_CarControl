@@ -10,14 +10,16 @@ public class AnswerSaver : MonoBehaviour
     public string currentAnswer; 
 
     Toggle[] toggles; 
-    InputField inputField; 
+    InputField inputField;
+    Slider slider; 
 
 
     public enum QuestionType
     {
         toggles, 
         togglesWithFreeInput, 
-        freeInputNumber
+        freeInputNumber,
+        slider
     }
 
     public QuestionType questionType ;
@@ -39,7 +41,7 @@ public class AnswerSaver : MonoBehaviour
             else
                 questionType = QuestionType.toggles; 
         }
-        else if(GetComponentInChildren<ToggleGroup>() == null || GetComponentInChildren<InputField>() != null)
+        else if(GetComponentInChildren<ToggleGroup>() == null && GetComponentInChildren<InputField>() != null)
         { // Input Field for Numbers
             
             inputField = GetComponentInChildren<InputField>();
@@ -47,6 +49,13 @@ public class AnswerSaver : MonoBehaviour
             {
                 questionType = QuestionType.freeInputNumber; 
             }
+        }
+        else if(GetComponentInChildren<Slider>() != null)
+        {
+
+            slider = GetComponentInChildren<Slider>();
+            questionType = QuestionType.slider;
+
         }
 
 
@@ -67,7 +76,7 @@ public class AnswerSaver : MonoBehaviour
                 }
 
 
-            break; 
+                break; 
             case QuestionType.togglesWithFreeInput: 
 
                 foreach(Toggle toggle in toggles)
@@ -86,10 +95,13 @@ public class AnswerSaver : MonoBehaviour
                     }
                 }
 
-            break;
+                break;
             case QuestionType.freeInputNumber: 
                 currentAnswer = inputField.text; 
-            break;
+                break;
+            case QuestionType.slider:
+                currentAnswer = slider.value.ToString(); 
+                break; 
         }
     }
 
