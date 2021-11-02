@@ -69,7 +69,7 @@ public class SimulationControlScript : MonoBehaviour
 
     //Traffic light prioritize
     int oldTLHighestScore = 0;
-    int trafficLightTestCounter = 0;
+    int simFrameCounter = 0;
 
     List<int> checkedTL = new List<int>();
     Dictionary<int, int> copyOfStartScores = new Dictionary<int, int>();
@@ -181,6 +181,8 @@ public class SimulationControlScript : MonoBehaviour
         bool isFirstTLTest = trafficLightsToTest.Count == 0;
         inNotTryChangeTrafficLight = isFirstTLTest;
         int tempTrafficLightToTest = 0;
+        simFrameCounter++;
+
         if (isFirstTLTest)
         {
             if(trafficLightScores.Count == 0)
@@ -220,7 +222,7 @@ public class SimulationControlScript : MonoBehaviour
 
             if(actualMaxLocal < oldTLHighestScore)      //Old score was better so change
             {
-                RecommendTrafficLight(trafficLightsToTest[0]);
+                RecommendTrafficLight(trafficLightsToTest[0], simFrameCounter);
 
 
                 trafficLightsToTest.Clear();
@@ -248,7 +250,6 @@ public class SimulationControlScript : MonoBehaviour
                 }
             }
         }
-        trafficLightTestCounter++;
 
         ClearSimCache(isFirstTLTest, tempTrafficLightToTest);
 
@@ -270,15 +271,15 @@ public class SimulationControlScript : MonoBehaviour
   //      }
     }
 
-    void RecommendTrafficLight (int id)
+    void RecommendTrafficLight (int id, int simCounter = 0)
     {
-        StartCoroutine(ChangeTrafficLight(id));
+        StartCoroutine(ChangeTrafficLight(id, simCounter));
      //  GetTrafficLightRefFromID(id).LightClicked();
     }
 
-    IEnumerator ChangeTrafficLight (int trafficLightID)
+    IEnumerator ChangeTrafficLight (int trafficLightID, int simFrameCounter)
     {
-        yield return new WaitForSecondsRealtime(reactionTime);
+        yield return new WaitForSecondsRealtime(reactionTime-(simFrameCounter * .06f));
         GetTrafficLightRefFromID(trafficLightID).LightClicked();
     }
 
@@ -330,7 +331,7 @@ public class SimulationControlScript : MonoBehaviour
         oldTLHighestScore = 0;
         checkedTL.Clear();
         trafficLightsToTest.Clear();
-        trafficLightTestCounter = 0;
+        simFrameCounter = 0;
         lightsToIgnore.Clear();
 
         StartCoroutine(StartSimCoroutine());
@@ -703,7 +704,7 @@ public class SimulationControlScript : MonoBehaviour
         {
             trafficLightCounter += simulationSteps;
 
-            if (trafficLightCounter > reactionTime)
+            if (trafficLightCounter >= reactionTime)
             {
                 trafficLightCounter = 0f;
                 lightsToChangeInThisRun[lightsToChangeInThisRun.Count - 1].LightClicked();
@@ -746,6 +747,9 @@ public class SimulationControlScript : MonoBehaviour
         {
             if (carSpawnTimesSim[0] <= simTimeCounter)      //Check if spawn car
             {
+                if (!GameManager.GM.spawnEmergency)     //CheckIfSpawnEmegency
+                    nextCarEmergency = false;
+
                 carSpawnerList[orderOfSpawnCarLocSim[0]].SpawnCar(nextCarEmergency);
                 if (nextCarEmergency)
                     nextCarEmergency = false;
@@ -756,7 +760,10 @@ public class SimulationControlScript : MonoBehaviour
         catch { }
         if (boatSpawnTimesSim[0] <= simTimeCounter)
         {
-            boatSpawnerSim.SpawnBoatFunc();
+            try
+            {
+                boatSpawnerSim.SpawnBoatFunc();
+            } catch { }
             boatSpawnTimesSim.RemoveAt(0);
         }
         if (emergencySpawnTimesSim[0] <= simTimeCounter)
