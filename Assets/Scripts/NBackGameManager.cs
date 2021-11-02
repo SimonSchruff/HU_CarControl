@@ -59,13 +59,21 @@ public class NBackGameManager : MonoBehaviour
     // PUBLIC VARIABLES
     public int n = 2;
     public int stimuliShown = 25;
-    public float matchProbability = 0.3333333333f;   
+    public float matchProbability = 0.3333333333f;
+    
     
     // LISTS
     //Letters that are randomly selected are directly assigned to List in inspector
     public List<string> lettersOfChoice = new List<string>(); 
-    public List<string> usedLetters = new List<string>(); 
-    
+    public List<string> usedLetters = new List<string>();
+    public List<string> showNumbers = new List<string>();
+
+    //Round Lists
+    List<string> round1Numbers = new List<string>();
+    List<string> round2Numbers = new List<string>();
+    List<string> round3Numbers = new List<string>();
+    List<string> round4Numbers = new List<string>();
+
 
     //  VARIABLES
     [HideInInspector]
@@ -116,17 +124,7 @@ public class NBackGameManager : MonoBehaviour
     public Text[] scoreUINumbers = new Text[8]; 
 
     
-    /*
-        [x] Reset Level Fct()
-        [x] Save Percentage scores for each level 
-        [] Upload to 000webhost in own .php file
-        [x] Clean UP Inspector Window 
-        [x] Update Instructions UI 
-        [x] Create Timer before game starts
-        [x] Functionality of levels / trial level
-        [x] Visually Disable Buttons for first n Numbers
-    */
-
+    
     void Awake()
     {
         //Singleton
@@ -146,7 +144,9 @@ public class NBackGameManager : MonoBehaviour
         currentMatches = totalMatchesPerRound; 
 
         gameState = GameState.instructions; 
-        InstructionObjects.SetActive(true); 
+        InstructionObjects.SetActive(true);
+
+        AssignLetters(); 
     }
 
     void Update()
@@ -271,9 +271,30 @@ public class NBackGameManager : MonoBehaviour
         
     }
 
-    IEnumerator WaitForSeconds(float s)
+
+    //GENERATE LIST OF LETTERS TO SHOW LATER
+    public void AssignLetters()
     {
-        yield return new WaitForSeconds(s); 
+        // Practice Round / 8 Matches
+        AddToList(round1Numbers, "5","2","0","5","0", "5", "6", "5", "9", "2", "9", "0", "9", "1", "0", "9", "0", "4", "2", "8", "2", "7", "6", "3", "6" );
+        // Round 2 of 4 / 10 Matches
+        AddToList(round2Numbers, "1", "6", "9", "4", "5", "4", "6", "4", "6", "5", "6", "3", "2", "5", "2", "3", "2", "3", "0", "7", "0", "7", "0", "2", "8");
+        //Round 3 of 4 / 5 Matches
+        AddToList(round3Numbers, "6", "4", "9", "5", "0", "4", "0", "7", "5", "7", "8", "1", "8", "5", "1", "6", "0", "6", "8", "5", "5", "5", "2", "7", "4");
+        //Round 4 of 4 / 8 Matches
+        AddToList(round4Numbers, "7", "0", "7", "5", "4", "4", "4", "6", "2", "6", "0", "3", "0", "3", "6", "1", "0", "1", "4", "2", "3", "2", "9", "2", "4");
+
+
+
+    }
+
+    void AddToList(List<string> list, params string[] numbers)
+    {
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            list.Add(numbers[i]);
+        }
+
     }
 
     public void SwitchInstructionsPage(int i)
@@ -328,7 +349,23 @@ public class NBackGameManager : MonoBehaviour
         
         
         //Get new random letter, add it to list and show it
-        letterTextObj.text = RandomizeLetter(); 
+        if(currentLevel == 0)
+        {
+            letterTextObj.text = round1Numbers[stimuli]; 
+        }
+        else if(currentLevel == 1)
+        {
+            letterTextObj.text = round2Numbers[stimuli];
+        }
+        else if(currentLevel == 2)
+        {
+            letterTextObj.text = round3Numbers[stimuli];
+        }
+        else if(currentLevel == 3)
+        {
+            letterTextObj.text = round4Numbers[stimuli];
+        }
+        
         currentLetter = letterTextObj.text; 
         usedLetters.Add(currentLetter); 
 
