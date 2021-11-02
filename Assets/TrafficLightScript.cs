@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class TrafficLightScript : SimulatedParent
 {
+    [SerializeField] List<string> DebugListEntries = new List<string>();
+
     public lightState state = lightState.green;
     [SerializeField] SpriteRenderer lightSprite;
     [SerializeField] Rigidbody2D clickableSprite;
@@ -112,10 +114,11 @@ public class TrafficLightScript : SimulatedParent
         {
             SetOrangePhase(lightState.green);
         }
+    }
 
-    //    if (Assistance.assi.actualAssistance != Assistance.AssistanceTypes.Manual)
-    //    {
-    //        SimulationControlScript.sim.StartSim();
-    //    }
+    public void AddEntryToDebugListing (Score.PointTypes typ, int amount, GameObject senderCar)
+    {
+        string temp = typ.ToString() + "_" + amount + "_" + (senderCar == null ? "" : senderCar.name);
+        DebugListEntries.Add(temp);
     }
 }

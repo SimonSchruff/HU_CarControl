@@ -224,7 +224,7 @@ public class CarControlScript : SimulatedParent
                             }
                         }
                     }
-                    else
+                    else        // When no emergency Car - Add priority to traffic light as well
                     {
                         if(emergencyCounter >= emergencyReduceScoreDelay)
                         {
@@ -232,9 +232,9 @@ public class CarControlScript : SimulatedParent
                             if (simState == simulationState.simulated)  // Add Priority to traffic light for waitng
                             {
                                 if (actualWaitingLightID != 0)
-                                    SimulationControlScript.sim.AddScoreToTrafficLight(actualWaitingLightID, 10);
+                                    SimulationControlScript.sim.AddScoreToTrafficLight(actualWaitingLightID, 1);
                                 else
-                                    Debug.Log("Emergency Error Here");
+                                    Debug.Log("Normal Car Error Here");
                             }
                         }
                     }

@@ -39,7 +39,8 @@ public class Score : MonoBehaviour
         emergencyCrash,
         carInWater,
         emergencyInWater,
-        emergencyWait
+        emergencyWait,
+        normalCarWait
     }
 
     private void Awake()

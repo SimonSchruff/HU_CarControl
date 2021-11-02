@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public List<int> orderOfSpawnCarLoc = new List<int>();
 
+    public bool spawnEmergency = true;
+
     [Header("To assign")]
     [SerializeField] Canvas mainCanvasRef; 
     [SerializeField] Text InfoTextRef;
@@ -322,6 +324,9 @@ public class GameManager : MonoBehaviour
 
             if(carSpawnTimes[0]<= timeCounter)      //Check if spawn car
             {
+                if (!spawnEmergency)        //SpawnNoEmergency
+                    nextCarEmergency = false;
+
                 carSpawners[orderOfSpawnCarLoc[0]].SpawnCar(nextCarEmergency);
                 if (nextCarEmergency)
                     nextCarEmergency = false;
@@ -330,7 +335,10 @@ public class GameManager : MonoBehaviour
             }
             if(boatSpawnTimes[0]<= timeCounter)
             {
-                boatSpawner[0].SpawnBoatFunc();
+                try
+                {
+                    boatSpawner[0].SpawnBoatFunc();
+                } catch { }
                 boatSpawnTimes.RemoveAt(0);
             }
             if(emergencySpawnTimes[0] <=timeCounter)
