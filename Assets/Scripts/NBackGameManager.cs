@@ -8,8 +8,6 @@ public class NBackGameManager : MonoBehaviour
 {
     public static NBackGameManager Instance; 
 
-
-
     [System.Serializable]
     public struct LevelData
     {
@@ -32,7 +30,6 @@ public class NBackGameManager : MonoBehaviour
         //public float totalMismatches;
         
     }
-
     public LevelData levelData; 
 
     
@@ -51,22 +48,18 @@ public class NBackGameManager : MonoBehaviour
     [Header("Timer")]
     public float letterShowSec = 0.5f; 
     public float letterWaitSec = 2.5f; 
-    float timer; 
-    float hideTimer; 
 
 
     [Header("Letter Objects, Lists, and Variables")]
     // PUBLIC VARIABLES
     public int n = 2;
     public int stimuliShown = 25;
-    public float matchProbability = 0.3333333333f;
+    
     
     
     // LISTS
     //Letters that are randomly selected are directly assigned to List in inspector
-    public List<string> lettersOfChoice = new List<string>(); 
     public List<string> usedLetters = new List<string>();
-    public List<string> showNumbers = new List<string>();
 
     //Round Lists
     List<string> round1Numbers = new List<string>();
@@ -85,14 +78,14 @@ public class NBackGameManager : MonoBehaviour
     int stimuli = 0; 
    
 
-    //BOOLS
-    [HideInInspector]
-    public bool inputHappened; 
+    #region Bools
+    bool inputHappened; 
     bool newLetterRdy = true; 
     bool newTimerRdy = true; 
     bool switchedLevels = false; 
-    
+    #endregion
 
+    #region Score
     // All possible score events
     [Header("Score")]
     public int correctMatch; 
@@ -104,11 +97,9 @@ public class NBackGameManager : MonoBehaviour
     public int totalMatchesPerRound;
     public float accurateTotalMatches; 
     public int currentMatches; 
-    
+    #endregion
 
-
-
-
+    #region UIRefs 
     [Header("UI References")]
     public GameObject InstructionObjects; 
     public GameObject InstructionsObjExample; 
@@ -122,6 +113,7 @@ public class NBackGameManager : MonoBehaviour
     public Text letterTextObj; 
     public Button[] Buttons = new Button[2]; 
     public Text[] scoreUINumbers = new Text[8]; 
+    #endregion
 
     
     
@@ -136,15 +128,9 @@ public class NBackGameManager : MonoBehaviour
         else
             Instance = this;
 
-        //Calculate Total correct matches
-        float tempFloat =  (float)(stimuliShown - n) * matchProbability;
-        accurateTotalMatches = tempFloat; 
-        totalMatchesPerRound = Mathf.RoundToInt(tempFloat); 
-        Debug.Log("Total Matches per Round: " + totalMatchesPerRound) ;
-        currentMatches = totalMatchesPerRound; 
-
         gameState = GameState.instructions; 
         InstructionObjects.SetActive(true);
+        
 
         AssignLetters(); 
     }
@@ -208,10 +194,9 @@ public class NBackGameManager : MonoBehaviour
                     scoreUINumbers[2].text = levelData.falseAlarm.ToString(); 
                     scoreUINumbers[3].text = levelData.missedMatches.ToString(); 
                     //Mismatch Numbers
-                    scoreUINumbers[4].text = currentMatches.ToString(); 
-                    scoreUINumbers[5].text = levelData.correctlyMismatched.ToString(); 
-                    scoreUINumbers[6].text = levelData.falseAlarmMismatch.ToString(); 
-                    scoreUINumbers[7].text = levelData.missedMismatches.ToString(); 
+                    scoreUINumbers[4].text = levelData.correctlyMismatched.ToString(); 
+                    scoreUINumbers[5].text = levelData.falseAlarmMismatch.ToString(); 
+                    scoreUINumbers[6].text = levelData.missedMismatches.ToString(); 
                 }
                 GameOverObjects.SetActive(false); 
 
@@ -236,7 +221,6 @@ public class NBackGameManager : MonoBehaviour
                 case 1: //Round 2 of 4
                     gameState = GameState.levelFinished; 
                     levelTextObj.text = "Round 2 of 4"; 
-                    currentMatches = Mathf.RoundToInt(accurateTotalMatches * 3); 
                     ResetForNewLevel(); 
                 break; 
                 case 2: //Round 3 of 4
@@ -299,8 +283,6 @@ public class NBackGameManager : MonoBehaviour
 
     public void SwitchInstructionsPage(int i)
     {
-        
-
         switch(i)
         {
             case 1: //Instructions
@@ -311,28 +293,24 @@ public class NBackGameManager : MonoBehaviour
                 InstructionObjects.SetActive(false); 
                 InstructionsObjExample.SetActive(true); 
             break; 
-            
-
         }
     }
 
     void ResetForNewLevel()
     {
-        
+        usedLetters.Clear(); 
+
         correctMatch = 0; 
         wrongMatch = 0; 
         correctMismatch = 0; 
         wrongMismatch = 0;
         missedMatch = 0; 
         missedMismatch = 0; 
-
         
         stimuli = 0; 
 
         switchedLevels = true; 
-        usedLetters.Clear(); 
-
-
+     
     }
 
     IEnumerator OneLetterPeriod()
@@ -340,15 +318,13 @@ public class NBackGameManager : MonoBehaviour
         newLetterRdy = false;
         inputHappened = false;  
      
-        // Disable Buttons if (Match/Mismatch is not possible) 
         // Correct letter only possible if usedLetters.Count is >= then n 
         if( usedLetters.Count >= n )
         {
             correctLetter = usedLetters[usedLetters.Count - n]; 
         }
         
-        
-        //Get new random letter, add it to list and show it
+        //Add Correct List according to level
         if(currentLevel == 0)
         {
             letterTextObj.text = round1Numbers[stimuli]; 
@@ -367,8 +343,10 @@ public class NBackGameManager : MonoBehaviour
         }
         
         currentLetter = letterTextObj.text; 
-        usedLetters.Add(currentLetter); 
+        usedLetters.Add(currentLetter); // Add to used Letter List
 
+
+        //SET UI
         letterObject.SetActive(true); 
 
         yield return new WaitForSeconds(letterShowSec); 
@@ -378,11 +356,15 @@ public class NBackGameManager : MonoBehaviour
         yield return new WaitForSeconds(letterWaitSec); 
 
         // If no Input happened during full letter period
-        if(!inputHappened && currentLetter == correctLetter)
+        if( usedLetters.Count > n ) // > instead of >= because letter has already been added to List above
         {
-            Debug.Log("Match missed! "); 
-            CountScore(4); 
+            if(!inputHappened && currentLetter == correctLetter)
+            {
+                Debug.Log("Match missed! "); 
+                CountScore(4); 
+            }
         }
+        
             
         if( usedLetters.Count > n )
         {
@@ -451,9 +433,7 @@ public class NBackGameManager : MonoBehaviour
         float totalMatches = correctMatch + missedMatch + wrongMismatch; 
         print(totalMatches); 
         float totalMismatches = (stimuli-n) - totalMatches; 
-        print(totalMismatches) ;
-        //levelData.totalMismatches = (stimuli-n) - totalMatchesPerRound;
-
+        print(totalMismatches); 
         //Numeric Int amount of Matches etc. Per Round
         levelData.totalCorrectMatches = correctMatch; 
         levelData.totalCorrectMismatches = correctMismatch ;
@@ -465,7 +445,7 @@ public class NBackGameManager : MonoBehaviour
         levelData.totalMissedMismatches = missedMismatch; 
         
         //Percentages of correctly identified matches etc. per Round
-        if(totalMatchesPerRound > 0 )
+        if(totalMatches > 0 )
         {
             levelData.correctlyMatched = (float)correctMatch / (float)totalMatches; 
             levelData.missedMatches = (float)missedMatch / (float)totalMatches; 
@@ -491,68 +471,6 @@ public class NBackGameManager : MonoBehaviour
         
     }
     
-
-    string RandomizeLetter()
-    {
-        string newLetter = "X"; 
-        
-        /*
-            ---- HANDLE EDGE CASES FOR PROBABILITY ----
-            - First two letters can`t be match/mismatch
-            - If amount of matches per current round already shown, dont show correct letter
-            - If number of remaining stimuli is <= matches still to be shown, show them at the end
-        */
-
-        int rand; 
-        if(currentLevel > 0) // Level 02 - 04
-        {
-            if(usedLetters.Count <= n )
-                rand = 1; 
-            else if(currentMatches == 0)
-                rand = 1; 
-            else if((stimuliShown - usedLetters.Count ) <=  currentMatches && currentLevel == 3)
-                rand = 3;
-            else
-                rand = Random.Range(1,4);
-        }
-        else // Level 01 
-        {
-            if(usedLetters.Count <= n )
-                rand = 1; 
-            else if(currentMatches == 0)
-                rand = 1; 
-            else if((stimuliShown - usedLetters.Count ) <=  currentMatches)
-                rand = 3;
-            else
-                rand = Random.Range(1,4);
-        }
-         
-
-
-        switch(rand)
-        {
-            case 1: 
-            case 2: 
-                string tempLetter = "X"; 
-                tempLetter = lettersOfChoice[Random.Range(0, lettersOfChoice.Count)]; 
-                // If random letter is the same as correct letter, repeat randomizing until different letter
-                //Does this affect randomness of letters ? 
-                while( tempLetter  == correctLetter )
-                {
-                    tempLetter = lettersOfChoice[Random.Range(0, lettersOfChoice.Count)]; 
-                }
-                newLetter = tempLetter; 
-            break; 
-            case 3: 
-                //Debug.Log("Correct Letter"); 
-                newLetter = correctLetter; 
-                currentMatches--; 
-            break; 
-
-        }
-        
-        return newLetter; 
-    }
 
     public void ChangeGameState(int i)
     {
