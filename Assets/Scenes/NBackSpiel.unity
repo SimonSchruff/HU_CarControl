@@ -623,8 +623,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 147.51, y: -20.00029}
-  m_SizeDelta: {x: 231.85, y: 46.9007}
+  m_AnchoredPosition: {x: 129.6, y: -19}
+  m_SizeDelta: {x: 299.1063, y: 46.9007}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &138381408
 MonoBehaviour:
@@ -659,7 +659,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Missed Mismatches : '
+  m_Text: 'No Reaction to Mismatches : '
 --- !u!222 &138381409
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -699,7 +699,7 @@ Transform:
   - {fileID: 914849496}
   - {fileID: 685029617}
   m_Father: {fileID: 845595270}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &205557230
 GameObject:
@@ -1594,8 +1594,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -180}
-  m_SizeDelta: {x: 160, y: 57.6996}
+  m_AnchoredPosition: {x: 0, y: -160}
+  m_SizeDelta: {x: 180, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &685029618
 MonoBehaviour:
@@ -1883,8 +1883,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -228, y: -18}
-  m_SizeDelta: {x: 212.6162, y: 46.9007}
+  m_AnchoredPosition: {x: -254.38516, y: -18}
+  m_SizeDelta: {x: 265.3865, y: 46.9007}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &791871318
 MonoBehaviour:
@@ -1919,7 +1919,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Missed Matches : '
+  m_Text: 'No Reaction to Matches : '
 --- !u!222 &791871319
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2056,8 +2056,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1253607110}
   - {fileID: 201670220}
+  - {fileID: 1253607110}
   - {fileID: 905807112}
   - {fileID: 392748433}
   - {fileID: 1591022019}
@@ -2372,8 +2372,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 28}
-  m_SizeDelta: {x: 453.7511, y: 312.2434}
+  m_AnchoredPosition: {x: 0, y: 44.1978}
+  m_SizeDelta: {x: 453.7511, y: 279.8478}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &914849497
 MonoBehaviour:
@@ -2456,7 +2456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -54, y: -63}
+  m_AnchoredPosition: {x: -98.132, y: -66.901}
   m_SizeDelta: {x: 47.12, y: 46.9007}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &940198993
@@ -2826,7 +2826,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 288.28, y: -64.901}
+  m_AnchoredPosition: {x: 304, y: -64}
   m_SizeDelta: {x: 47.12, y: 46.9007}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1081744505
@@ -2984,8 +2984,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -204.50783, y: -63.000996}
-  m_SizeDelta: {x: 253.8887, y: 46.9007}
+  m_AnchoredPosition: {x: -210.80933, y: -63.000996}
+  m_SizeDelta: {x: 179.2086, y: 46.9007}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1133802012
 MonoBehaviour:
@@ -3020,7 +3020,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'False Mismatch Alarm :'
+  m_Text: 'False Decision :'
 --- !u!222 &1133802013
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3180,7 +3180,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 287, y: -20}
+  m_AnchoredPosition: {x: 302.71997, y: -19.098991}
   m_SizeDelta: {x: 47.12, y: 46.9007}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1253607109
@@ -3218,7 +3218,7 @@ Transform:
   - {fileID: 205557231}
   - {fileID: 509840659}
   m_Father: {fileID: 845595270}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1293920100
 GameObject:
@@ -3991,7 +3991,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1457040340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4053,8 +4053,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 30}
-  m_SizeDelta: {x: 500.4309, y: 336.6348}
+  m_AnchoredPosition: {x: 0, y: 47.17948}
+  m_SizeDelta: {x: 500.4309, y: 302.2758}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1501204399
 MonoBehaviour:
@@ -4282,8 +4282,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 192, y: -64.9}
-  m_SizeDelta: {x: 145.4325, y: 46.9007}
+  m_AnchoredPosition: {x: 138.15, y: -64}
+  m_SizeDelta: {x: 282.0144, y: 46.9007}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1577071482
 MonoBehaviour:
@@ -4318,7 +4318,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'False Alarm :'
+  m_Text: 'False Decision Mismatch : '
 --- !u!222 &1577071483
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5235,7 +5235,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -5246,7 +5246,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Continue
+  m_Text: Continue to Example
 --- !u!222 &1906855472
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5398,20 +5398,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelData:
     playerID: 0
-    level: 0
+    currentLevel: 0
     totalCorrectPercentage: 0
     correctlyMatched: 0
     totalCorrectMatches: 0
-    falseAlarm: 0
-    totalFalseAlarms: 0
+    falseDecisionMatch: 0
+    totalFalseDecisionMatch: 0
     correctlyMismatched: 0
     totalCorrectMismatches: 0
-    falseAlarmMismatch: 0
-    totalFalseAlarmMismatches: 0
-    missedMatches: 0
-    totalMissedMatches: 0
-    missedMismatches: 0
-    totalMissedMismatches: 0
+    falseDecisionMismatch: 0
+    totalFalseDecisionMismatch: 0
+    noReactionMatches: 0
+    totalNoReactionMatches: 0
+    noReactionMismatches: 0
+    totalNoReactionMismatches: 0
   gameState: 0
   letterShowSec: 0.5
   letterWaitSec: 2.5

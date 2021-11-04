@@ -8,6 +8,7 @@ public class SQLSaveManager : MonoBehaviour
     public static SQLSaveManager instance; 
 
     public string playerID; 
+    string URL; 
 
 
     void Awake()
@@ -26,42 +27,47 @@ public class SQLSaveManager : MonoBehaviour
         //Create Unique Player ID ?
         //playerID = SystemInfo.deviceUniqueIdentifier; 
         playerID = "simon_test"; 
+        URL = "http://localhost/sqlCarControl/exDataManager.php"; 
     }
 
-    void Update()
-    {
-        
-    }
 
     public void StartNBackPostCoroutine(NBackGameManager.LevelData data)
     {
-        StartCoroutine(PostNbackLevelData(data)); 
+        StartCoroutine(PostNBackData(data)); 
     }
 
-
-    IEnumerator PostNbackLevelData(NBackGameManager.LevelData data)
+    IEnumerator PostNBackData(NBackGameManager.LevelData data)
     {
-        
-        string dataString = JsonUtility.ToJson(data); 
-        Debug.Log(dataString); 
-        
-        // Updated to IMulitpartFormSection
-        WWWForm postForm = new WWWForm(); 
-        postForm.AddField("id", playerID); 
+        #region Add Data to Form
+        List<IMultipartFormSection> formData = new List<IMultipartFormSection>(); 
 
-        postForm.AddField("level", data.level.ToString()); 
-        //postForm.AddField("total Matches", data.totalMatches.ToString()); 
-        //postForm.AddField("total Mismatches", data.totalMismatches.ToString()); 
+        // DATA
+        formData.Add(new MultipartFormDataSection("id", playerID)); 
+        formData.Add(new MultipartFormDataSection("currentLevel", data.currentLevel.ToString())); 
 
-        postForm.AddField("correctly Matched", data.correctlyMatched.ToString()); 
-        postForm.AddField("false Alarm", data.falseAlarm.ToString()); 
-        postForm.AddField("missed Matches", data.missedMatches.ToString()); 
+        // EVENTS IN TOTAL NUMBERS
+        formData.Add(new MultipartFormDataSection("totalCorrectMatches", data.totalCorrectMatches.ToString())); 
+        formData.Add(new MultipartFormDataSection("totalCorrectMismatches", data.totalCorrectMismatches.ToString())); 
 
-        postForm.AddField("correctly Mismatched", data.correctlyMismatched.ToString()); 
-        postForm.AddField("false Mismatch Alarm", data.falseAlarmMismatch.ToString()); 
-        postForm.AddField("missed Mismatches", data.missedMismatches.ToString());
+        formData.Add(new MultipartFormDataSection("totalFalseDecisionMatch", data.totalFalseDecisionMatch.ToString())); 
+        formData.Add(new MultipartFormDataSection("totalFalseDecisionMismatch", data.totalFalseDecisionMismatch.ToString())); 
+
+        formData.Add(new MultipartFormDataSection("totalNoReactionMatches", data.totalNoReactionMatches.ToString())); 
+        formData.Add(new MultipartFormDataSection("totalNoReactionMismatches", data.totalNoReactionMismatches.ToString())); 
+
+        // EVENTS IN PERCENTAGES
+        formData.Add(new MultipartFormDataSection("totalCorrectPercentage", data.totalCorrectPercentage.ToString())); 
+        formData.Add(new MultipartFormDataSection("correctlyMatched", data.correctlyMatched.ToString())); 
+        formData.Add(new MultipartFormDataSection("correctlyMismatched", data.correctlyMismatched.ToString())); 
+
+        formData.Add(new MultipartFormDataSection("noReactionMatches", data.noReactionMatches.ToString())); 
+        formData.Add(new MultipartFormDataSection("noReactionMismatches", data.noReactionMismatches.ToString())); 
+
+        formData.Add(new MultipartFormDataSection("falseDecisionMatch", data.falseDecisionMatch.ToString())); 
+        formData.Add(new MultipartFormDataSection("falseDecisionMismatch", data.falseDecisionMismatch.ToString())); 
+        #endregion
         
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("https://marki.fun/home/u799449553/domains/marki.fun/public_html/exdata/exDataManager.php", postForm))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1:8888/data.php", formData))
         {
             yield return webRequest.SendWebRequest(); 
 
@@ -79,9 +85,8 @@ public class SQLSaveManager : MonoBehaviour
 
                 break;
             }
-        }
-
-
-
+        } 
     }
+
+
 }
