@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TrafficLightScript : SimulatedParent
 {
-    [SerializeField] List<string> DebugListEntries = new List<string>();
+    public List<string> DebugListEntries = new List<string>();
 
     public lightState state = lightState.green;
     [SerializeField] SpriteRenderer lightSprite;
@@ -116,9 +116,9 @@ public class TrafficLightScript : SimulatedParent
         }
     }
 
-    public void AddEntryToDebugListing (Score.PointTypes typ, int amount, GameObject senderCar)
+    public void AddEntryToDebugListing (string typ, int amount, GameObject senderCar)
     {
-        string temp = typ.ToString() + "_" + amount + "_" + (senderCar == null ? "" : senderCar.name);
+        string temp = typ + "_" + amount + "_" + (senderCar == null ? "" : senderCar.name);
         DebugListEntries.Add(temp);
     }
 }

@@ -45,7 +45,9 @@ public class CarInFrontDetect : SimulatedParent
                     {
                         int temp = selfCar.carsInRowCounter;
                         if (selfCar.actualWaitingLightID != 0)
-                            SimulationControlScript.sim.AddScoreToTrafficLight(selfCar.actualWaitingLightID, temp);
+                        {
+               //             SimulationControlScript.sim.AddScoreToTrafficLight(selfCar.actualWaitingLightID, temp);
+                        }
                         else { }
                        //     Debug.Log("CarInFront no Light id");
                     }

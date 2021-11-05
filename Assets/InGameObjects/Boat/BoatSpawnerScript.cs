@@ -7,6 +7,7 @@ using UnityEngine;
 public class BoatSpawnerScript : SimulatedParent
 {
     PathCreator pathRef;
+    public bool spawnBoats = true;
     [SerializeField] GameObject startPosSpirte;
     [SerializeField] GameObject boatPrefab;
     Vector3 startPos;
@@ -20,14 +21,17 @@ public class BoatSpawnerScript : SimulatedParent
 
     public void SpawnBoatFunc ()
     {
-        GameObject tempBoatRef = Instantiate(boatPrefab, startPos, Quaternion.Euler(new Vector3(0,0,0)));
-        BoatControlScript bcs = tempBoatRef.GetComponent<BoatControlScript>();
-        bcs.ManualStart(pathRef);
-
-        if (simState == simulationState.simulated)
+        if(spawnBoats)
         {
-            SimulationControlScript.sim.simObjects.Add(bcs);
-            bcs.simState = simulationState.simulated;
+            GameObject tempBoatRef = Instantiate(boatPrefab, startPos, Quaternion.Euler(new Vector3(0,0,0)));
+            BoatControlScript bcs = tempBoatRef.GetComponent<BoatControlScript>();
+            bcs.ManualStart(pathRef);
+
+            if (simState == simulationState.simulated)
+            {
+                SimulationControlScript.sim.simObjects.Add(bcs);
+                bcs.simState = simulationState.simulated;
+            }
         }
     }
 }

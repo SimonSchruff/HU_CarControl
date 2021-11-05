@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     static public float set_Duration;
     [HideInInspector] public bool canGameStart = false;
     [HideInInspector] public List<TrafficLightScript> trafficLights = new List<TrafficLightScript>();
+    [HideInInspector] public Dictionary<int,TrafficLightScript> trafficLightsDict = new Dictionary<int,TrafficLightScript>();
     public List<CarSpawner> carSpawners = new List<CarSpawner>();
     [HideInInspector] public List<BoatSpawnerScript> boatSpawner = new List<BoatSpawnerScript>();
 
@@ -91,6 +92,7 @@ public class GameManager : MonoBehaviour
             counter++;
             tl.trafficLightID = counter;
             trafficLights.Add(tl);
+            trafficLightsDict.Add(counter, tl);
         }
 
         //Assign Spot ID
