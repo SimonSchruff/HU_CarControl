@@ -32,9 +32,7 @@ public class NBackGameManager : MonoBehaviour
     }
     public LevelData levelData; 
 
-    
-    [HideInInspector]
-    public enum GameState
+    enum GameState
     {
         timer,
         instructions, 
@@ -42,40 +40,29 @@ public class NBackGameManager : MonoBehaviour
         levelFinished, 
         gameOver
     }
-    public GameState gameState; 
+    GameState gameState; 
 
 
-    [Header("Timer")]
+    [Header("Variables")]
+    public int n = 2;
     public float letterShowSec = 0.5f; 
     public float letterWaitSec = 2.5f; 
-
-
-    [Header("Letter Objects, Lists, and Variables")]
-    // PUBLIC VARIABLES
-    public int n = 2;
-    public int stimuliShown = 25;
     
     
-    
-    // LISTS
-    //Letters that are randomly selected are directly assigned to List in inspector
-    public List<string> usedLetters = new List<string>();
-
-    //Round Lists
-    List<string> round1Numbers = new List<string>();
-    List<string> round2Numbers = new List<string>();
-    List<string> round3Numbers = new List<string>();
-    List<string> round4Numbers = new List<string>();
+    [Header("Round Stimuli Lists")]
+    public List<string> round1Numbers = new List<string>();
+    public List<string> round2Numbers = new List<string>();
+    public List<string> round3Numbers = new List<string>();
+    public List<string> round4Numbers = new List<string>();
+    List<string> usedLetters = new List<string>();
 
 
-    //  VARIABLES
-    [HideInInspector]
-    public int currentLevel = 0; 
-    [HideInInspector]
-    public string currentLetter; 
-    
+    // Private Varriables
+    int currentLevel = 0; 
+    string currentLetter; 
     string correctLetter = "A";
     int stimuli = 0; 
+    int stimuliShown = 25;
    
 
     #region Bools
@@ -86,17 +73,12 @@ public class NBackGameManager : MonoBehaviour
     #endregion
 
     #region Score
-    // All possible score events
-    [Header("Score")]
-    public int correctMatch; 
-    public int wrongMatch; 
-    public int correctMismatch; 
-    public int wrongMismatch;
-    public int missedMatch; 
-    public int missedMismatch; 
-    public int totalMatchesPerRound;
-    public float accurateTotalMatches; 
-    public int currentMatches; 
+    int correctMatch; 
+    int wrongMatch; 
+    int correctMismatch; 
+    int wrongMismatch;
+    int missedMatch; 
+    int missedMismatch;  
     #endregion
 
     #region UIRefs 
@@ -112,7 +94,7 @@ public class NBackGameManager : MonoBehaviour
     public GameObject letterObject; 
     public Text letterTextObj; 
     public Button[] Buttons = new Button[2]; 
-    public Text[] scoreUINumbers = new Text[8]; 
+    public Text[] scoreUINumbers = new Text[8]; // Numbers for Debug Percentages
     #endregion
 
     
@@ -128,11 +110,32 @@ public class NBackGameManager : MonoBehaviour
         else
             Instance = this;
 
+
         gameState = GameState.instructions; 
         InstructionObjects.SetActive(true);
-        
 
-        AssignLetters(); 
+
+        //Check if all Lists are the same length and set stimuli shown to length of list 01
+        if(round1Numbers.Count == round2Numbers.Count || round1Numbers.Count == round3Numbers.Count || round1Numbers.Count == round4Numbers.Count )
+        {
+            if(round2Numbers.Count == round3Numbers.Count || round2Numbers.Count == round4Numbers.Count)
+            {
+                if(round3Numbers.Count == round4Numbers.Count)
+                {
+                    stimuliShown = round1Numbers.Count; 
+                    print(stimuliShown); 
+                }
+                else 
+                    Debug.LogError("Round 3 and Round 4 List are not the same length!"); 
+            }
+            else
+                Debug.LogError("Round 2 and Round 3 or 4 List are not the same length!"); 
+        }
+        else
+            Debug.LogError("Round 1 and Round 2,3 or 4 List are not the same length!"); 
+
+        
+        
     }
 
     void Update()
@@ -253,32 +256,6 @@ public class NBackGameManager : MonoBehaviour
         }
         
         
-    }
-
-
-    //GENERATE LIST OF LETTERS TO SHOW LATER
-    public void AssignLetters()
-    {
-        // Practice Round / 8 Matches
-        AddToList(round1Numbers, "5","2","0","5","0", "5", "6", "5", "9", "2", "9", "0", "9", "1", "0", "9", "0", "4", "2", "8", "2", "7", "6", "3", "6" );
-        // Round 2 of 4 / 10 Matches
-        AddToList(round2Numbers, "1", "6", "9", "4", "5", "4", "6", "4", "6", "5", "6", "3", "2", "5", "2", "3", "2", "3", "0", "7", "0", "7", "0", "2", "8");
-        //Round 3 of 4 / 5 Matches
-        AddToList(round3Numbers, "6", "4", "9", "5", "0", "4", "0", "7", "5", "7", "8", "1", "8", "5", "1", "6", "0", "6", "8", "5", "5", "5", "2", "7", "4");
-        //Round 4 of 4 / 8 Matches
-        AddToList(round4Numbers, "7", "0", "7", "5", "4", "4", "4", "6", "2", "6", "0", "3", "0", "3", "6", "1", "0", "1", "4", "2", "3", "2", "9", "2", "4");
-
-
-
-    }
-
-    void AddToList(List<string> list, params string[] numbers)
-    {
-        for (int i = 0; i < numbers.Length; i++)
-        {
-            list.Add(numbers[i]);
-        }
-
     }
 
     public void SwitchInstructionsPage(int i)
