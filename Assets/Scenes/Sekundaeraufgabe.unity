@@ -421,6 +421,7 @@ MonoBehaviour:
   travelDistance: 37.5
   moveSpeed: 50
   timeRange: 60
+  timeToGiveInput: 10
   currentState: 0
 --- !u!1 &890495077
 GameObject:

@@ -18,6 +18,7 @@ public class SecondaryTask : MonoBehaviour
     public float travelDistance = 37.5f; 
     public float moveSpeed; 
     public float timeRange = 60; 
+    public float timeToGiveInput = 10; 
     int direction; 
 
 
@@ -102,7 +103,7 @@ public class SecondaryTask : MonoBehaviour
             else if(currentState == CurrentState.errorStateTop || currentState == CurrentState.errorStateBot)
             {
                 //Reset to start Pos
-                inputTimer = 10f; 
+                inputTimer = timeToGiveInput; 
                 currentState = CurrentState.cooldown; 
                 
             }
@@ -158,7 +159,7 @@ public class SecondaryTask : MonoBehaviour
             reset = true; 
             timerActive = false; 
             cooldown = true; 
-            timer = Random.Range(1, 60); 
+            timer = Random.Range(1, timeRange); 
             cooldownTimer = timeRange - timer; 
             print("Timer: " + timer + "; Cooldown: " + cooldownTimer); 
             
@@ -181,7 +182,7 @@ public class SecondaryTask : MonoBehaviour
         {
             // Player did not give input 
             currentState = CurrentState.cooldown; 
-            inputTimer = 10f; 
+            inputTimer = timeToGiveInput; 
             print("-3 Score"); 
 
         }
