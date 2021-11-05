@@ -299,7 +299,7 @@ public class SimulationControlScript : MonoBehaviour
     {
     //    yield return new WaitForSecondsRealtime(reactionTime-(simFrameCounter * .06f));
         yield return new WaitForSecondsRealtime(reactionTime);
-        GetTrafficLightRefFromID(trafficLightID).LightClicked();
+     //   GetTrafficLightRefFromID(trafficLightID).LightClicked();
     }
 
     int GetMaxScoreIndexFromTLScoreDict()
@@ -364,17 +364,6 @@ public class SimulationControlScript : MonoBehaviour
             return GameManager.GM.trafficLightsDict[id];    
         } 
         catch {return null;}
-            
-
-        /* foreach (TrafficLightScript tl in GameManager.GM.trafficLights)
-        {
-            if (tl.trafficLightID == id)
-            {
-                return tl;
-            }
-        } 
-        return null;
-        */
     }
 
     void FindHighestScoreAndAssign ()
@@ -444,7 +433,7 @@ public class SimulationControlScript : MonoBehaviour
             { }
             else
             {
-                AddScoreToTrafficLight(tl.trafficLightID, priority*30);
+                AddScoreToTrafficLight(tl.trafficLightID, priority*100);
             }
 
         } 
