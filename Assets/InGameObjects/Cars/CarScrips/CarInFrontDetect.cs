@@ -41,17 +41,28 @@ public class CarInFrontDetect : SimulatedParent
                     selfCar.actualWaitingLightID = otherCar.actualWaitingLightID;
                     selfCar.carsInRowCounter = otherCar.carsInRowCounter + 1;
 
-                    if(simState == simulationState.simulated)
+                    if (selfCar.actualWaitingLightID != 0)
                     {
-                        int temp = selfCar.carsInRowCounter;
-                        if (selfCar.actualWaitingLightID != 0)
+                        if(simState == simulationState.simulated)
                         {
-               //             SimulationControlScript.sim.AddScoreToTrafficLight(selfCar.actualWaitingLightID, temp);
+                            //       SimulationControlScript.sim.AddScoreToTrafficLight(selfCar.actualWaitingLightID, selfCar.carsInRowCounter);
+                            int acWaID = selfCar.actualWaitingLightID;
+                            foreach (TrafficLightScript tl in SimulationControlScript.sim.simTrafficLights)
+                            {
+                                if (tl.trafficLightID == acWaID)        //Set carsInRowInSim
+                                {
+                                    tl.waitingCarsCounter = selfCar.carsInRowCounter;
+                                    break;
+                                }
+                            }
+
                         }
-                        else { }
-                       //     Debug.Log("CarInFront no Light id");
-                    }
+                        else 
+                        {
+                            SimulationControlScript.sim.GetTrafficLightRefFromID(selfCar.actualWaitingLightID).waitingCarsCounter = selfCar.carsInRowCounter;   //Set car in Row counter of Traffic light
+                        }
                 }
+            }
 
                 bool sameLane = false;
 

@@ -65,7 +65,7 @@ public class SimulationControlScript : MonoBehaviour
 
     bool wasCrash = false;
 
-    public List<int> trafficLightsToChangeIDs = new List<int>();
+   // public List<int> trafficLightsToChangeIDs = new List<int>();
 
     //Traffic light prioritize
     int oldTLHighestScore = 0;
@@ -180,9 +180,9 @@ public class SimulationControlScript : MonoBehaviour
     {
         if(SimulationControlScript.sim.debug)
         {
-            foreach(int tlID in trafficLightScores.Keys)
+            foreach(TrafficLightScript tl in simTrafficLights)
             {
-                GetTrafficLightRefFromID(tlID).ChangeText(trafficLightScores[tlID]+"");
+                tl.ChangeText(tl.waitingCarsCounter+"");
             }
         }
     }
@@ -299,7 +299,7 @@ public class SimulationControlScript : MonoBehaviour
     {
     //    yield return new WaitForSecondsRealtime(reactionTime-(simFrameCounter * .06f));
         yield return new WaitForSecondsRealtime(reactionTime);
-     //   GetTrafficLightRefFromID(trafficLightID).LightClicked();
+        GetTrafficLightRefFromID(trafficLightID).LightClicked();
     }
 
     int GetMaxScoreIndexFromTLScoreDict()
@@ -554,6 +554,7 @@ public class SimulationControlScript : MonoBehaviour
                 try         // Check if is trafffic light
                 {
                     TrafficLightScript light = (TrafficLightScript)tempRef;
+          //          light.waitingCarsCounter = GetTrafficLightRefFromID(light.trafficLightID).trafficLightID;
                     simTrafficLights.Add(light);
                 }
                 catch { }

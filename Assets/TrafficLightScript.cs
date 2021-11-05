@@ -12,6 +12,8 @@ public class TrafficLightScript : SimulatedParent
     [SerializeField] Rigidbody2D clickableSprite;
     [SerializeField] Color[] redOrangeGreen;
 
+    public TrafficLightScript correspondingTL;
+
     public int trafficLightID;
     public float clickedTime;
     float waitTime;
@@ -22,6 +24,9 @@ public class TrafficLightScript : SimulatedParent
     [SerializeField] Text text2;
 
     Camera camRef;
+
+    public int waitingCarsCounter;
+
     public enum lightState
     {
         red,
@@ -35,6 +40,11 @@ public class TrafficLightScript : SimulatedParent
         camRef = Camera.main;
         ChangeText("");
         ChangeText("",false);
+
+        if(correspondingTL == null)
+        {
+            Debug.LogError("Assign corresponding Traffic Light!", gameObject);
+        }
     }
     public void ChangeText (string changeTo, bool changeTextOne = true)
     {
@@ -51,6 +61,14 @@ public class TrafficLightScript : SimulatedParent
         {
             state = newState;
         }
+        if(newState == lightState.green)
+        {
+            if(simState == simulationState.game)
+            {
+                waitingCarsCounter = 0;
+            }
+        }
+
         lightSprite.color = GetColorFromState();
     }
 
@@ -61,6 +79,15 @@ public class TrafficLightScript : SimulatedParent
         if(state == lightState.orange)
         {
             waitTime = GameManager.GM.timeCounter - clickedTime;
+        }
+
+        int correspondingTLID = correspondingTL.trafficLightID;
+        foreach(TrafficLightScript tl in SimulationControlScript.sim.simTrafficLights)
+        {
+            if(correspondingTLID == tl.trafficLightID)
+            {
+                correspondingTL = tl;
+            }
         }
     }
     public override void UpdateSimulation(float simStep)

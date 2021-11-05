@@ -156,13 +156,13 @@ public class CarControlScript : SimulatedParent
                          //   transform.Translate(Vector3.zero);
         //                    GetComponent<SpriteRenderer>().color = Random.ColorHSV();
                         }
+                    }
+                    catch { }
 
                         if (pathLength < carSpeed * timeCounter)        //CheckIfFinieshed
                         {
                             CarAtEndOfTrack();
                         }
-                    }
-                    catch { }
                 }
 
                 if (state == driveState.waitingAtTrafficLight)
@@ -229,16 +229,24 @@ public class CarControlScript : SimulatedParent
                             {
                                 if (actualWaitingLightID != 0)
                                 {
-                                //   CheckIfLightIsAlreadyGreen
-                                    if (SimulationControlScript.sim.GetTrafficLightRefFromID(actualWaitingLightID).state != TrafficLightScript.lightState.green)
+                                    //   CheckIfLightIsAlreadyGreen
+                                    SimulationControlScript tempSim = SimulationControlScript.sim;
+                                    bool isChangingTrafficLight = false;
+                                    if(tempSim.trafficLightsToTest.Count > 0)      //Check if wait in Traffic light cause of change of phases
                                     {
-                                        SimulationControlScript.sim.AddScoreToTrafficLight(actualWaitingLightID, 1);
+                                        isChangingTrafficLight = tempSim.trafficLightsToTest[0] == actualWaitingLightID;
+                                    }
+                                    int valueToAdd = isChangingTrafficLight ? -1 : 1;
 
-                                        SimulationControlScript.sim.GetTrafficLightRefFromID(actualWaitingLightID).AddEntryToDebugListing("NormalCarWaiting", 1, gameObject);
+                                    if (tempSim.GetTrafficLightRefFromID(actualWaitingLightID).state != TrafficLightScript.lightState.green)
+                                    {
+                                        tempSim.AddScoreToTrafficLight(actualWaitingLightID, valueToAdd);
+
+                                        tempSim.GetTrafficLightRefFromID(actualWaitingLightID).AddEntryToDebugListing("NormalCarWaiting", valueToAdd, gameObject);
                                     }
                                 }
-                                else
-                                    Debug.Log("Normal Car Error Here");
+                               // else
+                                 //   Debug.Log("Normal Car Error Here");
                             }
                         }
                     }
@@ -453,14 +461,33 @@ public class CarControlScript : SimulatedParent
             List<Collider2D> otherCol = new List<Collider2D>();
             selfCol.OverlapCollider(filterCollision, otherCol);
 
-            SpotSimScript spot = null;
-            bool found = false;
+            //     SpotSimScript spot = null;
+            //    bool found = false;
+            //    int tempToAdd = amount * 100;
+            //    int tempWaiting = 0;
+
+            //try
+            //{
+            //    tempWaiting = SimulationControlScript.sim.GetTrafficLightRefFromID(crossedTrafficLightIDs[crossedTrafficLightIDs.Count - 1]).waitingCarsCounter;
+            //}
+            //catch { Debug.Log("FAILED_0"); }
+
+            //try
+            //{
+            //    if (tempWaiting > 1)
+            //    {
+            //        tempToAdd = tempToAdd - (Mathf.Clamp(tempWaiting, 1, 9) * 9);
+            //        Debug.Log(tempToAdd);
+            //    }
+            //}
+            //catch { Debug.Log("FAILED_1"); }
             try
             {
-                SimulationControlScript.sim.AddScoreToTrafficLight(crossedTrafficLightIDs[crossedTrafficLightIDs.Count-1], amount * 100);
-                SimulationControlScript.sim.GetTrafficLightRefFromID(crossedTrafficLightIDs[crossedTrafficLightIDs.Count - 1]).AddEntryToDebugListing("CarSpawnCollision", amount,gameObject);
+
+                SimulationControlScript.sim.AddScoreToTrafficLight(crossedTrafficLightIDs[crossedTrafficLightIDs.Count-1], amount*100);
+                SimulationControlScript.sim.GetTrafficLightRefFromID(crossedTrafficLightIDs[crossedTrafficLightIDs.Count - 1]).AddEntryToDebugListing("CarSpawnCollision", amount*100,gameObject);
             }
-            catch { }
+            catch { Debug.Log("FAILED_2"); }
             /*
             foreach(Collider2D col in otherCol)
             {
