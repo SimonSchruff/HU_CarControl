@@ -5,7 +5,7 @@ using UnityEngine;
 public class CarInFrontDetect : SimulatedParent
 {
     List<CarControlScript> colCars = new List<CarControlScript>();
-    CarControlScript selfCar;
+    public CarControlScript selfCar;
 
     private void Start()        //SetSelfCarRef
     {

@@ -268,6 +268,9 @@ public class CarControlScript : SimulatedParent
 
     void CarAtEndOfTrack ()     //Car finieshed line - At end of track
     {
+        CheckIfOtherCarWouldStop();
+
+
         Collider2D col = GetComponent<Collider2D>();
         List<Collider2D> tempColliders = new List<Collider2D>();
         if (col.OverlapCollider(contactFilterContLane, tempColliders) > 0)
@@ -283,6 +286,31 @@ public class CarControlScript : SimulatedParent
             Score.sc.AddPoints(finishPointTyp , simState);
             DestroyImmediate(gameObject);
         }
+    }
+
+    void CheckIfOtherCarWouldStop ()
+    {
+        if(simState == simulationState.game)
+        {
+            List <Collider2D> collidingObjects = new List<Collider2D>();
+            GetComponent<Collider2D>().OverlapCollider(filterCollision, collidingObjects);
+            foreach (Collider2D col in collidingObjects)
+            {
+                if(col.CompareTag("CarOuter"))
+                {
+                    try
+                    {
+                        if (col.GetComponent<CarInFrontDetect>().selfCar.state == driveState.waitingCarInFront)
+                        {
+                            Debug.Log("Destroy when car is behind");
+                        }
+                        break;
+                    }
+                    catch { } // Catch when no self car ref is there any more
+                }
+            }
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)     // When normal game
@@ -484,10 +512,20 @@ public class CarControlScript : SimulatedParent
             try
             {
 
-                SimulationControlScript.sim.AddScoreToTrafficLight(crossedTrafficLightIDs[crossedTrafficLightIDs.Count-1], amount*100);
+                SimulationControlScript.sim.AddScoreToTrafficLight(crossedTrafficLightIDs[crossedTrafficLightIDs.Count - 1], amount * 100);
+            }
+            catch
+            {
+                Debug.Log("FAILED_11");
+            }
+            try
+            {
                 SimulationControlScript.sim.GetTrafficLightRefFromID(crossedTrafficLightIDs[crossedTrafficLightIDs.Count - 1]).AddEntryToDebugListing("CarSpawnCollision", amount*100,gameObject);
             }
-            catch { Debug.Log("FAILED_2"); }
+            catch 
+            { 
+                Debug.Log("FAILED_22"); 
+            }
             /*
             foreach(Collider2D col in otherCol)
             {
