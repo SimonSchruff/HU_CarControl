@@ -1,14 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking; 
+using UnityEngine.Networking;
 
 public class SQLSaveManager : MonoBehaviour
 {
-    public static SQLSaveManager instance; 
+    public static SQLSaveManager instance;
 
-    public string playerID; 
-    string URL; 
+    public string playerID;
+    [SerializeField] string URL = "http://127.0.0.1:8888/data.php";
+
+    public struct Answer
+    {
+        public int id;
+        public string name;
+        public string answer;
+    }
+    public List<Answer> answerList = new List<Answer>(); 
 
 
     void Awake()
@@ -22,19 +30,39 @@ public class SQLSaveManager : MonoBehaviour
         else
             instance = this;
 
-        DontDestroyOnLoad(gameObject); 
 
-        //Create Unique Player ID ?
-        //playerID = SystemInfo.deviceUniqueIdentifier; 
-        playerID = "simon_test"; 
-        URL = "http://localhost/sqlCarControl/exDataManager.php"; 
+        DontDestroyOnLoad(gameObject);
+
     }
 
+    public void SaveProlificID(string pID)
+    {
+        playerID = pID;
+    }
+
+    public void AddAnswerToList(int i, string n, string a) // id, name, answer
+    {
+        Answer tempAnswer = new Answer();
+        tempAnswer.id = i;
+        tempAnswer.name = n;
+        tempAnswer.answer = a; 
+
+        answerList.Add(tempAnswer); 
+        
+    }
+
+    public void StartAnwerPostCoroutine(Answer[] allAnswers)
+    {
+        // Start Coroutine to Post all Answers
+        // Sameas PostNBackData
+        // To different table, or same one ?? 
+    }
 
     public void StartNBackPostCoroutine(NBackGameManager.LevelData data)
     {
         StartCoroutine(PostNBackData(data)); 
     }
+
 
     IEnumerator PostNBackData(NBackGameManager.LevelData data)
     {
@@ -67,7 +95,7 @@ public class SQLSaveManager : MonoBehaviour
         formData.Add(new MultipartFormDataSection("falseDecisionMismatch", data.falseDecisionMismatch.ToString())); 
         #endregion
         
-        using (UnityWebRequest webRequest = UnityWebRequest.Post("http://127.0.0.1:8888/data.php", formData))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post(URL, formData))
         {
             yield return webRequest.SendWebRequest(); 
 

@@ -19,6 +19,7 @@ public class AnswerSaver : MonoBehaviour
         toggles, 
         togglesWithFreeInput, 
         freeInputNumber,
+        freeInputAlphaNum,
         slider
     }
 
@@ -48,6 +49,10 @@ public class AnswerSaver : MonoBehaviour
             if(inputField.contentType == InputField.ContentType.IntegerNumber)
             {
                 questionType = QuestionType.freeInputNumber; 
+            }
+            else if(inputField.contentType == InputField.ContentType.Alphanumeric)
+            {
+                questionType = QuestionType.freeInputAlphaNum; 
             }
         }
         else if(GetComponentInChildren<Slider>() != null)
@@ -101,6 +106,9 @@ public class AnswerSaver : MonoBehaviour
                 break;
             case QuestionType.slider:
                 currentAnswer = slider.value.ToString(); 
+                break;
+            case QuestionType.freeInputAlphaNum:
+                currentAnswer = inputField.text;
                 break; 
         }
     }
@@ -108,7 +116,19 @@ public class AnswerSaver : MonoBehaviour
 
     public void SaveAnswer(int questionID, string name)
     {
-        print("The question : "+ name + ", ID : " + questionID + " with the answer " + currentAnswer + " has been saved!"); 
-        //Save to SQL Database with SQL Save Manager
+        SQLSaveManager saveManager = SQLSaveManager.instance; 
+        //Save to SQL Database with SQL Save Manager        
+        if(questionID == 0 )
+        {
+            // Prolific ID
+            saveManager.SaveProlificID(currentAnswer); 
+        }
+        else
+        {
+            //SQLSaveManager.instance.AddAnswerToList(questionID, name, currentAnswer);
+            saveManager.AddAnswerToList(questionID, name, currentAnswer); 
+        }
+
+        print("The question : " + name + ", ID : " + questionID + " with the answer " + currentAnswer + " has been saved!");
     }
 }

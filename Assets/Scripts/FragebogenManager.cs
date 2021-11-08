@@ -118,7 +118,7 @@ public class FragebogenManager : MonoBehaviour
             string name = list[currentID].name;
             int id = list[currentID].id;
             
-            if (answer.questionType == AnswerSaver.QuestionType.freeInputNumber || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
+            if (answer.questionType == AnswerSaver.QuestionType.freeInputAlphaNum || answer.questionType == AnswerSaver.QuestionType.freeInputNumber || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
             {
                 if (answer.currentAnswer == null || answer.currentAnswer == "") // If no input happened in free input field dont allow continue
                 {
@@ -135,11 +135,10 @@ public class FragebogenManager : MonoBehaviour
 
                     return false;
                 }
-                else
+                else //Answer free Input Field
                 {
                     answer.SaveAnswer(id, name);
                     return true; 
-                    
                 }
             }
             else
