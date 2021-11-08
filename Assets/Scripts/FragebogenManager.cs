@@ -39,16 +39,15 @@ public class FragebogenManager : MonoBehaviour
     {
         // Shuffle List of Questions
         // Position in Array is shuffled but NOT id of question
+
         for(int i = 0; i < q.Length; i++) {
             Questions temp = q[i];
             int randomIndex = UnityEngine.Random.Range(i, q.Length);
             q[i] = q[randomIndex];
-
-
-
             q[randomIndex] = temp;
         }
     }
+
 
 
     #region Continue Button Event
@@ -65,7 +64,7 @@ public class FragebogenManager : MonoBehaviour
 
         questionNumber++;
         randID++;
-
+            
         int currentID = randID - 1;
         isAllowedToChange = SaveCurrentAnswer(currentID, randomOrderQuestions);
 
@@ -133,6 +132,7 @@ public class FragebogenManager : MonoBehaviour
                         randID--;
                         questionNumber--;
                     }
+
                     return false;
                 }
                 else
