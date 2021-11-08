@@ -268,7 +268,7 @@ public class CarControlScript : SimulatedParent
 
     void CarAtEndOfTrack ()     //Car finieshed line - At end of track
     {
-        CheckIfOtherCarWouldStop();
+      //  CheckIfOtherCarWouldStop();
 
 
         Collider2D col = GetComponent<Collider2D>();
@@ -517,6 +517,7 @@ public class CarControlScript : SimulatedParent
             catch
             {
                 Debug.Log("FAILED_11");
+                Destroy(gameObject);
             }
             try
             {

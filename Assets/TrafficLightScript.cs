@@ -13,6 +13,7 @@ public class TrafficLightScript : SimulatedParent
     [SerializeField] Color[] redOrangeGreen;
 
     public TrafficLightScript correspondingTL;
+    public int correspondingTLID;
 
     public int trafficLightID;
     public float clickedTime;
@@ -46,6 +47,15 @@ public class TrafficLightScript : SimulatedParent
             Debug.LogError("Assign corresponding Traffic Light!", gameObject);
         }
     }
+
+    private void Start()
+    {
+        if(simState == simulationState.game)
+        {
+            correspondingTLID = correspondingTL.trafficLightID;
+        }
+    }
+
     public void ChangeText (string changeTo, bool changeTextOne = true)
     {
         try
