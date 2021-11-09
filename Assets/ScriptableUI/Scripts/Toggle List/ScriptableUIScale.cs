@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 
 
-[RequireComponent(typeof(ToggleGroup))]
+
 public class ScriptableUIScale : ScriptableUI
 {
     //Variables etc
@@ -21,7 +21,6 @@ public class ScriptableUIScale : ScriptableUI
     Toggle[] toggleChildren; 
     InputField inputField; 
     Toggle inputFieldToggle; 
-    ToggleGroup toggleGroup; 
 
     //Bools
     bool hasFreeTextField = false;
@@ -51,29 +50,12 @@ public class ScriptableUIScale : ScriptableUI
             inputFieldToggle = inputField.GetComponentInParent<Toggle>(); 
             inputFieldToggle.isOn = false; 
             
-            inputFieldToggle.onValueChanged.AddListener(delegate { SetInputFieldInteractable(); }); 
+            
         }
             
 
 
     }
-
-    public override void Update()
-    {
-        base.Update(); 
-
-    }
-
-    public void SetInputFieldInteractable()
-    {   // Called from Toggle.OnValueChanged Event in Awake()
-        if(inputField != null)
-            inputField.interactable = !inputField.interactable;
-        else
-            Debug.Log("No Input Field Set!"); 
-    }
-
-
-
 
     #region Editor/Inspector Button Events
     public void CreateToggles()
@@ -88,7 +70,7 @@ public class ScriptableUIScale : ScriptableUI
         spacing = skinData.toggleData.spacing; 
         canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>(); 
 
-        toggleGroup = GetComponent<ToggleGroup>(); 
+        
 
         
         for (int i = 0; i < toggleNumber; i++)
@@ -99,7 +81,6 @@ public class ScriptableUIScale : ScriptableUI
             instance.GetComponentInChildren<Text>().text = texts[i];
             instance.GetComponentInChildren<Text>().color = color;
             instance.GetComponent<Toggle>().isOn = false; 
-            instance.GetComponent<Toggle>().group = toggleGroup; 
             instance.transform.SetParent(gameObject.transform, false);
 
             //Spacing als variabel
@@ -126,7 +107,6 @@ public class ScriptableUIScale : ScriptableUI
             
             GameObject instance = Instantiate(Resources.Load<GameObject>("ToggleTextInputObj"), fieldPos, Quaternion.identity );
             instance.GetComponent<Toggle>().isOn = false;
-            instance.GetComponent<Toggle>().group = toggleGroup; 
             instance.GetComponentInChildren<InputField>().interactable = false; 
             instance.GetComponentInChildren<InputField>().contentType = InputField.ContentType.Alphanumeric; 
             instance.transform.SetParent(gameObject.transform, false);

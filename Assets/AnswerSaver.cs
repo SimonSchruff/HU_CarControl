@@ -13,7 +13,7 @@ public class AnswerSaver : MonoBehaviour
     InputField inputField;
     Slider slider; 
 
-
+    
     public enum QuestionType
     {
         toggles, 
@@ -22,48 +22,30 @@ public class AnswerSaver : MonoBehaviour
         freeInputAlphaNum,
         slider
     }
-
+    [Tooltip("Set Type of Question to save Answer")]
     public QuestionType questionType ;
 
     void Awake()
     {
-        //Decide what type of Question and set enum "QuestionType" Accordingly
-
-        if(GetComponentInChildren<ToggleGroup>() != null)
+        switch(questionType)
         {
-            toggles = GetComponentsInChildren<Toggle>(); 
-
-            if(GetComponentInChildren<InputField>() != null)
-            {
+            case QuestionType.toggles:
+                toggles = GetComponentsInChildren<Toggle>();
+                break;
+            case QuestionType.togglesWithFreeInput:
+                toggles = GetComponentsInChildren<Toggle>();
+                inputField = GetComponentInChildren<InputField>(); 
+                break;
+            case QuestionType.freeInputNumber:
                 inputField = GetComponentInChildren<InputField>();
-                questionType = QuestionType.togglesWithFreeInput; 
- 
-            }
-            else
-                questionType = QuestionType.toggles; 
+                break;
+            case QuestionType.slider:
+                slider = GetComponentInChildren<Slider>();
+                break;
+            case QuestionType.freeInputAlphaNum:
+                inputField = GetComponentInChildren<InputField>();
+                break;
         }
-        else if(GetComponentInChildren<ToggleGroup>() == null && GetComponentInChildren<InputField>() != null)
-        { // Input Field for Numbers
-            
-            inputField = GetComponentInChildren<InputField>();
-            if(inputField.contentType == InputField.ContentType.IntegerNumber)
-            {
-                questionType = QuestionType.freeInputNumber; 
-            }
-            else if(inputField.contentType == InputField.ContentType.Alphanumeric)
-            {
-                questionType = QuestionType.freeInputAlphaNum; 
-            }
-        }
-        else if(GetComponentInChildren<Slider>() != null)
-        {
-
-            slider = GetComponentInChildren<Slider>();
-            questionType = QuestionType.slider;
-
-        }
-
-
     }
 
     void Update()
@@ -90,10 +72,12 @@ public class AnswerSaver : MonoBehaviour
                     {
                         if(toggle.GetComponentInChildren<InputField>() != null)
                         {
+                            inputField.interactable = true; 
                             currentAnswer = inputField.text; 
                         }
                         else
                         {
+                            inputField.interactable = false;
                             currentAnswer = toggle.GetComponentInChildren<Text>().text; 
                         }
                         
@@ -118,7 +102,7 @@ public class AnswerSaver : MonoBehaviour
     {
         SQLSaveManager saveManager = SQLSaveManager.instance; 
         //Save to SQL Database with SQL Save Manager        
-        if(questionID == 0 )
+        if(questionID == 0 && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Fragebogen")
         {
             // Prolific ID
             saveManager.SaveProlificID(currentAnswer); 
