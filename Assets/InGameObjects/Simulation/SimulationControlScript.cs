@@ -331,31 +331,6 @@ public class SimulationControlScript : MonoBehaviour
         catch {return null;}
     }
 
-    void FindHighestScoreAndAssign ()
-    {
-        int maxTrafficLight = 0;
-
-        if (durationMap.Count >= 2)
-        {
-            float temp = durationMap.Values.Max();
-            int tempIndex = durationMap.Values.ToList().IndexOf(temp);
-            maxTrafficLight = durationMap.Keys.ElementAt(tempIndex);
-        //    Debug.LogError(maxTrafficLight);
-        }
-        else if (durationMap.Count == 1)
-        {
-            maxTrafficLight = durationMap.Keys.ElementAt(0);
-        }
-        else
-        {
-            FinishSim();
-            return;
-        }
-
-        changeTrafficLights.Add(maxTrafficLight);
-        durationMap.Clear();
-    }
-
     void ClearSimCache(bool isFirstText = false, int testedTrafficLightID = 0)
     {
 
@@ -648,8 +623,6 @@ public class SimulationControlScript : MonoBehaviour
         SpawnHandle();
 
         Physics2D.SyncTransforms();     // Ich liebe dich
-
-
     }
 
     void CheckIfSwitchTrafficLight ()       // Switch the light and delete from lightsToChangeThisRun
@@ -678,15 +651,6 @@ public class SimulationControlScript : MonoBehaviour
             catch { UnityEngine.Debug.Log("Failed to remove SimObj"); }
         }
 
-        /*List<CarControlScript> carList = new List<CarControlScript>();
-        foreach (CarControlScript ccs in simCars)
-        {
-            if (ccs == null)
-            {
-                CarCo
-            }
-        }
-        */
         try
         {
             toDeleteList.Clear();
