@@ -7,6 +7,8 @@ public class TrafficLightScript : SimulatedParent
 {
     public List<string> DebugListEntries = new List<string>();
 
+    [SerializeField] int simScore;
+
     public lightState state = lightState.green;
     [SerializeField] SpriteRenderer lightSprite;
     [SerializeField] Rigidbody2D clickableSprite;
@@ -24,8 +26,6 @@ public class TrafficLightScript : SimulatedParent
     [SerializeField] Text text;
     [SerializeField] Text text2;
 
-    Camera camRef;
-
     public int waitingCarsCounter;
 
     public enum lightState
@@ -38,7 +38,6 @@ public class TrafficLightScript : SimulatedParent
     private void Awake()
     {
         UpdateTrafficLight(false, lightState.green);
-        camRef = Camera.main;
         ChangeText("");
         ChangeText("",false);
 
@@ -55,6 +54,12 @@ public class TrafficLightScript : SimulatedParent
             correspondingTLID = correspondingTL.trafficLightID;
         }
     }
+
+    public int GetSimScore ()
+    {
+        return simScore;
+    }
+
 
     public void ChangeText (string changeTo, bool changeTextOne = true)
     {
@@ -85,6 +90,9 @@ public class TrafficLightScript : SimulatedParent
     public override void InitSimulation()       //What to do when Simulation starts
     {
         base.InitSimulation();
+
+        simScore = 0;
+        DebugListEntries.Clear();
 
         if(state == lightState.orange)
         {
@@ -153,9 +161,17 @@ public class TrafficLightScript : SimulatedParent
         }
     }
 
-    public void AddEntryToDebugListing (string typ, int amount, GameObject senderCar)
+    public void AddDebubInfo (string typ, int amount, GameObject senderCar)
     {
         string temp = typ + "_" + amount + "_" + (senderCar == null ? "" : senderCar.name);
+        DebugListEntries.Add(temp);
+    }
+
+    public void AddScoreToTL (int amount, string info)
+    {
+        simScore += amount;
+
+        string temp = info + "_" + amount;      //DebugInfo
         DebugListEntries.Add(temp);
     }
 }

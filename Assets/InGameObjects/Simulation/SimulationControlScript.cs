@@ -25,6 +25,8 @@ public class SimulationControlScript : MonoBehaviour
     public List<TrafficLightScript> simTrafficLights = new List<TrafficLightScript>();
     public Dictionary<int, TrafficLightScript> simTrafficLightsDict = new Dictionary<int, TrafficLightScript>();
 
+    [SerializeField] List<SimEvent> simEvents = new List<SimEvent>();
+
     //CopyFromGameManager
     public float simTimeCounter;
     [SerializeField] List<CarSpawner> carSpawnerList = new List<CarSpawner>();
@@ -85,6 +87,9 @@ public class SimulationControlScript : MonoBehaviour
     [SerializeField] int addedScoreFirstCheck = 0;
     [SerializeField] int actualTestCounter = 0;
 
+    [SerializeField] SimEvent.checkState actualSimState;
+    [SerializeField] GameObject SimEventPrefab;
+
 
     private void Awake()
     {
@@ -95,7 +100,8 @@ public class SimulationControlScript : MonoBehaviour
         else
             Destroy(this.gameObject);
 
-
+        if(SimEventPrefab == null)
+            Debug.LogError("Assign simEventPrefab!");
     }
 
     private void Start()
@@ -116,7 +122,107 @@ public class SimulationControlScript : MonoBehaviour
             StartCoroutine(StartSimCoroutine());
     }
 
-    void FinishPart()
+    void FinishPart ()
+    {
+        simFrameCounter++;
+
+        int testedMaxTL = 0;    //Set in beginning of method
+        int TLPairID = 0;
+        int testedScore = 0;
+        int pairScore = 0;
+        Dictionary<int, int> TLScores = GetTLScoresAsDictionary();
+
+        if (simEvents.Count == 0) {
+            actualSimState = SimEvent.checkState.init;      //Init State
+
+            testedMaxTL = GetTLIDFromMaxScore();
+            if(testedMaxTL != 0)
+                trafficLightsToTest.Add(testedMaxTL);
+        }
+        else if(simEvents[simEvents.Count-1].selfCheckState != SimEvent.checkState.firstCheck) {
+            actualSimState = SimEvent.checkState.firstCheck;     //FirstCheck
+
+            SimEvent tempLastSimE = simEvents[simEvents.Count - 1];
+            testedMaxTL = trafficLightsToTest[0];
+            trafficLightsToTest.Clear();
+
+            if (TLScores[testedMaxTL] < tempLastSimE.testedScore)  // when old score was higher
+            {
+                if (!lightsToIgnore.Contains(tempLastSimE.pairTrafficLight))        //Check if pair TL is already in the Ignore list
+                    trafficLightsToTest.Add(tempLastSimE.pairTrafficLight);
+                else
+                {
+                    FinalizeSimulation(testedMaxTL);
+                    Debug.Log("PairTL is already in the ignore list!");
+                }
+            }
+            else        //When old score was better than simulated
+            {
+                lightsToIgnore.Add(trafficLightsToTest[0]);
+                trafficLightsToTest.Clear();
+                StartCoroutine(ContinueSimAfterFrame());
+            }
+        }
+        else {
+            actualSimState = SimEvent.checkState.pairCheck;    //PairCheck
+
+            testedMaxTL = trafficLightsToTest[0];
+
+            SimEvent tempLastSimE = simEvents[simEvents.Count - 1];
+            testedMaxTL = trafficLightsToTest[0];
+            trafficLightsToTest.Clear();
+
+            Debug.Log("Last: aS_" + tempLastSimE.testedScore + " pS_" + tempLastSimE.pairTLsScore);
+            Debug.Log("this: aS_" + TLScores [testedMaxTL] + " pS_" + TLScores[GetSimTLFromID(testedMaxTL).correspondingTLID]);
+
+            int sumOld = tempLastSimE.testedScore + tempLastSimE.pairTLsScore;
+            int sumNew = TLScores[testedMaxTL] + TLScores[GetSimTLFromID(testedMaxTL).correspondingTLID];
+            if (sumOld > sumNew)
+            {
+                FinalizeSimulation(testedMaxTL);
+                Debug.Log("corresponding tl was took");
+            }
+            else
+            {
+                FinalizeSimulation(GetSimTLFromID(testedMaxTL).correspondingTLID);
+                Debug.Log("took previous tl");
+            }
+
+        }
+        SimEvent tempSimEvent = Instantiate(SimEventPrefab).GetComponent<SimEvent>();
+        simEvents.Add(tempSimEvent);       //add to SimEvents
+
+
+        if (testedMaxTL != 0)    //Set fixed Variables
+        {
+            testedScore = TLScores[testedMaxTL];
+            TLPairID = GetSimTLFromID(testedMaxTL).correspondingTLID;
+            pairScore = TLScores[TLPairID];
+        }
+
+        // Assign variables to SimEvent
+        tempSimEvent.SetAllParameters(actualSimState, simFrameCounter, testedMaxTL, TLPairID, testedScore, pairScore, TLScores);
+
+        ClearSimCache();
+
+        if (trafficLightsToTest.Count > 0)      //Check if continue another
+        {
+            StartCoroutine(ContinueSimAfterFrame());
+        }
+        else
+        {
+            FinishSim();
+        }
+    }
+    void FinalizeSimulation (int recommendation)
+    {
+        RecommendTrafficLight(recommendation, simFrameCounter);
+        trafficLightsToTest.Clear();
+        FinishSim();
+    }
+
+
+    void FinishPartOld()
     {
         bool isFirstTLTest = trafficLightsToTest.Count == 0;
         inNotTryChangeTrafficLight = isFirstTLTest;
@@ -127,7 +233,7 @@ public class SimulationControlScript : MonoBehaviour
         {
             if(trafficLightScores.Count == 0)
             {
-                ClearSimCache(isFirstTLTest);
+                ClearSimCache();
                 FinishSim();
                 return;
             }
@@ -216,7 +322,7 @@ public class SimulationControlScript : MonoBehaviour
                     // When Score not better after change - ignore Light and start next sim
                     lightsToIgnore.Add(trafficLightsToTest[0]);
                     trafficLightsToTest.Clear();
-                    ClearSimCache(isFirstTLTest, tempTrafficLightToTest);
+                    ClearSimCache();
                     StartCoroutine(ContinueSimAfterFrame());        
                     return;
                 }
@@ -242,7 +348,7 @@ public class SimulationControlScript : MonoBehaviour
             }
         }
 
-        ClearSimCache(isFirstTLTest, tempTrafficLightToTest);
+        ClearSimCache();
 
             if(trafficLightsToTest.Count > 0)
             {
@@ -254,6 +360,33 @@ public class SimulationControlScript : MonoBehaviour
             }
     }
 
+    int GetTLIDFromMaxScore ()
+    {
+        int tempHighestScore = 0;
+        int tempTLID = 0;
+        foreach (TrafficLightScript tl in simTrafficLights)
+        {
+            if(tl.GetSimScore() > tempHighestScore)
+            {
+                tempHighestScore = tl.GetSimScore();
+                tempTLID = tl.trafficLightID;
+            }
+        }
+        if (tempTLID == 0)
+        {
+            Debug.Log("No traffic light with score was found");
+        }
+        return tempTLID;
+    }
+    Dictionary <int,int> GetTLScoresAsDictionary ()
+    {
+        Dictionary<int, int> tempDict = new Dictionary<int, int>();
+        foreach (TrafficLightScript tl in simTrafficLights)
+        {
+            tempDict.Add(tl.trafficLightID, tl.GetSimScore());
+        }
+        return tempDict;
+    }
     void RecommendTrafficLight (int id, int simCounter = 0)
     {
         StartCoroutine(ChangeTrafficLight(id, simCounter));
@@ -311,12 +444,25 @@ public class SimulationControlScript : MonoBehaviour
         }
 
         // Clear old Data
+
+
         inNotTryChangeTrafficLight = true;
         oldTLHighestScore = 0;
         checkedTL.Clear();
         trafficLightsToTest.Clear();
         simFrameCounter = 0;
         lightsToIgnore.Clear();
+
+        if(!debug)
+        {
+            simEvents.ForEach(delegate (SimEvent simE)
+            {
+                Destroy(simE.gameObject);
+            });
+        }
+        simEvents.Clear();
+
+
 
         StartCoroutine(StartSimCoroutine());
 
@@ -331,7 +477,7 @@ public class SimulationControlScript : MonoBehaviour
         catch {return null;}
     }
 
-    void ClearSimCache(bool isFirstText = false, int testedTrafficLightID = 0)
+    void ClearSimCache()
     {
 
 
@@ -374,7 +520,7 @@ public class SimulationControlScript : MonoBehaviour
             { }
             else
             {
-                AddScoreToTrafficLight(tl.trafficLightID, priority*100);
+              //  AddScoreToTrafficLight(tl.trafficLightID, priority*100);
             }
 
         } 
@@ -383,36 +529,48 @@ public class SimulationControlScript : MonoBehaviour
     //        tempSpotRef.ChangeText(i.ToString());
     }
 
-    public int AddScoreToTrafficLight (int id, int amount)
+    public void AddScoreToTrafficLight (int id, int amount, string debugText = "emty")
     {
-        if(id == 0)
-        {
-            Debug.Log("0-ID");
-            return 0;
-        }
-        if (lightsToIgnore.Contains(id))
-            return 0;
+        GetSimTLFromID(id).AddScoreToTL(amount, debugText);
 
-        int i = 0;
-        try
-        {
-            if (trafficLightScores.TryGetValue(id, out i))
-            {
-                i += amount;
-                trafficLightScores[id] = i;
-            }
-            else
-            {
-                i = amount;
-                trafficLightScores.Add(id, i);
-            }
-        }
-        catch { }
+        //if(id == 0)
+        //{
+        //    Debug.Log("0-ID");
+        //    return 0;
+        //}
+        //if (lightsToIgnore.Contains(id))
+        //    return 0;
 
-        return i;
+        //int i = 0;
+        //try
+        //{
+        //    if (trafficLightScores.TryGetValue(id, out i))
+        //    {
+        //        i += amount;
+        //        trafficLightScores[id] = i;
+        //    }
+        //    else
+        //    {
+        //        i = amount;
+        //        trafficLightScores.Add(id, i);
+        //    }
+        //}
+        //catch { }
+
      //       Debug.Log("AddScoreFailed from id: " + id + "   amount: " + amount);
      //       return 0; 
         
+    }
+    public TrafficLightScript GetSimTLFromID (int id)
+    {
+        try
+        {
+            return simTrafficLightsDict[id];
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     public void StartSim()
