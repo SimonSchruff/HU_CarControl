@@ -100,7 +100,8 @@ public class AnswerSaver : MonoBehaviour
 
     public void SaveAnswer(int questionID, string name)
     {
-        SQLSaveManager saveManager = SQLSaveManager.instance; 
+        SQLSaveManager saveManager = SQLSaveManager.instance;
+
         //Save to SQL Database with SQL Save Manager        
         if(questionID == 0 && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Fragebogen")
         {

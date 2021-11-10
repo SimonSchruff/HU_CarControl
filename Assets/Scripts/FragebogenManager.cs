@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 
 public class FragebogenManager : MonoBehaviour
 {
-    [SerializeField] KeyCode continueKey = KeyCode.KeypadEnter; 
     [SerializeField] int questionNumber; // Counted up with each button "Continue" Button Click
 
     // Dictionary not able to be shown in inspector -> Workaround
@@ -24,16 +23,8 @@ public class FragebogenManager : MonoBehaviour
     [Header("Questions List")]
     public Questions[] questions;
 
-    public Questions[] randomOrderQuestions;
 
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(continueKey))
-            NextQuestion(); 
-    }
-
-    
+    public GameObject notAllAnswersGivenText;
 
     #region Continue Button Event
 
@@ -54,121 +45,248 @@ public class FragebogenManager : MonoBehaviour
     public void NextQuestion() //Called by Continue Button
     {
         bool isAllowedToChange;
-        questionNumber++;
-        
+        notAllAnswersGivenText.SetActive(false);
 
-        int currentID = questions[questionNumber - 1].id;
-        isAllowedToChange = SaveCurrentAnswer(currentID);
+        int currentID = questions[questionNumber].id;
+        isAllowedToChange = AllowedToContinue(currentID);
+        print(isAllowedToChange); 
         
-
         if (isAllowedToChange)
         {
+            SaveAnswer(currentID); 
+
             questions[currentID].questionObj.gameObject.SetActive(false);
 
             if (currentID != (questions.Length - 1 )) // Last question -> Dont activate next UI
                 questions[currentID + 1].questionObj.gameObject.SetActive(true);
+
+
+            questionNumber++;
         }
+        else
+        {
+            notAllAnswersGivenText.SetActive(true); 
+        }
+                
+
+        
     }
 
     #endregion
+    bool AllowedToContinue(int currentID)
+    {
+        if (questions[currentID].questionObj.gameObject.GetComponentInChildren<AnswerSaver>() != null)
+        {
+            int answerAmount = 0; 
+            AnswerSaver[] allAnswers = questions[currentID].questionObj.gameObject.GetComponentsInChildren<AnswerSaver>();
+            foreach (AnswerSaver answer in allAnswers)
+            {
 
+
+                if (answer.questionType == AnswerSaver.QuestionType.toggles || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
+                {
+                    if (answer.GetComponentInChildren<ToggleGroup>() != null)
+                    {
+                        ToggleGroup tg = answer.gameObject.GetComponentInChildren<ToggleGroup>();
+                        if (tg.AnyTogglesOn() == false)
+                        {
+                            print("No Toggle is turned on; ");
+                            return false;
+                        }
+                        else
+                        {
+                            answerAmount++;
+                            if (answerAmount == allAnswers.Length)
+                                return true;
+                        }
+                    }
+                }
+
+
+
+                if (answer.questionType == AnswerSaver.QuestionType.freeInputAlphaNum || answer.questionType == AnswerSaver.QuestionType.freeInputNumber || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
+                {
+                    if (answer.currentAnswer == null || answer.currentAnswer == "") // If no input happened in free input field dont allow continue
+                    {
+                        return false;
+                    }
+
+                    if (answer.gameObject.name == "Prolific ID") // Prolific ID
+                    {
+                        bool returnBool;
+                        returnBool = CheckStringForLength(24, answer);
+
+                        if (!returnBool) // String not long enough
+                        {
+                            return returnBool;
+                        }
+                        else
+                        {
+                            return returnBool;
+                        }
+
+                    }
+                    else if (answer.gameObject.name == "Frage 02 - Age") // Age
+                    {
+                        int i = int.Parse(answer.currentAnswer);
+                        if (i < 18 || i > 99) // Age not valid
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            answerAmount++;
+                            if (answerAmount == allAnswers.Length)
+                                return true;
+                        }
+
+                    }
+                    else
+                    {
+                        answerAmount++;
+                        if (answerAmount == allAnswers.Length)
+                            return true;
+                    }
+                }
+                
+            } // Foreach Bracket
+
+            print("Mystery Code Path");
+            if (answerAmount == allAnswers.Length)
+                return true;
+            else
+                return false; 
+        }
+        else // IntroductionScreens with no Answer Saver attached; 
+        {
+            return true; 
+        }
+    }
+
+    void SaveAnswer(int currentID)
+    {
+        AnswerSaver[] allAnswers = questions[currentID].questionObj.gameObject.GetComponentsInChildren<AnswerSaver>();
+        foreach(AnswerSaver answer in allAnswers)
+        {
+            answer.SaveAnswer(currentID, answer.gameObject.name);
+        }
+    }
 
     bool SaveCurrentAnswer(int currentID)
     {
 
-        if (questions[currentID].questionObj.GetComponent<AnswerSaver>() != null) // Exclude start/instructions screen
+        if (questions[currentID].questionObj.gameObject.GetComponentInChildren<AnswerSaver>() != null) // Exclude start/instructions screen
         {
             // Save Answer Saver Array and check for length
             // If length == 1 save as normal
             // If length > 1 save individually
 
+            // Get all Anser Saver Objects in active question OBJ
+            AnswerSaver[] allAnswers = questions[currentID].questionObj.gameObject.GetComponentsInChildren<AnswerSaver>();
+            print(allAnswers.Length); 
 
 
-            AnswerSaver answer = questions[currentID].questionObj.GetComponent<AnswerSaver>();
-            string name = questions[currentID].name;
-            int id = questions[currentID].id;
-
-
-            #region If no Answer return false otherwise true
-
-
-            if (answer.questionType == AnswerSaver.QuestionType.toggles || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
+            foreach (AnswerSaver answer in allAnswers)
             {
-                if (answer.GetComponentInChildren<ToggleGroup>() != null)
+                //AnswerSaver answer = questions[currentID].questionObj.GetComponent<AnswerSaver>();
+                string name = questions[currentID].name;
+                int id = questions[currentID].id;
+
+
+                #region If no Answer return false otherwise true
+
+
+                if (answer.questionType == AnswerSaver.QuestionType.toggles || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
                 {
-                    ToggleGroup tg = answer.gameObject.GetComponentInChildren<ToggleGroup>();
-                    if (tg.AnyTogglesOn() == false)
+                    if (answer.GetComponentInChildren<ToggleGroup>() != null)
                     {
-                        print("No Toggle is turned on; ");
+                        ToggleGroup tg = answer.gameObject.GetComponentInChildren<ToggleGroup>();
+                        if (tg.AnyTogglesOn() == false)
+                        {
+                            print("No Toggle is turned on; ");
+                            questionNumber--;
+                            return false;
+                        }
+                    }
+                }
+
+                if (answer.questionType == AnswerSaver.QuestionType.freeInputAlphaNum || answer.questionType == AnswerSaver.QuestionType.freeInputNumber || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
+                {
+                    if (answer.currentAnswer == null || answer.currentAnswer == "") // If no input happened in free input field dont allow continue
+                    {
                         questionNumber--;
                         return false;
                     }
-                }
-            }
-            
-            if (answer.questionType == AnswerSaver.QuestionType.freeInputAlphaNum || answer.questionType == AnswerSaver.QuestionType.freeInputNumber || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
-            {
-                if (answer.currentAnswer == null || answer.currentAnswer == "") // If no input happened in free input field dont allow continue
-                {
-                    questionNumber--;   
-                    return false;
-                }
-                else //Answer == free Input Field
-                {
-                    
+                    else //Answer == free Input Field
+                    {
 
-                    if ( id == 0 && SceneManager.GetActiveScene().name == "Fragebogen") // Prolific ID
-                    {
-                        bool returnBool;
-                        returnBool = CheckStringForLength(24, answer); 
-                        
-                        if(!returnBool) // String not long enough
+
+                        if (id == 0 && SceneManager.GetActiveScene().name == "Fragebogen") // Prolific ID
                         {
-                            questionNumber--;
-                            return returnBool; 
+                            bool returnBool;
+                            returnBool = CheckStringForLength(24, answer);
+
+                            if (!returnBool) // String not long enough
+                            {
+                                questionNumber--;
+                                return returnBool;
+                            }
+                            else
+                            {
+                                answer.SaveAnswer(id, name);
+                                return returnBool;
+                            }
+
                         }
-                        else
+                        else if (id == 3 && SceneManager.GetActiveScene().name == "Fragebogen") // Age
                         {
-                            answer.SaveAnswer(id, name);
-                            return returnBool; 
-                        }
-                        
-                    }
-                    else if(id == 3 && SceneManager.GetActiveScene().name == "Fragebogen") // Age
-                    {
-                        int i = int.Parse(answer.currentAnswer); 
-                        if (i < 18 || i > 99) // Age not valid
-                        {
-                            questionNumber--;
-                            return false;
+                            int i = int.Parse(answer.currentAnswer);
+                            if (i < 18 || i > 99) // Age not valid
+                            {
+                                questionNumber--;
+                                return false;
+                            }
+                            else
+                            {
+                                answer.SaveAnswer(id, name);
+                                return true;
+                            }
+
                         }
                         else
                         {
                             answer.SaveAnswer(id, name);
                             return true;
-                        }
 
+                        }   
                     }
 
-                    answer.SaveAnswer(id, name);
-                    return true; 
+
                 }
-            }
-            else
-            {
-                answer.SaveAnswer(id, name);
-                return true; 
+                else
+                {
+                    answer.SaveAnswer(id, answer.gameObject.name);
+                    return true;
+
+                }
+
+
+            } // Foreach Bracket
+
                 
-            }
+                return true; // WHY DO I NEED THIS ? Otherwise Error : Not all code paths return value
+
+            #endregion
         }
-        else
+        else // Anser Saver == null
         {
-            
-            return true; 
+
+            return true;
         }
 
-        #endregion
-    }
+
+    } // Save Anser Bracket
+
 
 
     bool CheckStringForLength(int length, AnswerSaver a )
