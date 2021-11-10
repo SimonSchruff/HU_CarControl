@@ -1672,8 +1672,8 @@ MonoBehaviour:
   debug: 1
   offsetFromOriginal: 10
   simulationSteps: 0.035
-  simulationStepsAmount: 100
-  simulationStepRepeat: 1
+  simulationStepsAmount: 25
+  simulationStepRepeat: 4
   timeScale: 1
   isDelaySim: 0
   destroyRenderers: 0
@@ -1682,6 +1682,7 @@ MonoBehaviour:
   simObjects: []
   simCars: []
   simTrafficLights: []
+  simEvents: []
   simTimeCounter: 0
   carSpawnerList: []
   boatSpawnerSim: {fileID: 0}
@@ -1703,6 +1704,8 @@ MonoBehaviour:
   correspondingTLID: 0
   addedScoreFirstCheck: 0
   actualTestCounter: 0
+  actualSimState: 0
+  SimEventPrefab: {fileID: 5908230590514235217, guid: 2b83f5f5ea976e846bb0688e90d47b27, type: 3}
 --- !u!4 &1232684540
 Transform:
   m_ObjectHideFlags: 0

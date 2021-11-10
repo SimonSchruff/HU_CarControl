@@ -201,27 +201,27 @@ public class CarControlScript : SimulatedParent
                 {
                     emergencyCounter += simState == simulationState.game ? Time.deltaTime : simSteps;
 
-                    if (isEmergency)
-                    {
-                        if(emergencyCounter >= emergencyReduceScoreDelay)
-                        {
-                            Score.sc.AddPoints(Score.PointTypes.emergencyWait, simState);
-                            emergencyCounter = 0f;
-                            if (simState == simulationState.simulated)  // Add Priority to traffic light for waitng
-                            {
-                                if (actualWaitingLightID != 0)
-                                {
-                                    SimulationControlScript.sim.AddScoreToTrafficLight(actualWaitingLightID, 10);
+                    //if (isEmergency)
+                    //{
+                    //    if(emergencyCounter >= emergencyReduceScoreDelay)
+                    //    {
+                    //        Score.sc.AddPoints(Score.PointTypes.emergencyWait, simState);
+                    //        emergencyCounter = 0f;
+                    //        if (simState == simulationState.simulated)  // Add Priority to traffic light for waitng
+                    //        {
+                    //            if (actualWaitingLightID != 0)
+                    //            {
+                    //                SimulationControlScript.sim.AddScoreToTrafficLight(actualWaitingLightID, 10);
 
-                                    SimulationControlScript.sim.GetTrafficLightRefFromID(actualWaitingLightID).AddEntryToDebugListing("EmergencyWait",10,gameObject);
-                                }
-                                else
-                                    Debug.Log("Emergency Error Here");
-                            }
-                        }
-                    }
-                    else        // When no emergency Car - Add priority to traffic light as well
-                    {
+                    //                SimulationControlScript.sim.GetTrafficLightRefFromID(actualWaitingLightID).AddScoreToTL("EmergencyWait",10,gameObject);
+                    //            }
+                    //            else
+                    //                Debug.Log("Emergency Error Here");
+                    //        }
+                    //    }
+                    //}
+                    //else        // When no emergency Car - Add priority to traffic light as well
+                    //{
                         if(emergencyCounter >= emergencyReduceScoreDelay)
                         {
                             emergencyCounter = 0f;
@@ -231,25 +231,25 @@ public class CarControlScript : SimulatedParent
                                 {
                                     //   CheckIfLightIsAlreadyGreen
                                     SimulationControlScript tempSim = SimulationControlScript.sim;
-                                    bool isChangingTrafficLight = false;
-                                    if(tempSim.trafficLightsToTest.Count > 0)      //Check if wait in Traffic light cause of change of phases
-                                    {
-                                        isChangingTrafficLight = tempSim.trafficLightsToTest[0] == actualWaitingLightID;
-                                    }
-                                    int valueToAdd = isChangingTrafficLight ? -1 : 1;
+                                    //bool isChangingTrafficLight = false;
+                                    //if(tempSim.trafficLightsToTest.Count > 0)      //Check if wait in Traffic light cause of change of phases
+                                    //{
+                                    //    isChangingTrafficLight = tempSim.trafficLightsToTest[0] == actualWaitingLightID;
+                                    //}
+                                    //int valueToAdd = isChangingTrafficLight ? -1 : 1;
 
                                     if (tempSim.GetTrafficLightRefFromID(actualWaitingLightID).state != TrafficLightScript.lightState.green)
                                     {
-                                        tempSim.AddScoreToTrafficLight(actualWaitingLightID, valueToAdd);
+                                        tempSim.AddScoreToTrafficLight(actualWaitingLightID, 1, "NormalCarWaiting");
 
-                                        tempSim.GetTrafficLightRefFromID(actualWaitingLightID).AddEntryToDebugListing("NormalCarWaiting", valueToAdd, gameObject);
+                                        tempSim.GetTrafficLightRefFromID(actualWaitingLightID).AddDebubInfo("NormalCarWaiting", 1, gameObject);
                                     }
                                 }
                                // else
                                  //   Debug.Log("Normal Car Error Here");
                             }
                         }
-                    }
+                    //}
                 }
             }
         }
@@ -480,9 +480,9 @@ public class CarControlScript : SimulatedParent
 //WhenCarWaitsInRow
             if (actualWaitingLightID != 0 && state == driveState.waitingCarInFront) // Check if crash cause of 
             {
-               SimulationControlScript.sim.AddScoreToTrafficLight(actualWaitingLightID, s.carCrash * 100);
+               SimulationControlScript.sim.AddScoreToTrafficLight(actualWaitingLightID, s.carCrash * 100, "InRowWaitingCrash");
                 //DEBUG 1
-                SimulationControlScript.sim.GetTrafficLightRefFromID(actualWaitingLightID).AddEntryToDebugListing("InRowWaitingCrash",amount,gameObject);
+                SimulationControlScript.sim.GetTrafficLightRefFromID(actualWaitingLightID).AddDebubInfo("InRowWaitingCrash",amount,gameObject);
                 return;
             }
 
@@ -502,6 +502,7 @@ public class CarControlScript : SimulatedParent
 
             //try
             //{
+
             //    if (tempWaiting > 1)
             //    {
             //        tempToAdd = tempToAdd - (Mathf.Clamp(tempWaiting, 1, 9) * 9);
@@ -512,21 +513,13 @@ public class CarControlScript : SimulatedParent
             try
             {
 
-                SimulationControlScript.sim.AddScoreToTrafficLight(crossedTrafficLightIDs[crossedTrafficLightIDs.Count - 1], amount * 100);
+                SimulationControlScript.sim.AddScoreToTrafficLight(crossedTrafficLightIDs[crossedTrafficLightIDs.Count - 1], amount * 100, "BaseCrash");
             }
             catch
             {
-                Debug.Log("FAILED_11");
-                Destroy(gameObject);
+                Debug.Log("BaseCrash Failed find crossedTL");
             }
-            try
-            {
-                SimulationControlScript.sim.GetTrafficLightRefFromID(crossedTrafficLightIDs[crossedTrafficLightIDs.Count - 1]).AddEntryToDebugListing("CarSpawnCollision", amount*100,gameObject);
-            }
-            catch 
-            { 
-                Debug.Log("FAILED_22"); 
-            }
+
             /*
             foreach(Collider2D col in otherCol)
             {

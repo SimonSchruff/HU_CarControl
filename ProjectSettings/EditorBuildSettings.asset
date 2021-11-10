@@ -5,22 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/CrossScene.unity
+    guid: b1e25560d8fde964e8b5d378116d0c3a
   - enabled: 0
     path: Assets/Scenes/ReduceNoShips.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Fragebogen/Fragebogen.unity
     guid: 95e7f5f6d85544e898e14d2a516e58e6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NBackSpiel.unity
     guid: 03d56d282640d45319dbafe1cabb33cc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Fragebogen/Fragebogen -Teil 01 b.unity
     guid: 60f6ee7c9a5964750894a46e96e89699
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Placeholder Scene.unity
     guid: 0374831bf13ac4547af915142f8f3dd1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Fragebogen/Fragebogen - Teil 02.unity
     guid: 945fd3a788b4446c2ae6fdcbedb0efc7
   m_configObjects: {}
