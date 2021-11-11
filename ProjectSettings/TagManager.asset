@@ -20,6 +20,7 @@ TagManager:
   - CarSpawnCol
   - Canvas
   - questions
+  - answerError
   layers:
   - Default
   - TransparentFX

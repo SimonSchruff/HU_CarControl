@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 280817587}
   - component: {fileID: 280817586}
   m_Layer: 5
-  m_Name: ContinueButton
+  m_Name: Quit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -821,8 +821,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1594349380}
         m_TargetAssemblyTypeName: MySceneManager, Assembly-CSharp
-        m_MethodName: LoadSceneInt
-        m_Mode: 3
+        m_MethodName: QuitGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1097,7 +1097,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Continue
+  m_Text: Quit
 --- !u!222 &352206924
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4005,6 +4005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 
+  URL: http://127.0.0.1:8888/data.php
 --- !u!4 &1457040341
 Transform:
   m_ObjectHideFlags: 0
@@ -5412,11 +5413,9 @@ MonoBehaviour:
     totalNoReactionMatches: 0
     noReactionMismatches: 0
     totalNoReactionMismatches: 0
-  gameState: 0
+  n: 2
   letterShowSec: 0.5
   letterWaitSec: 2.5
-  n: 2
-  stimuliShown: 25
   round1Numbers:
   - 5
   - 2
@@ -5521,17 +5520,6 @@ MonoBehaviour:
   - 9
   - 2
   - 4
-  currentLevel: 0
-  currentLetter: 
-  correctMatch: 0
-  wrongMatch: 0
-  correctMismatch: 0
-  wrongMismatch: 0
-  missedMatch: 0
-  missedMismatch: 0
-  totalMatchesPerRound: 0
-  accurateTotalMatches: 0
-  currentMatches: 0
   InstructionObjects: {fileID: 201670219}
   InstructionsObjExample: {fileID: 1253607109}
   RunningGameObjects: {fileID: 905807111}
