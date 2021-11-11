@@ -86,83 +86,63 @@ public class FragebogenManager : MonoBehaviour
         {
             int answerAmount = 0;
             AnswerSaver[] allAnswers = questions[currentID].questionObj.gameObject.GetComponentsInChildren<AnswerSaver>();
+
             foreach (AnswerSaver answer in allAnswers)
             {
-
+                answerAmount++; 
 
                 if (answer.questionType == AnswerSaver.QuestionType.toggles || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
                 {
-                    if (answer.GetComponentInChildren<ToggleGroup>() != null)
+                    if (answer.gameObject.GetComponentInChildren<ToggleGroup>() != null)
                     {
-                        ToggleGroup tg = answer.gameObject.GetComponentInChildren<ToggleGroup>();
+                        ToggleGroup tg = answer.gameObject.GetComponentInChildren<ToggleGroup>(); 
                         if (tg.AnyTogglesOn() == false)
                         {
+                            print("False at toogle: " + answer.gameObject.name); 
                             return false;
                         }
-                        else
-                        {
-                            answerAmount++;
-                            if (answerAmount == allAnswers.Length)
-                                return true;
-                        }
+                        
                     }
                 }
-
-
 
                 if (answer.questionType == AnswerSaver.QuestionType.freeInputAlphaNum || answer.questionType == AnswerSaver.QuestionType.freeInputNumber || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
                 {
                     if (answer.currentAnswer == null || answer.currentAnswer == "") // If no input happened in free input field dont allow continue
                     {
+                        print("False at free input: " + answer.gameObject.name); 
                         return false;
                     }
 
-                    if (answer.gameObject.name == "Prolific ID") // Prolific ID
+                    if(answer.gameObject.name == "Prolific ID")
                     {
-                        bool returnBool;
-                        returnBool = CheckStringForLength(24, answer);
+                            bool returnBool;
+                            returnBool = CheckStringForLength(24, answer);
 
-                        if (!returnBool) // String not long enough
-                        {
-                            return returnBool;
-                        }
-                        else
-                        {
-                            return returnBool;
-                        }
-
+                            if (!returnBool) // String not long enough
+                            {
+                                print("False at prolific; "); 
+                                return returnBool;
+                            }
                     }
-                    else if (answer.gameObject.name == "Frage 02 - Age") // Age
+                    else if(answer.gameObject.name == "Frage 02 - Age")
                     {
-                        int i = int.Parse(answer.currentAnswer);
-                        if (i < 18 || i > 99) // Age not valid
-                        {
-                            return false;
-                        }
-                        else
-                        {
-                            answerAmount++;
-                            if (answerAmount == allAnswers.Length)
-                                return true;
-                        }
-
+                            int i = int.Parse(answer.currentAnswer);
+                            if (i < 18 || i > 99) // Age not valid
+                            {
+                                print("False at age");
+                                return false;
+                            }
                     }
-                    else
-                    {
-                        answerAmount++;
-                        if (answerAmount == allAnswers.Length)
-                            return true;
-                    }
-                }
+                } // Question Type Bracket
+            } // Foreach Loop Bracket
 
-            } // Foreach Bracket
-
-            print("Mystery Code Path");
+            // If code reaches this point, each question has been checked for valid answer
             if (answerAmount == allAnswers.Length)
                 return true;
             else
                 return false;
-        }
+            
+        }     
         else // IntroductionScreens with no Answer Saver attached; 
         {
             return true;
