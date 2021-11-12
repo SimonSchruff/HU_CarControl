@@ -86,6 +86,7 @@ public class FragebogenManager : MonoBehaviour
         {
             int answerAmount = 0;
             AnswerSaver[] allAnswers = questions[currentID].questionObj.gameObject.GetComponentsInChildren<AnswerSaver>();
+            print(questions[currentID].questionObj.gameObject.name); 
 
             foreach (AnswerSaver answer in allAnswers)
             {
