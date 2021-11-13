@@ -111,7 +111,7 @@ public class AnswerSaver : MonoBehaviour
         else
         {
             //SQLSaveManager.instance.AddAnswerToList(questionID, name, currentAnswer);
-            saveManager.AddAnswerToList(questionID, name, currentAnswer); 
+            //saveManager.AddAnswerToList(questionID, name, currentAnswer); 
         }
 
         print("The question : " + name + ", ID : " + questionID + " with the answer " + currentAnswer + " has been saved!");
