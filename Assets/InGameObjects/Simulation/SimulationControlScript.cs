@@ -66,8 +66,6 @@ public class SimulationControlScript : MonoBehaviour
 
     public List<int> lightsToIgnore = new List<int>();
 
-    bool wasCrash = false;
-
    // public List<int> trafficLightsToChangeIDs = new List<int>();
 
     //Traffic light prioritize
@@ -176,6 +174,7 @@ public class SimulationControlScript : MonoBehaviour
                     else
                     {
                         FinalizeSimulation(testedMaxTL);
+                        doCheckAtEndOfMethod = false;
                         Debug.Log("PairTL is already in the ignore list!");
                     }
                 }
@@ -209,11 +208,13 @@ public class SimulationControlScript : MonoBehaviour
             if (sumOld > sumNew)
             {
                 FinalizeSimulation(testedMaxTL);
+                doCheckAtEndOfMethod = false;
                 Debug.Log("corresponding tl was took");
             }
             else
             {
                 FinalizeSimulation(GetSimTLFromID(testedMaxTL).correspondingTLID);
+                doCheckAtEndOfMethod = false;
                 Debug.Log("took previous tl");
             }
         }
@@ -229,7 +230,7 @@ public class SimulationControlScript : MonoBehaviour
         }
 
         // Assign variables to SimEvent
-        tempSimEvent.SetAllParameters(actualSimState, simFrameCounter, testedMaxTL, TLPairID, testedScore, pairScore, TLScores);
+        tempSimEvent.SetAllParameters(actualSimState, simFrameCounter, testedMaxTL, TLPairID, testedScore, pairScore, TLScores, debug);
 
         ClearSimCache();
 
@@ -926,32 +927,23 @@ public class SimulationControlScript : MonoBehaviour
         yield return null;
         actualSimRepeats++;
 
-        bool stop = false;
-
         for (int i = 0; i < simulationStepsAmount; i++)
         {
-            if (!wasCrash)
-                UpdateFunc();
-            else
-            {
-                wasCrash = false;
-                FinishPart();
-                stop = true;
-                break;
-            }
+            UpdateFunc();
         }
         if (actualSimRepeats >= simulationStepRepeat)
+        {
             try
             {
-            FinishPart();
-
+                FinishPart();
             }
             catch
             { 
                 Debug.Log("FICK");
                 FinishPart ();
             }
-        else if (!stop)
+        }
+        else
             StartCoroutine(WaitOneFrame());
     }
 
