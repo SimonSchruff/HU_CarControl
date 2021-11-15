@@ -3,7 +3,10 @@ guid: 2a8d7bd00ed9a2e4dbddb42323959e7a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - boatSpawnerSim: {instanceID: 0}
+  - debugTrafficLightPrefab: {fileID: 4560623567811519515, guid: bded7737be830804aa647c18dfdbe717, type: 3}
+  - SimEventPrefab: {fileID: 5908230590514235217, guid: 2b83f5f5ea976e846bb0688e90d47b27, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
