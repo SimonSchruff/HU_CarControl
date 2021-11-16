@@ -5989,7 +5989,7 @@ GameObject:
   - component: {fileID: 180442220}
   - component: {fileID: 180442221}
   m_Layer: 5
-  m_Name: Frage 23 - Control Scale 05
+  m_Name: controlScale_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6927,7 +6927,7 @@ GameObject:
   - component: {fileID: 210910435}
   - component: {fileID: 210910436}
   m_Layer: 5
-  m_Name: Frage 19 - Control Scale 01
+  m_Name: controlScale_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19366,7 +19366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &544932332
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21330,7 +21330,7 @@ GameObject:
   - component: {fileID: 612226629}
   - component: {fileID: 612226630}
   m_Layer: 5
-  m_Name: Frage 27 - Control Scale 08
+  m_Name: controlScale_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25346,7 +25346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b5a0bf65ebc441a8eeb8b45333e5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.005
+  scrollSpeed: 0.0125
   isInverted: 1
 --- !u!114 &764902235
 MonoBehaviour:
@@ -25391,8 +25391,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1705950433}
   m_HandleRect: {fileID: 1705950432}
   m_Direction: 2
-  m_Value: 1.0000001
-  m_Size: 0.33796164
+  m_Value: 1
+  m_Size: 0.3379616
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -26787,7 +26787,7 @@ GameObject:
   - component: {fileID: 808952522}
   - component: {fileID: 808952523}
   m_Layer: 5
-  m_Name: Frage 22 - Control Scale 04
+  m_Name: controlScale_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29962,7 +29962,7 @@ GameObject:
   - component: {fileID: 897578015}
   - component: {fileID: 897578016}
   m_Layer: 5
-  m_Name: Frage 09 - Color Vision Test 01
+  m_Name: colorVisionTest_1
   m_TagString: questions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33814,7 +33814,7 @@ GameObject:
   - component: {fileID: 1016458863}
   - component: {fileID: 1016458864}
   m_Layer: 5
-  m_Name: Frage 26 - Control Scale 08
+  m_Name: controlScale_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44330,7 +44330,7 @@ GameObject:
   - component: {fileID: 1308707755}
   - component: {fileID: 1308707756}
   m_Layer: 5
-  m_Name: Frage 25 - Control Scale 07
+  m_Name: controlScale_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45984,7 +45984,7 @@ GameObject:
   - component: {fileID: 1375151787}
   - component: {fileID: 1375151788}
   m_Layer: 5
-  m_Name: Frage 30 - Control Scale 11
+  m_Name: controlScale_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57122,7 +57122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1721442237403776046, guid: 0a530392fe8c844e481760561be06fb9, type: 3}
       propertyPath: m_Name
-      value: Frage 12 - Color Vision Test 04
+      value: colorVisionTest_4
       objectReference: {fileID: 0}
     - target: {fileID: 1721442237403776046, guid: 0a530392fe8c844e481760561be06fb9, type: 3}
       propertyPath: m_IsActive
@@ -57207,8 +57207,8 @@ RectTransform:
   m_Father: {fileID: 2029887853}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.6620384}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -57735,7 +57735,7 @@ GameObject:
   - component: {fileID: 1733369518}
   - component: {fileID: 1733369519}
   m_Layer: 5
-  m_Name: Frage 20 - Control Scale 02
+  m_Name: controlScale_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58636,7 +58636,7 @@ GameObject:
   - component: {fileID: 1757392202}
   - component: {fileID: 1757392203}
   m_Layer: 5
-  m_Name: Frage 28 - Control Scale 09
+  m_Name: controlScale_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58950,7 +58950,7 @@ GameObject:
   - component: {fileID: 1764116592}
   - component: {fileID: 1764116593}
   m_Layer: 5
-  m_Name: Frage 11 - Color Vision Test 03
+  m_Name: colorVisionTest_3
   m_TagString: questions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67091,7 +67091,7 @@ GameObject:
   - component: {fileID: 2026062924}
   - component: {fileID: 2026062925}
   m_Layer: 5
-  m_Name: Frage 24 - Control Scale 06
+  m_Name: controlScale_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69794,7 +69794,7 @@ GameObject:
   - component: {fileID: 2100574879}
   - component: {fileID: 2100574880}
   m_Layer: 5
-  m_Name: Frage 21 - Control Scale 03
+  m_Name: controlScale_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70243,7 +70243,7 @@ GameObject:
   - component: {fileID: 2113836627}
   - component: {fileID: 2113836628}
   m_Layer: 5
-  m_Name: Frage 29 - Control Scale 10
+  m_Name: controlScale_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71127,7 +71127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1721442237403776046, guid: 0a530392fe8c844e481760561be06fb9, type: 3}
       propertyPath: m_Name
-      value: Frage 10 - Color Vision Test 02
+      value: colorVisionTest_2
       objectReference: {fileID: 0}
     - target: {fileID: 1721442237403776046, guid: 0a530392fe8c844e481760561be06fb9, type: 3}
       propertyPath: m_IsActive

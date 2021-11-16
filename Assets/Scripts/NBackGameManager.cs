@@ -84,7 +84,6 @@ public class NBackGameManager : MonoBehaviour
     #region UIRefs 
     [Header("UI References")]
     public GameObject InstructionObjects; 
-    public GameObject InstructionsObjExample; 
     public GameObject RunningGameObjects; 
     public GameObject TimerGameObjects; 
     public GameObject LevelFinishedGameObjects; 
@@ -145,8 +144,8 @@ public class NBackGameManager : MonoBehaviour
         switch(gameState)
         {
             case GameState.timer: 
-                TimerGameObjects.SetActive(true); 
-                InstructionsObjExample.SetActive(false);  
+                TimerGameObjects.SetActive(true);
+                InstructionObjects.SetActive(false);
                 RunningGameObjects.SetActive(false);
                 LevelFinishedGameObjects.SetActive(false); 
                 GameOverObjects.SetActive(false); 
@@ -155,9 +154,8 @@ public class NBackGameManager : MonoBehaviour
                     StartCoroutine(Timer()); 
             break; 
 
-            case GameState.instructions: 
-                TimerGameObjects.SetActive(false); 
-                RunningGameObjects.SetActive(false); 
+            case GameState.instructions:
+                InstructionObjects.SetActive(true);
                 LevelFinishedGameObjects.SetActive(false); 
                 GameOverObjects.SetActive(false); 
             break; 
@@ -165,7 +163,6 @@ public class NBackGameManager : MonoBehaviour
             case GameState.running: 
                 TimerGameObjects.SetActive(false);
                 InstructionObjects.SetActive(false); 
-                InstructionsObjExample.SetActive(false); 
                 RunningGameObjects.SetActive(true);
                 LevelFinishedGameObjects.SetActive(false);
                 GameOverObjects.SetActive(false);   
@@ -258,20 +255,6 @@ public class NBackGameManager : MonoBehaviour
         
     }
 
-    public void SwitchInstructionsPage(int i)
-    {
-        switch(i)
-        {
-            case 1: //Instructions
-                InstructionObjects.SetActive(true); 
-                InstructionsObjExample.SetActive(false); 
-            break;
-            case 2: //Example
-                InstructionObjects.SetActive(false); 
-                InstructionsObjExample.SetActive(true); 
-            break; 
-        }
-    }
 
     void ResetForNewLevel()
     {
@@ -362,12 +345,14 @@ public class NBackGameManager : MonoBehaviour
     {
         newTimerRdy = false; 
 
-        // Set to three
+        // Count Down
         timerTextObj.text = "3"; 
         yield return new WaitForSeconds(1); 
         timerTextObj.text = "2";    
         yield return new WaitForSeconds(1); 
         timerTextObj.text = "1"; 
+        yield return new WaitForSeconds(1);
+        timerTextObj.text = "GO";
         yield return new WaitForSeconds(1); 
 
         gameState = GameState.running;
