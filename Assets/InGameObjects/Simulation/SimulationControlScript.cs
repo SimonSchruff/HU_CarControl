@@ -56,7 +56,7 @@ public class SimulationControlScript : MonoBehaviour
     public Dictionary<int, int> trafficLightScores = new Dictionary<int, int>();
 
     // Automatic Sim control
-    public List<int> trafficLightsToTest = new List<int>();
+    //public List<int> trafficLightsToTest = new List<int>();
     [SerializeField] int actualDepth = 0;
     int checkLightsCounter = 0;
     [SerializeField] List<int> changeTrafficLights = new List<int>();
@@ -146,7 +146,7 @@ public class SimulationControlScript : MonoBehaviour
             testedMaxTL = GetTLIDFromMaxScore();
             if(testedMaxTL != 0)
             {
-                trafficLightsToTest.Add(testedMaxTL);
+                //trafficLightsToTest.Add(testedMaxTL);
                 debug = "Added tl to test";
             }
             else
