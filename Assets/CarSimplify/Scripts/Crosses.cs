@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Crosses : SimplifyParent
 {
+    public int [] TurnToLockSpwanPairs;
     public CarSpawnScript [] carSpawnLock;
+
 
     public List<Vector2> crossedInTurns = new List<Vector2>();
 

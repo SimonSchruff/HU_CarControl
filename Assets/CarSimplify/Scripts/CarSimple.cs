@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class CarSimple : SimplifyParent
 {
-    float speed;
     float gridSize;
+    float spawnDelay;
 
     Crosses[] crossLane;
     bool horOrVert;
 
     private void Start()
     {
-        speed = Control.con.speed;
         gridSize = Control.con.gridSize;
+        spawnDelay = Control.con.spawnDelay;
     }
 
     public void ManualInit (Crosses [] CrossLane, bool HorOrVertical)
@@ -25,25 +25,39 @@ public class CarSimple : SimplifyParent
     public void FillCrosses()
     {
         int counter = -1;
-        foreach (var cL in crossLane)
+
+        for (int i = actualStep; i < crossLane.Length; i++)
         {
             counter++;
 
-            if (actualStep + counter - 1 <= crossLane.Length && actualStep - counter >= 0)
+            if(crossLane[i] != null)
             {
-                if(cL != null)
-                {
-                    cL.crossedInTurns.Add(new Vector2(actualStep - counter+1, horOrVert ? 0 : 1));
-                }
+                crossLane[i].crossedInTurns.Add(new Vector2(i - actualStep, horOrVert ? 0 : 1));
             }
-            else 
-                break;
         }
+
+        //foreach (var cL in crossLane)
+        //{
+        //    counter++;
+
+        //    if(counter >= actualStep)
+        //    {
+        //        if (actualStep + counter - 1 <= crossLane.Length)
+        //        {
+        //            if(cL != null)
+        //            {
+        //                cL.crossedInTurns.Add(new Vector2(actualStep - counter+1, horOrVert ? 0 : 1));
+        //            }
+        //        }
+        //        else 
+        //            break;
+        //    }
+        //}
     }
 
     private void Update()
     {
-        gameObject.transform.Translate(new Vector3(gridSize * speed * Time.deltaTime, 0, 0));
+        gameObject.transform.Translate(new Vector3((gridSize * Time.deltaTime)/spawnDelay, 0, 0));
     }
 
 }

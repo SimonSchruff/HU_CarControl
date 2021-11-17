@@ -5,15 +5,16 @@ using UnityEngine;
 public class Control : MonoBehaviour
 {
     [Header("Adjust")]
-    public float speed = 1f;
     public float spawnDelay= 1f;
+    public float gridSize = 1.5f;
+
+    [SerializeField] int SpawnCarAmountPerTurn = 2;
 
 
 
 
     [Header("Gameplay not change")]
     public int actualStep = 0;
-    public float gridSize = 1.5f;
     public static Control con;
 
     public Crosses[] crossesRefs;
@@ -49,7 +50,7 @@ public class Control : MonoBehaviour
 
     IEnumerator UpdateFunc()
     {
-        yield return new WaitForSecondsRealtime(spawnDelay);
+        yield return new WaitForSeconds(spawnDelay);
 
         UpdateElems();
 
@@ -58,6 +59,15 @@ public class Control : MonoBehaviour
 
     void UpdateElems ()
     {
+        foreach (var cs in carSpawnRefs)
+        {
+            cs.UpdateCheckIfSpawnAllowed();
+        }
+        foreach (var cs in carSpawnRefs)
+        {
+            cs.UpdateCorrespondingCheck();
+        }
+
         GetPossibleSpawnerAndSpawnCar();
 
         foreach (Crosses cr in crossesRefs)   
@@ -77,12 +87,22 @@ public class Control : MonoBehaviour
             car.FillCrosses();
         }
     }
-    public  CarSpawnScript GetPossibleSpawnerAndSpawnCar ()
+    public void GetPossibleSpawnerAndSpawnCar ()
     {
+        List<CarSpawnScript> possibleSpawnPos = new List<CarSpawnScript>();
+        foreach (var carSpawn in carSpawnRefs)
+        {
+            if(carSpawn.AllowSpawnCar)
+            {
+                possibleSpawnPos.Add(carSpawn);
+            }
+        }
 
-
-
-
-        return null;
+        for (int i = 0; i < SpawnCarAmountPerTurn; i++)
+        {
+            CarSpawnScript temp = possibleSpawnPos[Random.Range(0, possibleSpawnPos.Count)];
+            temp.SpawnCar();
+            possibleSpawnPos.Remove(temp);
+        }
     }
 }
