@@ -425,11 +425,11 @@ public class NBackGameManager : MonoBehaviour
         }
 
         //Total Percentage score of correctly identified Matches and Mismatches
-        levelData.totalCorrectPercentage = ((float)correctMatch + (float)correctMismatch) / (float)(stimuliShown-n); 
+        levelData.totalCorrectPercentage = ((float)correctMatch + (float)correctMismatch) / (float)(stimuliShown-n);
         //Debug.Log(levelData.totalCorrectPercentage); 
-            
+
         // Send levelData to server; Include User ID
-        SQLSaveManager.instance.StartNBackPostCoroutine(levelData); 
+        SQLSaveManager.instance.SaveNBackData(levelData); 
         
     }
     

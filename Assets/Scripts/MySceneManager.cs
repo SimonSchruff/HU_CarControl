@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 public class MySceneManager : MonoBehaviour
 {
     public static MySceneManager Instance; 
-
-    bool loaded = false; 
-
     
     void Awake()
     {

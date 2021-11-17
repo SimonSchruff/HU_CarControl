@@ -12,11 +12,12 @@ public class SQLSaveManager : MonoBehaviour
 
     public struct Answer
     {
-        public int id;
         public string name;
         public string answer;
     }
-    public List<Answer> answerList = new List<Answer>(); 
+    public List<Answer> answerList = new List<Answer>();
+
+    public List<NBackGameManager.LevelData> nBackData = new List<NBackGameManager.LevelData>();  
 
 
     void Awake()
@@ -40,60 +41,64 @@ public class SQLSaveManager : MonoBehaviour
         playerID = pID;
     }
 
-    public void AddAnswerToList(int i, string n, string a) // id, name, answer
+    public void AddAnswerToList(string n, string a) // id, name, answer
     {
         Answer tempAnswer = new Answer();
-        tempAnswer.id = i;
         tempAnswer.name = n;
         tempAnswer.answer = a; 
 
-        answerList.Add(tempAnswer); 
+        answerList.Add(tempAnswer);
+        print("Answer: " + tempAnswer.name + " with the answer: " + tempAnswer.answer + " has been added to the list."); 
         
     }
 
-    public void StartAnwerPostCoroutine(Answer[] allAnswers)
+    public void SaveNBackData(NBackGameManager.LevelData data)
     {
-        // Start Coroutine to Post all Answers
-        // Sameas PostNBackData
-        // To different table, or same one ?? 
-    }
-
-    public void StartNBackPostCoroutine(NBackGameManager.LevelData data)
-    {
-        StartCoroutine(PostNBackData(data)); 
+        nBackData.Add(data);
     }
 
 
-    IEnumerator PostNBackData(NBackGameManager.LevelData data)
+
+    public void StartPostCoroutine(NBackGameManager.LevelData data)
     {
-        #region Add Data to Form
-        List<IMultipartFormSection> formData = new List<IMultipartFormSection>(); 
+        //StartCoroutine(PostData()); 
+    }
 
-        // DATA
-        formData.Add(new MultipartFormDataSection("id", playerID)); 
-        formData.Add(new MultipartFormDataSection("currentLevel", data.currentLevel.ToString())); 
 
-        // EVENTS IN TOTAL NUMBERS
-        formData.Add(new MultipartFormDataSection("totalCorrectMatches", data.totalCorrectMatches.ToString())); 
-        formData.Add(new MultipartFormDataSection("totalCorrectMismatches", data.totalCorrectMismatches.ToString())); 
+    IEnumerator PostData()
+    {
+        List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
+        formData.Add(new MultipartFormDataSection("id", playerID));
 
-        formData.Add(new MultipartFormDataSection("totalFalseDecisionMatch", data.totalFalseDecisionMatch.ToString())); 
-        formData.Add(new MultipartFormDataSection("totalFalseDecisionMismatch", data.totalFalseDecisionMismatch.ToString())); 
+        foreach (NBackGameManager.LevelData data in nBackData)
+        {
 
-        formData.Add(new MultipartFormDataSection("totalNoReactionMatches", data.totalNoReactionMatches.ToString())); 
-        formData.Add(new MultipartFormDataSection("totalNoReactionMismatches", data.totalNoReactionMismatches.ToString())); 
+            #region Add Data to Form
+            // DATA
+            formData.Add(new MultipartFormDataSection("currentLevel", data.currentLevel.ToString())); 
 
-        // EVENTS IN PERCENTAGES
-        formData.Add(new MultipartFormDataSection("totalCorrectPercentage", data.totalCorrectPercentage.ToString())); 
-        formData.Add(new MultipartFormDataSection("correctlyMatched", data.correctlyMatched.ToString())); 
-        formData.Add(new MultipartFormDataSection("correctlyMismatched", data.correctlyMismatched.ToString())); 
+            // EVENTS IN TOTAL NUMBERS
+            formData.Add(new MultipartFormDataSection("totalCorrectMatches_" + data.currentLevel.ToString(), data.totalCorrectMatches.ToString())); 
+            formData.Add(new MultipartFormDataSection("totalCorrectMismatches_" + data.currentLevel.ToString(), data.totalCorrectMismatches.ToString())); 
 
-        formData.Add(new MultipartFormDataSection("noReactionMatches", data.noReactionMatches.ToString())); 
-        formData.Add(new MultipartFormDataSection("noReactionMismatches", data.noReactionMismatches.ToString())); 
+            formData.Add(new MultipartFormDataSection("totalFalseDecisionMatch_" + data.currentLevel.ToString(), data.totalFalseDecisionMatch.ToString())); 
+            formData.Add(new MultipartFormDataSection("totalFalseDecisionMismatch_" + data.currentLevel.ToString(), data.totalFalseDecisionMismatch.ToString())); 
 
-        formData.Add(new MultipartFormDataSection("falseDecisionMatch", data.falseDecisionMatch.ToString())); 
-        formData.Add(new MultipartFormDataSection("falseDecisionMismatch", data.falseDecisionMismatch.ToString())); 
-        #endregion
+            formData.Add(new MultipartFormDataSection("totalNoReactionMatches_" + data.currentLevel.ToString(), data.totalNoReactionMatches.ToString())); 
+            formData.Add(new MultipartFormDataSection("totalNoReactionMismatches_" + data.currentLevel.ToString(), data.totalNoReactionMismatches.ToString())); 
+
+            // EVENTS IN PERCENTAGES
+            formData.Add(new MultipartFormDataSection("totalCorrectPercentage_"+ data.currentLevel.ToString(), data.totalCorrectPercentage.ToString())); 
+            formData.Add(new MultipartFormDataSection("correctlyMatched_"+ data.currentLevel.ToString(), data.correctlyMatched.ToString())); 
+            formData.Add(new MultipartFormDataSection("correctlyMismatched_"+ data.currentLevel.ToString(), data.correctlyMismatched.ToString())); 
+
+            formData.Add(new MultipartFormDataSection("noReactionMatches_"+ data.currentLevel.ToString(), data.noReactionMatches.ToString())); 
+            formData.Add(new MultipartFormDataSection("noReactionMismatches_"+ data.currentLevel.ToString(), data.noReactionMismatches.ToString())); 
+
+            formData.Add(new MultipartFormDataSection("falseDecisionMatch_"+ data.currentLevel.ToString(), data.falseDecisionMatch.ToString())); 
+            formData.Add(new MultipartFormDataSection("falseDecisionMismatch_"+ data.currentLevel.ToString(), data.falseDecisionMismatch.ToString())); 
+            #endregion
+        }
         
         using (UnityWebRequest webRequest = UnityWebRequest.Post(URL, formData))
         {
