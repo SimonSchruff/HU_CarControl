@@ -114,7 +114,7 @@ public class FragebogenManager : MonoBehaviour
                         return false;
                     }
 
-                    if(answer.gameObject.name == "Prolific ID")
+                    if(answer.gameObject.name == "prolificID")
                     {
                             bool returnBool;
                             returnBool = CheckStringForLength(24, answer);
@@ -125,7 +125,7 @@ public class FragebogenManager : MonoBehaviour
                                 return returnBool;
                             }
                     }
-                    else if(answer.gameObject.name == "Frage 02 - Age")
+                    else if(answer.gameObject.name == "age")
                     {
                             int i = int.Parse(answer.currentAnswer);
                             if (i < 18 || i > 99) // Age not valid
@@ -170,49 +170,5 @@ public class FragebogenManager : MonoBehaviour
             return false;
         }
     }
-
-
-
-
-    // Code used for Randomizing Questions; Currently not used; (Saved for later maybe) 
-
-    /*
-    void RandomizeQuestions(Questions[] q)
-    {
-        // Shuffle List of Questions
-        // Position in Array is shuffled but NOT id of question
-
-        for (int i = 0; i < q.Length; i++)
-        {
-            Questions temp = q[i];
-            int randomIndex = UnityEngine.Random.Range(i, q.Length);
-            q[i] = q[randomIndex];
-            q[randomIndex] = temp;
-        }
-    }
-
-        public void NextRandomOrderQuestion()
-    {
-        bool isAllowedToChange;
-
-        randID++;
-
-        int currentID = randID - 1;
-        isAllowedToChange = SaveCurrentAnswer(currentID, randomOrderQuestions);
-
-        if(isAllowedToChange)
-        {
-            randomOrderQuestions[currentID].questionObj.gameObject.SetActive(false);
-
-            if (randID != (randomOrderQuestions.Length)) 
-                randomOrderQuestions[currentID + 1].questionObj.gameObject.SetActive(true);
-            else // Load new Scene if last question
-                MySceneManager.Instance.LoadSceneInt(SceneManager.GetActiveScene().buildIndex + 1 ); 
-        }
-
-
-    }
-
-    */
     
 }
