@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SimplifySCene.unity
+    guid: 297601f3150e35d45bb45c57b6e8d166
   - enabled: 0
     path: Assets/Scenes/CrossScene.unity
     guid: b1e25560d8fde964e8b5d378116d0c3a

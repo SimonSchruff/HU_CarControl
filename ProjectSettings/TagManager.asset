@@ -21,6 +21,8 @@ TagManager:
   - Canvas
   - questions
   - answerError
+  - CrossSimple
+  - CrossInner
   layers:
   - Default
   - TransparentFX
@@ -36,7 +38,7 @@ TagManager:
   - Boat
   - Spot
   - SpawnCar
-  - 
+  - CrossTouch
   - 
   - 
   - 

@@ -10,9 +10,7 @@ public class CarSpawnScript : SimplifyParent
     [SerializeField] Crosses[] crossRefs;
     [SerializeField] GameObject carPrefab;
     public bool AllowSpawnCar = true;
-    [SerializeField] bool debugAllowSpawn = false;
     public CarSpawnScript correspondingSpawner;
-    public bool notAllowSpawnThisTime = false; 
 
     SpriteRenderer arrow;
 
@@ -33,12 +31,11 @@ public class CarSpawnScript : SimplifyParent
 
         arrow.color = AllowSpawnCar ? Color.green : Color.red;
     }
-    public void UpdateCorrespondingCheck ()
+    public void DisableAllowSpawn()
     {
-        if (notAllowSpawnThisTime)
-            AllowSpawnCar = false;
+        AllowSpawnCar = false;
 
-        arrow.color = AllowSpawnCar ? Color.green : Color.red;
+        arrow.color = Color.red;
     }
 
     public void SpawnCar()
@@ -73,11 +70,6 @@ public class CarSpawnScript : SimplifyParent
                 }
             }
         }
-        if(correspondingSpawner != null)
-        {
-            correspondingSpawner.notAllowSpawnThisTime = true;
-        }
-
         return true;
     }
 }
