@@ -9,9 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class FragebogenManager : MonoBehaviour
 {
-    [SerializeField] int questionNumber; // Counted up with each button "Continue" Button Click
+    [SerializeField] private int questionNumber; // Counted up with each button "Continue" Button Click
 
-    // Dictionary not able to be shown in inspector -> Workaround
     [Serializable]
     public struct Questions
     {
@@ -51,7 +50,7 @@ public class FragebogenManager : MonoBehaviour
 
         int currentID = questions[questionNumber].id;
         isAllowedToChange = AllowedToContinue(currentID);
-        print(isAllowedToChange);
+        //print(isAllowedToChange);
 
         if (isAllowedToChange)
         {
@@ -116,13 +115,9 @@ public class FragebogenManager : MonoBehaviour
 
                     if(answer.gameObject.name == "prolificID")
                     {
-                            bool returnBool;
-                            returnBool = CheckStringForLength(24, answer);
-
-                            if (!returnBool) // String not long enough
+                            if(answer.currentAnswer.Length != 24)
                             {
-                                print("False at prolific; "); 
-                                return returnBool;
+                                return false; 
                             }
                     }
                     else if(answer.gameObject.name == "age")
@@ -134,9 +129,8 @@ public class FragebogenManager : MonoBehaviour
                                 return false;
                             }
                     }
-                } // Question Type Bracket
-            } // Foreach Loop Bracket
-
+                } 
+            } 
             // If code reaches this point, each question has been checked for valid answer
             if (answerAmount == allAnswers.Length)
                 return true;
@@ -155,20 +149,7 @@ public class FragebogenManager : MonoBehaviour
         AnswerSaver[] allAnswers = questions[currentID].questionObj.gameObject.GetComponentsInChildren<AnswerSaver>();
         foreach (AnswerSaver answer in allAnswers)
         {
-            answer.SaveAnswer(currentID, answer.gameObject.name);
+            answer.SaveAnswer(answer.gameObject.name);
         }
     }
-
-    bool CheckStringForLength(int length, AnswerSaver a)
-    {
-        if (a.currentAnswer.Length == length)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
 }

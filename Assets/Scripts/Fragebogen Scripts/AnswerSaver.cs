@@ -70,8 +70,6 @@ public class AnswerSaver : MonoBehaviour
                         currentAnswer = toggle.GetComponentInChildren<Text>().text; 
                     }
                 }
-
-
                 break; 
             case QuestionType.togglesWithFreeInput: 
 
@@ -107,20 +105,18 @@ public class AnswerSaver : MonoBehaviour
     }
 
 
-    public void SaveAnswer(int questionID, string name)
+    public void SaveAnswer(string name)
     {
-        SQLSaveManager saveManager = SQLSaveManager.instance;
-
         //Save to SQL Database with SQL Save Manager        
-        if(questionID == 0 && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Fragebogen")
+        if(name == "prolificID")
         {
             // Prolific ID
-            saveManager.SaveProlificID(currentAnswer); 
+            SQLSaveManager.instance.SaveProlificID(currentAnswer); 
         }
         else
         {
             //SQLSaveManager.instance.AddAnswerToList(questionID, name, currentAnswer);
-            saveManager.AddAnswerToList(name, currentAnswer);  
+            SQLSaveManager.instance.AddAnswerToList(name, currentAnswer);  
         }
 
         //print("The question : " + name + ", ID : " + questionID + " with the answer " + currentAnswer + " has been saved!");

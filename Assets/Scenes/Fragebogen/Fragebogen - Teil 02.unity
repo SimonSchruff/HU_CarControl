@@ -1705,7 +1705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 0.02
-  isInverted: 1
+  isInverted: 0
 --- !u!114 &46086068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20434,7 +20434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 0.02
-  isInverted: 1
+  isInverted: 0
 --- !u!114 &603089953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27589,7 +27589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 0.02
-  isInverted: 1
+  isInverted: 0
 --- !u!114 &797663647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28146,7 +28146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 0.02
-  isInverted: 1
+  isInverted: 0
 --- !u!114 &808761689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29812,7 +29812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 0.015
-  isInverted: 1
+  isInverted: 0
 --- !u!114 &862753036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36562,7 +36562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 0.02
-  isInverted: 1
+  isInverted: 0
 --- !u!114 &1017947893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45925,7 +45925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 0.02
-  isInverted: 1
+  isInverted: 0
 --- !u!114 &1285673688
 MonoBehaviour:
   m_ObjectHideFlags: 0
