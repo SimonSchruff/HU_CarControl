@@ -27,7 +27,7 @@ public class ScoreSimple : MonoBehaviour
     {
         if (amount!=0)
         {
-            score = +amount;
+            score += amount;
             scoreText.text = score.ToString();
         }
     }
