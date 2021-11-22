@@ -57,14 +57,7 @@ public class AnswerSaver : MonoBehaviour
                 foreach(Toggle toggle in toggles)
                 {
                     //print(toggle.gameObject.name); 
-                    if(toggle.gameObject.name == "mani_check_2_1" || toggle.gameObject.name == "mani_check_2_2" || toggle.gameObject.name == "mani_check_2_3")
-                    {
-                        if (toggle.isOn == true)
-                            currentAnswer = "1";
-                        else
-                            currentAnswer = "0"; 
-                    }
-
+                    
                     if(toggle.isOn == true)
                     {
                         currentAnswer = toggle.GetComponentInChildren<Text>().text; 
