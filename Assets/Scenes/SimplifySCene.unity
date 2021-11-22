@@ -187,7 +187,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &49579201
 GameObject:
@@ -225,7 +225,7 @@ Transform:
   - {fileID: 1176386167}
   - {fileID: 1545100527}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &49672197 stripped
 Transform:
@@ -417,6 +417,88 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+--- !u!1 &229784899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 229784901}
+  - component: {fileID: 229784900}
+  m_Layer: 0
+  m_Name: HighlightGroup (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!212 &229784900
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229784899}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -45
+  m_Sprite: {fileID: 21300000, guid: 259e428ceea67234e9a09ec4f736aa6d, type: 3}
+  m_Color: {r: 0.11012435, g: 1, b: 0, a: 0.22745098}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.64, y: 0.64}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &229784901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229784899}
+  m_LocalRotation: {x: -0, y: -0, z: -1, w: -0.00000035762784}
+  m_LocalPosition: {x: -2.97, y: -1.51, z: 0.19310941}
+  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_Children: []
+  m_Father: {fileID: 1167474761}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
 --- !u!114 &244981281 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3303113253298491993, guid: 6586056e75fd4c14085002cfa9055308, type: 3}
@@ -639,7 +721,7 @@ Transform:
   - {fileID: 740729030}
   - {fileID: 942914533}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &458565587 stripped
 Transform:
@@ -755,6 +837,88 @@ Transform:
   m_Father: {fileID: 49579202}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &621354274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 621354276}
+  - component: {fileID: 621354275}
+  m_Layer: 0
+  m_Name: HighlightGroup (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!212 &621354275
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621354274}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -45
+  m_Sprite: {fileID: 21300000, guid: 259e428ceea67234e9a09ec4f736aa6d, type: 3}
+  m_Color: {r: 0.11012435, g: 1, b: 0, a: 0.22745098}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.64, y: 0.64}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &621354276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621354274}
+  m_LocalRotation: {x: -0, y: -0, z: -0.70710653, w: 0.70710707}
+  m_LocalPosition: {x: 2.94, y: 1.52, z: 0.19310941}
+  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_Children: []
+  m_Father: {fileID: 1167474761}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!4 &624962951 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5699143521932867494, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
@@ -1165,6 +1329,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: carSpawnLock.Array.data[0]
       value: 
       objectReference: {fileID: 1435508952}
@@ -1172,6 +1340,10 @@ PrefabInstance:
       propertyPath: carSpawnLock.Array.data[1]
       value: 
       objectReference: {fileID: 244981281}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.data[0]
+      value: 
+      objectReference: {fileID: 995502995}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: TurnToLockSpwanPairs.Array.size
       value: 2
@@ -1246,6 +1418,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: carSpawnLock.Array.data[0]
       value: 
       objectReference: {fileID: 1435508952}
@@ -1253,6 +1433,18 @@ PrefabInstance:
       propertyPath: carSpawnLock.Array.data[1]
       value: 
       objectReference: {fileID: 289113974}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[0]
+      value: 
+      objectReference: {fileID: 1771516480}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[1]
+      value: 
+      objectReference: {fileID: 463962621}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.data[0]
+      value: 
+      objectReference: {fileID: 624962952}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: TurnToLockSpwanPairs.Array.size
       value: 2
@@ -1327,6 +1519,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f05108e4d6a7c4ca6f4c2f18435f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1036574659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1036574661}
+  - component: {fileID: 1036574660}
+  m_Layer: 0
+  m_Name: HighlightGroup (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!212 &1036574660
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036574659}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -45
+  m_Sprite: {fileID: 21300000, guid: 259e428ceea67234e9a09ec4f736aa6d, type: 3}
+  m_Color: {r: 0.11012435, g: 1, b: 0, a: 0.22745098}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.64, y: 0.64}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1036574661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036574659}
+  m_LocalRotation: {x: -0, y: -0, z: 0.70710677, w: 0.7071068}
+  m_LocalPosition: {x: 3.01, y: -1.46, z: 0.19310941}
+  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_Children: []
+  m_Father: {fileID: 1167474761}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1001 &1049998034
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1449,6 +1723,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: carSpawnLock.Array.data[0]
       value: 
       objectReference: {fileID: 749799494}
@@ -1456,6 +1734,14 @@ PrefabInstance:
       propertyPath: carSpawnLock.Array.data[1]
       value: 
       objectReference: {fileID: 751512627}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[0]
+      value: 
+      objectReference: {fileID: 766665559}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[1]
+      value: 
+      objectReference: {fileID: 765656131}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: TurnToLockSpwanPairs.Array.size
       value: 2
@@ -1514,6 +1800,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+--- !u!1 &1167474759
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1167474761}
+  - component: {fileID: 1167474760}
+  m_Layer: 0
+  m_Name: Assistance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1167474760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167474759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a08d9f4f56dcd4ebf9b0a051f363e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actualAssistance: 0
+  highlightSprites:
+  - {fileID: 1695161330}
+  - {fileID: 229784900}
+  - {fileID: 621354275}
+  - {fileID: 1036574660}
+  crossHightlightPair_0:
+  - {fileID: 458565588}
+  - {fileID: 2089194487}
+  - {fileID: 1771516480}
+  crossHightlightPair_1:
+  - {fileID: 463962621}
+  - {fileID: 995502995}
+  - {fileID: 1680335769}
+  crossHightlightPair_2:
+  - {fileID: 765656131}
+  - {fileID: 766665559}
+  - {fileID: 737079283}
+  crossHightlightPair_3:
+  - {fileID: 49672198}
+  - {fileID: 624962952}
+  - {fileID: 666386535}
+--- !u!4 &1167474761
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167474759}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1695161331}
+  - {fileID: 229784901}
+  - {fileID: 621354276}
+  - {fileID: 1036574661}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1168418076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1554,7 +1909,7 @@ Transform:
   - {fileID: 624962951}
   - {fileID: 666386534}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1176386165
 GameObject:
@@ -1735,6 +2090,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: carSpawnLock.Array.data[0]
       value: 
       objectReference: {fileID: 749799494}
@@ -1742,6 +2105,18 @@ PrefabInstance:
       propertyPath: carSpawnLock.Array.data[1]
       value: 
       objectReference: {fileID: 289113974}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[0]
+      value: 
+      objectReference: {fileID: 766665559}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.data[0]
+      value: 
+      objectReference: {fileID: 624962952}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.data[1]
+      value: 
+      objectReference: {fileID: 49672198}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: TurnToLockSpwanPairs.Array.size
       value: 2
@@ -2024,6 +2399,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: carSpawnLock.Array.data[0]
       value: 
       objectReference: {fileID: 1435508952}
@@ -2031,6 +2414,14 @@ PrefabInstance:
       propertyPath: carSpawnLock.Array.data[1]
       value: 
       objectReference: {fileID: 751512627}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[0]
+      value: 
+      objectReference: {fileID: 1771516480}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.data[0]
+      value: 
+      objectReference: {fileID: 2089194487}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: TurnToLockSpwanPairs.Array.size
       value: 2
@@ -2269,6 +2660,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f05108e4d6a7c4ca6f4c2f18435f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1695161329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1695161331}
+  - component: {fileID: 1695161330}
+  m_Layer: 0
+  m_Name: HighlightGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!212 &1695161330
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695161329}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -45
+  m_Sprite: {fileID: 21300000, guid: 259e428ceea67234e9a09ec4f736aa6d, type: 3}
+  m_Color: {r: 0.11012435, g: 1, b: 0, a: 0.22745098}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.64, y: 0.64}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1695161331
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695161329}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.97, y: 1.52, z: 0.19310941}
+  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_Children: []
+  m_Father: {fileID: 1167474761}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1723380888
 GameObject:
   m_ObjectHideFlags: 0
@@ -2365,7 +2838,7 @@ GameObject:
   - component: {fileID: 1726208820}
   - component: {fileID: 1726208824}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: ScoreCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2445,7 +2918,7 @@ RectTransform:
   m_Children:
   - {fileID: 1474781899}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2497,6 +2970,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: carSpawnLock.Array.data[0]
       value: 
       objectReference: {fileID: 1435508952}
@@ -2504,6 +2985,22 @@ PrefabInstance:
       propertyPath: carSpawnLock.Array.data[1]
       value: 
       objectReference: {fileID: 1357242470}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[0]
+      value: 
+      objectReference: {fileID: 1771516480}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[1]
+      value: 
+      objectReference: {fileID: 463962621}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[2]
+      value: 
+      objectReference: {fileID: 49672198}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.data[0]
+      value: 
+      objectReference: {fileID: 766665559}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: TurnToLockSpwanPairs.Array.size
       value: 2
@@ -2789,6 +3286,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: carSpawnLock.Array.data[0]
       value: 
       objectReference: {fileID: 165961446}
@@ -2796,6 +3301,18 @@ PrefabInstance:
       propertyPath: carSpawnLock.Array.data[1]
       value: 
       objectReference: {fileID: 751512627}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[0]
+      value: 
+      objectReference: {fileID: 995502995}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.data[0]
+      value: 
+      objectReference: {fileID: 2089194487}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.data[1]
+      value: 
+      objectReference: {fileID: 463962621}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: TurnToLockSpwanPairs.Array.size
       value: 2
@@ -2870,6 +3387,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: carSpawnLock.Array.data[0]
       value: 
       objectReference: {fileID: 165961446}
@@ -2877,6 +3402,26 @@ PrefabInstance:
       propertyPath: carSpawnLock.Array.data[1]
       value: 
       objectReference: {fileID: 1357242470}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[0]
+      value: 
+      objectReference: {fileID: 995502995}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[1]
+      value: 
+      objectReference: {fileID: 1680335769}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[2]
+      value: 
+      objectReference: {fileID: 624962952}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.data[0]
+      value: 
+      objectReference: {fileID: 766665559}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.data[1]
+      value: 
+      objectReference: {fileID: 737079283}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: TurnToLockSpwanPairs.Array.size
       value: 2
@@ -3049,6 +3594,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: carSpawnLock.Array.data[0]
       value: 
       objectReference: {fileID: 165961446}
@@ -3056,6 +3605,14 @@ PrefabInstance:
       propertyPath: carSpawnLock.Array.data[1]
       value: 
       objectReference: {fileID: 289113974}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[0]
+      value: 
+      objectReference: {fileID: 995502995}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[1]
+      value: 
+      objectReference: {fileID: 1680335769}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: TurnToLockSpwanPairs.Array.size
       value: 2
@@ -3243,6 +3800,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: carSpawnLock.Array.data[0]
       value: 
       objectReference: {fileID: 749799494}
@@ -3250,6 +3815,26 @@ PrefabInstance:
       propertyPath: carSpawnLock.Array.data[1]
       value: 
       objectReference: {fileID: 244981281}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[0]
+      value: 
+      objectReference: {fileID: 766665559}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[1]
+      value: 
+      objectReference: {fileID: 765656131}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossH.Array.data[2]
+      value: 
+      objectReference: {fileID: 2089194487}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.data[0]
+      value: 
+      objectReference: {fileID: 995502995}
+    - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
+      propertyPath: previousCrossV.Array.data[1]
+      value: 
+      objectReference: {fileID: 1771516480}
     - target: {fileID: 4565408007231783987, guid: c8ed7f26c75a54747b5c0fb75f6374ae, type: 3}
       propertyPath: TurnToLockSpwanPairs.Array.size
       value: 2
