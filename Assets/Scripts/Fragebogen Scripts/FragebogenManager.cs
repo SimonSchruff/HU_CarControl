@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class FragebogenManager : MonoBehaviour
 {
     [SerializeField] private int questionNumber; // Counted up with each button "Continue" Button Click
+    [SerializeField] private GameObject ineligableScreen; 
 
     [Serializable]
     public struct Questions
@@ -101,7 +102,14 @@ public class FragebogenManager : MonoBehaviour
                             print("False at toogle: " + answer.gameObject.name); 
                             return false;
                         }
-                        
+                        else if(answer.gameObject.name == "language" || answer.gameObject.name == "visualAcuity" || answer.gameObject.name == "colorVision")
+                        {
+                            if (answer.currentAnswer == "2")
+                            {
+                                ShowIneligableScreen();
+                                return false;
+                            }
+                        }
                     }
                 }
 
@@ -125,7 +133,7 @@ public class FragebogenManager : MonoBehaviour
                             int i = int.Parse(answer.currentAnswer);
                             if (i < 18 || i > 99) // Age not valid
                             {
-                                print("False at age");
+                                ShowIneligableScreen();
                                 return false;
                             }
                     }
@@ -151,5 +159,24 @@ public class FragebogenManager : MonoBehaviour
         {
             answer.SaveAnswer(answer.gameObject.name);
         }
+    }
+
+    public void ShowIneligableScreen()
+    {
+        if(ineligableScreen == null)
+        {
+            Debug.LogError("Ineligable Screen Refernce, not set!");
+            return; 
+        }
+
+        foreach (ErrorText et in errorTexts)
+            et.obj.SetActive(false);
+
+        foreach (Questions q in questions)
+            q.questionObj.SetActive(false);
+
+        ineligableScreen.SetActive(true); 
+
+
     }
 }

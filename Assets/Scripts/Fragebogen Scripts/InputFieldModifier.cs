@@ -47,4 +47,9 @@ public class InputFieldModifier : MonoBehaviour
     {
         m_TargetInputField.text = m_TargetInputField.text.Substring(0, m_TargetInputField.text.Length - 1);
     }
+
+    public void CopyToClipboard()
+    {
+         GUIUtility.systemCopyBuffer =  m_TargetInputField.text; 
+    }
 }
