@@ -10,6 +10,8 @@ public class CarSimple : SimplifyParent
     Crosses[] crossLane;
     bool horOrVert;
 
+    bool died = false;
+
     private void Start()
     {
         gridSize = Control.con.gridSize;
@@ -33,22 +35,28 @@ public class CarSimple : SimplifyParent
     }
     public void FillCrosses()
     {
-        int counter = -1;
-
-        for (int i = actualStep; i < crossLane.Length; i++)
+        if (!died)
         {
-            counter++;
+            int counter = -1;
 
-            if(crossLane[i] != null)
+            for (int i = actualStep; i < crossLane.Length; i++)
             {
-                crossLane[i].crossedInTurns.Add(new Vector2(i - actualStep, horOrVert ? 0 : 1));
+                counter++;
+
+                if(crossLane[i] != null)
+                {
+                    crossLane[i].crossedInTurns.Add(new Vector2(i - actualStep, horOrVert ? 0 : 1));
+                }
             }
         }
     }
 
     private void Update()
     {
-        gameObject.transform.Translate(new Vector3((gridSize * Time.deltaTime)/spawnDelay, 0, 0));
+        if(!died)
+        {
+            gameObject.transform.Translate(new Vector3((gridSize * Time.deltaTime)/spawnDelay, 0, 0));
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -78,7 +86,22 @@ public class CarSimple : SimplifyParent
     {
         ScoreSimple.sco.UpdateScore(success ? 5 : -3);
 
-        Destroy(gameObject);
+        if (!success)
+        {
+            died = true;
+            SimplAssis.assi.UpdateAssistance();
+
+            GetComponentInChildren<Animator>().SetTrigger("Die");
+
+            StartCoroutine(DestroyAfterTime());
+        }
+        else
+            Destroy(gameObject);
     }
 
+    IEnumerator DestroyAfterTime()
+    {
+        yield return new WaitForSeconds(2); //Destroy after 1s
+        Destroy(gameObject);
+    }
 }

@@ -65,8 +65,34 @@ public class Crosses : SimplifyParent
         highlightSprite.gameObject.SetActive(setHighlighted);
 
         if (setHighlighted && priority != 0)
+        {
             priorityText.text = priority.ToString();
 
-        priorityText.text = tempHighlightPrio.ToString();
+            float tempScale = 0;
+            float tempOpa = 0;
+            switch (priority)       //Define visual stuff different Highlight things
+            {
+                case 1:
+                    tempScale = 6;
+                    tempOpa = 1;
+                    break;
+                case 2:
+                    tempScale = 5;
+                    tempOpa =.85f;
+                    break;
+                case 3:
+                    tempScale = 4.6f;
+                    tempOpa = .65f;
+                    break;
+                default:
+                    tempScale = 4.3f;
+                    tempOpa = .5f;
+                    break;
+            }
+
+            highlightSprite.transform.localScale = new Vector3(tempScale, tempScale, tempScale);
+            highlightSprite.color = new Color(highlightSprite.color.r, highlightSprite.color.g, highlightSprite.color.b, tempOpa);
+        }
+
     }
 }
