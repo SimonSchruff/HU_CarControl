@@ -1829,7 +1829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a08d9f4f56dcd4ebf9b0a051f363e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actualAssistance: 0
+  actualAssistance: 2
   highlightSprites:
   - {fileID: 1695161330}
   - {fileID: 229784900}

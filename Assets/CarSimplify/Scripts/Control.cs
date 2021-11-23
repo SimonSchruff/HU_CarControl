@@ -56,6 +56,7 @@ public class Control : MonoBehaviour
         yield return new WaitForSeconds(spawnDelay);
 
         UpdateElems();
+        SimplAssis.assi.UpdateAssistance();
 
         StartCoroutine(UpdateFunc());
     }

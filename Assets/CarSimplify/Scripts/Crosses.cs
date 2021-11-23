@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Crosses : SimplifyParent
 {
@@ -18,6 +19,8 @@ public class Crosses : SimplifyParent
 
 
     public List<Vector2> crossedInTurns = new List<Vector2>();
+
+    [SerializeField] Text priorityText;
 
     private void Start()
     {
@@ -42,11 +45,24 @@ public class Crosses : SimplifyParent
         {
             actualState = !actualState;
             transform.rotation = Quaternion.Euler(0, 0, actualState ? 0 : 90);
+
+            if (SimplAssis.assi.actualAssistance != SimplAssis.assiState.auto)
+            {
+                SimplAssis.assi.UpdateAssistance();
+            }
+        }
+        else
+        {
+            SimplAssis.assi.SetUpdateTimer();
         }
     }
 
-    public void SetHighlighted (bool setHighlighted = false)
+    public void SetHighlighted(int priority = 0, bool setHighlighted = false)
     {
+        priorityText.gameObject.SetActive(setHighlighted);
         highlightSprite.gameObject.SetActive(setHighlighted);
+
+        if (setHighlighted && priority != 0)
+            priorityText.text = priority.ToString();
     }
 }
