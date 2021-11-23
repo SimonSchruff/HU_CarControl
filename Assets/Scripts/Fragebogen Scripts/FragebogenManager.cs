@@ -67,6 +67,11 @@ public class FragebogenManager : MonoBehaviour
             {
                 MySceneManager.Instance.LoadSceneByName("NBackSpiel"); 
             }
+            else if (questions[currentID].questionObj.gameObject.name == "Color Vision")
+            {
+                MySceneManager.Instance.LoadSceneByName("Placeholder Scene");
+            }
+
 
 
             questionNumber++;
