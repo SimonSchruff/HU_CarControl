@@ -1165,7 +1165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1deeb55e645234098ba9ec507ce790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDelay: 5
+  spawnDelay: 8
   gridSize: 3
   SpawnCarAmountPerTurn: 2
   camRef: {fileID: 289027053}

@@ -60,10 +60,12 @@ public class SimplAssis : MonoBehaviour
                     ResetHighlightedCrosses();
 
                     int counter = 0;
-                    foreach (var cross in SearchForNextRecommendations())
+
+                    var tempCrossToChange = SearchForNextRecommendations();
+
+                    foreach (var tempCross in tempCrossToChange)
                     {
-                        counter++;
-                        cross.SetHighlighted(counter, true);
+                        tempCross.SetHighlighted(tempCross.tempHighlightPrio, true);
                     }
 
                     break;
@@ -82,10 +84,10 @@ public class SimplAssis : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        foreach (var cross in SearchForNextRecommendations())
-        {
-            cross.CrossClicked();
-        }
+        //foreach (var cross in SearchForNextRecommendations())
+        //{
+        //    cross.CrossClicked();
+        //}
     }
     public void SetUpdateTimer()
     {
@@ -127,8 +129,14 @@ public class SimplAssis : MonoBehaviour
 
         List<Crosses> excludeCrosses = new List<Crosses>();
 
+        int maxCount = 6; // How many Crosses should be checked in Row + Emty slots
 
-        for (int i = 0; i < 6; i++)
+        foreach (var cr in crosRef)
+        {
+            cr.tempHighlightPrio = 0;
+        }
+
+        for (int i = 0; i < maxCount; i++)
         {
             foreach (var cross in crosRef)
             {
@@ -166,7 +174,12 @@ public class SimplAssis : MonoBehaviour
                                 }
                                 if (possible)
                                 {
-                                    crosList.Add(cross);
+                                    if(cross.tempHighlightPrio == 0)
+                                    {
+                                        crosList.Add(cross);
+                                        cross.tempHighlightPrio = i+1;
+                                        Debug.Log(i);
+                                    }
                                 }
                             }
                         }
