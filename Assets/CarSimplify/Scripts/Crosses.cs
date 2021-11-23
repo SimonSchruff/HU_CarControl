@@ -17,6 +17,8 @@ public class Crosses : SimplifyParent
 
     public SpriteRenderer highlightSprite;
 
+    public int tempHighlightPrio;
+
 
     public List<Vector2> crossedInTurns = new List<Vector2>();
 
@@ -64,5 +66,7 @@ public class Crosses : SimplifyParent
 
         if (setHighlighted && priority != 0)
             priorityText.text = priority.ToString();
+
+        priorityText.text = tempHighlightPrio.ToString();
     }
 }
