@@ -93,7 +93,6 @@ public class NBackGameManager : MonoBehaviour
     public GameObject letterObject; 
     public Text letterTextObj; 
     public Button[] Buttons = new Button[2]; 
-    public Text[] scoreUINumbers = new Text[8]; // Numbers for Debug Percentages
     #endregion
 
     
@@ -186,18 +185,6 @@ public class NBackGameManager : MonoBehaviour
                 InstructionObjects.SetActive(false); 
                 RunningGameObjects.SetActive(false);
                 LevelFinishedGameObjects.SetActive(true); 
-                //Set Score UI 
-                {
-                    //Match Numbers
-                    scoreUINumbers[0].text = levelData.totalCorrectPercentage.ToString(); 
-                    scoreUINumbers[1].text = levelData.correctlyMatched.ToString(); 
-                    scoreUINumbers[2].text = levelData.falseDecisionMatch.ToString(); 
-                    scoreUINumbers[3].text = levelData.noReactionMatches.ToString(); 
-                    //Mismatch Numbers
-                    scoreUINumbers[4].text = levelData.correctlyMismatched.ToString(); 
-                    scoreUINumbers[5].text = levelData.falseDecisionMismatch.ToString(); 
-                    scoreUINumbers[6].text = levelData.noReactionMismatches.ToString(); 
-                }
                 GameOverObjects.SetActive(false); 
 
             break; 
