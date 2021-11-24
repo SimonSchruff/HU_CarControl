@@ -50,11 +50,23 @@ public class SimplAssis : MonoBehaviour
         {
             case assiState.none:
                 {
-
                     break;
                 }
             case assiState.areaHelp:
-                break;
+                {
+                    ResetHighlightAreas();
+
+                    var tempCrossToChange = SearchForNextRecommendations();
+                    if(tempCrossToChange.Count>0)
+                    {
+                        SpriteRenderer highlight = highlightSprites[FindHighlightAreaIndexFromCross(tempCrossToChange[0])];
+                        highlight.gameObject.SetActive(true);
+                                                    
+                    }
+
+
+                    break;
+                }
             case assiState.specificHelp:
                 {
                     ResetHighlightedCrosses();
@@ -80,6 +92,41 @@ public class SimplAssis : MonoBehaviour
                 break;
         }
     }
+
+    int FindHighlightAreaIndexFromCross (Crosses crossToFindArea)
+    {
+        foreach (var area0 in crossHightlightPair_0)
+        {
+            if (area0 == crossToFindArea)
+            {
+                return 0;
+            }
+        }
+        foreach (var area1 in crossHightlightPair_1)
+        {
+            if (area1 == crossToFindArea)
+            {
+                return 1;
+            }
+        }
+        foreach (var area2 in crossHightlightPair_2)
+        {
+            if (area2 == crossToFindArea)
+            {
+                return 2;
+            }
+        }
+        foreach (var area3 in crossHightlightPair_3)
+        {
+            if (area3 == crossToFindArea)
+            {
+                return 3;
+            }
+        }
+
+        return -1;
+    }
+
     IEnumerator DelayAutoUpdate ()
     {
         yield return new WaitForSeconds(1f);
@@ -147,19 +194,22 @@ public class SimplAssis : MonoBehaviour
                         if(cross.actualState != (vec.y==0))
                         {
                             bool possible = true;
-                            foreach (var usedCrosses in crosList)
+                            if (i != 0)
                             {
-                                foreach(var prevCross in (cross.actualState? cross.previousCrossH: cross.previousCrossV))
+                                foreach (var usedCrosses in crosList)
                                 {
-                                    if(prevCross == usedCrosses)
+                                    foreach(var prevCross in (cross.actualState? cross.previousCrossH: cross.previousCrossV))
                                     {
-                                        possible = false;
+                                        if(prevCross == usedCrosses)
+                                        {
+                                            possible = false;
+                                            break;
+                                        }
+                                    }
+                                    if (possible == false)
+                                    {
                                         break;
                                     }
-                                }
-                                if (possible == false)
-                                {
-                                    break;
                                 }
                             }
                             if (possible)
