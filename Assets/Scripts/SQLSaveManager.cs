@@ -8,7 +8,7 @@ public class SQLSaveManager : MonoBehaviour
     public static SQLSaveManager instance;
 
     public string playerID;
-    [SerializeField] string URL = "http://127.0.0.1:8888/data.php";
+    [SerializeField] string URL = "http://127.0.0.1:8888/HU_CarControl/data.php";
 
     public struct Answer
     {
@@ -59,9 +59,9 @@ public class SQLSaveManager : MonoBehaviour
 
 
 
-    public void StartPostCoroutine(NBackGameManager.LevelData data)
+    public void StartPostCoroutine()
     {
-        //StartCoroutine(PostData()); 
+        StartCoroutine(PostData()); 
     }
 
 
@@ -71,34 +71,35 @@ public class SQLSaveManager : MonoBehaviour
 
         formData.Add(new MultipartFormDataSection("id", playerID));
 
+        foreach(Answer a in answerList)
+        {
+            formData.Add(new MultipartFormDataSection(a.name, a.answer)); 
+        }
+
         foreach (NBackGameManager.LevelData data in nBackData)
         {
 
-            #region Add Data to Form
-            // DATA
-            formData.Add(new MultipartFormDataSection("currentLevel", data.currentLevel.ToString())); 
 
             // EVENTS IN TOTAL NUMBERS
-            formData.Add(new MultipartFormDataSection("totalCorrectMatches_" + data.currentLevel.ToString(), data.totalCorrectMatches.ToString())); 
-            formData.Add(new MultipartFormDataSection("totalCorrectMismatches_" + data.currentLevel.ToString(), data.totalCorrectMismatches.ToString())); 
+            formData.Add(new MultipartFormDataSection("totalCorrectMatches_" + data.currentLevel.ToString(), data.totalCorrectMatches.ToString()));
+            formData.Add(new MultipartFormDataSection("totalCorrectMismatches_" + data.currentLevel.ToString(), data.totalCorrectMismatches.ToString()));
 
-            formData.Add(new MultipartFormDataSection("totalFalseDecisionMatch_" + data.currentLevel.ToString(), data.totalFalseDecisionMatch.ToString())); 
-            formData.Add(new MultipartFormDataSection("totalFalseDecisionMismatch_" + data.currentLevel.ToString(), data.totalFalseDecisionMismatch.ToString())); 
+            formData.Add(new MultipartFormDataSection("totalFalseDecisionMatch_" + data.currentLevel.ToString(), data.totalFalseDecisionMatch.ToString()));
+            formData.Add(new MultipartFormDataSection("totalFalseDecisionMismatch_" + data.currentLevel.ToString(), data.totalFalseDecisionMismatch.ToString()));
 
-            formData.Add(new MultipartFormDataSection("totalNoReactionMatches_" + data.currentLevel.ToString(), data.totalNoReactionMatches.ToString())); 
-            formData.Add(new MultipartFormDataSection("totalNoReactionMismatches_" + data.currentLevel.ToString(), data.totalNoReactionMismatches.ToString())); 
+            formData.Add(new MultipartFormDataSection("totalNoReactionMatches_" + data.currentLevel.ToString(), data.totalNoReactionMatches.ToString()));
+            formData.Add(new MultipartFormDataSection("totalNoReactionMismatches_" + data.currentLevel.ToString(), data.totalNoReactionMismatches.ToString()));
 
             // EVENTS IN PERCENTAGES
-            formData.Add(new MultipartFormDataSection("totalCorrectPercentage_"+ data.currentLevel.ToString(), data.totalCorrectPercentage.ToString())); 
-            formData.Add(new MultipartFormDataSection("correctlyMatched_"+ data.currentLevel.ToString(), data.correctlyMatched.ToString())); 
-            formData.Add(new MultipartFormDataSection("correctlyMismatched_"+ data.currentLevel.ToString(), data.correctlyMismatched.ToString())); 
+            formData.Add(new MultipartFormDataSection("totalCorrectPercentage_" + data.currentLevel.ToString(), data.totalCorrectPercentage.ToString()));
+            formData.Add(new MultipartFormDataSection("correctlyMatched_" + data.currentLevel.ToString(), data.correctlyMatched.ToString()));
+            formData.Add(new MultipartFormDataSection("correctlyMismatched_" + data.currentLevel.ToString(), data.correctlyMismatched.ToString()));
 
-            formData.Add(new MultipartFormDataSection("noReactionMatches_"+ data.currentLevel.ToString(), data.noReactionMatches.ToString())); 
-            formData.Add(new MultipartFormDataSection("noReactionMismatches_"+ data.currentLevel.ToString(), data.noReactionMismatches.ToString())); 
+            formData.Add(new MultipartFormDataSection("noReactionMatches_" + data.currentLevel.ToString(), data.noReactionMatches.ToString()));
+            formData.Add(new MultipartFormDataSection("noReactionMismatches_" + data.currentLevel.ToString(), data.noReactionMismatches.ToString()));
 
-            formData.Add(new MultipartFormDataSection("falseDecisionMatch_"+ data.currentLevel.ToString(), data.falseDecisionMatch.ToString())); 
-            formData.Add(new MultipartFormDataSection("falseDecisionMismatch_"+ data.currentLevel.ToString(), data.falseDecisionMismatch.ToString())); 
-            #endregion
+            formData.Add(new MultipartFormDataSection("falseDecisionMatch_" + data.currentLevel.ToString(), data.falseDecisionMatch.ToString()));
+            formData.Add(new MultipartFormDataSection("falseDecisionMismatch_" + data.currentLevel.ToString(), data.falseDecisionMismatch.ToString()));
         }
         
         using (UnityWebRequest webRequest = UnityWebRequest.Post(URL, formData))
