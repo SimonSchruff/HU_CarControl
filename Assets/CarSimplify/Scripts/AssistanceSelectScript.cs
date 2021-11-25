@@ -7,7 +7,7 @@ public class AssistanceSelectScript : MonoBehaviour
 {
     public static AssistanceSelectScript assiSel;
 
-    [SerializeField] AssiSelectStates actualAssiSelect = AssiSelectStates.None;
+    public AssiSelectStates actualAssiSelect = AssiSelectStates.None;
 
     [SerializeField] Text AssistanceDisplayText;
 
@@ -37,7 +37,7 @@ public class AssistanceSelectScript : MonoBehaviour
     public void ChangeAssiSelect (AssiSelectStates changeTo)
     {
         HideAllDispays();
-
+        
         switch (changeTo)
         {
             case AssiSelectStates.Debug:
@@ -64,18 +64,20 @@ public class AssistanceSelectScript : MonoBehaviour
                 break;
             case AssiSelectStates.Select:
                 selectPanel.gameObject.SetActive(true);
+                SimplAssis.assi.ChangeAssitance(SimplAssis.assiState.areaHelp);
                 SetUpDebugPanel();
                 break;
             default:
                 break;
         }
+        
     }
 
 
     private void Start()
     {
-        SetUpDebugPanel();
         ChangeAssiSelect(actualAssiSelect);
+        SetUpDebugPanel();
     }
     void SetUpDebugPanel ()
     {
@@ -121,6 +123,8 @@ public class AssistanceSelectScript : MonoBehaviour
 
         SimplAssis.assi.ChangeAssitance(SimplAssis.assiState.areaHelp);
         areaBut.color = Color.green;
+    
+        Control.con.actualSaveClass.ChangeAssitanceInGame(true);
     }
     public void ChangeAssistanceToSpecific ()
     {
@@ -128,6 +132,8 @@ public class AssistanceSelectScript : MonoBehaviour
 
         SimplAssis.assi.ChangeAssitance(SimplAssis.assiState.specificHelp);
         specificBut.color = Color.green;
+
+        Control.con.actualSaveClass.ChangeAssitanceInGame(false);
     }
 
     void ClearHighlightOfAllBut ()

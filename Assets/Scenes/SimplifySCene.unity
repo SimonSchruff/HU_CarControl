@@ -1099,7 +1099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed06cca6b6d4fd4b9de0953a276c961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actualAssiSelect: 3
+  actualAssiSelect: 4
   AssistanceDisplayText: {fileID: 1812864128}
   selectPanel: {fileID: 21435419}
   debugNoneBut: {fileID: 1250643949}
@@ -1576,6 +1576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1deeb55e645234098ba9ec507ce790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trialDurationInMin: 1
   spawnDelay: 8
   gridSize: 3
   SpawnCarAmountPerTurn: 2
@@ -1598,6 +1599,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16384
   actualStep: 0
+  actualSaveClass: {fileID: 0}
+  allSaveClasses: []
   crossesRefs: []
   carSpawnRefs: []
 --- !u!4 &882296787
@@ -3095,8 +3098,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -99.0895, y: -24.8887}
-  m_SizeDelta: {x: 198.179, y: 49.7773}
+  m_AnchoredPosition: {x: -102.460785, y: -28.259995}
+  m_SizeDelta: {x: 191.4364, y: 43.0347}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1474781900
 MonoBehaviour:

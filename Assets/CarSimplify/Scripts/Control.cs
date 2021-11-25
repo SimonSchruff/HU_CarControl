@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Control : MonoBehaviour
 {
+    [SerializeField] int trialDurationInMin = 5;
     [Header("Adjust")]
     public float spawnDelay= 1f;
     public float gridSize = 1.5f;
@@ -13,12 +14,15 @@ public class Control : MonoBehaviour
     [SerializeField] Camera camRef;
     [SerializeField] ContactFilter2D filter;
     [SerializeField] LayerMask mask;
-
+        
 
 
     [Header("Gameplay not change")]
     public int actualStep = 0;
     public static Control con;
+
+    public SaveTrialClass actualSaveClass;
+    public List<SaveTrialClass> allSaveClasses = new List<SaveTrialClass>();
 
     public Crosses[] crossesRefs;
     public CarSpawnScript[] carSpawnRefs;
@@ -40,15 +44,58 @@ public class Control : MonoBehaviour
     IEnumerator StartGameDelay()
     {
         yield return new WaitForSecondsRealtime(2);
-        StartGame();
+        StartGame("Base");
     }
 
-    public void StartGame ()
+    public void StartGame (string TrialName)
     {
         crossesRefs = FindObjectsOfType<Crosses>();
         carSpawnRefs = FindObjectsOfType<CarSpawnScript>();
 
         StartCoroutine(UpdateFunc());
+        StartCoroutine(FinishTrial());
+
+        actualSaveClass = gameObject.AddComponent<SaveTrialClass>();
+        actualSaveClass.trialName = TrialName;
+        actualSaveClass.assistance = AssistanceSelectScript.assiSel.actualAssiSelect.ToString();
+        allSaveClasses.Add(actualSaveClass);
+
+        if (AssistanceSelectScript.assiSel.actualAssiSelect == AssistanceSelectScript.AssiSelectStates.Area)
+        {
+            actualSaveClass.percentageArea = 1;
+        }
+        else if (AssistanceSelectScript.assiSel.actualAssiSelect == AssistanceSelectScript.AssiSelectStates.Specific)
+        {
+            actualSaveClass.percentageSpecific = 1;
+        }
+        else if (AssistanceSelectScript.assiSel.actualAssiSelect == AssistanceSelectScript.AssiSelectStates.Select)
+        {
+            actualSaveClass.InitChangeAssistanceActive(SimplAssis.assi.actualAssistance == SimplAssis.assiState.areaHelp);
+            
+        }
+    }
+    IEnumerator FinishTrial ()
+    {
+        yield return new WaitForSeconds(trialDurationInMin * 60);
+        FinishTrialFunc();
+    }
+
+    void FinishTrialFunc ()
+    {
+        actualSaveClass.FinishTrial();
+
+        actualSaveClass.score = ScoreSimple.sco.GetScore(); // Set score
+        ScoreSimple.sco.ResetScore();   //Reset score
+
+        foreach (var cars in FindObjectsOfType<CarSimple>())
+        {
+            Destroy(cars.gameObject);
+        }
+        SimplAssis.assi.UpdateAssistance();
+
+        StopCoroutine(UpdateFunc());
+
+        actualSaveClass = null;
     }
 
     IEnumerator UpdateFunc()

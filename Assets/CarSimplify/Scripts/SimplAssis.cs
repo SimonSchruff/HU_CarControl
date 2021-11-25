@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SimplAssis : MonoBehaviour
 {
-    public assiState actualAssistance = assiState.none;
+    [HideInInspector] public assiState actualAssistance = assiState.none;
 
     [Header("AreaHighlight")]
     [SerializeField] SpriteRenderer[] highlightSprites;

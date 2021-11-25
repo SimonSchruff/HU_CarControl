@@ -66,6 +66,8 @@ public class CarSimple : SimplifyParent
             Crosses cross = collision.GetComponentInParent<Crosses>();
             if(cross.actualState == horOrVert)
             {
+                Control.con.actualSaveClass.crossesCrossed++;
+
                 cross.locked = true;
             }
             else
@@ -94,9 +96,15 @@ public class CarSimple : SimplifyParent
             GetComponentInChildren<Animator>().SetTrigger("Die");
 
             StartCoroutine(DestroyAfterTime());
+
+            Control.con.actualSaveClass.carsCrashed++;
         }
         else
+        {
             Destroy(gameObject);
+            Control.con.actualSaveClass.carsSuccess++;
+        }
+
     }
 
     IEnumerator DestroyAfterTime()

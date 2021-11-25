@@ -31,4 +31,12 @@ public class ScoreSimple : MonoBehaviour
             scoreText.text = score.ToString();
         }
     }
+    public int GetScore ()
+    {
+        return score;
+    }
+    public void ResetScore()
+    {
+        score = 0;
+    }
 }

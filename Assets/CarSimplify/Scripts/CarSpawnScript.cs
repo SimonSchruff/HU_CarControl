@@ -19,7 +19,6 @@ public class CarSpawnScript : SimplifyParent
         arrow = GetComponentInChildren<SpriteRenderer>();
     }
 
-
     public override void SimpleUpdate()
     {
         base.SimpleUpdate();
@@ -44,6 +43,8 @@ public class CarSpawnScript : SimplifyParent
         {
             GameObject inst = Instantiate(carPrefab, transform.position, transform.rotation);
             inst.GetComponent<CarSimple>().ManualInit(crossRefs, HorOrVert);
+
+            Control.con.actualSaveClass.carsTotal++;
         }
     }
 
