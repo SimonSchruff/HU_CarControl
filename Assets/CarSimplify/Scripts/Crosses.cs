@@ -61,7 +61,7 @@ public class Crosses : SimplifyParent
 
     public void SetHighlighted(int priority = 0, bool setHighlighted = false)
     {
-        priorityText.gameObject.SetActive(setHighlighted);
+    //    priorityText.gameObject.SetActive(setHighlighted);
         highlightSprite.gameObject.SetActive(setHighlighted);
 
         if (setHighlighted && priority != 0)
