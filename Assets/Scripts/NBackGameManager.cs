@@ -11,24 +11,20 @@ public class NBackGameManager : MonoBehaviour
     [System.Serializable]
     public struct LevelData
     {
-        public int playerID; 
         public int currentLevel; 
+        public int totalCorrectMatches; 
+        public int totalCorrectMismatches;  
+        public int totalFalseDecisionMatch; 
+        public int totalFalseDecisionMismatch; 
+        public int totalNoReactionMatches; 
+        public int totalNoReactionMismatches; 
         public float totalCorrectPercentage; 
         public float correctlyMatched; 
-        public int totalCorrectMatches; 
-        public float falseDecisionMatch; 
-        public int totalFalseDecisionMatch; 
         public float correctlyMismatched;
-        public int totalCorrectMismatches;  
+        public float falseDecisionMatch; 
         public float falseDecisionMismatch;
-        public int totalFalseDecisionMismatch; 
         public float noReactionMatches; 
-        public int totalNoReactionMatches; 
         public float noReactionMismatches; 
-        public int totalNoReactionMismatches; 
-        //public float totalMatches;  
-        //public float totalMismatches;
-        
     }
     public LevelData levelData; 
 
@@ -379,10 +375,9 @@ public class NBackGameManager : MonoBehaviour
         levelData = new LevelData(); 
         
         levelData.currentLevel = currentLevel; 
-        float totalMatches = correctMatch + missedMatch + wrongMismatch; 
-        print(totalMatches); 
+        float totalMatches = correctMatch + missedMatch + wrongMismatch;  
         float totalMismatches = (stimuli-n) - totalMatches; 
-        print(totalMismatches); 
+        
         //Numeric Int amount of Matches etc. Per Round
         levelData.totalCorrectMatches = correctMatch; 
         levelData.totalCorrectMismatches = correctMismatch ;
@@ -413,9 +408,7 @@ public class NBackGameManager : MonoBehaviour
 
         //Total Percentage score of correctly identified Matches and Mismatches
         levelData.totalCorrectPercentage = ((float)correctMatch + (float)correctMismatch) / (float)(stimuliShown-n);
-        //Debug.Log(levelData.totalCorrectPercentage); 
 
-        // Send levelData to server; Include User ID
         SQLSaveManager.instance.SaveNBackData(levelData); 
         
     }

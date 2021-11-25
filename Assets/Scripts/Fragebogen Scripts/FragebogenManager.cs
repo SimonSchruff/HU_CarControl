@@ -59,11 +59,8 @@ public class FragebogenManager : MonoBehaviour
 
             questions[currentID].questionObj.gameObject.SetActive(false);
 
-            if (currentID != (questions.Length - 1)) // Last question -> Dont activate next UI
-            {
-                questions[currentID + 1].questionObj.gameObject.SetActive(true);
-            }
-            else if(questions[currentID].questionObj.gameObject.name ==  "Set Active Self Eff")
+            
+            if(questions[currentID].questionObj.gameObject.name ==  "Set Active Self Eff")
             {
                 MySceneManager.Instance.LoadSceneByName("NBackSpiel"); 
             }
@@ -71,8 +68,15 @@ public class FragebogenManager : MonoBehaviour
             {
                 MySceneManager.Instance.LoadSceneByName("Placeholder Scene");
             }
-
-
+            else if(questions[currentID].questionObj.gameObject.name == "Set Active Data Quality")
+            {
+                SQLSaveManager.instance.StartPostCoroutine(); 
+                questions[currentID + 1].questionObj.gameObject.SetActive(true);
+            }
+            else if (currentID != (questions.Length - 1)) // Last question -> Dont activate next UI
+            {
+                questions[currentID + 1].questionObj.gameObject.SetActive(true);
+            }
 
             questionNumber++;
         }
@@ -97,7 +101,7 @@ public class FragebogenManager : MonoBehaviour
         {
             int answerAmount = 0;
             AnswerSaver[] allAnswers = questions[currentID].questionObj.gameObject.GetComponentsInChildren<AnswerSaver>();
-            print(questions[currentID].questionObj.gameObject.name); 
+            //print(questions[currentID].questionObj.gameObject.name); 
 
             foreach (AnswerSaver answer in allAnswers)
             {
