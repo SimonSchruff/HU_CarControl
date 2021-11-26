@@ -19,9 +19,6 @@ public class SQLSaveManager : MonoBehaviour
 
     public List<NBackGameManager.LevelData> nBackData = new List<NBackGameManager.LevelData>();
 
-
-    public string testDataString; 
-
     void Awake()
     {
         //Singleton
