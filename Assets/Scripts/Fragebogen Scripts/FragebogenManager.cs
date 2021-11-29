@@ -125,6 +125,16 @@ public class FragebogenManager : MonoBehaviour
                                 return false;
                             }
                         }
+                        else if(answer.gameObject.name == "intro1_1" || answer.gameObject.name == "intro1_3" || answer.gameObject.name == "intro2_3")
+                        {
+                            if (answer.currentAnswer == "2") // Answered 2:False
+                                return false; 
+                        }
+                        else if (answer.gameObject.name == "intro1_2" || answer.gameObject.name == "intro2_1" || answer.gameObject.name == "intro2_2")
+                        {
+                            if (answer.currentAnswer == "1") // Answered 1:True
+                                return false;
+                        }
                     }
                 }
 

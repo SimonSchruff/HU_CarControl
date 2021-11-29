@@ -241,7 +241,6 @@ MonoBehaviour:
   playerID: 
   URL: http://127.0.0.1:8888/HU_CarControl/dataNew.php
   nBackData: []
-  testDataString: 
 --- !u!4 &33252836
 Transform:
   m_ObjectHideFlags: 0
@@ -7242,7 +7241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b5a0bf65ebc441a8eeb8b45333e5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.02
+  scrollSpeed: 0.03
   isInverted: 0
 --- !u!114 &440697191
 MonoBehaviour:
@@ -10620,7 +10619,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 0
-  m_CharacterLimit: 0
+  m_CharacterLimit: 24
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -16270,7 +16269,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 0
-  m_CharacterLimit: 0
+  m_CharacterLimit: 24
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -31065,7 +31064,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 0
-  m_CharacterLimit: 0
+  m_CharacterLimit: 24
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []

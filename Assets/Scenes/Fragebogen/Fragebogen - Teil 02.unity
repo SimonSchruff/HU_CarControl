@@ -28987,7 +28987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b5a0bf65ebc441a8eeb8b45333e5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.03
+  scrollSpeed: 0.04
   isInverted: 0
 --- !u!114 &808761689
 MonoBehaviour:
@@ -30466,7 +30466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b5a0bf65ebc441a8eeb8b45333e5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.025
+  scrollSpeed: 0.04
   isInverted: 0
 --- !u!114 &862753036
 MonoBehaviour:
@@ -36883,7 +36883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b5a0bf65ebc441a8eeb8b45333e5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.02
+  scrollSpeed: 0.03
   isInverted: 0
 --- !u!114 &1017947893
 MonoBehaviour:
