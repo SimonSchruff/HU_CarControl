@@ -87,7 +87,14 @@ public class FragebogenManager : MonoBehaviour
             }
             else if (currentID != (questions.Length - 1)) // Last question -> Dont activate next UI
             {
-                questions[currentID + 1].questionObj.gameObject.SetActive(true);
+                GameObject obj = questions[currentID + 1].questionObj.gameObject;
+                obj.SetActive(true); 
+
+                try
+                {
+                    obj.GetComponent<TrialStartLogic>().ActivateSession();
+                }
+                catch { }
             }
 
             questionNumber++;

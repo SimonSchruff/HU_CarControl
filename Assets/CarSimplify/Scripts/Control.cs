@@ -38,7 +38,7 @@ public class Control : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        StartCoroutine(wait());
+        //StartCoroutine(wait());
     }
 
     IEnumerator wait ()
@@ -104,6 +104,7 @@ public class Control : MonoBehaviour
         }
         CheckIfAddLastScoreClass();
 
+        AssistanceSelectScript.assiSel.ChangeUIVisibility(false); 
         FragebogenManager.fra.NextQuestion();
 
         actualSaveClass = null;
