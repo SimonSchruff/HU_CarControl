@@ -123,8 +123,12 @@ public class AssistanceSelectScript : MonoBehaviour
 
         SimplAssis.assi.ChangeAssitance(SimplAssis.assiState.areaHelp);
         areaBut.color = Color.green;
-    
-        Control.con.actualSaveClass.ChangeAssitanceInGame(true);
+
+        try
+        {
+            Control.con.actualSaveClass.ChangeAssitanceInGame(true);
+        }
+        catch {}
     }
     public void ChangeAssistanceToSpecific ()
     {
