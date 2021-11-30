@@ -94,7 +94,6 @@ public class SecondaryTask : MonoBehaviour
 
         if(Input.GetKeyDown(resetKey))
         {
-            StartCoroutine(KeyPressedDebug()); 
 
             if(currentState == CurrentState.baseState)
             {
@@ -186,9 +185,6 @@ public class SecondaryTask : MonoBehaviour
             print("-3 Score"); 
 
         }
-
-
-
     }
 
     void Move(Vector3 basePos)
@@ -226,18 +222,6 @@ public class SecondaryTask : MonoBehaviour
         return currentPos; 
     }
 
-    IEnumerator KeyPressedDebug()
-    {
-        
-        if(debugText != null)
-        {
-            debugText.SetActive(true); 
-            yield return new WaitForSeconds(1); 
-            debugText.SetActive(false); 
-        }
-        else 
-            print("Debug Text Object not set!"); 
-        
-    }
+   
 
 }
