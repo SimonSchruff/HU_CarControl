@@ -56,11 +56,12 @@ public class Control : MonoBehaviour
         StartCoroutine(UpdateFunc(true));
         StartCoroutine(FinishTrial());
 
-        actualSaveClass = gameObject.AddComponent<SaveTrialClass>();
+        actualSaveClass = SQLSaveManager.instance.gameObject.AddComponent<SaveTrialClass>();
         actualSaveClass.trialName = TrialName;
         actualSaveClass.assistance = AssistanceSelectScript.assiSel.actualAssiSelect.ToString();
         actualSaveClass.saveData = safeData;
-        allSaveClasses.Add(actualSaveClass);
+        if(safeData)
+            allSaveClasses.Add(actualSaveClass);
 
         if (AssistanceSelectScript.assiSel.actualAssiSelect == AssistanceSelectScript.AssiSelectStates.Area)
         {
@@ -97,9 +98,52 @@ public class Control : MonoBehaviour
 
         StopCoroutine(UpdateFunc());
 
-        actualSaveClass = null;
-    }
+        foreach (var sec in FindObjectsOfType<SecondaryTask>())     //Destroy Sec Task
+        {
+            Destroy(sec.gameObject);
+        }
+        CheckIfAddLastScoreClass();
 
+        FragebogenManager.fra.NextQuestion();
+
+        actualSaveClass = null;
+    }   
+
+    void CheckIfAddLastScoreClass ()
+    {
+        if(allSaveClasses.Count == 5)
+        {
+            float tempScore1 = 0;
+            float tempScore2 = 0;
+
+            for (int i = 0; i < 5; i++)
+            {
+                switch (i)
+                {
+                    case 1:
+                        tempScore1 += allSaveClasses[i].score;
+                        break;
+                    case 2:
+                        tempScore1 += allSaveClasses[i].score;
+                        break;
+                    case 3:
+                        tempScore1 += allSaveClasses[i].score;
+                        break;
+                    case 4:
+                        tempScore2 += allSaveClasses[i].score;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            float finScore = ((tempScore1 / 3) + tempScore2) / 2;
+
+            SaveTrialClass tri = SQLSaveManager.instance.gameObject.AddComponent<SaveTrialClass>();
+            tri.score = Mathf.RoundToInt(finScore);
+            tri.assistance = "total";
+        }
+    }
     IEnumerator UpdateFunc(bool isStart = false)
     {
         yield return new WaitForSeconds(isStart ? 2 : spawnDelay);
