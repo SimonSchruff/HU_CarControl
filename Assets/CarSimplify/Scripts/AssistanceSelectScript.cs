@@ -34,6 +34,19 @@ public class AssistanceSelectScript : MonoBehaviour
         }
     }
 
+    public void ChangeUIVisibility(bool changeVisibilityTo)
+    {
+        ScoreSimple.sco.ChangeScoreVisibility(changeVisibilityTo);
+        if (changeVisibilityTo)
+        {
+            ChangeAssiSelect(actualAssiSelect);
+        }
+        else
+        {
+            HideAllDispays();
+        }
+    }
+
     public void ChangeAssiSelect (AssiSelectStates changeTo)
     {
         HideAllDispays();
@@ -78,6 +91,8 @@ public class AssistanceSelectScript : MonoBehaviour
     {
         ChangeAssiSelect(actualAssiSelect);
         SetUpDebugPanel();
+
+        ChangeUIVisibility(false);
     }
     void SetUpDebugPanel ()
     {
@@ -137,7 +152,10 @@ public class AssistanceSelectScript : MonoBehaviour
         SimplAssis.assi.ChangeAssitance(SimplAssis.assiState.specificHelp);
         specificBut.color = Color.green;
 
-        Control.con.actualSaveClass.ChangeAssitanceInGame(false);
+        if (Control.con.actualSaveClass != null)
+        {
+            Control.con.actualSaveClass.ChangeAssitanceInGame(false);
+        }
     }
 
     void ClearHighlightOfAllBut ()

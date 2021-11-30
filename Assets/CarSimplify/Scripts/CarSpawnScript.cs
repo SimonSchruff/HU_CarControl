@@ -44,7 +44,10 @@ public class CarSpawnScript : SimplifyParent
             GameObject inst = Instantiate(carPrefab, transform.position, transform.rotation);
             inst.GetComponent<CarSimple>().ManualInit(crossRefs, HorOrVert);
 
-            Control.con.actualSaveClass.carsTotal++;
+            if (Control.con.actualSaveClass != null)
+            {
+                Control.con.actualSaveClass.carsTotal++;
+            }
         }
     }
 

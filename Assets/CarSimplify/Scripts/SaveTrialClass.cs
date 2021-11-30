@@ -21,6 +21,8 @@ public class SaveTrialClass : MonoBehaviour
     float areaTime = 0;
     float specificTime = 0;
 
+    public bool saveData = true;
+
     bool finished = false;
     
     public void InitChangeAssistanceActive(bool IsArea)
@@ -69,6 +71,11 @@ public class SaveTrialClass : MonoBehaviour
             float totalTime = specificTime + areaTime;
             percentageArea = areaTime / totalTime;
             percentageSpecific = specificTime / totalTime;
+        }
+
+        if (!saveData)
+        {
+            Destroy(this);
         }
     }
 }

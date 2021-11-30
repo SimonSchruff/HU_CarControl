@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Control : MonoBehaviour
 {
-    [SerializeField] int trialDurationInMin = 5;
+    public float trialDurationInMin = .5f;
     [Header("Adjust")]
     public float spawnDelay= 1f;
     public float gridSize = 1.5f;
@@ -15,6 +15,7 @@ public class Control : MonoBehaviour
     [SerializeField] ContactFilter2D filter;
     [SerializeField] LayerMask mask;
         
+
 
 
     [Header("Gameplay not change")]
@@ -38,16 +39,10 @@ public class Control : MonoBehaviour
             Destroy(gameObject);
         }
 
-        StartCoroutine(StartGameDelay());
+        FindObjectOfType<TrialStartLogic>().ActivateSession();
     }
 
-    IEnumerator StartGameDelay()
-    {
-        yield return new WaitForSecondsRealtime(2);
-        StartGame("Base");
-    }
-
-    public void StartGame (string TrialName)
+    public void StartGame (string TrialName, bool safeData = true)
     {
         crossesRefs = FindObjectsOfType<Crosses>();
         carSpawnRefs = FindObjectsOfType<CarSpawnScript>();
@@ -58,6 +53,7 @@ public class Control : MonoBehaviour
         actualSaveClass = gameObject.AddComponent<SaveTrialClass>();
         actualSaveClass.trialName = TrialName;
         actualSaveClass.assistance = AssistanceSelectScript.assiSel.actualAssiSelect.ToString();
+        actualSaveClass.saveData = safeData;
         allSaveClasses.Add(actualSaveClass);
 
         if (AssistanceSelectScript.assiSel.actualAssiSelect == AssistanceSelectScript.AssiSelectStates.Area)
@@ -82,9 +78,9 @@ public class Control : MonoBehaviour
 
     void FinishTrialFunc ()
     {
+        actualSaveClass.score = ScoreSimple.sco.GetScore(); // Set score
         actualSaveClass.FinishTrial();
 
-        actualSaveClass.score = ScoreSimple.sco.GetScore(); // Set score
         ScoreSimple.sco.ResetScore();   //Reset score
 
         foreach (var cars in FindObjectsOfType<CarSimple>())

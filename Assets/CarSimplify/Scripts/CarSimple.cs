@@ -66,7 +66,10 @@ public class CarSimple : SimplifyParent
             Crosses cross = collision.GetComponentInParent<Crosses>();
             if(cross.actualState == horOrVert)
             {
-                Control.con.actualSaveClass.crossesCrossed++;
+                if (Control.con.actualSaveClass != null)
+                {
+                    Control.con.actualSaveClass.crossesCrossed++;
+                }
 
                 cross.locked = true;
             }
@@ -97,12 +100,18 @@ public class CarSimple : SimplifyParent
 
             StartCoroutine(DestroyAfterTime());
 
-            Control.con.actualSaveClass.carsCrashed++;
+            if (Control.con.actualSaveClass != null)
+            {
+                Control.con.actualSaveClass.carsCrashed++;
+            }
         }
         else
         {
             Destroy(gameObject);
-            Control.con.actualSaveClass.carsSuccess++;
+            if (Control.con.actualSaveClass != null)
+            {
+                Control.con.actualSaveClass.carsSuccess++;
+            }
         }
 
     }
