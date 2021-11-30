@@ -76,7 +76,7 @@ public class SecondaryTask : MonoBehaviour
         }
 
         //Timer; For first time reset is only possible after 10sec to give player time to settle
-        timer = Random.Range(10, timeRange); 
+        timer = Random.Range(5, timeRange); 
         cooldownTimer = timeRange - timer; 
         print("Timer: " + timer + "; Cooldown: " + cooldownTimer); 
 
@@ -98,10 +98,12 @@ public class SecondaryTask : MonoBehaviour
             if(currentState == CurrentState.baseState)
             {
                 ScoreSimple.sco.UpdateScore(-1);  // False Alarm
+                Control.con.actualSaveClass.sec_FalseAlarm++; 
             }
             else if(currentState == CurrentState.errorStateTop || currentState == CurrentState.errorStateBot)
             {
                 //Reset to start Pos
+                Control.con.actualSaveClass.sec_Correct++;
                 inputTimer = timeToGiveInput; 
                 currentState = CurrentState.cooldown; 
                 
@@ -157,9 +159,10 @@ public class SecondaryTask : MonoBehaviour
             //Reset to new pos
             reset = true; 
             timerActive = false; 
-            cooldown = true; 
+            cooldown = true;
+            Control.con.actualSaveClass.sec_TotalAlarms++;
             timer = Random.Range(1, timeRange); 
-            cooldownTimer = timeRange - timer; 
+            cooldownTimer = timeRange - timer;
             print("Timer: " + timer + "; Cooldown: " + cooldownTimer); 
             
         }
@@ -183,7 +186,7 @@ public class SecondaryTask : MonoBehaviour
             currentState = CurrentState.cooldown; 
             inputTimer = timeToGiveInput;
             ScoreSimple.sco.UpdateScore(-2); //Missed
-
+            Control.con.actualSaveClass.sec_Misses++;
         }
     }
 

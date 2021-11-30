@@ -117,7 +117,7 @@ public class SQLSaveManager : MonoBehaviour
             Debug.LogError("No NBack Data Found!");
 
 
-        primaryData = FindObjectsOfType<SaveTrialClass>();
+        primaryData = GetComponents<SaveTrialClass>(); 
         if(primaryData != null)
         {
             foreach(SaveTrialClass data in primaryData)
@@ -133,7 +133,11 @@ public class SQLSaveManager : MonoBehaviour
                 formData.Add(new MultipartFormDataSection(data.trialName + "_percentageArea", data.percentageArea.ToString()));
                 formData.Add(new MultipartFormDataSection(data.trialName + "_percentageSpecific", data.percentageSpecific.ToString()));
 
-                // Score for secondary task
+                formData.Add(new MultipartFormDataSection(data.trialName + "_sec_TotalAlarms", data.percentageSpecific.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_sec_Correct", data.percentageSpecific.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_sec_Misses", data.percentageSpecific.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_sec_FalseAlarm", data.percentageSpecific.ToString()));
+
 
 
             }
