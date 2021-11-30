@@ -15,6 +15,12 @@ public class SaveTrialClass : MonoBehaviour
     public float percentageArea = 0;
     public float percentageSpecific = 0;
 
+    public float sec_TotalAlarms = 0;
+    public float sec_Correct = 0;
+    public float sec_Misses = 0;
+    public float sec_FalseAlarm = 0;
+    
+
     private float lastChangeTime;
     private bool isChangeAssistance = false;
     private bool isArea = true;

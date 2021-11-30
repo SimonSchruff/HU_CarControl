@@ -7495,8 +7495,8 @@ MonoBehaviour:
   showUI: 1
   saveData: 1
   trialDurationInMin: 0.5
-  differentGroupAssistances: 1
-  assistanceLevel: 2
+  differentGroupAssistances: 0
+  assistanceLevel: 4
   group1_assiLevel: 1
   group2_assiLevel: 1
   group3_assiLevel: 1

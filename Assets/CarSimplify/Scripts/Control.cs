@@ -38,7 +38,13 @@ public class Control : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        StartCoroutine(wait());
+    }
 
+    IEnumerator wait ()
+    {
+        yield return new WaitForSeconds(3);
+        
         FindObjectOfType<TrialStartLogic>().ActivateSession();
     }
 
@@ -47,7 +53,7 @@ public class Control : MonoBehaviour
         crossesRefs = FindObjectsOfType<Crosses>();
         carSpawnRefs = FindObjectsOfType<CarSpawnScript>();
 
-        StartCoroutine(UpdateFunc());
+        StartCoroutine(UpdateFunc(true));
         StartCoroutine(FinishTrial());
 
         actualSaveClass = gameObject.AddComponent<SaveTrialClass>();
@@ -94,9 +100,9 @@ public class Control : MonoBehaviour
         actualSaveClass = null;
     }
 
-    IEnumerator UpdateFunc()
+    IEnumerator UpdateFunc(bool isStart = false)
     {
-        yield return new WaitForSeconds(spawnDelay);
+        yield return new WaitForSeconds(isStart ? 2 : spawnDelay);
 
         UpdateElems();
         SimplAssis.assi.UpdateAssistance();

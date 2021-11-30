@@ -77,13 +77,12 @@ public class AssistanceSelectScript : MonoBehaviour
                 break;
             case AssiSelectStates.Select:
                 selectPanel.gameObject.SetActive(true);
-                SimplAssis.assi.ChangeAssitance(SimplAssis.assiState.areaHelp);
+                SimplAssis.assi.ChangeAssitance((Random.Range(0,2)==1)?SimplAssis.assiState.areaHelp: SimplAssis.assiState.specificHelp);
                 SetUpDebugPanel();
                 break;
             default:
                 break;
         }
-        
     }
 
 
