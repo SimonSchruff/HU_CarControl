@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class AnswerSaver : MonoBehaviour
 {
 
-    public string currentAnswer; 
+    public string currentAnswer;
+    public InputField toggleIF; 
 
     Toggle[] toggles; 
     InputField inputField;
@@ -20,7 +21,8 @@ public class AnswerSaver : MonoBehaviour
         togglesWithFreeInput, 
         freeInputNumber,
         freeInputAlphaNum,
-        slider
+        slider,
+        other
     }
     [Tooltip("Set Type of Question to save Answer")]
     public QuestionType questionType ;
@@ -45,6 +47,9 @@ public class AnswerSaver : MonoBehaviour
             case QuestionType.freeInputAlphaNum:
                 inputField = GetComponentInChildren<InputField>();
                 break;
+            case QuestionType.other:
+                currentAnswer = "null"; 
+                break;
         }
     }
 
@@ -60,7 +65,11 @@ public class AnswerSaver : MonoBehaviour
                     
                     if(toggle.isOn == true)
                     {
-                        currentAnswer = toggle.GetComponentInChildren<Text>().text; 
+                        currentAnswer = toggle.GetComponentInChildren<Text>().text;
+                        if(name == "education" && currentAnswer == "8" || name == "countryOfResidence" && currentAnswer == "9" || name == "employment" && currentAnswer == "10" )
+                        {
+                            toggleIF.GetComponentInParent<AnswerSaver>().currentAnswer = toggleIF.text; 
+                        }
                     }
                 }
                 break; 
@@ -93,7 +102,9 @@ public class AnswerSaver : MonoBehaviour
                 break;
             case QuestionType.freeInputAlphaNum:
                 currentAnswer = inputField.text;
-                break; 
+                break;
+            case QuestionType.other:
+                break;
         }
     }
 
@@ -103,8 +114,11 @@ public class AnswerSaver : MonoBehaviour
         //Save to SQL Database with SQL Save Manager        
         if(name == "prolificID")
         {
-            // Prolific ID
             SQLSaveManager.instance.SaveProlificID(currentAnswer); 
+        }
+        else if(name == "intro1_1" || name == "intro1_2" || name == "intro1_3" || name == "intro2_1" || name == "intro2_2" || name == "intro2_3") // Do not need to be saved; 
+        {
+            return;
         }
         else
         {
@@ -112,6 +126,50 @@ public class AnswerSaver : MonoBehaviour
             SQLSaveManager.instance.AddAnswerToList(name, currentAnswer);  
         }
 
-        //print("The question : " + name + ", ID : " + questionID + " with the answer " + currentAnswer + " has been saved!");
+
+        /*
+         * else if(name == "education" || name == "countryOfResidence" || name == "employment" )
+        {
+            if(toggleIF != null)
+            {
+                if(name == "education")
+                {
+                    GameObject other = GameObject.Find("education_other");
+                    if (other == null)
+                        Debug.LogError("Game Object education_other not Found!");
+                    else
+                    {
+                        string otherAnswer = other.GetComponent<AnswerSaver>().currentAnswer = toggleIF.text;
+                    }
+                    
+                }
+                else if (name == "countryOfResidence")
+                {
+                    GameObject other = GameObject.Find("countryOfResidence_other");
+                    if (other == null)
+                        Debug.LogError("Game Object countryOfResidence_other not Found!");
+                    else
+                    {
+                        string otherAnswer = other.GetComponent<AnswerSaver>().currentAnswer = toggleIF.text;
+                    }
+                }
+                else if (name == "employment")
+                {
+                    GameObject other = GameObject.Find("employment_other");
+                    if (other == null)
+                        Debug.LogError("Game Object employment_other not Found!");
+                    else
+                    {
+                        string otherAnswer = other.GetComponent<AnswerSaver>().currentAnswer = toggleIF.text;
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogError("Input Field for Education/Country/Employment Not set!"); 
+            }
+        }
+         */
+
     }
 }

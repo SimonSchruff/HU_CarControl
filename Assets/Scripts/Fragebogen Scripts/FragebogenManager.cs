@@ -66,7 +66,7 @@ public class FragebogenManager : MonoBehaviour
             }
             else if (questions[currentID].questionObj.gameObject.name == "Color Vision")
             {
-                MySceneManager.Instance.LoadSceneByName("Placeholder Scene");
+                MySceneManager.Instance.LoadSceneByName("Introduction");
             }
             else if(questions[currentID].questionObj.gameObject.name == "Set Active Data Quality")
             {
@@ -162,7 +162,16 @@ public class FragebogenManager : MonoBehaviour
                                 return false;
                             }
                     }
-                } 
+                }
+
+                if(answer.questionType == AnswerSaver.QuestionType.other)
+                {
+                    if(answer.currentAnswer == null || answer.currentAnswer == "")
+                    {
+                        print("False at free input: " + answer.gameObject.name);
+                        return false; 
+                    }
+                }
             } 
             // If code reaches this point, each question has been checked for valid answer
             if (answerAmount == allAnswers.Length)
@@ -182,6 +191,7 @@ public class FragebogenManager : MonoBehaviour
         AnswerSaver[] allAnswers = questions[currentID].questionObj.gameObject.GetComponentsInChildren<AnswerSaver>();
         foreach (AnswerSaver answer in allAnswers)
         {
+            // If education etc. save number AND free text field 
             answer.SaveAnswer(answer.gameObject.name);
         }
     }

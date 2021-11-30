@@ -24,8 +24,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Fragebogen/Fragebogen -Teil 01 b.unity
     guid: 60f6ee7c9a5964750894a46e96e89699
   - enabled: 1
-    path: Assets/Scenes/Placeholder Scene.unity
-    guid: 0374831bf13ac4547af915142f8f3dd1
+    path: Assets/Scenes/Introduction.unity
+    guid: 8795d2dab3355449cb0b0424089f1a36
   - enabled: 1
     path: Assets/Scenes/Fragebogen/Fragebogen - Teil 02.unity
     guid: 945fd3a788b4446c2ae6fdcbedb0efc7

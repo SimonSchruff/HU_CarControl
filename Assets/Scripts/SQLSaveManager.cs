@@ -7,6 +7,14 @@ public class SQLSaveManager : MonoBehaviour
 {
     public static SQLSaveManager instance;
 
+    public enum Group
+    {
+        group1,
+        group2,
+        group3
+    }
+    public Group group;
+
     public string playerID;
     [SerializeField] string URL; 
 
@@ -18,6 +26,8 @@ public class SQLSaveManager : MonoBehaviour
     public List<Answer> answerList = new List<Answer>();
 
     public List<NBackGameManager.LevelData> nBackData = new List<NBackGameManager.LevelData>();
+
+    
 
     void Awake()
     {
@@ -47,7 +57,7 @@ public class SQLSaveManager : MonoBehaviour
         tempAnswer.answer = a;
 
         answerList.Add(tempAnswer);
-        //print("Answer: " + tempAnswer.name + " with the answer: " + tempAnswer.answer + " has been added to the list.");
+        print("Answer: " + tempAnswer.name + " with the answer: " + tempAnswer.answer + " has been added to the list.");
     }
 
     public void SaveNBackData(NBackGameManager.LevelData data)
@@ -60,14 +70,17 @@ public class SQLSaveManager : MonoBehaviour
         StartCoroutine(PostData());
     }
 
+
+
     IEnumerator PostData()
     {
-        print("Posting " + (answerList.Count + 53 ) + " items...");
+        //print("Posting " + (answerList.Count + 53 ) + " items...");
 
         List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
         formData.Add(new MultipartFormDataSection("id", playerID));
+        formData.Add(new MultipartFormDataSection("gr", group.ToString()));
 
-        foreach(Answer a in answerList)
+        foreach (Answer a in answerList)
         {
             formData.Add(new MultipartFormDataSection(a.name, a.answer));
         }
