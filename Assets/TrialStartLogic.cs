@@ -18,15 +18,13 @@ public class TrialStartLogic : MonoBehaviour
 
     SQLSaveManager.Group group;
 
-    private void Start()
-    {
-        group = SQLSaveManager.instance.group;
-
-        trialName = gameObject.name;
-    }
-
     public void ActivateSession ()
     {
+        group = SQLSaveManager.instance.group;
+        trialName = gameObject.name;
+
+
+
         Control c = Control.con;
 
         ScoreSimple.sco.ChangeScoreVisibility(showUI);
@@ -59,6 +57,6 @@ public class TrialStartLogic : MonoBehaviour
         AssistanceSelectScript.assiSel.ChangeAssiSelect(tempState);
 
         //StartTrial
-        c.StartGame(trialName, saveData);
+        c.StartGame(trialName, saveData, tempState.ToString());
     }
 }

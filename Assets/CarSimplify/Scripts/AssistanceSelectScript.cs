@@ -88,7 +88,7 @@ public class AssistanceSelectScript : MonoBehaviour
 
     private void Start()
     {
-        ChangeAssiSelect(actualAssiSelect);
+      //  ChangeAssiSelect(actualAssiSelect);
         SetUpDebugPanel();
 
         ChangeUIVisibility(false);

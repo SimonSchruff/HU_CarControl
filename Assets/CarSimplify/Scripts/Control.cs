@@ -14,8 +14,8 @@ public class Control : MonoBehaviour
     [SerializeField] Camera camRef;
     [SerializeField] ContactFilter2D filter;
     [SerializeField] LayerMask mask;
-        
 
+    bool gameRunning = false;
 
 
     [Header("Gameplay not change")]
@@ -38,17 +38,9 @@ public class Control : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        //StartCoroutine(wait());
     }
 
-    IEnumerator wait ()
-    {
-        yield return new WaitForSeconds(3);
-        
-        FindObjectOfType<TrialStartLogic>().ActivateSession();
-    }
-
-    public void StartGame (string TrialName, bool safeData = true)
+    public void StartGame (string TrialName, bool safeData = true, string assistanceLevel = "x")
     {
         crossesRefs = FindObjectsOfType<Crosses>();
         carSpawnRefs = FindObjectsOfType<CarSpawnScript>();
@@ -56,9 +48,12 @@ public class Control : MonoBehaviour
         StartCoroutine(UpdateFunc(true));
         StartCoroutine(FinishTrial());
 
+        gameRunning = true;
+
         actualSaveClass = SQLSaveManager.instance.gameObject.AddComponent<SaveTrialClass>();
         actualSaveClass.trialName = TrialName;
-        actualSaveClass.assistance = AssistanceSelectScript.assiSel.actualAssiSelect.ToString();
+        actualSaveClass.assistance = assistanceLevel;
+      //  actualSaveClass.assistance = AssistanceSelectScript.assiSel.actualAssiSelect.ToString();
         actualSaveClass.saveData = safeData;
         if(safeData)
             allSaveClasses.Add(actualSaveClass);
@@ -73,8 +68,7 @@ public class Control : MonoBehaviour
         }
         else if (AssistanceSelectScript.assiSel.actualAssiSelect == AssistanceSelectScript.AssiSelectStates.Select)
         {
-            actualSaveClass.InitChangeAssistanceActive(SimplAssis.assi.actualAssistance == SimplAssis.assiState.areaHelp);
-            
+            actualSaveClass.InitChangeAssistanceActive(SimplAssis.assi.actualAssistance == SimplAssis.assiState.areaHelp);   
         }
     }
     IEnumerator FinishTrial ()
@@ -85,6 +79,7 @@ public class Control : MonoBehaviour
 
     void FinishTrialFunc ()
     {
+        gameRunning = false;
         actualSaveClass.score = ScoreSimple.sco.GetScore(); // Set score
         actualSaveClass.FinishTrial();
 
@@ -149,10 +144,14 @@ public class Control : MonoBehaviour
     {
         yield return new WaitForSeconds(isStart ? 2 : spawnDelay);
 
-        UpdateElems();
-        SimplAssis.assi.UpdateAssistance();
+        if (gameRunning)
+        {
+            UpdateElems();
+            SimplAssis.assi.UpdateAssistance();
 
-        StartCoroutine(UpdateFunc());
+            StartCoroutine(UpdateFunc());
+        }
+
     }
 
     void UpdateElems ()
