@@ -97,7 +97,7 @@ public class SecondaryTask : MonoBehaviour
 
             if(currentState == CurrentState.baseState)
             {
-                print("No Action was needed"); 
+                ScoreSimple.sco.UpdateScore(-1);  // False Alarm
             }
             else if(currentState == CurrentState.errorStateTop || currentState == CurrentState.errorStateBot)
             {
@@ -181,8 +181,8 @@ public class SecondaryTask : MonoBehaviour
         {
             // Player did not give input 
             currentState = CurrentState.cooldown; 
-            inputTimer = timeToGiveInput; 
-            print("-3 Score"); 
+            inputTimer = timeToGiveInput;
+            ScoreSimple.sco.UpdateScore(-2); //Missed
 
         }
     }

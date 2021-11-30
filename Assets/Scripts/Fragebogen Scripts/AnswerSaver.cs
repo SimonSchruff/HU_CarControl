@@ -61,8 +61,6 @@ public class AnswerSaver : MonoBehaviour
 
                 foreach(Toggle toggle in toggles)
                 {
-                    //print(toggle.gameObject.name); 
-                    
                     if(toggle.isOn == true)
                     {
                         currentAnswer = toggle.GetComponentInChildren<Text>().text;
@@ -122,54 +120,8 @@ public class AnswerSaver : MonoBehaviour
         }
         else
         {
-            //SQLSaveManager.instance.AddAnswerToList(questionID, name, currentAnswer);
             SQLSaveManager.instance.AddAnswerToList(name, currentAnswer);  
         }
-
-
-        /*
-         * else if(name == "education" || name == "countryOfResidence" || name == "employment" )
-        {
-            if(toggleIF != null)
-            {
-                if(name == "education")
-                {
-                    GameObject other = GameObject.Find("education_other");
-                    if (other == null)
-                        Debug.LogError("Game Object education_other not Found!");
-                    else
-                    {
-                        string otherAnswer = other.GetComponent<AnswerSaver>().currentAnswer = toggleIF.text;
-                    }
-                    
-                }
-                else if (name == "countryOfResidence")
-                {
-                    GameObject other = GameObject.Find("countryOfResidence_other");
-                    if (other == null)
-                        Debug.LogError("Game Object countryOfResidence_other not Found!");
-                    else
-                    {
-                        string otherAnswer = other.GetComponent<AnswerSaver>().currentAnswer = toggleIF.text;
-                    }
-                }
-                else if (name == "employment")
-                {
-                    GameObject other = GameObject.Find("employment_other");
-                    if (other == null)
-                        Debug.LogError("Game Object employment_other not Found!");
-                    else
-                    {
-                        string otherAnswer = other.GetComponent<AnswerSaver>().currentAnswer = toggleIF.text;
-                    }
-                }
-            }
-            else
-            {
-                Debug.LogError("Input Field for Education/Country/Employment Not set!"); 
-            }
-        }
-         */
 
     }
 }
