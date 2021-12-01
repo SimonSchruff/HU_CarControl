@@ -5,21 +5,29 @@ using UnityEngine.UI;
 
 public class SecondaryTask : MonoBehaviour
 {
+    
+
     [Header("Key Bindings")]
     public KeyCode resetKey = KeyCode.Space; 
 
 
     [Header("Object References")]
-    public GameObject indicator; 
-    public GameObject debugText; 
+    public GameObject indicator;
+
+    [Header("Training Session")]
+    public bool isTrainingSession;
+    public Text scoreText;
+    public GameObject continueButton; 
 
 
     [Header("Variables")]
     public float travelDistance = 37.5f; 
     public float moveSpeed; 
-    public float timeRange = 60; 
-    public float timeToGiveInput = 10; 
-    int direction; 
+    public float timeRange = 60f; 
+    public float timeToGiveInput = 10f; 
+    int direction;
+    int rounds = 0;
+    int score = 0; 
 
 
     #region Position Vectors
@@ -75,6 +83,8 @@ public class SecondaryTask : MonoBehaviour
                 break; 
         }
 
+
+
         //Timer; For first time reset is only possible after 10sec to give player time to settle
         timer = Random.Range(5, timeRange); 
         cooldownTimer = timeRange - timer; 
@@ -97,16 +107,20 @@ public class SecondaryTask : MonoBehaviour
 
             if(currentState == CurrentState.baseState)
             {
-                ScoreSimple.sco.UpdateScore(-1);  // False Alarm
-                Control.con.actualSaveClass.sec_FalseAlarm++; 
+                if(!isTrainingSession)
+                {
+                    ScoreSimple.sco.UpdateScore(-1);  // False Alarm
+                    Control.con.actualSaveClass.sec_FalseAlarm++; 
+                }
+                else
+                {
+                    score--; 
+                }
             }
             else if(currentState == CurrentState.errorStateTop || currentState == CurrentState.errorStateBot)
             {
-                //Reset to start Pos
-                Control.con.actualSaveClass.sec_Correct++;
                 inputTimer = timeToGiveInput; 
-                currentState = CurrentState.cooldown; 
-                
+                currentState = CurrentState.cooldown;    
             }
         }
 
@@ -141,6 +155,15 @@ public class SecondaryTask : MonoBehaviour
                 break; 
         }
 
+        if(isTrainingSession && scoreText != null && continueButton != null)
+        {
+            scoreText.text = score.ToString();
+
+            if (rounds >= 3)
+                continueButton.SetActive(true); 
+                
+        }
+
 
         Move(currentStartPos); 
 
@@ -160,8 +183,17 @@ public class SecondaryTask : MonoBehaviour
             reset = true; 
             timerActive = false; 
             cooldown = true;
-            Control.con.actualSaveClass.sec_TotalAlarms++;
-            timer = Random.Range(1, timeRange); 
+            if (!isTrainingSession)
+            {
+                try { Control.con.actualSaveClass.sec_TotalAlarms++; }
+                catch { Debug.LogError("Adding Total Alarm Missing Ref Exception!");  }
+            }
+            else
+            {
+
+            }
+            rounds++; 
+            timer = Random.Range(1, timeRange - timeToGiveInput); 
             cooldownTimer = timeRange - timer;
             print("Timer: " + timer + "; Cooldown: " + cooldownTimer); 
             
@@ -185,8 +217,20 @@ public class SecondaryTask : MonoBehaviour
             // Player did not give input 
             currentState = CurrentState.cooldown; 
             inputTimer = timeToGiveInput;
-            ScoreSimple.sco.UpdateScore(-2); //Missed
-            Control.con.actualSaveClass.sec_Misses++;
+            if (!isTrainingSession)
+            {
+                try
+                {
+                    ScoreSimple.sco.UpdateScore(-2); //Missed
+                    Control.con.actualSaveClass.sec_Misses++;
+                }
+                catch
+                {
+                    Debug.LogError("Adding Missed Ref Exception!"); 
+                }
+            }
+            else
+                score -= 2; 
         }
     }
 
