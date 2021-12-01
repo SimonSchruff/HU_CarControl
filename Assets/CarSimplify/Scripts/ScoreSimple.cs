@@ -43,6 +43,5 @@ public class ScoreSimple : MonoBehaviour
     public void ChangeScoreVisibility (bool ChangeVisibilityTo)
     {
         scoreText.gameObject.SetActive(ChangeVisibilityTo);
-    }
-    
+    }    
 }

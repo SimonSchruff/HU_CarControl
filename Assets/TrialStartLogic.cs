@@ -20,6 +20,8 @@ public class TrialStartLogic : MonoBehaviour
 
     public void ActivateSession ()
     {
+        ScoreSimple.sco.ResetScore();
+
         group = SQLSaveManager.instance.group;
         trialName = gameObject.name;
 
