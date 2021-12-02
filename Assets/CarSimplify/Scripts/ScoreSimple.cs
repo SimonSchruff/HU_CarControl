@@ -38,6 +38,7 @@ public class ScoreSimple : MonoBehaviour
     public void ResetScore()
     {
         score = 0;
+        scoreText.text = score.ToString(); 
     }
 
     public void ChangeScoreVisibility (bool ChangeVisibilityTo)

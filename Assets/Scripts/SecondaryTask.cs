@@ -16,7 +16,7 @@ public class SecondaryTask : MonoBehaviour
 
     [Header("Training Session")]
     public bool isTrainingSession;
-    public Text scoreText;
+    public Text trainingText;
     public GameObject continueButton; 
 
 
@@ -105,7 +105,7 @@ public class SecondaryTask : MonoBehaviour
         if(Input.GetKeyDown(resetKey))
         {
 
-            if(currentState == CurrentState.baseState)
+            if(currentState == CurrentState.baseState || currentState == CurrentState.cooldown)
             {
                 if(!isTrainingSession)
                 {
@@ -114,11 +114,21 @@ public class SecondaryTask : MonoBehaviour
                 }
                 else
                 {
-                    score--; 
+                    score--;
+                    StartCoroutine(ShowTrainingText("Wrong Input! -1 Score Deduction"));
                 }
             }
             else if(currentState == CurrentState.errorStateTop || currentState == CurrentState.errorStateBot)
             {
+                if(!isTrainingSession)
+                {
+                    Control.con.actualSaveClass.sec_Correct++;
+                    Control.con.actualSaveClass.sec_TotalAlarms++;
+                }
+                else
+                    StartCoroutine(ShowTrainingText("Correct Input!"));
+
+                rounds++; 
                 inputTimer = timeToGiveInput; 
                 currentState = CurrentState.cooldown;    
             }
@@ -155,11 +165,10 @@ public class SecondaryTask : MonoBehaviour
                 break; 
         }
 
-        if(isTrainingSession && scoreText != null && continueButton != null)
+        if(isTrainingSession && continueButton != null)
         {
-            scoreText.text = score.ToString();
 
-            if (rounds >= 3)
+            if (rounds >= 2)
                 continueButton.SetActive(true); 
                 
         }
@@ -183,16 +192,6 @@ public class SecondaryTask : MonoBehaviour
             reset = true; 
             timerActive = false; 
             cooldown = true;
-            if (!isTrainingSession)
-            {
-                try { Control.con.actualSaveClass.sec_TotalAlarms++; }
-                catch { Debug.LogError("Adding Total Alarm Missing Ref Exception!");  }
-            }
-            else
-            {
-
-            }
-            rounds++; 
             timer = Random.Range(1, timeRange - timeToGiveInput); 
             cooldownTimer = timeRange - timer;
             print("Timer: " + timer + "; Cooldown: " + cooldownTimer); 
@@ -223,6 +222,9 @@ public class SecondaryTask : MonoBehaviour
                 {
                     ScoreSimple.sco.UpdateScore(-2); //Missed
                     Control.con.actualSaveClass.sec_Misses++;
+                    Control.con.actualSaveClass.sec_TotalAlarms++;
+                    rounds++; 
+
                 }
                 catch
                 {
@@ -230,7 +232,12 @@ public class SecondaryTask : MonoBehaviour
                 }
             }
             else
-                score -= 2; 
+            {
+                StartCoroutine(ShowTrainingText("You did not give an input! -2 Score Deduction")); 
+                score -= 2;
+                rounds++; 
+            }
+                
         }
     }
 
@@ -269,6 +276,14 @@ public class SecondaryTask : MonoBehaviour
         return currentPos; 
     }
 
-   
+    IEnumerator ShowTrainingText(string text)
+    {
+        trainingText.text = text;
+        trainingText.gameObject.SetActive(true); 
+        yield return new WaitForSeconds(2);
+        trainingText.gameObject.SetActive(false);
+    }
+
+
 
 }

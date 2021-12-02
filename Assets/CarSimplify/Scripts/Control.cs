@@ -137,6 +137,7 @@ public class Control : MonoBehaviour
 
             SaveTrialClass tri = SQLSaveManager.instance.gameObject.AddComponent<SaveTrialClass>();
             tri.score = Mathf.RoundToInt(finScore);
+            tri.trialName = "total"; // Added Trial Name
             tri.assistance = "total";
         }
     }
