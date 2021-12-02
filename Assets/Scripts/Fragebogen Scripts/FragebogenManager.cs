@@ -80,6 +80,11 @@ public class FragebogenManager : MonoBehaviour
             {
                 MySceneManager.Instance.LoadSceneByName("Introduction");
             }
+            else if(questions[currentID].questionObj.gameObject.name == "Page 5")
+            {
+                MySceneManager.Instance.LoadSceneByName("Fragebogen");
+
+            }
             else if(questions[currentID].questionObj.gameObject.name == "Set Active Data Quality")
             {
                 SQLSaveManager.instance.StartPostCoroutine(); 
@@ -136,7 +141,7 @@ public class FragebogenManager : MonoBehaviour
                             print("False at toogle: " + answer.gameObject.name); 
                             return false;
                         }
-                        else if(answer.gameObject.name == "language" || answer.gameObject.name == "visualAcuity" || answer.gameObject.name == "colorVision")
+                        else if(answer.gameObject.name == "language" || answer.gameObject.name == "visualAcuity" || answer.gameObject.name == "colorVision" || answer.gameObject.name == "declarationConsent")
                         {
                             if (answer.currentAnswer == "2")
                             {
@@ -154,6 +159,7 @@ public class FragebogenManager : MonoBehaviour
                             if (answer.currentAnswer == "1") // Answered 1:True
                                 return false;
                         }
+
                     }
                 }
 

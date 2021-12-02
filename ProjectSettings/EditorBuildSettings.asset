@@ -6,14 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SimplifySCene.unity
-    guid: 297601f3150e35d45bb45c57b6e8d166
-  - enabled: 0
-    path: Assets/Scenes/CrossScene.unity
-    guid: b1e25560d8fde964e8b5d378116d0c3a
-  - enabled: 0
-    path: Assets/Scenes/ReduceNoShips.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/DeclarationOfConsent.unity
+    guid: bb103a318259140f4b4e3c2de5f2843b
   - enabled: 1
     path: Assets/Scenes/Fragebogen/Fragebogen.unity
     guid: 95e7f5f6d85544e898e14d2a516e58e6

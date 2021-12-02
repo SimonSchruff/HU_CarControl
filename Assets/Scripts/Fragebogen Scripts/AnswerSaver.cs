@@ -114,7 +114,7 @@ public class AnswerSaver : MonoBehaviour
         {
             SQLSaveManager.instance.SaveProlificID(currentAnswer); 
         }
-        else if(name == "intro1_1" || name == "intro1_2" || name == "intro1_3" || name == "intro2_1" || name == "intro2_2" || name == "intro2_3") // Do not need to be saved; 
+        else if(name == "intro1_1" || name == "intro1_2" || name == "intro1_3" || name == "intro2_1" || name == "intro2_2" || name == "intro2_3" || name == "declarationConsent") // Do not need to be saved; 
         {
             return;
         }
