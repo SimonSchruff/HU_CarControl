@@ -16,6 +16,8 @@ public class Control : MonoBehaviour
     [SerializeField] LayerMask mask;
 
     bool gameRunning = false;
+    float timeCounter = 0f;
+    bool isInit = false;
 
 
     [Header("Gameplay not change")]
@@ -44,11 +46,12 @@ public class Control : MonoBehaviour
     {
         crossesRefs = FindObjectsOfType<Crosses>();
         carSpawnRefs = FindObjectsOfType<CarSpawnScript>();
-
-        StartCoroutine(UpdateFunc(true));
+        
+       // StartCoroutine(UpdateFunc(true));
         StartCoroutine(FinishTrial());
 
         gameRunning = true;
+        isInit = true;
 
         actualSaveClass = SQLSaveManager.instance.gameObject.AddComponent<SaveTrialClass>();
         actualSaveClass.trialName = TrialName;
@@ -71,6 +74,8 @@ public class Control : MonoBehaviour
             actualSaveClass.InitChangeAssistanceActive(SimplAssis.assi.actualAssistance == SimplAssis.assiState.areaHelp);   
         }
     }
+
+    
     IEnumerator FinishTrial ()
     {
         yield return new WaitForSeconds(trialDurationInMin * 60);
@@ -80,6 +85,7 @@ public class Control : MonoBehaviour
     void FinishTrialFunc ()
     {
         gameRunning = false;
+        timeCounter = 0;
         actualSaveClass.score = ScoreSimple.sco.GetScore(); // Set score
         actualSaveClass.FinishTrial();
 
@@ -91,7 +97,7 @@ public class Control : MonoBehaviour
         }
         SimplAssis.assi.UpdateAssistance();
 
-        StopCoroutine(UpdateFunc());
+       // StopCoroutine(UpdateFunc());
 
         foreach (var sec in FindObjectsOfType<SecondaryTask>())     //Destroy Sec Task
         {
@@ -153,6 +159,14 @@ public class Control : MonoBehaviour
             StartCoroutine(UpdateFunc());
         }
 
+    }
+    void UpdateFuncToCall ()
+    {
+        if (gameRunning)
+        {
+            UpdateElems();
+            SimplAssis.assi.UpdateAssistance();
+        }
     }
 
     void UpdateElems ()
@@ -274,6 +288,21 @@ public class Control : MonoBehaviour
 
     private void Update()
     {
+        if(gameRunning)
+        {
+            timeCounter += Time.deltaTime;
+
+            if(timeCounter >= (isInit? 2 : spawnDelay))
+            {
+                isInit = false;
+                UpdateFuncToCall();
+                timeCounter = 0;
+
+                Debug.LogError((isInit ? 2 : spawnDelay));
+            }
+        }
+
+
         if (Input.GetMouseButtonDown(0))
         {
             try         // Click Crosses
@@ -298,16 +327,6 @@ public class Control : MonoBehaviour
                         }
                     }
                 }
-
-                //RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero, mask);
-                //if (hit.collider != null)
-                //{
-                //    if (hit.collider.CompareTag("CrossSimple"))
-                //    {
-                //        Crosses clickedCross = hit.collider.GetComponentInParent<Crosses>();
-                //        clickedCross.CrossClicked();
-                //    }
-                //}
             }
             catch { }
         }
