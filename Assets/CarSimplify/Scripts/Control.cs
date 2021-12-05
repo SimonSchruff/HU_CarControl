@@ -297,8 +297,6 @@ public class Control : MonoBehaviour
                 isInit = false;
                 UpdateFuncToCall();
                 timeCounter = 0;
-
-                Debug.LogError((isInit ? 2 : spawnDelay));
             }
         }
 

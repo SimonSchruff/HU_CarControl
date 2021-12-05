@@ -55,6 +55,8 @@ public class FragebogenManager : MonoBehaviour
 
     public void NextQuestion() //Called by Continue Button
     {
+                try
+                {
         bool isAllowedToChange;
 
         foreach (ErrorText et in errorTexts)
@@ -117,98 +119,108 @@ public class FragebogenManager : MonoBehaviour
 
         }
     }
+    catch {
+            Debug.Log("NextQuestionError");
+        }
+    }
 
 
     bool AllowedToContinue(int currentID)
     {
-        if (questions[currentID].questionObj.gameObject.GetComponentInChildren<AnswerSaver>() != null)
+        try
         {
-            int answerAmount = 0;
-            AnswerSaver[] allAnswers = questions[currentID].questionObj.gameObject.GetComponentsInChildren<AnswerSaver>();
-            //print(questions[currentID].questionObj.gameObject.name); 
-
-            foreach (AnswerSaver answer in allAnswers)
+            if (questions[currentID].questionObj.gameObject.GetComponentInChildren<AnswerSaver>() != null)
             {
-                answerAmount++; 
+                int answerAmount = 0;
+                AnswerSaver[] allAnswers = questions[currentID].questionObj.gameObject.GetComponentsInChildren<AnswerSaver>();
+                //print(questions[currentID].questionObj.gameObject.name); 
 
-                if (answer.questionType == AnswerSaver.QuestionType.toggles || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
+                foreach (AnswerSaver answer in allAnswers)
                 {
-                    if (answer.gameObject.GetComponentInChildren<ToggleGroup>() != null)
+                    answerAmount++;
+
+                    if (answer.questionType == AnswerSaver.QuestionType.toggles || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
                     {
-                        ToggleGroup tg = answer.gameObject.GetComponentInChildren<ToggleGroup>(); 
-                        if (tg.AnyTogglesOn() == false)
+                        if (answer.gameObject.GetComponentInChildren<ToggleGroup>() != null)
                         {
-                            print("False at toogle: " + answer.gameObject.name); 
+                            ToggleGroup tg = answer.gameObject.GetComponentInChildren<ToggleGroup>();
+                            if (tg.AnyTogglesOn() == false)
+                            {
+                                print("False at toogle: " + answer.gameObject.name);
+                                return false;
+                            }
+                            else if (answer.gameObject.name == "language" || answer.gameObject.name == "visualAcuity" || answer.gameObject.name == "colorVision" || answer.gameObject.name == "declarationConsent")
+                            {
+                                if (answer.currentAnswer == "2")
+                                {
+                                    ShowIneligableScreen();
+                                    return false;
+                                }
+                            }
+                            else if (answer.gameObject.name == "intro1_1" || answer.gameObject.name == "intro1_3" || answer.gameObject.name == "intro2_3")
+                            {
+                                if (answer.currentAnswer == "2") // Answered 2:False
+                                    return false;
+                            }
+                            else if (answer.gameObject.name == "intro1_2" || answer.gameObject.name == "intro2_1" || answer.gameObject.name == "intro2_2")
+                            {
+                                if (answer.currentAnswer == "1") // Answered 1:True
+                                    return false;
+                            }
+
+                        }
+                    }
+
+                    if (answer.questionType == AnswerSaver.QuestionType.freeInputAlphaNum || answer.questionType == AnswerSaver.QuestionType.freeInputNumber || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
+                    {
+                        if (answer.currentAnswer == null || answer.currentAnswer == "") // If no input happened in free input field dont allow continue
+                        {
+                            print("False at free input: " + answer.gameObject.name);
                             return false;
                         }
-                        else if(answer.gameObject.name == "language" || answer.gameObject.name == "visualAcuity" || answer.gameObject.name == "colorVision" || answer.gameObject.name == "declarationConsent")
+
+                        if (answer.gameObject.name == "prolificID")
                         {
-                            if (answer.currentAnswer == "2")
+                            if (answer.currentAnswer.Length != 24)
                             {
-                                ShowIneligableScreen();
                                 return false;
                             }
                         }
-                        else if(answer.gameObject.name == "intro1_1" || answer.gameObject.name == "intro1_3" || answer.gameObject.name == "intro2_3")
+                        else if (answer.gameObject.name == "age")
                         {
-                            if (answer.currentAnswer == "2") // Answered 2:False
-                                return false; 
-                        }
-                        else if (answer.gameObject.name == "intro1_2" || answer.gameObject.name == "intro2_1" || answer.gameObject.name == "intro2_2")
-                        {
-                            if (answer.currentAnswer == "1") // Answered 1:True
-                                return false;
-                        }
-
-                    }
-                }
-
-                if (answer.questionType == AnswerSaver.QuestionType.freeInputAlphaNum || answer.questionType == AnswerSaver.QuestionType.freeInputNumber || answer.questionType == AnswerSaver.QuestionType.togglesWithFreeInput)
-                {
-                    if (answer.currentAnswer == null || answer.currentAnswer == "") // If no input happened in free input field dont allow continue
-                    {
-                        print("False at free input: " + answer.gameObject.name); 
-                        return false;
-                    }
-
-                    if(answer.gameObject.name == "prolificID")
-                    {
-                            if(answer.currentAnswer.Length != 24)
-                            {
-                                return false; 
-                            }
-                    }
-                    else if(answer.gameObject.name == "age")
-                    {
                             int i = int.Parse(answer.currentAnswer);
                             if (i < 18 || i > 99) // Age not valid
                             {
                                 ShowIneligableScreen();
                                 return false;
                             }
+                        }
                     }
-                }
 
-                if(answer.questionType == AnswerSaver.QuestionType.other)
-                {
-                    if(answer.currentAnswer == null || answer.currentAnswer == "")
+                    if (answer.questionType == AnswerSaver.QuestionType.other)
                     {
-                        print("False at free input: " + answer.gameObject.name);
-                        return false; 
+                        if (answer.currentAnswer == null || answer.currentAnswer == "")
+                        {
+                            print("False at free input: " + answer.gameObject.name);
+                            return false;
+                        }
                     }
                 }
-            } 
-            // If code reaches this point, each question has been checked for valid answer
-            if (answerAmount == allAnswers.Length)
+                // If code reaches this point, each question has been checked for valid answer
+                if (answerAmount == allAnswers.Length)
+                    return true;
+                else
+                    return false;
+
+            }
+            else // IntroductionScreens with no Answer Saver attached; 
+            {
                 return true;
-            else
-                return false;
-            
-        }     
-        else // IntroductionScreens with no Answer Saver attached; 
-        {
-            return true;
+            }
         }
+        catch
+        {}
+        return true;
     }
 
     void SaveAnswer(int currentID)
@@ -238,6 +250,11 @@ public class FragebogenManager : MonoBehaviour
         ineligableScreen.SetActive(true); 
 
 
+    }
+
+    public void LoadIntroduction ()
+    {
+        MySceneManager.Instance.LoadSceneByName("Introduction");
     }
 
    
