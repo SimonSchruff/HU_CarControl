@@ -298,7 +298,7 @@ public class Control : MonoBehaviour
                 UpdateFuncToCall();
                 timeCounter = 0;
 
-                Debug.LogError((isInit ? 2 : spawnDelay));
+               // Debug.LogError((isInit ? 2 : spawnDelay)); // throws errors with "8"; problem ?? 
             }
         }
 

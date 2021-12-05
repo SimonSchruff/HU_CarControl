@@ -141,7 +141,7 @@ public class FragebogenManager : MonoBehaviour
                             print("False at toogle: " + answer.gameObject.name); 
                             return false;
                         }
-                        else if(answer.gameObject.name == "language" || answer.gameObject.name == "visualAcuity" || answer.gameObject.name == "colorVision" || answer.gameObject.name == "declarationConsent")
+                        else if(answer.gameObject.name == "language_1" || answer.gameObject.name == "visualAcuity" || answer.gameObject.name == "colorVision" || answer.gameObject.name == "declarationConsent")
                         {
                             if (answer.currentAnswer == "2")
                             {

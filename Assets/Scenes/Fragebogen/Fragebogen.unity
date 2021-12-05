@@ -240,8 +240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   group: 0
   playerID: 
-  URL: http://127.0.0.1:8888/HU_CarControl/dataNew.php
   nBackData: []
+  primaryData: []
 --- !u!4 &33252836
 Transform:
   m_ObjectHideFlags: 0
@@ -36910,7 +36910,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &4852332225241331458
 MonoBehaviour:
   m_ObjectHideFlags: 0

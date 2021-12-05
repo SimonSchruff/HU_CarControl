@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class SliderPercentageIndicator : MonoBehaviour
 {
     Slider slider;
-    Text text; 
+    Text text;
+
+    [SerializeField] private Text altText; 
 
     void Start()
     {
@@ -22,6 +24,12 @@ public class SliderPercentageIndicator : MonoBehaviour
 
     void Update()
     {
-        text.text = slider.value.ToString(); 
+        text.text = slider.value.ToString();
+
+        if(gameObject.name == "PercentageIndicator_com")
+        {
+            text.text = slider.value.ToString();
+            altText.text = (100 - slider.value).ToString(); 
+        }
     }
 }

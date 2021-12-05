@@ -26,7 +26,9 @@ public class SQLSaveManager : MonoBehaviour
     public List<Answer> answerList = new List<Answer>();
 
     public List<NBackGameManager.LevelData> nBackData = new List<NBackGameManager.LevelData>();
-    public SaveTrialClass[] primaryData = new SaveTrialClass[0]; 
+    public SaveTrialClass[] primaryData = new SaveTrialClass[0];
+
+    string startTime; 
 
 
 
@@ -44,6 +46,9 @@ public class SQLSaveManager : MonoBehaviour
 
 
         DontDestroyOnLoad(gameObject);
+
+        startTime = System.DateTime.UtcNow.ToString(); 
+        print(startTime); 
 
     }
 
@@ -79,6 +84,7 @@ public class SQLSaveManager : MonoBehaviour
         List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
 
         formData.Add(new MultipartFormDataSection("id", playerID));
+        formData.Add(new MultipartFormDataSection("startTime", startTime));
         formData.Add(new MultipartFormDataSection("gr", group.ToString()));
 
         foreach (Answer a in answerList)
