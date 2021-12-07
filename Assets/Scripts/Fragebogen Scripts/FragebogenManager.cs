@@ -73,9 +73,9 @@ public class FragebogenManager : MonoBehaviour
             SaveAnswer(currentID);
 
             questions[currentID].questionObj.gameObject.SetActive(false);
-            questions[currentID +1 ].questionObj.gameObject.SetActive(true);
+            //questions[currentID +1 ].questionObj.gameObject.SetActive(true);
 
-            /*
+            
             if(questions[currentID].questionObj.gameObject.name ==  "Set Active Self Eff")
             {
                 MySceneManager.Instance.LoadSceneByName("NBackSpiel"); 
@@ -97,15 +97,17 @@ public class FragebogenManager : MonoBehaviour
             else if (currentID != (questions.Length - 1)) // Last question -> Dont activate next UI
             {
                 GameObject obj = questions[currentID + 1].questionObj.gameObject;
-                obj.SetActive(true); 
+                obj.SetActive(true);
 
-                try
+                TrialStartLogic tr; 
+                if(obj.TryGetComponent<TrialStartLogic>(out tr) == true)
                 {
-                    obj.GetComponent<TrialStartLogic>().ActivateSession();
+                    tr.ActivateSession();
+
                 }
-                catch { }
+                
             }
-            */
+            
 
 
             questionNumber++;
