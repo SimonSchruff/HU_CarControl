@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class FragebogenManager : MonoBehaviour
 {
+    public Text debugText; 
     [SerializeField] private int questionNumber; // Counted up with each button "Continue" Button Click
     [SerializeField] private GameObject ineligableScreen;
 
@@ -63,15 +64,18 @@ public class FragebogenManager : MonoBehaviour
 
         int currentID = questions[questionNumber].id;
         isAllowedToChange = AllowedToContinue(currentID);
+        debugText.text = isAllowedToChange.ToString(); 
         //print(isAllowedToChange);
 
+        
         if (isAllowedToChange)
         {
             SaveAnswer(currentID);
 
             questions[currentID].questionObj.gameObject.SetActive(false);
+            questions[currentID +1 ].questionObj.gameObject.SetActive(true);
 
-            
+            /*
             if(questions[currentID].questionObj.gameObject.name ==  "Set Active Self Eff")
             {
                 MySceneManager.Instance.LoadSceneByName("NBackSpiel"); 
@@ -101,6 +105,8 @@ public class FragebogenManager : MonoBehaviour
                 }
                 catch { }
             }
+            */
+
 
             questionNumber++;
         }
@@ -116,10 +122,11 @@ public class FragebogenManager : MonoBehaviour
             }
 
         }
+        
     }
 
 
-    bool AllowedToContinue(int currentID)
+    public bool AllowedToContinue(int currentID)
     {
         if (questions[currentID].questionObj.gameObject.GetComponentInChildren<AnswerSaver>() != null)
         {
