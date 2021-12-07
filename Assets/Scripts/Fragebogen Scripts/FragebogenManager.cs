@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 
 public class FragebogenManager : MonoBehaviour
 {
-    public Text debugText; 
     [SerializeField] private int questionNumber; // Counted up with each button "Continue" Button Click
     [SerializeField] private GameObject ineligableScreen;
 
@@ -64,7 +63,6 @@ public class FragebogenManager : MonoBehaviour
 
         int currentID = questions[questionNumber].id;
         isAllowedToChange = AllowedToContinue(currentID);
-        debugText.text = isAllowedToChange.ToString(); 
         //print(isAllowedToChange);
 
         
