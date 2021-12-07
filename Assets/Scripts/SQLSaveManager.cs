@@ -7,6 +7,8 @@ public class SQLSaveManager : MonoBehaviour
 {
     public static SQLSaveManager instance;
 
+    [SerializeField] GameObject errorMessageCanvas;
+
     public enum Group
     {
         group1,
@@ -16,7 +18,7 @@ public class SQLSaveManager : MonoBehaviour
     public Group group;
 
     public string playerID;
-    private string URL = "http://marki.fun/PHP/dataNew.php"; 
+    private string URL = "https://marki.fun/PHP/dataNew.php";
 
     public struct Answer
     {
@@ -139,10 +141,10 @@ public class SQLSaveManager : MonoBehaviour
                 formData.Add(new MultipartFormDataSection(data.trialName + "_percentageArea", data.percentageArea.ToString()));
                 formData.Add(new MultipartFormDataSection(data.trialName + "_percentageSpecific", data.percentageSpecific.ToString()));
 
-                formData.Add(new MultipartFormDataSection(data.trialName + "_sec_TotalAlarms", data.percentageSpecific.ToString()));
-                formData.Add(new MultipartFormDataSection(data.trialName + "_sec_Correct", data.percentageSpecific.ToString()));
-                formData.Add(new MultipartFormDataSection(data.trialName + "_sec_Misses", data.percentageSpecific.ToString()));
-                formData.Add(new MultipartFormDataSection(data.trialName + "_sec_FalseAlarm", data.percentageSpecific.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_sec_TotalAlarms", data.sec_TotalAlarms.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_sec_Correct", data.sec_Correct.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_sec_Misses", data.sec_Misses.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_sec_FalseAlarm", data.sec_FalseAlarm.ToString()));
 
 
 
@@ -159,17 +161,25 @@ public class SQLSaveManager : MonoBehaviour
             switch (webRequest.result)
             {
                 case UnityWebRequest.Result.ConnectionError:
+                    StartCoroutine(retrySendData());
+                    break;
                 case UnityWebRequest.Result.DataProcessingError:
+                    StartCoroutine(retrySendData());
                     Debug.LogError("PostDataRequest Error: " + webRequest.error);
                     break;
                 case UnityWebRequest.Result.ProtocolError:
+                    StartCoroutine(retrySendData());
                     Debug.LogError("PostDataRequest HTTP Error: " + webRequest.error);
                     break;
                 case UnityWebRequest.Result.Success:
                     Debug.Log("PostDataRequest Response: " + webRequest.downloadHandler.text);
-
                     break;
             }
+        }
+
+        IEnumerator retrySendData ()
+        {
+            yield return new WaitForSeconds(1);
         }
     }
 
