@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf5f3b11fd2046c7928cced3f2ca483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  group: 0
+  group: 2
   playerID: 
   nBackData: []
   primaryData: []

@@ -58012,11 +58012,11 @@ MonoBehaviour:
     name: Trust and Reliability
     questionObj: {fileID: 574314915}
   - id: 11
-    name: Trust and Reliability Slider Group 1 and 2
-    questionObj: {fileID: 1105647814}
+    name: Trust and Reliability Slider Group 3
+    questionObj: {fileID: 1570816612}
   - id: 12
-    name: Satisfaction Slider Group 1 adn 2
-    questionObj: {fileID: 1894016755}
+    name: Satisfaction Slider Group 3
+    questionObj: {fileID: 472089269}
   - id: 13
     name: Data Quality
     questionObj: {fileID: 1091411071}
