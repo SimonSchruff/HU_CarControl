@@ -18,7 +18,7 @@ public class SQLSaveManager : MonoBehaviour
     public Group group;
 
     public string playerID;
-    private string URL = "http://marki.fun/PHP/dataNew.php";
+    private string URL = "https://marki.fun/PHP/dataNew.php";
 
     public struct Answer
     {
