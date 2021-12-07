@@ -18,7 +18,7 @@ public class SQLSaveManager : MonoBehaviour
     public Group group;
 
     public string playerID;
-    private string URL = "https://marki.fun/PHP/dataNew.php";
+    private string URL = "http://marki.fun/PHP/dataNew.php";
 
     public struct Answer
     {
@@ -179,7 +179,10 @@ public class SQLSaveManager : MonoBehaviour
 
         IEnumerator retrySendData ()
         {
+            GameObject tempError = Instantiate(errorMessageCanvas);
             yield return new WaitForSeconds(1);
+            Destroy(tempError);
+            StartCoroutine(PostData());
         }
     }
 

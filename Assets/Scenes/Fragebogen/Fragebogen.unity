@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf5f3b11fd2046c7928cced3f2ca483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  errorMessageCanvas: {fileID: 1741147094596929069, guid: cc186687992832c4593022035337dce1, type: 3}
   group: 0
   playerID: 
   nBackData: []
