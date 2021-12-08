@@ -132,6 +132,8 @@ public class SecondaryTask : MonoBehaviour
                 inputTimer = timeToGiveInput; 
                 currentState = CurrentState.cooldown;    
             }
+
+            indicator.transform.localPosition = startPos;
         }
 
         switch(currentState)
@@ -168,8 +170,8 @@ public class SecondaryTask : MonoBehaviour
         if(isTrainingSession && continueButton != null)
         {
 
-            if (rounds >= 2)
-                continueButton.SetActive(true); 
+            if (rounds >= 3)
+                FragebogenManager.fra.NextQuestion(); 
                 
         }
 
