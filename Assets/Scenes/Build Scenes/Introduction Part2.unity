@@ -3579,7 +3579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showUI: 1
   saveData: 1
-  trialDurationInMin: 1
+  trialDurationInMin: 5
   differentGroupAssistances: 0
   assistanceLevel: 1
   group1_assiLevel: 1

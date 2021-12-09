@@ -28586,7 +28586,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 683151115}
   m_Direction: 2
   m_Value: 1.0000021
-  m_Size: 0.540596
+  m_Size: 0.54059607
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -31017,7 +31017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b5a0bf65ebc441a8eeb8b45333e5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.025
+  scrollSpeed: 0.02
   isInverted: 0
 --- !u!114 &862753036
 MonoBehaviour:
@@ -55594,10 +55594,10 @@ MonoBehaviour:
     questionObj: {fileID: 574314915}
   - id: 11
     name: 'Trust and Reliability Slider Group '
-    questionObj: {fileID: 1105647814}
+    questionObj: {fileID: 1570816612}
   - id: 12
     name: 'Satisfaction Slider Group '
-    questionObj: {fileID: 1894016755}
+    questionObj: {fileID: 472089269}
   errorTexts:
   - parentObjectName: enjoyment
     obj: {fileID: 1110514668}
