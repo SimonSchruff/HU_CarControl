@@ -87,7 +87,11 @@ public class FragebogenManager : MonoBehaviour
                 MySceneManager.Instance.LoadSceneByName("Fragebogen");
 
             }
-            else if(questions[currentID].questionObj.gameObject.name == "Set Active Data Quality")
+            else if(questions[currentID].questionObj.gameObject.name == "Group 1 + 2 Sat" || questions[currentID].questionObj.gameObject.name == "Group 3 Sat")
+            {
+                MySceneManager.Instance.LoadSceneByName("Introduction Part2");
+            }
+            else if(questions[currentID].questionObj.gameObject.name == "Data Quality")
             {
                 SQLSaveManager.instance.StartPostCoroutine(); 
                 questions[currentID + 1].questionObj.gameObject.SetActive(true);
