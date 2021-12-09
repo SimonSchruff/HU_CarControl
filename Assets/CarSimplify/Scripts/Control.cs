@@ -19,6 +19,7 @@ public class Control : MonoBehaviour
     float timeCounter = 0f;
     bool isInit = false;
 
+    [SerializeField] bool isLastLevel = false;
 
     [Header("Gameplay not change")]
     public int actualStep = 0;
@@ -58,8 +59,6 @@ public class Control : MonoBehaviour
         actualSaveClass.assistance = assistanceLevel;
       //  actualSaveClass.assistance = AssistanceSelectScript.assiSel.actualAssiSelect.ToString();
         actualSaveClass.saveData = safeData;
-        if(safeData)
-            allSaveClasses.Add(actualSaveClass);
 
         if (AssistanceSelectScript.assiSel.actualAssiSelect == AssistanceSelectScript.AssiSelectStates.Area)
         {
@@ -113,32 +112,35 @@ public class Control : MonoBehaviour
 
     void CheckIfAddLastScoreClass ()
     {
-        if(allSaveClasses.Count == 5)
+        if(isLastLevel)
         {
             float tempScore1 = 0;
             float tempScore2 = 0;
 
-            for (int i = 0; i < 5; i++)
+            var saveTrials = FindObjectsOfType<SaveTrialClass>();
+
+            foreach (var trial in saveTrials)
             {
-                switch (i)
+                switch (trial.trialName)
                 {
-                    case 1:
-                        tempScore1 += allSaveClasses[i].score;
+                    case "tr2":
+                        tempScore1 += trial.score;
                         break;
-                    case 2:
-                        tempScore1 += allSaveClasses[i].score;
+                    case "tr3":
+                        tempScore1 += trial.score;
                         break;
-                    case 3:
-                        tempScore1 += allSaveClasses[i].score;
+                    case "tr4":
+                        tempScore1 += trial.score;
                         break;
-                    case 4:
-                        tempScore2 += allSaveClasses[i].score;
+                    case "tr5":
+                        tempScore2 += trial.score;
                         break;
 
                     default:
                         break;
                 }
             }
+
             float finScore = ((tempScore1 / 3) + tempScore2) / 2;
 
             SaveTrialClass tri = SQLSaveManager.instance.gameObject.AddComponent<SaveTrialClass>();

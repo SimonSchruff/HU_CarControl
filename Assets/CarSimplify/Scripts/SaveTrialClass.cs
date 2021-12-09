@@ -81,7 +81,7 @@ public class SaveTrialClass : MonoBehaviour
 
         if (!saveData)
         {
-            Destroy(this);
+            DestroyImmediate(this);
         }
     }
 }
