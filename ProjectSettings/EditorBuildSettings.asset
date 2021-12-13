@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Dec.unity
-    guid: 7ebb2b6c0ea36924eb4e41e377110638
   - enabled: 1
     path: Assets/Scenes/Build Scenes/DeclarationOfConsent.unity
     guid: bb103a318259140f4b4e3c2de5f2843b
