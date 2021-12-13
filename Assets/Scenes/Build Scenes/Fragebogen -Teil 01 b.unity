@@ -2874,9 +2874,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf5f3b11fd2046c7928cced3f2ca483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  errorMessageCanvas: {fileID: 0}
+  group: 0
   playerID: 
-  URL: http://127.0.0.1:8888/data.php
   nBackData: []
+  primaryData: []
 --- !u!4 &163638772
 Transform:
   m_ObjectHideFlags: 0
@@ -3028,6 +3030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 0
 --- !u!1 &200116931
 GameObject:
@@ -3410,6 +3413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 0
 --- !u!1 &213620736
 GameObject:
@@ -11232,6 +11236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 0
 --- !u!1 &614200834
 GameObject:
@@ -13524,6 +13529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 0
 --- !u!1 &815900991
 GameObject:
@@ -14837,6 +14843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 2
 --- !u!1 &905394504
 GameObject:
@@ -16697,6 +16704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 0
 --- !u!1 &1043374956
 GameObject:
@@ -21139,6 +21147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 0
 --- !u!1 &1308994770
 GameObject:
@@ -22323,6 +22332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 0
 --- !u!1 &1378495391
 GameObject:
@@ -27430,6 +27440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 2
 --- !u!1 &1705950431
 GameObject:
@@ -27794,6 +27805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 0
 --- !u!1 &1743319698
 GameObject:
@@ -28311,6 +28323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 0
 --- !u!1 &1758987770
 GameObject:
@@ -28622,6 +28635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 2
 --- !u!1 &1769615547
 GameObject:
@@ -32773,6 +32787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 0
 --- !u!1 &2028286326
 GameObject:
@@ -34349,6 +34364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 0
 --- !u!1 &2102351771
 GameObject:
@@ -34642,6 +34658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 0
 --- !u!1 &2119374208
 GameObject:
@@ -35138,4 +35155,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: 
+  toggleIF: {fileID: 0}
   questionType: 2

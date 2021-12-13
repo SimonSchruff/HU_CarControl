@@ -72,6 +72,7 @@ public class FragebogenManager : MonoBehaviour
 
             questions[currentID].questionObj.gameObject.SetActive(false);
             //questions[currentID +1 ].questionObj.gameObject.SetActive(true);
+            print(questions[currentID].questionObj.gameObject.name); 
 
             
             if(questions[currentID].questionObj.gameObject.name ==  "Set Active Self Eff")
@@ -87,7 +88,7 @@ public class FragebogenManager : MonoBehaviour
                 MySceneManager.Instance.LoadSceneByName("Fragebogen");
 
             }
-            else if(questions[currentID].questionObj.gameObject.name == "Group 1 + 2 Sat" || questions[currentID].questionObj.gameObject.name == "Group 3 Sat")
+            else if(questions[currentID].questionObj.gameObject.name == "Set Active Sat Sliders")
             {
                 MySceneManager.Instance.LoadSceneByName("Introduction Part2");
             }
