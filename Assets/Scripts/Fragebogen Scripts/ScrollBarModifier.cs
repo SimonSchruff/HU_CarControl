@@ -20,21 +20,19 @@ public class ScrollBarModifier : MonoBehaviour
 
     void Update()
     {
-        if (scrollbar.value <= 0f)
+        Mathf.Clamp(scrollbar.value, 0, 1); 
         {
-            scrollbar.value = 0.0001f;
-        }
-        else if (scrollbar.value >= 1f)
-        {
-            scrollbar.value = 0.9999f;
-        }
-        else
-        {
+            //print(Input.mouseScrollDelta.y); 
 
             if (!isInverted )
-                scrollbar.value += Input.mouseScrollDelta.y * scrollSpeed;
+            {
+
+                Mathf.Clamp(scrollbar.value += Input.mouseScrollDelta.y * scrollSpeed ,0,1);   
+            }
             else
-                scrollbar.value += Input.mouseScrollDelta.y * -scrollSpeed;
+            {
+                Mathf.Clamp(scrollbar.value += Input.mouseScrollDelta.y * -scrollSpeed ,0,1);   
+            }
         }
 
         

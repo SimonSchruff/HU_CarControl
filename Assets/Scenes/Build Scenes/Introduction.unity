@@ -5046,7 +5046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b5a0bf65ebc441a8eeb8b45333e5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.03
+  scrollSpeed: 0.01
   isInverted: 0
 --- !u!114 &580333722
 MonoBehaviour:
@@ -5091,8 +5091,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1814832974}
   m_HandleRect: {fileID: 1814832973}
   m_Direction: 2
-  m_Value: 1.0000004
-  m_Size: 0.74952585
+  m_Value: 1.0000002
+  m_Size: 0.7495258
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5541,16 +5541,24 @@ PrefabInstance:
       objectReference: {fileID: 894083807}
     - target: {fileID: 5563881467275734730, guid: ab2685052fdde442b96ab9d2a190d9d1, type: 3}
       propertyPath: timeRange
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5563881467275734730, guid: ab2685052fdde442b96ab9d2a190d9d1, type: 3}
       propertyPath: trainingText
       value: 
       objectReference: {fileID: 835153059}
     - target: {fileID: 5563881467275734730, guid: ab2685052fdde442b96ab9d2a190d9d1, type: 3}
+      propertyPath: trainingTime
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563881467275734730, guid: ab2685052fdde442b96ab9d2a190d9d1, type: 3}
       propertyPath: continueButton
       value: 
       objectReference: {fileID: 249513206}
+    - target: {fileID: 5563881467275734730, guid: ab2685052fdde442b96ab9d2a190d9d1, type: 3}
+      propertyPath: timeToGiveInput
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5563881467275734730, guid: ab2685052fdde442b96ab9d2a190d9d1, type: 3}
       propertyPath: isTrainingSession
       value: 1
@@ -16125,7 +16133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b5a0bf65ebc441a8eeb8b45333e5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.03
+  scrollSpeed: 0.01
   isInverted: 0
 --- !u!114 &1933615928
 MonoBehaviour:
@@ -16170,8 +16178,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1138109525}
   m_HandleRect: {fileID: 1138109524}
   m_Direction: 2
-  m_Value: 0.9842472
-  m_Size: 0.41943344
+  m_Value: 0.9842471
+  m_Size: 0.4194334
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

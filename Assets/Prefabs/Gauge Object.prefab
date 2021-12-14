@@ -128,10 +128,10 @@ MonoBehaviour:
   resetKey: 32
   indicator: {fileID: 5563881466448516084}
   isTrainingSession: 0
+  trainingTime: 0
   trainingText: {fileID: 0}
-  continueButton: {fileID: 0}
   travelDistance: 41
-  moveSpeed: 100
+  moveSpeed: 80
   timeRange: 60
   timeToGiveInput: 10
   currentState: 0

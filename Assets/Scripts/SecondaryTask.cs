@@ -16,8 +16,10 @@ public class SecondaryTask : MonoBehaviour
 
     [Header("Training Session")]
     public bool isTrainingSession;
+    public float trainingTime; 
     public Text trainingText;
-    public GameObject continueButton; 
+    //public GameObject continueButton;
+    private float _trainingTimer; 
 
 
     [Header("Variables")]
@@ -167,12 +169,11 @@ public class SecondaryTask : MonoBehaviour
                 break; 
         }
 
-        if(isTrainingSession && continueButton != null)
+        if(isTrainingSession)
         {
-
-            if (rounds >= 3)
-                FragebogenManager.fra.NextQuestion(); 
-                
+            _trainingTimer += Time.deltaTime;
+            if(_trainingTimer > trainingTime)
+                FragebogenManager.fra.NextQuestion();        
         }
 
 
