@@ -48,8 +48,8 @@ public class NBackGameManager : MonoBehaviour
     [Header("Round Stimuli Lists")]
     public List<string> round1Numbers = new List<string>();
     public List<string> round2Numbers = new List<string>();
-    public List<string> round3Numbers = new List<string>();
-    public List<string> round4Numbers = new List<string>();
+    //public List<string> round3Numbers = new List<string>();
+    //public List<string> round4Numbers = new List<string>();
     List<string> usedLetters = new List<string>();
 
 
@@ -109,25 +109,6 @@ public class NBackGameManager : MonoBehaviour
         InstructionObjects.SetActive(true);
 
 
-        //Check if all Lists are the same length and set stimuli shown to length of list 01
-        if(round1Numbers.Count == round2Numbers.Count || round1Numbers.Count == round3Numbers.Count || round1Numbers.Count == round4Numbers.Count )
-        {
-            if(round2Numbers.Count == round3Numbers.Count || round2Numbers.Count == round4Numbers.Count)
-            {
-                if(round3Numbers.Count == round4Numbers.Count)
-                {
-                    stimuliShown = round1Numbers.Count; 
-                    print(stimuliShown); 
-                }
-                else 
-                    Debug.LogError("Round 3 and Round 4 List are not the same length!"); 
-            }
-            else
-                Debug.LogError("Round 2 and Round 3 or 4 List are not the same length!"); 
-        }
-        else
-            Debug.LogError("Round 1 and Round 2,3 or 4 List are not the same length!"); 
-
         
         
     }
@@ -164,7 +145,7 @@ public class NBackGameManager : MonoBehaviour
 
                 
 
-                if(stimuli >= stimuliShown)
+                if(stimuli >= round1Numbers.Count && currentLevel == 0 || stimuli >= round2Numbers.Count && currentLevel == 1)
                 {
                     SaveScoreData(); 
                     switchedLevels = false; 
@@ -203,22 +184,13 @@ public class NBackGameManager : MonoBehaviour
                 break; 
                 case 1: //Round 2 of 4
                     gameState = GameState.levelFinished; 
-                    levelTextObj.text = "Round 2 of 4"; 
+                    levelTextObj.text = "Round 2 of 2"; 
                     ResetForNewLevel(); 
                 break; 
                 case 2: //Round 3 of 4
-                    levelTextObj.text = "Round 3 of 4"; 
-                    gameState = GameState.levelFinished;
-                    ResetForNewLevel(); 
+                    gameState = GameState.gameOver;
                 break;  
-                case 3: //Round 4 of 4
-                    levelTextObj.text = "Round 4 of 4"; 
-                    gameState = GameState.levelFinished; 
-                    ResetForNewLevel(); 
-                break; 
-                case 4: // Game Over
-                    gameState = GameState.gameOver; 
-                break; 
+               
             }
         }
 
@@ -276,14 +248,7 @@ public class NBackGameManager : MonoBehaviour
         {
             letterTextObj.text = round2Numbers[stimuli];
         }
-        else if(currentLevel == 2)
-        {
-            letterTextObj.text = round3Numbers[stimuli];
-        }
-        else if(currentLevel == 3)
-        {
-            letterTextObj.text = round4Numbers[stimuli];
-        }
+        
         
         currentLetter = letterTextObj.text; 
         usedLetters.Add(currentLetter); // Add to used Letter List

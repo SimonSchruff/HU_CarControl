@@ -795,8 +795,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -102.460785, y: -28.259995}
-  m_SizeDelta: {x: 191.4364, y: 43.0347}
+  m_AnchoredPosition: {x: -102.460785, y: -34.994583}
+  m_SizeDelta: {x: 191.4364, y: 56.5039}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3619266538461240622
 CanvasRenderer:
@@ -819,7 +819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9145266, g: 0.9150943, b: 0.3496351, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1687,10 +1687,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1698,7 +1698,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: area
+  m_Text: 'Mode 1: Area'
 --- !u!1 &3619266539041142834
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,6 +1764,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 16384
+  isLastLevel: 0
   actualStep: 0
   actualSaveClass: {fileID: 0}
   allSaveClasses: []
@@ -1927,8 +1928,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.84400004}
   m_AnchorMax: {x: 0.13956252, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 15.7196045, y: -9.885101}
+  m_SizeDelta: {x: 31.4392, y: 19.7702}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3619266539239304188
 CanvasRenderer:
@@ -2035,10 +2036,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -2046,7 +2047,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: specific
+  m_Text: 'Mode 2: Specific'
 --- !u!1 &3619266539323433575
 GameObject:
   m_ObjectHideFlags: 0
