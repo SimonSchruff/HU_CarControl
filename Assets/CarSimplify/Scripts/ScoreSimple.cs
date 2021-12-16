@@ -29,6 +29,8 @@ public class ScoreSimple : MonoBehaviour
         {
             score += amount;
             scoreText.text = score.ToString();
+
+            scoreText.GetComponent<Animator>().SetTrigger(amount > 0 ? "p" : "n");
         }
     }
     public int GetScore ()
@@ -43,6 +45,6 @@ public class ScoreSimple : MonoBehaviour
 
     public void ChangeScoreVisibility (bool ChangeVisibilityTo)
     {
-        scoreText.gameObject.SetActive(ChangeVisibilityTo);
+     //   scoreText.gameObject.SetActive(ChangeVisibilityTo);
     }    
 }

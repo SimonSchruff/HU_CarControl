@@ -228,7 +228,6 @@ public class SimplAssis : MonoBehaviour
                                     {
                                         crosList.Add(cross);
                                         cross.tempHighlightPrio = i+1;
-                                        Debug.Log(i);
                                     }
                                 }
                             }

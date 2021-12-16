@@ -10,6 +10,7 @@ public class Control : MonoBehaviour
     public float gridSize = 1.5f;
 
     [SerializeField] int SpawnCarAmountPerTurn = 2;
+    [SerializeField] int SpawnCarAmountAtBegin = 5;
 
     [SerializeField] Camera camRef;
     [SerializeField] ContactFilter2D filter;
@@ -43,7 +44,7 @@ public class Control : MonoBehaviour
         }
     }
 
-    public void StartGame (string TrialName, bool safeData = true, string assistanceLevel = "x")
+    public void StartGame(string TrialName, bool safeData = true, string assistanceLevel = "x")
     {
         crossesRefs = FindObjectsOfType<Crosses>();
         carSpawnRefs = FindObjectsOfType<CarSpawnScript>();
@@ -162,23 +163,23 @@ public class Control : MonoBehaviour
         }
 
     }
-    void UpdateFuncToCall ()
+    void UpdateFuncToCall (bool IsInit = false)
     {
         if (gameRunning)
         {
-            UpdateElems();
+            UpdateElems(IsInit);
             SimplAssis.assi.UpdateAssistance();
         }
     }
 
-    void UpdateElems ()
+    void UpdateElems (bool IsInit = false)
     {
         foreach (var cs in carSpawnRefs)
         {
             cs.UpdateCheckIfSpawnAllowed();
         }
 
-        GetPossibleSpawnerAndSpawnCar();
+        GetPossibleSpawnerAndSpawnCar(IsInit);
 
         foreach (Crosses cr in crossesRefs)   
         {
@@ -197,7 +198,7 @@ public class Control : MonoBehaviour
             car.FillCrosses();
         }
     }
-    public void GetPossibleSpawnerAndSpawnCar ()
+    public void GetPossibleSpawnerAndSpawnCar (bool IsInit = false)
     {
         if (SpawnCarAmountPerTurn == 1)
         {
@@ -218,8 +219,7 @@ public class Control : MonoBehaviour
             List<CarSpawnScript> horSpawn = new List<CarSpawnScript>();
             List<CarSpawnScript> verSpawn = new List<CarSpawnScript>();
 
-
-            if (Random.Range(0, 2) == 1)
+            if (IsInit)
             {
                 foreach (var carSpawn in carSpawnRefs)
                 {
@@ -228,14 +228,19 @@ public class Control : MonoBehaviour
                         horSpawn.Add(carSpawn);
                     }
                 }
-                if (horSpawn.Count > 0)
+                Debug.Log("XXXXXXXX__" + SpawnCarAmountAtBegin / 2);
+                for (int i = 0; i < (SpawnCarAmountAtBegin / 2); i++)
                 {
-                    CarSpawnScript tempH = horSpawn[Random.Range(0, horSpawn.Count)];
-                    tempH.SpawnCar();
-
-                    if (tempH.correspondingSpawner != null)
+                    if (horSpawn.Count > 0)
                     {
-                        tempH.correspondingSpawner.DisableAllowSpawn();
+                        CarSpawnScript tempH = horSpawn[Random.Range(0, horSpawn.Count)];
+                        verSpawn.Remove(tempH);
+                        tempH.SpawnCar();
+
+                        if (tempH.correspondingSpawner != null)
+                        {
+                            tempH.correspondingSpawner.DisableAllowSpawn();
+                        }
                     }
                 }
 
@@ -246,43 +251,85 @@ public class Control : MonoBehaviour
                         verSpawn.Add(carSpawn);
                     }
                 }
-                if (verSpawn.Count > 0)
+
+                for (int i = 0; i < (SpawnCarAmountAtBegin / 2); i++)
                 {
-                    CarSpawnScript tempV = verSpawn[Random.Range(0, verSpawn.Count)];
-                    tempV.SpawnCar();
+                    if (verSpawn.Count > 0)
+                    {
+                        CarSpawnScript tempV = verSpawn[Random.Range(0, verSpawn.Count)];
+                        verSpawn.Remove(tempV);
+                        tempV.SpawnCar();
+
+                    }
                 }
             }
             else
             {
-                foreach (var carSpawn in carSpawnRefs)
+                if (Random.Range(0, 2) == 1)
                 {
-                    if (carSpawn.AllowSpawnCar && carSpawn.HorOrVert)
+                    foreach (var carSpawn in carSpawnRefs)
                     {
-                        verSpawn.Add(carSpawn);
+                        if (carSpawn.AllowSpawnCar && !carSpawn.HorOrVert)
+                        {
+                            horSpawn.Add(carSpawn);
+                        }
                     }
-                }
-                if (verSpawn.Count > 0)
-                {
-                    CarSpawnScript tempV = verSpawn[Random.Range(0, verSpawn.Count)];
-                    tempV.SpawnCar();
+                    if (horSpawn.Count > 0)
+                    {
+                        CarSpawnScript tempH = horSpawn[Random.Range(0, horSpawn.Count)];
+                        tempH.SpawnCar();
 
-                    if (tempV.correspondingSpawner != null)
-                    {
-                        tempV.correspondingSpawner.DisableAllowSpawn();
+                        if (tempH.correspondingSpawner != null)
+                        {
+                            tempH.correspondingSpawner.DisableAllowSpawn();
+                        }
                     }
-                }
 
-                foreach (var carSpawn in carSpawnRefs)
-                {
-                    if (carSpawn.AllowSpawnCar && !carSpawn.HorOrVert)
+                    foreach (var carSpawn in carSpawnRefs)
                     {
-                        horSpawn.Add(carSpawn);
+                        if (carSpawn.AllowSpawnCar && carSpawn.HorOrVert)
+                        {
+                            verSpawn.Add(carSpawn);
+                        }
+                    }
+                    if (verSpawn.Count > 0)
+                    {
+                        CarSpawnScript tempV = verSpawn[Random.Range(0, verSpawn.Count)];
+                        tempV.SpawnCar();
                     }
                 }
-                if (horSpawn.Count > 0)
+                else
                 {
-                    CarSpawnScript tempH = horSpawn[Random.Range(0, horSpawn.Count)];
-                    tempH.SpawnCar();
+                    foreach (var carSpawn in carSpawnRefs)
+                    {
+                        if (carSpawn.AllowSpawnCar && carSpawn.HorOrVert)
+                        {
+                            verSpawn.Add(carSpawn);
+                        }
+                    }
+                    if (verSpawn.Count > 0)
+                    {
+                        CarSpawnScript tempV = verSpawn[Random.Range(0, verSpawn.Count)];
+                        tempV.SpawnCar();
+
+                        if (tempV.correspondingSpawner != null)
+                        {
+                            tempV.correspondingSpawner.DisableAllowSpawn();
+                        }
+                    }
+
+                    foreach (var carSpawn in carSpawnRefs)
+                    {
+                        if (carSpawn.AllowSpawnCar && !carSpawn.HorOrVert)
+                        {
+                            horSpawn.Add(carSpawn);
+                        }
+                    }
+                    if (horSpawn.Count > 0)
+                    {
+                        CarSpawnScript tempH = horSpawn[Random.Range(0, horSpawn.Count)];
+                        tempH.SpawnCar();
+                    }
                 }
             }
         }
@@ -294,10 +341,10 @@ public class Control : MonoBehaviour
         {
             timeCounter += Time.deltaTime;
 
-            if(timeCounter >= (isInit? 2 : spawnDelay))
+            if(timeCounter >= (isInit? .2f : spawnDelay))
             {
+                UpdateFuncToCall(isInit);
                 isInit = false;
-                UpdateFuncToCall();
                 timeCounter = 0;
             }
         }
