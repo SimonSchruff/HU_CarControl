@@ -31,7 +31,7 @@ public class SQLSaveManager : MonoBehaviour
     public SaveTrialClass[] primaryData = new SaveTrialClass[0];
 
     System.DateTime startTime;
-    System.TimeSpan uploadTime;
+    System.TimeSpan timeSpent;
 
 
     void Awake()
@@ -83,13 +83,13 @@ public class SQLSaveManager : MonoBehaviour
 
     IEnumerator PostData()
     {
-        uploadTime = System.DateTime.UtcNow - startTime; 
+        timeSpent = System.DateTime.UtcNow - startTime; 
 
         List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
 
         formData.Add(new MultipartFormDataSection("id", playerID));
         formData.Add(new MultipartFormDataSection("startTime", startTime.ToString()));
-        formData.Add(new MultipartFormDataSection("uploadTime", uploadTime.ToString()));
+        formData.Add(new MultipartFormDataSection("timeSpent", timeSpent.ToString()));
 
         formData.Add(new MultipartFormDataSection("gr", group.ToString()));
 
