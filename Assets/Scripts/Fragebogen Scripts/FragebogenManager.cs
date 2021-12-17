@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class FragebogenManager : MonoBehaviour
 {
-    [SerializeField] private int questionNumber; // Counted up with each button "Continue" Button Click
+    public int questionNumber; // Counted up with each button "Continue" Button Click
     [SerializeField] private GameObject ineligableScreen;
 
     [Serializable]
