@@ -6886,6 +6886,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.000015258789
       objectReference: {fileID: 0}
+    - target: {fileID: 3619266538461240623, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
+      propertyPath: m_Color.b
+      value: 0.007843138
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619266538461240623, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
+      propertyPath: m_Color.g
+      value: 0.56078434
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619266538461240623, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9725491
+      objectReference: {fileID: 0}
     - target: {fileID: 3619266538766819888, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: m_Name
       value: GAME_SIMPLE
@@ -17878,7 +17890,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1138109524}
   m_Direction: 2
   m_Value: 0.9842472
-  m_Size: 0.41943344
+  m_Size: 0.41943347
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
