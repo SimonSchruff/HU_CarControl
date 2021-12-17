@@ -23,6 +23,13 @@ public class CarSimple : SimplifyParent
         yield return new WaitForSeconds(time);
         DestroyCar(true);
     }
+    IEnumerator AddPointsAfter(float time)
+    {
+        yield return new WaitForSeconds(time);
+        GetComponentInChildren<Animator>().SetTrigger("suc");
+        ScoreSimple.sco.UpdateScore (5);
+    }
+
 
     public void ManualInit (Crosses [] CrossLane, bool HorOrVertical)
     {
@@ -32,6 +39,7 @@ public class CarSimple : SimplifyParent
 
         spawnDelay = Control.con.spawnDelay;
         StartCoroutine(DestroyAfter(horOrVert ? 7 * spawnDelay : 4 * spawnDelay));
+        StartCoroutine(AddPointsAfter(horOrVert ? (5 * spawnDelay) +(.25f * spawnDelay) : (3 * spawnDelay) + (.30f * spawnDelay)));
     }
     public void FillCrosses()
     {
@@ -89,7 +97,8 @@ public class CarSimple : SimplifyParent
 
     void DestroyCar(bool success = false)
     {
-        ScoreSimple.sco.UpdateScore(success ? 5 : -3);
+        if(!success)     // Score is added earlier 
+            ScoreSimple.sco.UpdateScore(success ? 5 : -3);
 
         if (!success)
         {
