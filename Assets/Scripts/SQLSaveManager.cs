@@ -30,10 +30,8 @@ public class SQLSaveManager : MonoBehaviour
     public List<NBackGameManager.LevelData> nBackData = new List<NBackGameManager.LevelData>();
     public SaveTrialClass[] primaryData = new SaveTrialClass[0];
 
-    string startTime;
-    string uploadTime; 
-
-
+    System.DateTime startTime;
+    System.TimeSpan uploadTime;
 
 
     void Awake()
@@ -50,7 +48,8 @@ public class SQLSaveManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        startTime = System.DateTime.UtcNow.ToString(); 
+        startTime = System.DateTime.UtcNow;
+        
         print(startTime); 
 
     }
@@ -84,13 +83,13 @@ public class SQLSaveManager : MonoBehaviour
 
     IEnumerator PostData()
     {
-        uploadTime = System.DateTime.UtcNow.ToString();
+        uploadTime = System.DateTime.UtcNow - startTime; 
 
         List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
 
         formData.Add(new MultipartFormDataSection("id", playerID));
-        formData.Add(new MultipartFormDataSection("startTime", startTime));
-        formData.Add(new MultipartFormDataSection("uploadTime", uploadTime));
+        formData.Add(new MultipartFormDataSection("startTime", startTime.ToString()));
+        formData.Add(new MultipartFormDataSection("uploadTime", uploadTime.ToString()));
 
         formData.Add(new MultipartFormDataSection("gr", group.ToString()));
 
