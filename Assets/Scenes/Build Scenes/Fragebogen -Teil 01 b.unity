@@ -12837,7 +12837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b5a0bf65ebc441a8eeb8b45333e5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.005
+  scrollSpeed: 0.01
   isInverted: 0
 --- !u!114 &764902235
 MonoBehaviour:
@@ -12882,8 +12882,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1705950433}
   m_HandleRect: {fileID: 1705950432}
   m_Direction: 2
-  m_Value: 1.0000004
-  m_Size: 0.39500684
+  m_Value: 1.0000002
+  m_Size: 0.39500675
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

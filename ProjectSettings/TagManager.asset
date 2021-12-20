@@ -23,6 +23,7 @@ TagManager:
   - answerError
   - CrossSimple
   - CrossInner
+  - completionCode
   layers:
   - Default
   - TransparentFX

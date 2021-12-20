@@ -5410,7 +5410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b5a0bf65ebc441a8eeb8b45333e5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.01
+  scrollSpeed: 0.02
   isInverted: 0
 --- !u!114 &1715767603
 MonoBehaviour:
@@ -6194,7 +6194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b5a0bf65ebc441a8eeb8b45333e5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.01
+  scrollSpeed: 0.02
   isInverted: 0
 --- !u!114 &1836586204
 MonoBehaviour:
@@ -6240,7 +6240,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 436846697}
   m_Direction: 2
   m_Value: 0.99925274
-  m_Size: 0.40323344
+  m_Size: 0.4032334
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

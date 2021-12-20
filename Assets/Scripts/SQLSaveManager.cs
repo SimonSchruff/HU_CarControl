@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using TMPro; 
 
 public class SQLSaveManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class SQLSaveManager : MonoBehaviour
     public Group group;
 
     public string playerID;
+    public string completionCode; 
     private string URL = "https://marki.fun/PHP/dataNew.php";
 
     public struct Answer
@@ -188,6 +190,18 @@ public class SQLSaveManager : MonoBehaviour
             Destroy(tempError);
             StartCoroutine(PostData());
         }
+    }
+
+    public void SetCompletionCode()
+    {
+        if(!GameObject.FindGameObjectWithTag("completionCode"))
+        {
+            Debug.Log("CompletionCode not found!"); 
+            return; 
+        }
+        TextMeshProUGUI codeText = GameObject.FindGameObjectWithTag("completionCode").GetComponent<TextMeshProUGUI>();
+        codeText.text = completionCode;  
+        
     }
 
    

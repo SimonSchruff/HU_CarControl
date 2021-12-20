@@ -94,8 +94,9 @@ public class FragebogenManager : MonoBehaviour
             }
             else if(questions[currentID].questionObj.gameObject.name == "Data Quality")
             {
-                SQLSaveManager.instance.StartPostCoroutine(); 
+                SQLSaveManager.instance.StartPostCoroutine();
                 questions[currentID + 1].questionObj.gameObject.SetActive(true);
+                SQLSaveManager.instance.SetCompletionCode();
             }
             else if (currentID != (questions.Length - 1)) // Last question -> Dont activate next UI
             {
