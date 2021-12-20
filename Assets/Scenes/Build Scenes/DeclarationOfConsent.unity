@@ -3600,15 +3600,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163257971560777708, guid: 979deef2a3d7e47fd9b0b52c8170c8f9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 164.5948
       objectReference: {fileID: 0}
     - target: {fileID: 9163257971560777708, guid: 979deef2a3d7e47fd9b0b52c8170c8f9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 80
+      value: 59.0651
       objectReference: {fileID: 0}
     - target: {fileID: 9163257971560777708, guid: 979deef2a3d7e47fd9b0b52c8170c8f9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 233.4
+      value: 229
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163257971560777708, guid: 979deef2a3d7e47fd9b0b52c8170c8f9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 55
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 979deef2a3d7e47fd9b0b52c8170c8f9, type: 3}
@@ -5451,8 +5455,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 451910429}
   m_HandleRect: {fileID: 451910428}
   m_Direction: 2
-  m_Value: 0.99999994
-  m_Size: 0.6705329
+  m_Value: 1.0000001
+  m_Size: 0.67053294
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
