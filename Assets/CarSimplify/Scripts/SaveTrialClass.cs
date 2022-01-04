@@ -10,6 +10,11 @@ public class SaveTrialClass : MonoBehaviour
     public int carsSuccess = 0;
     public int carsCrashed = 0;
     public int crossesCrossed = 0;
+    public int crossesCrossedHorizontal = 0;
+    public int crossesCrossedVertical = 0;
+
+    public int amountUserClickedCrosses = 0;
+
     public string assistance = "";
     public int changedAssistanceAmount = 0;
     public float percentageArea = 0;
