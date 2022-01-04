@@ -77,6 +77,11 @@ public class CarSimple : SimplifyParent
                 if (Control.con.actualSaveClass != null)
                 {
                     Control.con.actualSaveClass.crossesCrossed++;
+
+                    if(horOrVert)
+                        Control.con.actualSaveClass.crossesCrossedHorizontal++;
+                    else
+                        Control.con.actualSaveClass.crossesCrossedVertical++;
                 }
 
                 cross.locked = true;

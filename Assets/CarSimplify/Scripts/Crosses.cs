@@ -52,6 +52,11 @@ public class Crosses : SimplifyParent
             {
                 SimplAssis.assi.UpdateAssistance();
             }
+            // Add CrossesClickedCounter
+            if (Control.con.actualSaveClass != null)
+            {
+                Control.con.actualSaveClass.amountUserClickedCrosses++;
+            }
         }
         else
         {
