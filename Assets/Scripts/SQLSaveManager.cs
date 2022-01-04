@@ -142,6 +142,9 @@ public class SQLSaveManager : MonoBehaviour
                 formData.Add(new MultipartFormDataSection(data.trialName + "_carsSuccess", data.carsSuccess.ToString()));
                 formData.Add(new MultipartFormDataSection(data.trialName + "_carsCrashed", data.carsCrashed.ToString()));
                 formData.Add(new MultipartFormDataSection(data.trialName + "_crossesCrossed", data.crossesCrossed.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_crossesCrossedHorizontal", data.crossesCrossedHorizontal.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_crossesCrossedVertical", data.crossesCrossedVertical.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_amountUserClickedCrosses", data.amountUserClickedCrosses.ToString()));
                 formData.Add(new MultipartFormDataSection(data.trialName + "_assistance", data.assistance));
                 formData.Add(new MultipartFormDataSection(data.trialName + "_changedAssistanceAmount", data.changedAssistanceAmount.ToString()));
                 formData.Add(new MultipartFormDataSection(data.trialName + "_percentageArea", data.percentageArea.ToString()));

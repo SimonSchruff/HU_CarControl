@@ -4006,8 +4006,8 @@ MonoBehaviour:
   m_text: '<b>Risks of participation </b>
 
     With your study participation, you
-    contribute to research in automation psychology. Furthermore, there is no direct
-    advantage for you in participating in the study, nor are there any recognizable
+    contribute to research in psychology of automation. Furthermore, there is no
+    direct advantage for you in participating in the study, nor are there any recognizable
     risks associated with it. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7068,16 +7068,16 @@ MonoBehaviour:
     Regulation (Datenschutzgrundverordnung, DSGVO). Our goal is to process your data
     responsibly. We will not publish your data in connection with your name. \n<b>Legal
     basis  </b>\nThe legal basis for the processing of your personal data is your
-    voluntary written consent pursuant to Art. 6 para. 1 lit. a DSGVO, or Art. 9
-    para.2 lit. a DSGVO, as far as special categories of personal data are concerned.
-    The terms of data protection law are complied with at any time. \nIn addition,
-    we work on the basis of the Declaration of Helsinki (Declaration of the World
-    Medical Association on the Ethical Principles for Medical Research Involving
-    Human Subjects) and the Guideline for Good Clinical Practice and follow the recommendations
-    of the German Research Foundation (Deutschen Forschungsgemeinschaft, DFG) to
-    ensure good scientific practice. \n<b>Data types and purposes of use </b>\nAs
-    part of the study, questionnaire, performance, and behavioral data are collected
-    for the purpose of research.  \n<b>Storage and access \nInformation on data processing
+    voluntary written consent pursuant to Art. 6 para. 1 lit. a GDPR, or Art. 9 para.2
+    lit. a GDPR, as far as special categories of personal data are concerned. The
+    terms of data protection law are complied with at any time. \nIn addition, we
+    work on the basis of the Declaration of Helsinki (Declaration of the World Medical
+    Association on the Ethical Principles for Medical Research Involving Human Subjects)
+    and the Guideline for Good Clinical Practice and follow the recommendations of
+    the German Research Foundation (Deutschen Forschungsgemeinschaft, DFG) to ensure
+    good scientific practice. \n<b>Data types and purposes of use </b>\nAs part of
+    the study, questionnaire, performance, and behavioral data are collected for
+    the purpose of research.  \n<b>Storage and access \nInformation on data processing
     </b>\nIf and to the extent that you consent, your data will be processed within
     the scope of the above-mentioned study as follows: Your collected study data
     will be stored anonymously under a 24-digit alphanumeric code ['Prolific ID'].
@@ -7122,34 +7122,34 @@ MonoBehaviour:
     of the processing carried out until the revocation is not affected by this. 
     \n<i>Right to information </i>\nYou have the right to obtain information about
     your personal data that is collected or processed in our working group or, if
-    applicable, that is transmitted to third parties (Art. 15 DSGVO).  \n<i>Right
+    applicable, that is transmitted to third parties (Art. 15 GDPR).  \n<i>Right
     to rectification </i> \nYou have the right to have inaccurate personal data concerning
-    you corrected (Art. 16 DSGVO). \n<i>Right to deletion</i> \nUnder the legal conditions,
-    you have the right to have your personal data deleted (Art. 17 DSGVO), e.g. if
+    you corrected (Art. 16 GDPR). \n<i>Right to deletion</i> \nUnder the legal conditions,
+    you have the right to have your personal data deleted (Art. 17 GDPR), e.g. if
     this data is no longer necessary for the purpose for which it was collected and
     the deletion is not contrary to any legal retention periods or you have revoked
     your consent and there is no other legal basis for the processing. In principle,
     anonymized data can no longer be deleted, as no link can be established between
     data and person.  \n<i>Right to restriction of processing</i>  \nYou have the
     right to request the restriction of processing from the people responsible if
-    one of the conditions of Art. 18 (1) DSGVO applies. \n<i>Right to data portability
-    </i> \nUnder the conditions of Art. 20 (1) DSGVO, you have the right to data
-    portability.  \n<i>Right to object </i>\nIf reasons arise from your particular
-    situation, you have the right to object to the processing of your personal data.
-    Subsequently, processing will no longer take place in principle, unless processing
-    is still necessary on a legal basis.  \n<i>Right of appeal</i>\nYou have the
-    right to issue a complaint with a Member State supervisory authority if there
-    are doubts about the lawfulness of the processing of your personal data. The
-    competent supervisory authority for Humboldt University of Berlin is the Berlin
-    Commissioner for Data Protection and Freedom of Information. Without prejudice
-    to this right of complaint, you may contact the Data Protection Officer of Humboldt
-    University of Berlin, Tel: +49 (30) 2093-20022, E-Mail: <u>datenschutz@uv.hu-berlin.de</u>,
-    at any time with questions relating to data protection.  \nShould you make use
-    of your above-mentioned rights, the public body will check whether the legal
-    requirements for this are met. \nThe aforementioned rights are generally not
-    applicable to anonymized data, as this can no longer be associated with your
-    person. \nIf you wish to exercise your data subject rights, please contact the
-    people responsible for the project (see above).  "
+    one of the conditions of Art. 18 (1) GDPR applies. \n<i>Right to data portability
+    </i> \nUnder the conditions of Art. 20 (1) GDPR, you have the right to data portability. 
+    \n<i>Right to object </i>\nIf reasons arise from your particular situation, you
+    have the right to object to the processing of your personal data. Subsequently,
+    processing will no longer take place in principle, unless processing is still
+    necessary on a legal basis.  \n<i>Right of appeal</i>\nYou have the right to
+    issue a complaint with a Member State supervisory authority if there are doubts
+    about the lawfulness of the processing of your personal data. The competent supervisory
+    authority for Humboldt University of Berlin is the Berlin Commissioner for Data
+    Protection and Freedom of Information. Without prejudice to this right of complaint,
+    you may contact the Data Protection Officer of Humboldt University of Berlin,
+    Tel: +49 (30) 2093-20022, E-Mail: <u>datenschutz@uv.hu-berlin.de</u>, at any
+    time with questions relating to data protection.  \nShould you make use of your
+    above-mentioned rights, the public body will check whether the legal requirements
+    for this are met. \nThe aforementioned rights are generally not applicable to
+    anonymized data, as this can no longer be associated with your person. \nIf you
+    wish to exercise your data subject rights, please contact the people responsible
+    for the project (see above).  "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

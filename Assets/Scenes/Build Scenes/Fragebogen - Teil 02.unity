@@ -5541,7 +5541,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Low %
+  m_Text: Low
 --- !u!222 &176425684
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30057,8 +30057,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 105, y: 160.18642}
-  m_SizeDelta: {x: 61.0037, y: 40.3728}
+  m_AnchoredPosition: {x: 106, y: 160.18642}
+  m_SizeDelta: {x: 67.2709, y: 40.3728}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &869003518
 MonoBehaviour:
@@ -41965,8 +41965,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Before we start the last trial, we will ask you several questions regarding
     your perception of <u>the task you just did with the help of the assistance system.</u>
-    It is important that you answer <u>all</u> questions. There is no right or wrong
-    answer, please answer spontaneously based on your first impression. '
+    There is no right or wrong answer, please answer spontaneously based on your
+    first impression. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -45520,8 +45520,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 474270049}
   m_HandleRect: {fileID: 474270048}
   m_Direction: 2
-  m_Value: 1.0000015
-  m_Size: 0.47448793
+  m_Value: 1.0000013
+  m_Size: 0.4744879
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -63504,8 +63504,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.9999733, y: -83.25}
-  m_SizeDelta: {x: 521.4778, y: -73.5}
+  m_AnchoredPosition: {x: 29.029, y: -87.01032}
+  m_SizeDelta: {x: 589.54, y: -65.9794}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1855796141
 MonoBehaviour:
@@ -66656,7 +66656,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1914521676}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -68397,7 +68397,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: High %
+  m_Text: High
 --- !u!222 &1955192385
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -68678,7 +68678,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'This is an attention check, please select "7". '
+  m_Text: 'This is an attention check, please select "extremely". '
 --- !u!222 &1959383904
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -4072,7 +4072,7 @@ GameObject:
   - component: {fileID: 246937413}
   - component: {fileID: 246937412}
   m_Layer: 5
-  m_Name: 13 hours or more
+  m_Name: 10 hours or more
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4130,7 +4130,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 13 hours or more
+  m_Text: 10 hours or more
 --- !u!222 &246937413
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5352,7 +5352,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361352805}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -13775,7 +13775,7 @@ GameObject:
   - component: {fileID: 817803723}
   - component: {fileID: 817803722}
   m_Layer: 5
-  m_Name: 3-6 hours
+  m_Name: 1-3 hours
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13833,7 +13833,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3-6 hours
+  m_Text: 1-3 hours
 --- !u!222 &817803723
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24728,12 +24728,12 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'For the following questions, imagine that you were given a new technology
     <b>(e.g. a new computer program, a new smartphone, a new technology that supports
-    you in the household such as a new vacuum robot,...).</b> It doesn''t matter
-    specifically what this technology does, only that it is intended to make your
-    job easier and that you have never used it before. The following questions ask
-    you to indicate whether you could use this unfamiliar technology under a variety
-    of conditions. For each of the conditions, please indicate whether you think
-    you would be able to complete the job using the new technology. '
+    you in the household such as a new robot vacuum cleaner,...).</b> It doesn''t
+    matter specifically what this technology does, only that it is intended to support
+    you and that you have never used it before. The following questions ask you to
+    indicate whether you could use this unfamiliar technology under a variety of
+    conditions. For each of the conditions, please indicate whether you think you
+    would be able to complete the job using the new technology. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -25039,7 +25039,7 @@ GameObject:
   - component: {fileID: 1534324092}
   - component: {fileID: 1534324091}
   m_Layer: 5
-  m_Name: 6-9 hours
+  m_Name: 3-6 hours
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25097,7 +25097,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6-9 hours
+  m_Text: 3-6 hours
 --- !u!222 &1534324092
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28664,7 +28664,7 @@ GameObject:
   - component: {fileID: 1726723957}
   - component: {fileID: 1726723956}
   m_Layer: 5
-  m_Name: 0-3 hours
+  m_Name: Not at all
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28722,7 +28722,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0-3 hours
+  m_Text: Not at all
 --- !u!222 &1726723957
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -33531,7 +33531,7 @@ GameObject:
   - component: {fileID: 2057530987}
   - component: {fileID: 2057530986}
   m_Layer: 5
-  m_Name: 10-12 hours
+  m_Name: 6-9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33589,7 +33589,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10-12 hours
+  m_Text: 6-9 hours
 --- !u!222 &2057530987
 CanvasRenderer:
   m_ObjectHideFlags: 0
