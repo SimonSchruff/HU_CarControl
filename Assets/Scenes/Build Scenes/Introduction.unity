@@ -182,7 +182,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Now please perform both tasks simultaneously.  \r\nThe \u201Creal\u201D
     data collection is starting now. <b>Collect as many points as possible by performing
-    well both tasks:</b> the intersection control task <b><u>and</u></b> the gauge-monitoring
+    well in both tasks:</b> the intersection control task <b><u>and</u></b> the gauge-monitoring
     task. \r\nPlease remember to prioritize your actions according to the point deduction,
     which is done as follows:\r\n-\tYou get 5 points for every car that you navigate
     successfully.\r\n-\tWhenever a car cannot pass the street, a deduction of 3 points
@@ -6880,11 +6880,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3619266538461240616, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.14309692
+      value: -0.1430664
       objectReference: {fileID: 0}
     - target: {fileID: 3619266538461240616, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000015258789
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3619266538461240623, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: m_Color.b
@@ -9318,7 +9318,7 @@ MonoBehaviour:
     gate</b>, it opens in the other direction of the road. You get 5 points for every
     car that you navigate successfully. Whenever a car cannot pass the street, a
     deduction of 3 points results. <b>Collect as many points as possible.</b> The
-    <b>top 5 players</b> will receive a <b>bonus payment of EUR 3.00</b> (~ GBR 2.52)
+    <b>top 5 players</b> will receive a <b>bonus payment of EUR 3.00</b> (~ GBP 2.52)
     on top.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13461,6 +13461,7 @@ MonoBehaviour:
   errorMessageCanvas: {fileID: 0}
   group: 2
   playerID: 
+  completionCode: 
   nBackData: []
   primaryData: []
 --- !u!4 &1457040341
@@ -16503,7 +16504,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864475264}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -17889,8 +17890,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1138109525}
   m_HandleRect: {fileID: 1138109524}
   m_Direction: 2
-  m_Value: 0.9842472
-  m_Size: 0.41943344
+  m_Value: 0.9842471
+  m_Size: 0.4194334
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -20346,8 +20347,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.0004425, y: -108.22684}
-  m_SizeDelta: {x: 688.95, y: 207.1846}
+  m_AnchoredPosition: {x: -0.0004425, y: -119.03611}
+  m_SizeDelta: {x: 688.95, y: 228.8031}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2139655680
 MonoBehaviour:
