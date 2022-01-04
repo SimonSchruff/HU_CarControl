@@ -31705,7 +31705,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Where is your home located?
+  m_Text: 'Where is your current place of residence? '
 --- !u!222 &1919880419
 CanvasRenderer:
   m_ObjectHideFlags: 0
