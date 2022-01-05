@@ -58,7 +58,7 @@ public class NBackGameManager : MonoBehaviour
     string currentLetter; 
     string correctLetter = "A";
     int stimuli = 0; 
-    int stimuliShown = 25;
+    int stimuliShown = 0;
    
 
     #region Bools
@@ -108,9 +108,7 @@ public class NBackGameManager : MonoBehaviour
         gameState = GameState.instructions; 
         InstructionObjects.SetActive(true);
 
-
-        
-        
+        stimuliShown = round1Numbers.Count; 
     }
 
     void Update()
@@ -223,6 +221,7 @@ public class NBackGameManager : MonoBehaviour
         missedMismatch = 0; 
         
         stimuli = 0; 
+        stimuliShown = round2Numbers.Count; 
 
         switchedLevels = true; 
      
@@ -341,7 +340,7 @@ public class NBackGameManager : MonoBehaviour
         
         levelData.currentLevel = currentLevel; 
         float totalMatches = correctMatch + missedMatch + wrongMismatch;  
-        float totalMismatches = (stimuli-n) - totalMatches; 
+        float totalMismatches = (stimuliShown-n) - totalMatches; 
         
         //Numeric Int amount of Matches etc. Per Round
         levelData.totalCorrectMatches = correctMatch; 
