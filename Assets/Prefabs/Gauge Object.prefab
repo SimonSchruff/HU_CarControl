@@ -132,7 +132,7 @@ MonoBehaviour:
   trainingText: {fileID: 0}
   travelDistance: 41
   moveSpeed: 60
-  timeRange: 60
+  timeRange: 30
   timeToGiveInput: 10
   currentState: 0
 --- !u!1 &5563881468269520076
