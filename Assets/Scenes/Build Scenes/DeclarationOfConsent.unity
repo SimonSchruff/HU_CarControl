@@ -6104,8 +6104,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 436846698}
   m_HandleRect: {fileID: 436846697}
   m_Direction: 2
-  m_Value: 0.99925274
-  m_Size: 0.4032334
+  m_Value: 0.9992527
+  m_Size: 0.40323338
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6384,8 +6384,8 @@ MonoBehaviour:
     You can
     participate in the online study if English is your native language, you have
     normal or corrected-to-normal vision, you have not already participated in the
-    same study, and you are using a desktop computer or notebook to take the study.
-    Participation via tablet or mobile is not possible. '
+    same study, and you are using a desktop computer or notebook to take the study
+    with a computer mouse. Participation via tablet or mobile is not possible. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

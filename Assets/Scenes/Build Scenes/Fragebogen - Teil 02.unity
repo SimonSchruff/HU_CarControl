@@ -1983,8 +1983,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'To what extent do the statements below apply to you regarding <u>the task
-    you just did with the help of the assistance system?</u> Use the number that
+  m_text: 'To what extent do the statements below apply to you regarding the trials
+    you just did <u>with the help of the assistance system?</u> Use the number that
     best reflects your belief.  '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15524,7 +15524,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please rate how much you enjoyed the task you just did
+  m_Text: Please rate how much you enjoyed the trials you just did
 --- !u!222 &470647342
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23128,10 +23128,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'We are also interested in assessing the experience you had during <u>the
-    task you just did with the help of the assistance system.</u> There are no right
-    or wrong answers, so please choose the response that best describes your own
-    situation. '
+  m_text: 'We are also interested in assessing the experience you had during the
+    trials you just did <u>with the help of the assistance system.</u> There are
+    no right or wrong answers, so please choose the response that best describes
+    your own situation. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -27929,7 +27929,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1818996008}
   m_HandleRect: {fileID: 1818996007}
   m_Direction: 2
-  m_Value: 1.0000012
+  m_Value: 1.0000011
   m_Size: 0.6594821
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -29654,8 +29654,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1534238524}
   m_HandleRect: {fileID: 1534238523}
   m_Direction: 2
-  m_Value: 1.0000002
-  m_Size: 0.40698585
+  m_Value: 1.0000004
+  m_Size: 0.40698588
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -35962,8 +35962,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1812046625}
   m_HandleRect: {fileID: 1812046624}
   m_Direction: 2
-  m_Value: 1.0000015
-  m_Size: 0.49700615
+  m_Value: 1.0000017
+  m_Size: 0.49700624
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -41964,9 +41964,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 'Before we start the last trial, we will ask you several questions regarding
-    your perception of <u>the task you just did with the help of the assistance system.</u>
-    There is no right or wrong answer, please answer spontaneously based on your
-    first impression. '
+    your perception of <u>the trials you just did with the help of the assistance
+    system.</u> There is no right or wrong answer, please answer spontaneously based
+    on your first impression. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -50072,7 +50072,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1413689693}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -66656,7 +66656,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1914521676}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -68678,7 +68678,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'This is an attention check, please select "extremely". '
+  m_Text: 'This is an attention check, please select extremely. '
 --- !u!222 &1959383904
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -339,12 +339,12 @@ MonoBehaviour:
     the help of the assistance system. Your <b>final score</b> results 50 % from
     <b>this last trial</b> and 50 % from the <b>previous trials 2-4</b> in which
     you were supported by the assistance system. \nPlease remember: <b>Collect as
-    many points as possible by performing well both tasks:</b> the intersection control
-    task <u><b>and</b></u> the gauge-monitoring task. Prioritize your actions according
-    to the point deduction, which is done as follows: \n\t- You get 5 points for
-    every car that you navigate successfully. \n\t- Whenever a car cannot pass the
-    street, a deduction of 3 points results. \n\t- A missed correction of the gauge
-    pointer will lead to a point deduction of 2 points. "
+    many points as possible by performing well in both tasks:</b> the intersection
+    control task <u><b>and</b></u> the gauge-monitoring task. Prioritize your actions
+    according to the point deduction, which is done as follows: \n\t- You get 5 points
+    for every car that you navigate successfully. \n\t- Whenever a car cannot pass
+    the street, a deduction of 3 points results. \n\t- A missed correction of the
+    gauge pointer will lead to a point deduction of 2 points. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
