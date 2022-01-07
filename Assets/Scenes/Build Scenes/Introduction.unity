@@ -382,8 +382,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.4096985, y: -21.2747}
-  m_SizeDelta: {x: 805.1094, y: 598.5105}
+  m_AnchoredPosition: {x: -3.5935, y: -21.2747}
+  m_SizeDelta: {x: 838.3741, y: 598.5105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &35592253
 MonoBehaviour:
@@ -532,8 +532,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.409724, y: -0.7825}
-  m_SizeDelta: {x: 805.1094, y: 602.4581}
+  m_AnchoredPosition: {x: -3.5934, y: -0.7825}
+  m_SizeDelta: {x: 838.3741, y: 602.4581}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &50091794
 MonoBehaviour:
@@ -801,8 +801,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.4096985, y: -2.3639}
-  m_SizeDelta: {x: 805.1094, y: 640.3844}
+  m_AnchoredPosition: {x: -3.5935, y: -2.3639}
+  m_SizeDelta: {x: 838.3741, y: 640.3844}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &160505548
 MonoBehaviour:
@@ -2994,7 +2994,7 @@ MonoBehaviour:
     by an assistance system <u><b>AND</b></u> 50 % <b>from the last trial in which
     you will have to work manually again</b>, i.e. without the help of the assistance
     system.\r\n\nPlease remember: <b>Collect as many points as possible by performing
-    well both tasks:</b> the intersection control task <u><b>and</u></b> the gauge-monitoring
+    well in both tasks:</b> the intersection control task <u><b>and</u></b> the gauge-monitoring
     task. Prioritize your actions according to the point deduction, which is done
     as follows:\r\n-\tYou get 5 points for every car that you navigate successfully.\r\n-\tWhenever
     a car cannot pass the street, a deduction of 3 points results.\r\n-\tA missed
@@ -3226,8 +3226,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 36.113735, y: -18.235498}
-  m_SizeDelta: {x: 805.1094, y: 576.2225}
+  m_AnchoredPosition: {x: 29.110617, y: -18.235498}
+  m_SizeDelta: {x: 838.3741, y: 576.2225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &402287406
 MonoBehaviour:
@@ -4633,8 +4633,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.4096985, y: -17.56}
-  m_SizeDelta: {x: 805.1094, y: 627.5522}
+  m_AnchoredPosition: {x: -3.5935, y: -17.56}
+  m_SizeDelta: {x: 838.3741, y: 627.5522}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &532820595
 MonoBehaviour:
@@ -6445,8 +6445,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.409724, y: -1.9561}
-  m_SizeDelta: {x: 805.1094, y: 598.5461}
+  m_AnchoredPosition: {x: -3.5934, y: -1.9561}
+  m_SizeDelta: {x: 838.3741, y: 598.5461}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &712021818
 MonoBehaviour:
@@ -8560,8 +8560,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.4096985, y: -2.3639}
-  m_SizeDelta: {x: 805.1094, y: 640.3844}
+  m_AnchoredPosition: {x: -3.5935, y: -2.3639}
+  m_SizeDelta: {x: 838.3741, y: 640.3844}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &867510840
 MonoBehaviour:
@@ -8612,7 +8612,7 @@ GameObject:
   - component: {fileID: 869986563}
   - component: {fileID: 869986564}
   m_Layer: 0
-  m_Name: Test Trial with Assistance System
+  m_Name: trTest_assi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8646,7 +8646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showUI: 1
-  saveData: 0
+  saveData: 1
   trialDurationInMin: 0.5
   differentGroupAssistances: 1
   assistanceLevel: 1
@@ -9620,8 +9620,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.409724, y: 0}
-  m_SizeDelta: {x: 805.1094, y: 599.3284}
+  m_AnchoredPosition: {x: -3.5934, y: 0}
+  m_SizeDelta: {x: 838.3741, y: 599.3284}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &946178452
 MonoBehaviour:
@@ -10797,8 +10797,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.4097, y: -19.924}
-  m_SizeDelta: {x: 805.1094, y: 620.1228}
+  m_AnchoredPosition: {x: -3.5935, y: -19.924}
+  m_SizeDelta: {x: 838.3741, y: 620.1228}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1027498666
 MonoBehaviour:
@@ -11026,8 +11026,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.4096985, y: -2.3639}
-  m_SizeDelta: {x: 805.1094, y: 640.3844}
+  m_AnchoredPosition: {x: -3.5935, y: -2.3639}
+  m_SizeDelta: {x: 838.3741, y: 640.3844}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1058725430
 MonoBehaviour:
@@ -11177,8 +11177,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.4096985, y: -2.3639}
-  m_SizeDelta: {x: 805.1094, y: 640.3844}
+  m_AnchoredPosition: {x: -3.5935, y: -2.3639}
+  m_SizeDelta: {x: 838.3741, y: 640.3844}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1110482975
 MonoBehaviour:
@@ -11388,8 +11388,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.4097, y: 0}
-  m_SizeDelta: {x: 805.1094, y: 604.0231}
+  m_AnchoredPosition: {x: -3.5935, y: 0}
+  m_SizeDelta: {x: 838.3741, y: 604.0231}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1123164837
 MonoBehaviour:
@@ -13253,8 +13253,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.4097, y: -12.8325}
-  m_SizeDelta: {x: 805.1094, y: 647.8137}
+  m_AnchoredPosition: {x: -3.5935, y: -12.8325}
+  m_SizeDelta: {x: 838.3741, y: 647.8137}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1456135263
 MonoBehaviour:
@@ -13377,8 +13377,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.4096985, y: -17.8978}
-  m_SizeDelta: {x: 805.1094, y: 622.8243}
+  m_AnchoredPosition: {x: -3.5935, y: -17.8978}
+  m_SizeDelta: {x: 838.3741, y: 622.8243}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1458253000
 MonoBehaviour:
@@ -13952,8 +13952,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.4097, y: -14.1832}
-  m_SizeDelta: {x: 805.1094, y: 635.6567}
+  m_AnchoredPosition: {x: -3.5935, y: -14.1832}
+  m_SizeDelta: {x: 838.3741, y: 635.6567}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1513307688
 MonoBehaviour:
@@ -15236,8 +15236,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.4097, y: 1.1736}
-  m_SizeDelta: {x: 805.1094, y: 598.546}
+  m_AnchoredPosition: {x: -3.5935, y: 1.1736}
+  m_SizeDelta: {x: 838.3741, y: 598.546}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1642095544
 MonoBehaviour:
@@ -17755,8 +17755,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1138109525}
   m_HandleRect: {fileID: 1138109524}
   m_Direction: 2
-  m_Value: 0.9842471
-  m_Size: 0.41943341
+  m_Value: 0.9842472
+  m_Size: 0.41943344
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -19286,7 +19286,7 @@ MonoBehaviour:
     you will have to work manually again</b>, i.e. without the help of the assistance
     system.\r\nThe choice of modes does not affect your score; only your overall
     performance is relevant.\nPlease remember: <b>Collect as many points as possible
-    by performing well both tasks:</b> the intersection control task <u><b>and</u></b>
+    by performing well in both tasks:</b> the intersection control task <u><b>and</u></b>
     the gauge-monitoring task. Prioritize your actions according to the point deduction,
     which is done as follows:\r\n-\tYou get 5 points for every car that you navigate
     successfully.\r\n-\tWhenever a car cannot pass the street, a deduction of 3 points
@@ -19875,8 +19875,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.4096985, y: -2.3639}
-  m_SizeDelta: {x: 805.1094, y: 640.3844}
+  m_AnchoredPosition: {x: -3.5935, y: -2.3639}
+  m_SizeDelta: {x: 838.3741, y: 640.3844}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2079870285
 MonoBehaviour:

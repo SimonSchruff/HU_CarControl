@@ -4333,8 +4333,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 52879756}
   m_HandleRect: {fileID: 52879755}
   m_Direction: 2
-  m_Value: 0.9999812
-  m_Size: 0.23190169
+  m_Value: 0.9999811
+  m_Size: 0.23190168
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6104,8 +6104,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 436846698}
   m_HandleRect: {fileID: 436846697}
   m_Direction: 2
-  m_Value: 0.9992527
-  m_Size: 0.40323338
+  m_Value: 0.99925274
+  m_Size: 0.4032334
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7065,91 +7065,91 @@ MonoBehaviour:
       m_Calls: []
   m_text: "<b>Announcement </b>\nIn the following, you will receive detailed information
     on the use of your data in accordance with the German General Data Protection
-    Regulation (Datenschutzgrundverordnung, DSGVO). Our goal is to process your data
-    responsibly. We will not publish your data in connection with your name. \n<b>Legal
-    basis  </b>\nThe legal basis for the processing of your personal data is your
-    voluntary written consent pursuant to Art. 6 para. 1 lit. a GDPR, or Art. 9 para.2
-    lit. a GDPR, as far as special categories of personal data are concerned. The
-    terms of data protection law are complied with at any time. \nIn addition, we
-    work on the basis of the Declaration of Helsinki (Declaration of the World Medical
-    Association on the Ethical Principles for Medical Research Involving Human Subjects)
-    and the Guideline for Good Clinical Practice and follow the recommendations of
-    the German Research Foundation (Deutschen Forschungsgemeinschaft, DFG) to ensure
-    good scientific practice. \n<b>Data types and purposes of use </b>\nAs part of
-    the study, questionnaire, performance, and behavioral data are collected for
-    the purpose of research.  \n<b>Storage and access \nInformation on data processing
-    </b>\nIf and to the extent that you consent, your data will be processed within
-    the scope of the above-mentioned study as follows: Your collected study data
-    will be stored anonymously under a 24-digit alphanumeric code ['Prolific ID'].
-    Only authorized project members can access the anonymized data and measurements.
-    Your study data will be analyzed mainly in the form of group evaluations. This
-    applies in particular to scientific publications: Scientific articles and theses
-    or dissertations, which are published on the basis of the results of the studies,
-    deal with the data of all participants in groups and anonymously. Individual
-    data are only analyzed to check the plausibility of the data and, if necessary,
-    to exclude outliers. An inference to your person, i.e. your name, is not possible.
-    \n<b>Publication </b>\nThe publication of the research results in publications
-    or at conferences takes place exclusively in an anonymous form so that you cannot
-    be identified as a person.  \n<b>Storage period and subsequent use </b>\nAll
-    data will be stored for ten years as required by the German Research Foundation
-    (DFG). If you wish early deletion of your study data, please write an email to
-    Mich\xE8le Rieth (mrieth@uni-bremen.de), and share your alphanumeric code ['Prolific-ID']
-    with us. You do not need to give us your name, so that your anonymity (see above)
-    is preserved. However, it will only be possible to delete your data until your
-    data has been merged and evaluated at group level, as from that moment it will
-    be stored in a file to which the numerical code is not transferred. \nYou have
-    the right to request information about your recorded data, as far as this is
-    possible for technical reasons. You can inquire about this with the study director.
-    However, we would like to point out that the collected data were selected according
-    to purely scientific criteria and have no medical-diagnostic or psychological-diagnostic
-    benefit for the individual case. \nAssuming your consent, the personal data collected
-    in this study will be made available in pseudonymized form for subsequent use
-    for research. \nIn accordance with the recommendations of the German Research
-    Foundation (DFG) and the German Psychological Society (DGPs) on quality assurance
-    in research, research data should be made available to other scientists for research
-    purposes whenever possible. Non-anonymized data will not be made available to
-    the public under any circumstances. The data service center makes the research
-    data available to scientists for exclusively scientific purposes. \n<b>With regard
-    to your personal data, you have the following rights: </b>\n<i>Consent to the
-    processing of personal data and right to withdraw consent.</i>\n The processing
-    of your personal data is only legal with your consent. You are not obliged to
-    consent to the processing; consent is <b>voluntary</b>. In addition, you have
-    the right to <b>revoke</b> your consent to the processing of personal data at
-    any time for the future vis-\xE0-vis the people responsible. Refusal or revocation
-    of consent will not result in any legal disadvantages for you. The revocation
-    of consent has the effect that the processing of the affected personal data becomes
-    unlawful for the future in accordance with the revocation declaration. The lawfulness
-    of the processing carried out until the revocation is not affected by this. 
-    \n<i>Right to information </i>\nYou have the right to obtain information about
-    your personal data that is collected or processed in our working group or, if
-    applicable, that is transmitted to third parties (Art. 15 GDPR).  \n<i>Right
-    to rectification </i> \nYou have the right to have inaccurate personal data concerning
-    you corrected (Art. 16 GDPR). \n<i>Right to deletion</i> \nUnder the legal conditions,
-    you have the right to have your personal data deleted (Art. 17 GDPR), e.g. if
-    this data is no longer necessary for the purpose for which it was collected and
-    the deletion is not contrary to any legal retention periods or you have revoked
-    your consent and there is no other legal basis for the processing. In principle,
-    anonymized data can no longer be deleted, as no link can be established between
-    data and person.  \n<i>Right to restriction of processing</i>  \nYou have the
-    right to request the restriction of processing from the people responsible if
-    one of the conditions of Art. 18 (1) GDPR applies. \n<i>Right to data portability
-    </i> \nUnder the conditions of Art. 20 (1) GDPR, you have the right to data portability. 
-    \n<i>Right to object </i>\nIf reasons arise from your particular situation, you
-    have the right to object to the processing of your personal data. Subsequently,
-    processing will no longer take place in principle, unless processing is still
-    necessary on a legal basis.  \n<i>Right of appeal</i>\nYou have the right to
-    issue a complaint with a Member State supervisory authority if there are doubts
-    about the lawfulness of the processing of your personal data. The competent supervisory
-    authority for Humboldt University of Berlin is the Berlin Commissioner for Data
-    Protection and Freedom of Information. Without prejudice to this right of complaint,
-    you may contact the Data Protection Officer of Humboldt University of Berlin,
-    Tel: +49 (30) 2093-20022, E-Mail: <u>datenschutz@uv.hu-berlin.de</u>, at any
-    time with questions relating to data protection.  \nShould you make use of your
-    above-mentioned rights, the public body will check whether the legal requirements
-    for this are met. \nThe aforementioned rights are generally not applicable to
-    anonymized data, as this can no longer be associated with your person. \nIf you
-    wish to exercise your data subject rights, please contact the people responsible
-    for the project (see above).  "
+    Regulation (GDPR). Our goal is to process your data responsibly. We will not
+    publish your data in connection with your name. \n<b>Legal basis  </b>\nThe legal
+    basis for the processing of your personal data is your voluntary written consent
+    pursuant to Art. 6 para. 1 lit. a GDPR, or Art. 9 para.2 lit. a GDPR, as far
+    as special categories of personal data are concerned. The terms of data protection
+    law are complied with at any time. \nIn addition, we work on the basis of the
+    Declaration of Helsinki (Declaration of the World Medical Association on the
+    Ethical Principles for Medical Research Involving Human Subjects) and the Guideline
+    for Good Clinical Practice and follow the recommendations of the German Research
+    Foundation (Deutschen Forschungsgemeinschaft, DFG) to ensure good scientific
+    practice. \n<b>Data types and purposes of use </b>\nAs part of the study, questionnaire,
+    performance, and behavioral data are collected for the purpose of research. 
+    \n<b>Storage and access \nInformation on data processing </b>\nIf and to the
+    extent that you consent, your data will be processed within the scope of the
+    above-mentioned study as follows: Your collected study data will be stored anonymously
+    under a 24-digit alphanumeric code ['Prolific ID']. Only authorized project members
+    can access the anonymized data and measurements. Your study data will be analyzed
+    mainly in the form of group evaluations. This applies in particular to scientific
+    publications: Scientific articles and theses or dissertations, which are published
+    on the basis of the results of the studies, deal with the data of all participants
+    in groups and anonymously. Individual data are only analyzed to check the plausibility
+    of the data and, if necessary, to exclude outliers. An inference to your person,
+    i.e. your name, is not possible. \n<b>Publication </b>\nThe publication of the
+    research results in publications or at conferences takes place exclusively in
+    an anonymous form so that you cannot be identified as a person.  \n<b>Storage
+    period and subsequent use </b>\nAll data will be stored for ten years as required
+    by the German Research Foundation (DFG). If you wish early deletion of your study
+    data, please write an email to Mich\xE8le Rieth (mrieth@uni-bremen.de), and share
+    your alphanumeric code ['Prolific-ID'] with us. You do not need to give us your
+    name, so that your anonymity (see above) is preserved. However, it will only
+    be possible to delete your data until your data has been merged and evaluated
+    at group level, as from that moment it will be stored in a file to which the
+    numerical code is not transferred. \nYou have the right to request information
+    about your recorded data, as far as this is possible for technical reasons. You
+    can inquire about this with the study director. However, we would like to point
+    out that the collected data were selected according to purely scientific criteria
+    and have no medical-diagnostic or psychological-diagnostic benefit for the individual
+    case. \nAssuming your consent, the personal data collected in this study will
+    be made available in pseudonymized form for subsequent use for research. \nIn
+    accordance with the recommendations of the German Research Foundation (DFG) and
+    the German Psychological Society (DGPs) on quality assurance in research, research
+    data should be made available to other scientists for research purposes whenever
+    possible. Non-anonymized data will not be made available to the public under
+    any circumstances. The data service center makes the research data available
+    to scientists for exclusively scientific purposes. \n<b>With regard to your personal
+    data, you have the following rights: </b>\n<i>Consent to the processing of personal
+    data and right to withdraw consent.</i>\n The processing of your personal data
+    is only legal with your consent. You are not obliged to consent to the processing;
+    consent is <b>voluntary</b>. In addition, you have the right to <b>revoke</b>
+    your consent to the processing of personal data at any time for the future vis-\xE0-vis
+    the people responsible. Refusal or revocation of consent will not result in any
+    legal disadvantages for you. The revocation of consent has the effect that the
+    processing of the affected personal data becomes unlawful for the future in accordance
+    with the revocation declaration. The lawfulness of the processing carried out
+    until the revocation is not affected by this.  \n<i>Right to information </i>\nYou
+    have the right to obtain information about your personal data that is collected
+    or processed in our working group or, if applicable, that is transmitted to third
+    parties (Art. 15 GDPR).  \n<i>Right to rectification </i> \nYou have the right
+    to have inaccurate personal data concerning you corrected (Art. 16 GDPR). \n<i>Right
+    to deletion</i> \nUnder the legal conditions, you have the right to have your
+    personal data deleted (Art. 17 GDPR), e.g. if this data is no longer necessary
+    for the purpose for which it was collected and the deletion is not contrary to
+    any legal retention periods or you have revoked your consent and there is no
+    other legal basis for the processing. In principle, anonymized data can no longer
+    be deleted, as no link can be established between data and person.  \n<i>Right
+    to restriction of processing</i>  \nYou have the right to request the restriction
+    of processing from the people responsible if one of the conditions of Art. 18
+    (1) GDPR applies. \n<i>Right to data portability </i> \nUnder the conditions
+    of Art. 20 (1) GDPR, you have the right to data portability.  \n<i>Right to object
+    </i>\nIf reasons arise from your particular situation, you have the right to
+    object to the processing of your personal data. Subsequently, processing will
+    no longer take place in principle, unless processing is still necessary on a
+    legal basis.  \n<i>Right of appeal</i>\nYou have the right to issue a complaint
+    with a Member State supervisory authority if there are doubts about the lawfulness
+    of the processing of your personal data. The competent supervisory authority
+    for Humboldt University of Berlin is the Berlin Commissioner for Data Protection
+    and Freedom of Information. Without prejudice to this right of complaint, you
+    may contact the Data Protection Officer of Humboldt University of Berlin, Tel:
+    +49 (30) 2093-20022, E-Mail: <u>datenschutz@uv.hu-berlin.de</u>, at any time
+    with questions relating to data protection.  \nShould you make use of your above-mentioned
+    rights, the public body will check whether the legal requirements for this are
+    met. \nThe aforementioned rights are generally not applicable to anonymized data,
+    as this can no longer be associated with your person. \nIf you wish to exercise
+    your data subject rights, please contact the people responsible for the project
+    (see above).  "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
