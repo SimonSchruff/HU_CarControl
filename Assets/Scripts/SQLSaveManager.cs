@@ -19,8 +19,7 @@ public class SQLSaveManager : MonoBehaviour
     public Group group;
 
     public string playerID;
-    public string completionCode; 
-    private string URL = "https://marki.fun/PHP/dataNew.php";
+    private string URL = "https://marki.fun/PHP/dataFL.php";
 
     public struct Answer
     {
@@ -195,17 +194,7 @@ public class SQLSaveManager : MonoBehaviour
         }
     }
 
-    public void SetCompletionCode()
-    {
-        if(!GameObject.FindGameObjectWithTag("completionCode"))
-        {
-            Debug.Log("CompletionCode not found!"); 
-            return; 
-        }
-        TextMeshProUGUI codeText = GameObject.FindGameObjectWithTag("completionCode").GetComponent<TextMeshProUGUI>();
-        codeText.text = completionCode;  
-        
-    }
+    
 
    
 }

@@ -79,7 +79,7 @@ public class FragebogenManager : MonoBehaviour
             {
                 MySceneManager.Instance.LoadSceneByName("NBackSpiel"); 
             }
-            else if (questions[currentID].questionObj.gameObject.name == "Color Vision")
+            else if (questions[currentID].questionObj.gameObject.name == "Set Active Need For Control")
             {
                 MySceneManager.Instance.LoadSceneByName("Introduction");
             }
@@ -96,7 +96,7 @@ public class FragebogenManager : MonoBehaviour
             {
                 SQLSaveManager.instance.StartPostCoroutine();
                 questions[currentID + 1].questionObj.gameObject.SetActive(true);
-                SQLSaveManager.instance.SetCompletionCode();
+                
             }
             else if (currentID != (questions.Length - 1)) // Last question -> Dont activate next UI
             {
@@ -154,7 +154,7 @@ public class FragebogenManager : MonoBehaviour
                             print("False at toogle: " + answer.gameObject.name); 
                             return false;
                         }
-                        else if(answer.gameObject.name == "language_1" || answer.gameObject.name == "visualAcuity" || answer.gameObject.name == "colorVision" || answer.gameObject.name == "declarationConsent")
+                        else if(answer.gameObject.name == "atc_license" || answer.gameObject.name == "declarationConsent")
                         {
                             if (answer.currentAnswer == "2")
                             {
@@ -186,7 +186,7 @@ public class FragebogenManager : MonoBehaviour
 
                     if(answer.gameObject.name == "prolificID")
                     {
-                            if(answer.currentAnswer.Length != 24)
+                            if(answer.currentAnswer.Length != 4)
                             {
                                 return false; 
                             }

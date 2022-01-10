@@ -507,9 +507,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   errorMessageCanvas: {fileID: 1741147094596929069, guid: cc186687992832c4593022035337dce1, type: 3}
-  group: 2
+  group: 0
   playerID: 
-  completionCode: 7EA04F3B
   nBackData: []
   primaryData: []
 --- !u!4 &33252836
@@ -21381,7 +21380,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 18
+    m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -21392,7 +21391,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter a valid prolific ID.
+  m_Text: 'Please enter a valid 4-digit code. '
 --- !u!222 &1162843057
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24680,8 +24679,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 4}
-  m_SizeDelta: {x: 290, y: 30}
+  m_AnchoredPosition: {x: 0, y: -53}
+  m_SizeDelta: {x: 290, y: 25.6741}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1346418374
 MonoBehaviour:
@@ -28643,7 +28642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d8830d8036345628ba82328c834423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionNumber: 0
+  questionNumber: 1
   ineligableScreen: {fileID: 1244657728}
   questions:
   - id: 0
@@ -34028,7 +34027,7 @@ GameObject:
   - component: {fileID: 1865704151}
   - component: {fileID: 1865704152}
   m_Layer: 5
-  m_Name: location_other
+  m_Name: residence_other
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34067,8 +34066,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: null
-  toggleIF: {fileID: 0}
-  questionType: 5
+  toggleIF: {fileID: 676610123}
+  questionType: 3
 --- !u!224 &1866445565 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9163257971182596029, guid: 979deef2a3d7e47fd9b0b52c8170c8f9, type: 3}
@@ -36855,7 +36854,7 @@ GameObject:
   - component: {fileID: 2028782596}
   - component: {fileID: 2028782597}
   m_Layer: 5
-  m_Name: location
+  m_Name: residence
   m_TagString: questions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
