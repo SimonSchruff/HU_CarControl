@@ -507,7 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   errorMessageCanvas: {fileID: 1741147094596929069, guid: cc186687992832c4593022035337dce1, type: 3}
-  group: 0
+  group: 2
   playerID: 
   nBackData: []
   primaryData: []
@@ -6656,7 +6656,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361352805}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -15795,7 +15795,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &799303679
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25126,8 +25126,8 @@ RectTransform:
   m_Father: {fileID: 142729338}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.80139303}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -28642,7 +28642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d8830d8036345628ba82328c834423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionNumber: 1
+  questionNumber: 0
   ineligableScreen: {fileID: 1244657728}
   questions:
   - id: 0
@@ -34066,8 +34066,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnswer: null
-  toggleIF: {fileID: 676610123}
-  questionType: 3
+  toggleIF: {fileID: 0}
+  questionType: 5
 --- !u!224 &1866445565 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9163257971182596029, guid: 979deef2a3d7e47fd9b0b52c8170c8f9, type: 3}
@@ -39258,7 +39258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1721442238295884613
 GameObject:
   m_ObjectHideFlags: 0
