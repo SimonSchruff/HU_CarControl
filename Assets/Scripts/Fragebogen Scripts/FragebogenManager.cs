@@ -191,15 +191,6 @@ public class FragebogenManager : MonoBehaviour
                                 return false; 
                             }
                     }
-                    else if(answer.gameObject.name == "age")
-                    {
-                            int i = int.Parse(answer.currentAnswer);
-                            if (i < 18 || i > 99) // Age not valid
-                            {
-                                ShowIneligableScreen();
-                                return false;
-                            }
-                    }
                 }
 
                 if(answer.questionType == AnswerSaver.QuestionType.other)

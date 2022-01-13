@@ -455,8 +455,8 @@ RectTransform:
   m_Father: {fileID: 1027904146}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.7680838}
-  m_AnchorMax: {x: 1, y: 0.99998546}
+  m_AnchorMin: {x: 0, y: 0.7763545}
+  m_AnchorMax: {x: 1, y: 0.9999861}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1111,8 +1111,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00038338, y: -616.03}
-  m_SizeDelta: {x: 637.62, y: 1604.1}
+  m_AnchoredPosition: {x: 0.00038338, y: -645.69086}
+  m_SizeDelta: {x: 637.62, y: 1663.4218}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &286709358
 GameObject:
@@ -1148,8 +1148,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 5}
-  m_SizeDelta: {x: -20, y: -30}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: -19.999998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &286709360
 MonoBehaviour:
@@ -1178,14 +1178,14 @@ MonoBehaviour:
     in the course of the study will be to control the car traffic at intersections.
     Temporarily, you will be supported by an assistance system. Before, between,
     and after that, we'll ask you to answer a few questions (more detailed information
-    will follow). \nPlease use a <b>desktop computer or notebook</b> to take the
-    study. Participation via tablet or mobile is not possible. Please use Chrome
-    or Firefox; Safari and Edge (Internet Explorer) are not supported. \nParticipation
-    in this survey is <b>voluntary</b> and all answers will be collected and stored
-    <b>anonymously</b>. Study participation will take approximately 45 minutes. \nIn
-    the following, you will find all information on the handling of your data in
-    accordance with data protection law as well as information on the purpose of
-    the study. "
+    will follow). \nPlease use a <b>desktop computer or notebook with a comupter
+    mouse</b> to take the study. Participation via tablet or mobile is not possible.
+    Please use Chrome or Firefox; Safari and Edge (Internet Explorer) are not supported.
+    \nParticipation in this survey is <b>voluntary</b> and all answers will be collected
+    and stored <b>anonymously</b>. Study participation will take approximately 45
+    minutes. \nIn the following, you will find all information on the handling of
+    your data in accordance with data protection law as well as information on the
+    purpose of the study. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1777,8 +1777,8 @@ RectTransform:
   m_Father: {fileID: 953750915}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5963206}
-  m_AnchorMax: {x: 1, y: 0.99955404}
+  m_AnchorMin: {x: 0, y: 0.6042725}
+  m_AnchorMax: {x: 1, y: 0.99956286}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2078,13 +2078,14 @@ RectTransform:
   m_Children:
   - {fileID: 346306598}
   - {fileID: 1564596532}
+  - {fileID: 661988283}
   m_Father: {fileID: 968784621}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.00035191, y: -142.10141}
-  m_SizeDelta: {x: 650.1, y: 84.8179}
+  m_AnchoredPosition: {x: 0.00035191, y: -172.87161}
+  m_SizeDelta: {x: 650.1, y: 146.3533}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &542635836
 MonoBehaviour:
@@ -2359,6 +2360,144 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 621290656}
   m_CullTransparentMesh: 1
+--- !u!1 &661988282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 661988283}
+  - component: {fileID: 661988285}
+  - component: {fileID: 661988284}
+  m_Layer: 5
+  m_Name: Text (TMP) (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &661988283
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661988282}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 542635835}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 171.87463, y: -38.47561}
+  m_SizeDelta: {x: -366.2507, y: -95.0382}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &661988284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661988282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Thilo Thelen
+
+    Phone: +49 172 4162200
+
+    Email: thelen@uni-bremen.de'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 12
+  m_fontSizeBase: 12
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &661988285
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661988282}
+  m_CullTransparentMesh: 1
 --- !u!1 &664188438
 GameObject:
   m_ObjectHideFlags: 0
@@ -2613,7 +2752,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 5.0348, y: -488}
+  m_AnchoredPosition: {x: 5.0348, y: -530}
   m_SizeDelta: {x: 640.03, y: 501.186}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &713239042
@@ -3044,8 +3183,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000023534, y: -175}
-  m_SizeDelta: {x: 637.62, y: 237.5338}
+  m_AnchoredPosition: {x: -0.000023534, y: -207.70306}
+  m_SizeDelta: {x: 637.62, y: 302.9399}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &834138330
 MonoBehaviour:
@@ -3321,8 +3460,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0012465, y: -271.13226}
-  m_SizeDelta: {x: 650.1, y: 910.0311}
+  m_AnchoredPosition: {x: 0.0012465, y: -280.27542}
+  m_SizeDelta: {x: 650.1, y: 928.3175}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1000328647
 GameObject:
@@ -3431,8 +3570,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You are ineligible for this study. Please return your submission on Prolific
-    by selecting the 'stop without completing' button.
+  m_Text: 'You are ineligible for this study. '
 --- !u!222 &1006486108
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3476,7 +3614,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000031163, y: -865.34045}
+  m_AnchoredPosition: {x: -0.000031163, y: -937}
   m_SizeDelta: {x: 637.62, y: 1119.7445}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1009577102
@@ -4719,8 +4857,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 52879756}
   m_HandleRect: {fileID: 52879755}
   m_Direction: 2
-  m_Value: 0.9999811
-  m_Size: 0.23190168
+  m_Value: 0.99998206
+  m_Size: 0.22363152
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5180,8 +5318,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 171.87463, y: 9.95001}
-  m_SizeDelta: {x: -366.25073, y: -47.5}
+  m_AnchoredPosition: {x: 171.87463, y: 22.194803}
+  m_SizeDelta: {x: -366.2507, y: -71.9894}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1564596533
 MonoBehaviour:
@@ -5709,8 +5847,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 451910429}
   m_HandleRect: {fileID: 451910428}
   m_Direction: 2
-  m_Value: 0.99999976
-  m_Size: 0.6705329
+  m_Value: 1.0000001
+  m_Size: 0.67053294
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6530,8 +6668,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 436846698}
   m_HandleRect: {fileID: 436846697}
   m_Direction: 2
-  m_Value: 0.9992527
-  m_Size: 0.40323338
+  m_Value: 0.9992771
+  m_Size: 0.39529037
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7139,7 +7277,8 @@ MonoBehaviour:
     of Business Psychology & Human Resource Management \nEnrique-Schmidt-Stra\xDFe
     1, 28359 Bremen \n \nProf. Dr. Vera Hagemann \nPhone: +49 421 218 66750 \nEmail:
     vhagemann@uni-bremen.de  \n \nMich\xE8le Rieth, M.Sc. \nPhone: +49 421 218 667563
-    \nEmail: mrieth@uni-bremen.de "
+    \nEmail: mrieth@uni-bremen.de \n\nThilo Thelen\nPhone: +49 172 4162200\nEmail:
+    thelen@uni-bremen.de"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7518,38 +7657,38 @@ MonoBehaviour:
     an anonymous form so that you cannot be identified as a person.  \n<b>Storage
     period and subsequent use </b>\nAll data will be stored for ten years as required
     by the German Research Foundation (DFG). If you wish early deletion of your study
-    data, please write an email to Mich\xE8le Rieth (mrieth@uni-bremen.de), and share
-    your alphanumeric code ['Prolific-ID'] with us. You do not need to give us your
-    name, so that your anonymity (see above) is preserved. However, it will only
-    be possible to delete your data until your data has been merged and evaluated
-    at group level, as from that moment it will be stored in a file to which the
-    numerical code is not transferred. \nYou have the right to request information
-    about your recorded data, as far as this is possible for technical reasons. You
-    can inquire about this with the study director. However, we would like to point
-    out that the collected data were selected according to purely scientific criteria
-    and have no medical-diagnostic or psychological-diagnostic benefit for the individual
-    case. \nAssuming your consent, the personal data collected in this study will
-    be made available in pseudonymized form for subsequent use for research. \nIn
-    accordance with the recommendations of the German Research Foundation (DFG) and
-    the German Psychological Society (DGPs) on quality assurance in research, research
-    data should be made available to other scientists for research purposes whenever
-    possible. Non-anonymized data will not be made available to the public under
-    any circumstances. The data service center makes the research data available
-    to scientists for exclusively scientific purposes. \n<b>With regard to your personal
-    data, you have the following rights: </b>\n<i>Consent to the processing of personal
-    data and right to withdraw consent.</i>\n The processing of your personal data
-    is only legal with your consent. You are not obliged to consent to the processing;
-    consent is <b>voluntary</b>. In addition, you have the right to <b>revoke</b>
-    your consent to the processing of personal data at any time for the future vis-\xE0-vis
-    the people responsible. Refusal or revocation of consent will not result in any
-    legal disadvantages for you. The revocation of consent has the effect that the
-    processing of the affected personal data becomes unlawful for the future in accordance
-    with the revocation declaration. The lawfulness of the processing carried out
-    until the revocation is not affected by this.  \n<i>Right to information </i>\nYou
-    have the right to obtain information about your personal data that is collected
-    or processed in our working group or, if applicable, that is transmitted to third
-    parties (Art. 15 GDPR).  \n<i>Right to rectification </i> \nYou have the right
-    to have inaccurate personal data concerning you corrected (Art. 16 GDPR). \n<i>Right
+    data, please write an email to Thilo Thelen (thelen@uni-bremen.de), and share
+    your 4-letter code with us. You do not need to give us your name, so that your
+    anonymity (see above) is preserved. However, it will only be possible to delete
+    your data until your data has been merged and evaluated at group level, as from
+    that moment it will be stored in a file to which the numerical code is not transferred.
+    \nYou have the right to request information about your recorded data, as far
+    as this is possible for technical reasons. You can inquire about this with the
+    study director. However, we would like to point out that the collected data were
+    selected according to purely scientific criteria and have no medical-diagnostic
+    or psychological-diagnostic benefit for the individual case. \nAssuming your
+    consent, the personal data collected in this study will be made available in
+    pseudonymized form for subsequent use for research. \nIn accordance with the
+    recommendations of the German Research Foundation (DFG) and the German Psychological
+    Society (DGPs) on quality assurance in research, research data should be made
+    available to other scientists for research purposes whenever possible. Non-anonymized
+    data will not be made available to the public under any circumstances. The data
+    service center makes the research data available to scientists for exclusively
+    scientific purposes.  \n<b>With regard to your personal data, you have the following
+    rights: </b>\n<i>Consent to the processing of personal data and right to withdraw
+    consent.</i>\n The processing of your personal data is only legal with your consent.
+    You are not obliged to consent to the processing; consent is <b>voluntary</b>.
+    In addition, you have the right to <b>revoke</b> your consent to the processing
+    of personal data at any time for the future vis-\xE0-vis the people responsible.
+    Refusal or revocation of consent will not result in any legal disadvantages for
+    you. The revocation of consent has the effect that the processing of the affected
+    personal data becomes unlawful for the future in accordance with the revocation
+    declaration. The lawfulness of the processing carried out until the revocation
+    is not affected by this.  \n<i>Right to information </i>\nYou have the right
+    to obtain information about your personal data that is collected or processed
+    in our working group or, if applicable, that is transmitted to third parties
+    (Art. 15 GDPR).  \n<i>Right to rectification </i> \nYou have the right to have
+    inaccurate personal data concerning you corrected (Art. 16 GDPR). \n<i>Right
     to deletion</i> \nUnder the legal conditions, you have the right to have your
     personal data deleted (Art. 17 GDPR), e.g. if this data is no longer necessary
     for the purpose for which it was collected and the deletion is not contrary to

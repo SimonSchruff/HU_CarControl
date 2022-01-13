@@ -507,7 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   errorMessageCanvas: {fileID: 1741147094596929069, guid: cc186687992832c4593022035337dce1, type: 3}
-  group: 2
+  group: 1
   playerID: 
   nBackData: []
   primaryData: []
@@ -7882,8 +7882,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -101.18407, y: -13}
-  m_SizeDelta: {x: 162.6696, y: 30}
+  m_AnchoredPosition: {x: -18.534912, y: -13}
+  m_SizeDelta: {x: 327.9679, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &416530984
 MonoBehaviour:
@@ -7918,7 +7918,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '% ( of other tasks )'
+  m_Text: '% is dedicated to those tasks'
 --- !u!222 &416530985
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23879,7 +23879,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 18
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -23890,11 +23890,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '''You are ineligible for this study as you have provided information which
-    is inconsistent with your Prolific prescreening responses (under 18 years, English
-    is not you first language, or no normal/ corrected-to-normal vision). Please
-    return your submission on Prolific by selecting the ''stop without completing''
-    button.'''
+  m_Text: Unfortunately, you are ineligible for this study as you do not hold a valid
+    Air Traffic Control License. Thank you for your interest in this study.
 --- !u!222 &1298492365
 CanvasRenderer:
   m_ObjectHideFlags: 0

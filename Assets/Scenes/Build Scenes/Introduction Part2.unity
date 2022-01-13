@@ -2645,7 +2645,6 @@ MonoBehaviour:
   errorMessageCanvas: {fileID: 0}
   group: 1
   playerID: 
-  completionCode: test
   nBackData: []
   primaryData: []
 --- !u!4 &1457040341
@@ -4023,7 +4022,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Thank you for your participation! \n \nIf you are interested in receiving
     the ranking list to see how you performed compared to other participants, please
-    send an e-mail to: <u>thelen@uni-bremen.de</u> within the next days. Please save
+    send an email to: <u>thelen@uni-bremen.de</u> within the next days. Please save
     this email now. Feel free to make a screenshot from this side. \n \nIn this email,
     please do <u><b>not</b></u> tell us your 4-letter code that you entered in the
     beginning. <b>This code is just for you!</b> Just tell us that you are interested
