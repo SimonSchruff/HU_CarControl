@@ -16,6 +16,8 @@ public class AssistanceSelectScript : MonoBehaviour
     [SerializeField] Image areaBut;
     [SerializeField] Image specificBut;
 
+    [SerializeField] GameObject TutorialOverlay;
+    GameObject tempOverlay;
 
     public enum AssiSelectStates
     {
@@ -133,6 +135,8 @@ public class AssistanceSelectScript : MonoBehaviour
     }
     public void ChangeAssistanceToArea ()
     {
+        CheckIfRemoveTutorialOverlay(true);
+
         ClearHighlightOfAllBut();
 
         SimplAssis.assi.ChangeAssitance(SimplAssis.assiState.areaHelp);
@@ -146,6 +150,8 @@ public class AssistanceSelectScript : MonoBehaviour
     }
     public void ChangeAssistanceToSpecific ()
     {
+        CheckIfRemoveTutorialOverlay(false);
+
         ClearHighlightOfAllBut();
 
         SimplAssis.assi.ChangeAssitance(SimplAssis.assiState.specificHelp);
@@ -154,6 +160,27 @@ public class AssistanceSelectScript : MonoBehaviour
         if (Control.con.actualSaveClass != null)
         {
             Control.con.actualSaveClass.ChangeAssitanceInGame(false);
+        }
+    }
+
+    void CheckIfRemoveTutorialOverlay (bool toArea)
+    {
+        if(SimplAssis.assi.actualAssistance == (toArea ? SimplAssis.assiState.specificHelp : SimplAssis.assiState.areaHelp))
+        {
+            if (tempOverlay != null)
+            {
+                Destroy(tempOverlay);
+                Time.timeScale = 1f;
+            }
+        }
+    }
+
+    public void CreateTutorialAssiOverlay ()
+    {
+        if (SQLSaveManager.instance.group == SQLSaveManager.Group.group3)
+        {
+            tempOverlay = Instantiate(TutorialOverlay);
+            Time.timeScale = 0;
         }
     }
 

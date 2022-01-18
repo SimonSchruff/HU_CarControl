@@ -3,7 +3,13 @@ guid: eed06cca6b6d4fd4b9de0953a276c961
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - AssistanceDisplayText: {instanceID: 0}
+  - selectPanel: {instanceID: 0}
+  - debugNoneBut: {instanceID: 0}
+  - areaBut: {instanceID: 0}
+  - specificBut: {instanceID: 0}
+  - TutorialOverlay: {fileID: 898290926576295565, guid: 2f14dd299d63c814286183e8e9a9cfe2, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

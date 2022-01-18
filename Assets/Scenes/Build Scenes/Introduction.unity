@@ -6823,6 +6823,14 @@ PrefabInstance:
       propertyPath: trialDurationInMin
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3619266539239304191, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.7803955
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619266539239304191, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2444427940546553179, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
@@ -17755,8 +17763,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1138109525}
   m_HandleRect: {fileID: 1138109524}
   m_Direction: 2
-  m_Value: 0.9842472
-  m_Size: 0.41943344
+  m_Value: 0.9842471
+  m_Size: 0.41943341
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

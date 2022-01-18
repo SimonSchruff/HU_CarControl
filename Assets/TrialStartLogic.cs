@@ -60,5 +60,16 @@ public class TrialStartLogic : MonoBehaviour
 
         //StartTrial
         c.StartGame(trialName, saveData, tempState.ToString());
+
+        if(trialName == "trTest_assi")      // Start Courinine Show Overlay after Time
+        {
+            StartCoroutine(ShowChangeOverlay());
+        }
+    }
+
+    IEnumerator ShowChangeOverlay ()
+    {
+        yield return new WaitForSeconds(10);
+        AssistanceSelectScript.assiSel.CreateTutorialAssiOverlay();
     }
 }
