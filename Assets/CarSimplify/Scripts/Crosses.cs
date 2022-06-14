@@ -48,25 +48,25 @@ public class Crosses : SimplifyParent
             actualState = !actualState;
             transform.rotation = Quaternion.Euler(0, 0, actualState ? 0 : 90);
 
-            if (SimplAssis.assi.actualAssistance != SimplAssis.assiState.auto)
+            if (SimplAssis.instance.actualAssistance != SimplAssis.AssiState.auto)
             {
-                SimplAssis.assi.UpdateAssistance();
+                SimplAssis.instance.UpdateAssistance();
             }
             // Add CrossesClickedCounter
-            if (Control.con.actualSaveClass != null)
+            if (Control.instance.actualSaveClass != null)
             {
-                Control.con.actualSaveClass.amountUserClickedCrosses++;
+                Control.instance.actualSaveClass.amountUserClickedCrosses++;
             }
         }
         else
         {
-            SimplAssis.assi.SetUpdateTimer();
+            SimplAssis.instance.SetUpdateTimer();
         }
     }
 
     public void SetHighlighted(int priority = 0, bool setHighlighted = false)
     {
-    //    priorityText.gameObject.SetActive(setHighlighted);
+        //priorityText.gameObject.SetActive(setHighlighted);
         highlightSprite.gameObject.SetActive(setHighlighted);
 
         if (setHighlighted && priority != 0)
@@ -75,7 +75,8 @@ public class Crosses : SimplifyParent
 
             float tempScale = 0;
             float tempOpa = 0;
-            switch (priority)       //Define visual stuff different Highlight things
+            //Define visual stuff different Highlight things
+            switch (priority)       
             {
                 case 1:
                     tempScale = 6;
@@ -96,7 +97,8 @@ public class Crosses : SimplifyParent
             }
 
             highlightSprite.transform.localScale = new Vector3(tempScale, tempScale, tempScale);
-            highlightSprite.color = new Color(highlightSprite.color.r, highlightSprite.color.g, highlightSprite.color.b, tempOpa);
+            var color = highlightSprite.color;
+            highlightSprite.color = new Color(color.r, color.g, color.b, tempOpa);
         }
 
     }

@@ -24,7 +24,6 @@ public class Control : MonoBehaviour
 
     [Header("Gameplay not change")]
     public int actualStep = 0;
-    public static Control con;
 
     public SaveTrialClass actualSaveClass;
     public List<SaveTrialClass> allSaveClasses = new List<SaveTrialClass>();
@@ -32,11 +31,12 @@ public class Control : MonoBehaviour
     public Crosses[] crossesRefs;
     public CarSpawnScript[] carSpawnRefs;
 
+    public static Control instance;
     private void Awake()
     {
-        if (con == null)
+        if (instance == null)
         {
-            con = this;
+            instance = this;
         }
         else
         {
@@ -44,7 +44,7 @@ public class Control : MonoBehaviour
         }
     }
 
-    public void StartGame(string TrialName, bool safeData = true, string assistanceLevel = "x")
+    public void StartGame(string TrialName = "trial_test", bool safeData = true, string assistanceLevel = "x")
     {
         crossesRefs = FindObjectsOfType<Crosses>();
         carSpawnRefs = FindObjectsOfType<CarSpawnScript>();
@@ -55,23 +55,30 @@ public class Control : MonoBehaviour
         gameRunning = true;
         isInit = true;
 
-        actualSaveClass = SQLSaveManager.instance.gameObject.AddComponent<SaveTrialClass>();
-        actualSaveClass.trialName = TrialName;
-        actualSaveClass.assistance = assistanceLevel;
-      //  actualSaveClass.assistance = AssistanceSelectScript.assiSel.actualAssiSelect.ToString();
-        actualSaveClass.saveData = safeData;
+        if (SQLSaveManager.instance)
+        {
+            actualSaveClass = SQLSaveManager.instance.gameObject.AddComponent<SaveTrialClass>();
+            actualSaveClass.trialName = TrialName;
+            actualSaveClass.assistance = assistanceLevel;
+            actualSaveClass.saveData = safeData;
+            // actualSaveClass.assistance = AssistanceSelectScript.assiSel.actualAssiSelect.ToString();
+        }
+        else
+        {
+            Debug.Log("No Save Manager found; Trial will not be saved! Control.cs : 68");
+        }
 
-        if (AssistanceSelectScript.assiSel.actualAssiSelect == AssistanceSelectScript.AssiSelectStates.Area)
+        if (AssistanceSelectScript.instance.assiSelectState == AssistanceSelectScript.AssiSelectStates.Area)
         {
             actualSaveClass.percentageArea = 1;
         }
-        else if (AssistanceSelectScript.assiSel.actualAssiSelect == AssistanceSelectScript.AssiSelectStates.Specific)
+        else if (AssistanceSelectScript.instance.assiSelectState == AssistanceSelectScript.AssiSelectStates.Specific)
         {
             actualSaveClass.percentageSpecific = 1;
         }
-        else if (AssistanceSelectScript.assiSel.actualAssiSelect == AssistanceSelectScript.AssiSelectStates.Select)
+        else if (AssistanceSelectScript.instance.assiSelectState == AssistanceSelectScript.AssiSelectStates.Select)
         {
-            actualSaveClass.InitChangeAssistanceActive(SimplAssis.assi.actualAssistance == SimplAssis.assiState.areaHelp);   
+            actualSaveClass.InitChangeAssistanceActive(SimplAssis.instance.actualAssistance == SimplAssis.AssiState.areaHelp);   
         }
     }
 
@@ -95,7 +102,7 @@ public class Control : MonoBehaviour
         {
             Destroy(cars.gameObject);
         }
-        SimplAssis.assi.UpdateAssistance();
+        SimplAssis.instance.UpdateAssistance();
 
        // StopCoroutine(UpdateFunc());
 
@@ -105,7 +112,7 @@ public class Control : MonoBehaviour
         }
         CheckIfAddLastScoreClass();
 
-        AssistanceSelectScript.assiSel.ChangeUIVisibility(false); 
+        AssistanceSelectScript.instance.ChangeUIVisibility(false); 
         FragebogenManager.fra.NextQuestion();
 
         actualSaveClass = null;
@@ -150,6 +157,8 @@ public class Control : MonoBehaviour
             tri.assistance = "total";
         }
     }
+    
+    /*
     IEnumerator UpdateFunc(bool isStart = false)
     {
         yield return new WaitForSeconds(isStart ? 2 : spawnDelay);
@@ -163,12 +172,14 @@ public class Control : MonoBehaviour
         }
 
     }
+    */
+    
     void UpdateFuncToCall (bool IsInit = false)
     {
         if (gameRunning)
         {
             UpdateElems(IsInit);
-            SimplAssis.assi.UpdateAssistance();
+            SimplAssis.instance.UpdateAssistance();
         }
     }
 
@@ -210,9 +221,10 @@ public class Control : MonoBehaviour
                     possibleSpawnPos.Add(carSpawn);
                 }
             }
-                CarSpawnScript temp = possibleSpawnPos[Random.Range(0, possibleSpawnPos.Count - 1)];
-                temp.SpawnCar();
-                possibleSpawnPos.Remove(temp);
+            
+            CarSpawnScript temp = possibleSpawnPos[Random.Range(0, possibleSpawnPos.Count - 1)];
+            temp.SpawnCar();
+            possibleSpawnPos.Remove(temp);
         }
         else
         {
@@ -350,17 +362,18 @@ public class Control : MonoBehaviour
         }
 
 
-        if (Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0))
         {
-            try         // Click Crosses
+            // Click Crosses
+            try
             {
                 Vector3 mousePos = camRef.ScreenToWorldPoint(Input.mousePosition);
                 Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
-                List <RaycastHit2D> hitResults = new List<RaycastHit2D>();
+                List<RaycastHit2D> hitResults = new List<RaycastHit2D>();
                 Physics2D.Raycast(mousePos2D, Vector2.zero, filter, hitResults);
 
-                if(hitResults.Count > 0)
+                if (hitResults.Count > 0)
                 {
                     foreach (var hitRes in hitResults)
                     {
@@ -375,7 +388,10 @@ public class Control : MonoBehaviour
                     }
                 }
             }
-            catch { }
+            catch
+            {
+                Debug.LogError("Click On Cross failed! Control.cs : 386; ");
+            }
         }
     }
 }

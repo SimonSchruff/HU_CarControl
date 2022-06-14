@@ -27,7 +27,7 @@ public class TrialStartLogic : MonoBehaviour
 
 
 
-        Control c = Control.con;
+        Control c = Control.instance;
 
         ScoreSimple.sco.ChangeScoreVisibility(showUI);
 
@@ -56,7 +56,7 @@ public class TrialStartLogic : MonoBehaviour
         {
             tempState = assistanceLevel;
         }
-        AssistanceSelectScript.assiSel.ChangeAssiSelect(tempState);
+        AssistanceSelectScript.instance.ChangeAssiSelect(tempState);
 
         //StartTrial
         c.StartGame(trialName, saveData, tempState.ToString());

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SimplAssis : MonoBehaviour
 {
-    [HideInInspector] public assiState actualAssistance = assiState.none;
+    [HideInInspector] public AssiState actualAssistance = AssiState.none;
 
     [Header("AreaHighlight")]
     [SerializeField] SpriteRenderer[] highlightSprites;
@@ -15,24 +15,22 @@ public class SimplAssis : MonoBehaviour
 
     float autoUpdateTimer = 0;
 
-    public static SimplAssis assi;
-    public enum assiState
+    public enum AssiState
     {
-        none,
-        areaHelp,
-        specificHelp,
-        auto
+        none, areaHelp, specificHelp, auto
     }
 
+    // Singleton
+    public static SimplAssis instance;
     private void Awake()
     {
-        if (assi == null)
-            assi = this;
+        if (instance == null)
+            instance = this;
         else
             Destroy(this);
     }
 
-    public void ChangeAssitance (assiState changeStateTo)
+    public void ChangeAssistanceMode (AssiState changeStateTo)
     {
         ResetHighlightAreas();
 
@@ -48,11 +46,11 @@ public class SimplAssis : MonoBehaviour
     {
         switch (actualAssistance)
         {
-            case assiState.none:
+            case AssiState.none:
                 {
                     break;
                 }
-            case assiState.areaHelp:
+            case AssiState.areaHelp:
                 {
                     ResetHighlightAreas();
 
@@ -67,7 +65,7 @@ public class SimplAssis : MonoBehaviour
 
                     break;
                 }
-            case assiState.specificHelp:
+            case AssiState.specificHelp:
                 {
                     ResetHighlightedCrosses();
 
@@ -82,7 +80,7 @@ public class SimplAssis : MonoBehaviour
 
                     break;
                 }
-            case assiState.auto:
+            case AssiState.auto:
                 {
                     StartCoroutine(DelayAutoUpdate());
 
@@ -156,7 +154,7 @@ public class SimplAssis : MonoBehaviour
 
     void ResetHighlightedCrosses ()
     {
-        foreach (var cross in Control.con.crossesRefs)
+        foreach (var cross in Control.instance.crossesRefs)
         {
             cross.SetHighlighted();
         }
@@ -171,32 +169,33 @@ public class SimplAssis : MonoBehaviour
 
     List <Crosses>  SearchForNextRecommendations ()
     {
-        List<Crosses> crosList = new List<Crosses>();
-        Crosses[] crosRef = Control.con.crossesRefs;
+        List<Crosses> crossList = new List<Crosses>();
+        Crosses[] crossRef = Control.instance.crossesRefs;
 
         List<Crosses> excludeCrosses = new List<Crosses>();
 
-        int maxCount = 6; // How many Crosses should be checked in Row + Emty slots
+        int maxCount = 6; // How many Crosses should be checked in Row + Empty slots
 
-        foreach (var cr in crosRef)
+        foreach (var cr in crossRef)
         {
             cr.tempHighlightPrio = 0;
         }
 
         for (int i = 0; i < maxCount; i++)
         {
-            foreach (var cross in crosRef)
+            foreach (var cross in crossRef)
             {
                 foreach (Vector2 vec in cross.crossedInTurns)
                 {
-                    if(vec.x == i) // Check if action might be needed in close turn
+                    // Check if action might be needed in close turn
+                    if(vec.x == i) 
                     {
-                        if(cross.actualState != (vec.y==0))
+                        if(cross.actualState != (vec.y == 0))
                         {
                             bool possible = true;
                             if (i != 0)
                             {
-                                foreach (var usedCrosses in crosList)
+                                foreach (var usedCrosses in crossList)
                                 {
                                     foreach(var prevCross in (cross.actualState? cross.previousCrossH: cross.previousCrossV))
                                     {
@@ -226,14 +225,15 @@ public class SimplAssis : MonoBehaviour
                                 {
                                     if(cross.tempHighlightPrio == 0)
                                     {
-                                        crosList.Add(cross);
+                                        crossList.Add(cross);
                                         cross.tempHighlightPrio = i+1;
                                     }
                                 }
                             }
                         }
-                        else    //Exclude when cross needs to be crossed and cross standing right
+                        else    
                         {
+                            //Exclude when cross needs to be crossed and cross standing right
                             excludeCrosses.Add(cross);
                         }
                     }
@@ -241,10 +241,7 @@ public class SimplAssis : MonoBehaviour
             }
         }
 
-
-
-
-        return crosList;
+        return crossList;
     }
 
 

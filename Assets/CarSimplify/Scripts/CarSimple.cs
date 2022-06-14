@@ -14,8 +14,8 @@ public class CarSimple : SimplifyParent
 
     private void Start()
     {
-        gridSize = Control.con.gridSize;
-        spawnDelay = Control.con.spawnDelay;
+        gridSize = Control.instance.gridSize;
+        spawnDelay = Control.instance.spawnDelay;
     }
 
     IEnumerator DestroyAfter(float time)
@@ -37,7 +37,7 @@ public class CarSimple : SimplifyParent
         horOrVert = HorOrVertical;
         actualStep = -1;  //Set on -1 to update on Spawn and set on 0
 
-        spawnDelay = Control.con.spawnDelay;
+        spawnDelay = Control.instance.spawnDelay;
         StartCoroutine(DestroyAfter(horOrVert ? 7 * spawnDelay : 4 * spawnDelay));
         StartCoroutine(AddPointsAfter(horOrVert ? (5 * spawnDelay) +(.25f * spawnDelay) : (3 * spawnDelay) + (.30f * spawnDelay)));
     }
@@ -74,14 +74,14 @@ public class CarSimple : SimplifyParent
             Crosses cross = collision.GetComponentInParent<Crosses>();
             if(cross.actualState == horOrVert)
             {
-                if (Control.con.actualSaveClass != null)
+                if (Control.instance.actualSaveClass != null)
                 {
-                    Control.con.actualSaveClass.crossesCrossed++;
+                    Control.instance.actualSaveClass.crossesCrossed++;
 
                     if(horOrVert)
-                        Control.con.actualSaveClass.crossesCrossedHorizontal++;
+                        Control.instance.actualSaveClass.crossesCrossedHorizontal++;
                     else
-                        Control.con.actualSaveClass.crossesCrossedVertical++;
+                        Control.instance.actualSaveClass.crossesCrossedVertical++;
                 }
 
                 cross.locked = true;
@@ -108,23 +108,23 @@ public class CarSimple : SimplifyParent
         if (!success)
         {
             died = true;
-            SimplAssis.assi.UpdateAssistance();
+            SimplAssis.instance.UpdateAssistance();
 
             GetComponentInChildren<Animator>().SetTrigger("Die");
 
             StartCoroutine(DestroyAfterTime());
 
-            if (Control.con.actualSaveClass != null)
+            if (Control.instance.actualSaveClass != null)
             {
-                Control.con.actualSaveClass.carsCrashed++;
+                Control.instance.actualSaveClass.carsCrashed++;
             }
         }
         else
         {
             Destroy(gameObject);
-            if (Control.con.actualSaveClass != null)
+            if (Control.instance.actualSaveClass != null)
             {
-                Control.con.actualSaveClass.carsSuccess++;
+                Control.instance.actualSaveClass.carsSuccess++;
             }
         }
 

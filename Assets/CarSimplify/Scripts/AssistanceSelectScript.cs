@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class AssistanceSelectScript : MonoBehaviour
 {
-    public static AssistanceSelectScript assiSel;
+    public static AssistanceSelectScript instance;
 
-    public AssiSelectStates actualAssiSelect = AssiSelectStates.None;
+    public AssiSelectStates assiSelectState = AssiSelectStates.None;
 
     [SerializeField] Text AssistanceDisplayText;
 
@@ -24,9 +24,9 @@ public class AssistanceSelectScript : MonoBehaviour
 
     private void Awake()
     {
-        if (assiSel == null)
+        if (instance == null)
         {
-            assiSel = this;
+            instance = this;
         }
         else
         {
@@ -39,7 +39,7 @@ public class AssistanceSelectScript : MonoBehaviour
         ScoreSimple.sco.ChangeScoreVisibility(changeVisibilityTo);
         if (changeVisibilityTo)
         {
-            ChangeAssiSelect(actualAssiSelect);
+            ChangeAssiSelect(assiSelectState);
         }
         else
         {
@@ -61,23 +61,23 @@ public class AssistanceSelectScript : MonoBehaviour
                 AssistanceDisplayText.gameObject.SetActive(true);
                 AssistanceDisplayText.text = "Assistance OFF";
                 AssistanceDisplayText.color = Color.red;
-                SimplAssis.assi.ChangeAssitance(SimplAssis.assiState.none);
+                SimplAssis.instance.ChangeAssistanceMode(SimplAssis.AssiState.none);
                 break;
             case AssiSelectStates.Area:
                 AssistanceDisplayText.gameObject.SetActive(true);
                 AssistanceDisplayText.text = "Area assistance ON";
                 AssistanceDisplayText.color = Color.green;
-                SimplAssis.assi.ChangeAssitance(SimplAssis.assiState.areaHelp);
+                SimplAssis.instance.ChangeAssistanceMode(SimplAssis.AssiState.areaHelp);
                 break;
             case AssiSelectStates.Specific:
                 AssistanceDisplayText.gameObject.SetActive(true);
                 AssistanceDisplayText.text = "Specific assistance ON";
                 AssistanceDisplayText.color = Color.green;
-                SimplAssis.assi.ChangeAssitance(SimplAssis.assiState.specificHelp);
+                SimplAssis.instance.ChangeAssistanceMode(SimplAssis.AssiState.specificHelp);
                 break;
             case AssiSelectStates.Select:
                 selectPanel.gameObject.SetActive(true);
-                SimplAssis.assi.ChangeAssitance((Random.Range(0,2)==1)?SimplAssis.assiState.areaHelp: SimplAssis.assiState.specificHelp);
+                SimplAssis.instance.ChangeAssistanceMode((Random.Range(0,2)==1)?SimplAssis.AssiState.areaHelp: SimplAssis.AssiState.specificHelp);
                 SetUpDebugPanel();
                 break;
             default:
@@ -95,21 +95,21 @@ public class AssistanceSelectScript : MonoBehaviour
     }
     void SetUpDebugPanel ()
     {
-        if (actualAssiSelect == AssiSelectStates.Select && SimplAssis.assi.actualAssistance == SimplAssis.assiState.none)
-            SimplAssis.assi.ChangeAssitance(SimplAssis.assiState.areaHelp);
+        if (assiSelectState == AssiSelectStates.Select && SimplAssis.instance.actualAssistance == SimplAssis.AssiState.none)
+            SimplAssis.instance.ChangeAssistanceMode(SimplAssis.AssiState.areaHelp);
 
-        switch (SimplAssis.assi.actualAssistance)
+        switch (SimplAssis.instance.actualAssistance)
         {
-            case SimplAssis.assiState.none:
+            case SimplAssis.AssiState.none:
                 ChangeAssistanceToNone();
                 break;
-            case SimplAssis.assiState.areaHelp:
+            case SimplAssis.AssiState.areaHelp:
                 ChangeAssistanceToArea();
                 break;
-            case SimplAssis.assiState.specificHelp:
+            case SimplAssis.AssiState.specificHelp:
                 ChangeAssistanceToSpecific();
                 break;
-            case SimplAssis.assiState.auto:
+            case SimplAssis.AssiState.auto:
                 break;
             default:
                 break;
@@ -128,19 +128,19 @@ public class AssistanceSelectScript : MonoBehaviour
     {
         ClearHighlightOfAllBut();
 
-        SimplAssis.assi.ChangeAssitance(SimplAssis.assiState.none);
+        SimplAssis.instance.ChangeAssistanceMode(SimplAssis.AssiState.none);
         debugNoneBut.color = Color.green;
     }
     public void ChangeAssistanceToArea ()
     {
         ClearHighlightOfAllBut();
 
-        SimplAssis.assi.ChangeAssitance(SimplAssis.assiState.areaHelp);
+        SimplAssis.instance.ChangeAssistanceMode(SimplAssis.AssiState.areaHelp);
         areaBut.color = Color.green;
 
         try
         {
-            Control.con.actualSaveClass.ChangeAssitanceInGame(true);
+            Control.instance.actualSaveClass.ChangeAssitanceInGame(true);
         }
         catch {}
     }
@@ -148,12 +148,12 @@ public class AssistanceSelectScript : MonoBehaviour
     {
         ClearHighlightOfAllBut();
 
-        SimplAssis.assi.ChangeAssitance(SimplAssis.assiState.specificHelp);
+        SimplAssis.instance.ChangeAssistanceMode(SimplAssis.AssiState.specificHelp);
         specificBut.color = Color.green;
 
-        if (Control.con.actualSaveClass != null)
+        if (Control.instance.actualSaveClass != null)
         {
-            Control.con.actualSaveClass.ChangeAssitanceInGame(false);
+            Control.instance.actualSaveClass.ChangeAssitanceInGame(false);
         }
     }
 

@@ -6,6 +6,6 @@ public class Debug_StartGameSimple : MonoBehaviour
 {
     void Start()
     {
-        Control.con.StartGame("Debug",false);
+        Control.instance.StartGame("Debug",false);
     }
 }

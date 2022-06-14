@@ -112,7 +112,7 @@ public class SecondaryTask : MonoBehaviour
                 if(!isTrainingSession)
                 {
                     ScoreSimple.sco.UpdateScore(-1);  // False Alarm
-                    Control.con.actualSaveClass.sec_FalseAlarm++; 
+                    Control.instance.actualSaveClass.sec_FalseAlarm++; 
                 }
                 else
                 {
@@ -124,8 +124,8 @@ public class SecondaryTask : MonoBehaviour
             {
                 if(!isTrainingSession)
                 {
-                    Control.con.actualSaveClass.sec_Correct++;
-                    Control.con.actualSaveClass.sec_TotalAlarms++;
+                    Control.instance.actualSaveClass.sec_Correct++;
+                    Control.instance.actualSaveClass.sec_TotalAlarms++;
                 }
                 else
                     StartCoroutine(ShowTrainingText("Correct Input!"));
@@ -224,8 +224,8 @@ public class SecondaryTask : MonoBehaviour
                 try
                 {
                     ScoreSimple.sco.UpdateScore(-2); //Missed
-                    Control.con.actualSaveClass.sec_Misses++;
-                    Control.con.actualSaveClass.sec_TotalAlarms++;
+                    Control.instance.actualSaveClass.sec_Misses++;
+                    Control.instance.actualSaveClass.sec_TotalAlarms++;
                     rounds++; 
 
                 }
