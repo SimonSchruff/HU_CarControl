@@ -2,8 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// TODO: Add Different vehicle types as inherited classes
 public class CarSimple : SimplifyParent
 {
+    // Set in Prefab
+    // Enum determines how car is going to be saved; 
+    public enum CarType
+    {
+        car00, 
+        car01, 
+        car02
+    }
+    public CarType carType;
+
+    [Header("Assistance Error Variables")] 
+    [Tooltip("Determines whether or not the assistance system can miss the car;")] public bool CanBeMissedByAssiSystem = false;
+    [Tooltip("Determines how likely it is that the assistance system will miss the car;")] public float ErrorProbability = 0.7f; 
+    
     float gridSize;
     float spawnDelay;
 
@@ -18,12 +34,12 @@ public class CarSimple : SimplifyParent
         spawnDelay = Control.instance.spawnDelay;
     }
 
-    IEnumerator DestroyAfter(float time)
+    private IEnumerator DestroyAfter(float time)
     {
         yield return new WaitForSeconds(time);
         DestroyCar(true);
     }
-    IEnumerator AddPointsAfter(float time)
+    private IEnumerator AddPointsAfter(float time)
     {
         yield return new WaitForSeconds(time);
         GetComponentInChildren<Animator>().SetTrigger("suc");
@@ -31,30 +47,35 @@ public class CarSimple : SimplifyParent
     }
 
 
-    public void ManualInit (Crosses [] CrossLane, bool HorOrVertical)
+    public void ManualInit (Crosses[] CrossLane, bool HorOrVertical)
     {
         crossLane = CrossLane;
         horOrVert = HorOrVertical;
         actualStep = -1;  //Set on -1 to update on Spawn and set on 0
 
+        // Get Score after timer is over
         spawnDelay = Control.instance.spawnDelay;
         StartCoroutine(DestroyAfter(horOrVert ? 7 * spawnDelay : 4 * spawnDelay));
         StartCoroutine(AddPointsAfter(horOrVert ? (5 * spawnDelay) +(.25f * spawnDelay) : (3 * spawnDelay) + (.30f * spawnDelay)));
     }
     public void FillCrosses()
     {
-        if (!died)
+        if (died)
+            return;
+        
+        // Tell crosses in how many steps car will need to pass
+        for(int i = actualStep; i < crossLane.Length; i++)
         {
-            int counter = -1;
-
-            for (int i = actualStep; i < crossLane.Length; i++)
+            if (crossLane[i] != null)
             {
-                counter++;
-
-                if(crossLane[i] != null)
+                bool isError = false;
+                if (CanBeMissedByAssiSystem) 
                 {
-                    crossLane[i].crossedInTurns.Add(new Vector2(i - actualStep, horOrVert ? 0 : 1));
+                    float randProbability = Random.Range(0f, 1f);
+                    if (randProbability <= ErrorProbability) { isError = true; }
                 }
+                
+                crossLane[i].crossedInTurnsDictionary.Add(new KeyValuePair<bool, Vector2>(isError, new Vector2(i - actualStep, horOrVert ? 0 : 1)));
             }
         }
     }
@@ -100,14 +121,17 @@ public class CarSimple : SimplifyParent
         }
     }
 
-    void DestroyCar(bool success = false)
+    private void DestroyCar(bool success = false)
     {
+        /*
         if(!success)     // Score is added earlier 
             ScoreSimple.sco.UpdateScore(success ? 5 : -3);
-
+        */
+        
         if (!success)
         {
             died = true;
+            ScoreSimple.sco.UpdateScore(-3);
             SimplAssis.instance.UpdateAssistance();
 
             GetComponentInChildren<Animator>().SetTrigger("Die");
@@ -116,15 +140,40 @@ public class CarSimple : SimplifyParent
 
             if (Control.instance.actualSaveClass != null)
             {
-                Control.instance.actualSaveClass.carsCrashed++;
+                Control.instance.actualSaveClass.carsCrashedTotal++;
+                switch (carType)
+                {
+                    case CarType.car00:
+                        Control.instance.actualSaveClass.cars00Crashed++;
+                        break;
+                    case CarType.car01:
+                        Control.instance.actualSaveClass.cars01Crashed++;
+                        break;
+                    case CarType.car02:
+                        Control.instance.actualSaveClass.cars02Crashed++;
+                        break;
+                }
             }
         }
         else
         {
+            // Score is added in CarSimple.AddPointsAfter()
             Destroy(gameObject);
             if (Control.instance.actualSaveClass != null)
             {
-                Control.instance.actualSaveClass.carsSuccess++;
+                Control.instance.actualSaveClass.carsSuccessTotal++;
+                switch (carType)
+                {
+                    case CarType.car00:
+                        Control.instance.actualSaveClass.cars00Success++;
+                        break;
+                    case CarType.car01:
+                        Control.instance.actualSaveClass.cars01Success++;
+                        break;
+                    case CarType.car02:
+                        Control.instance.actualSaveClass.cars02Success++;
+                        break;
+                }
             }
         }
 

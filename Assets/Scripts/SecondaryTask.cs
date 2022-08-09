@@ -173,7 +173,7 @@ public class SecondaryTask : MonoBehaviour
         {
             _trainingTimer += Time.deltaTime;
             if(_trainingTimer > trainingTime)
-                FragebogenManager.fra.NextQuestion();        
+                FragebogenManager.instance.NextQuestion();        
         }
 
 

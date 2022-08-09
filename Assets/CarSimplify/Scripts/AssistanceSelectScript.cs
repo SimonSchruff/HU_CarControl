@@ -43,6 +43,7 @@ public class AssistanceSelectScript : MonoBehaviour
         }
         else
         {
+            print("Hide all displays!");
             HideAllDispays();
         }
     }
@@ -93,7 +94,8 @@ public class AssistanceSelectScript : MonoBehaviour
 
         ChangeUIVisibility(false);
     }
-    void SetUpDebugPanel ()
+    
+    void SetUpDebugPanel()
     {
         if (assiSelectState == AssiSelectStates.Select && SimplAssis.instance.actualAssistance == SimplAssis.AssiState.none)
             SimplAssis.instance.ChangeAssistanceMode(SimplAssis.AssiState.areaHelp);
@@ -116,7 +118,7 @@ public class AssistanceSelectScript : MonoBehaviour
         }
     }
 
-    void HideAllDispays ()
+    void HideAllDispays()
     {
         AssistanceDisplayText.gameObject.SetActive(false);
         debugNoneBut.gameObject.SetActive(false);

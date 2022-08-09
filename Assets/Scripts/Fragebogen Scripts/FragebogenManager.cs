@@ -20,7 +20,7 @@ public class FragebogenManager : MonoBehaviour
         public GameObject questionObj;
     }
 
-    public static FragebogenManager fra;
+    public static FragebogenManager instance;
     public Questions[] questions;
 
     [Serializable]
@@ -43,9 +43,9 @@ public class FragebogenManager : MonoBehaviour
 
     private void Awake()
     {
-        if(fra == null)
+        if(instance == null)
         {
-            fra = this;
+            instance = this;
         }
         else
         {
@@ -111,8 +111,6 @@ public class FragebogenManager : MonoBehaviour
                 }
                 
             }
-            
-
 
             questionNumber++;
         }

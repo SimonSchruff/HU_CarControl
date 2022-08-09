@@ -106,19 +106,25 @@ public class Control : MonoBehaviour
 
        // StopCoroutine(UpdateFunc());
 
-        foreach (var sec in FindObjectsOfType<SecondaryTask>())     //Destroy Sec Task
+       //Destroy Sec Task
+        foreach (var sec in FindObjectsOfType<SecondaryTask>())   
         {
             Destroy(sec.gameObject);
         }
         CheckIfAddLastScoreClass();
 
         AssistanceSelectScript.instance.ChangeUIVisibility(false); 
-        FragebogenManager.fra.NextQuestion();
-
+        
+        // Continue in Survey
+        if(FragebogenManager.instance)
+            FragebogenManager.instance.NextQuestion();
+        else
+            print("No FragebogenManager found; Cannot continue; Control.cs : 122");
+        
         actualSaveClass = null;
     }   
 
-    void CheckIfAddLastScoreClass ()
+    void CheckIfAddLastScoreClass()
     {
         if(isLastLevel)
         {
@@ -235,7 +241,7 @@ public class Control : MonoBehaviour
             {
                 foreach (var carSpawn in carSpawnRefs)
                 {
-                    if (carSpawn.AllowSpawnCar && !carSpawn.HorOrVert)
+                    if (carSpawn.AllowSpawnCar && !carSpawn.IsHorizontal)
                     {
                         horSpawn.Add(carSpawn);
                     }
@@ -258,7 +264,7 @@ public class Control : MonoBehaviour
 
                 foreach (var carSpawn in carSpawnRefs)
                 {
-                    if (carSpawn.AllowSpawnCar && carSpawn.HorOrVert)
+                    if (carSpawn.AllowSpawnCar && carSpawn.IsHorizontal)
                     {
                         verSpawn.Add(carSpawn);
                     }
@@ -281,7 +287,7 @@ public class Control : MonoBehaviour
                 {
                     foreach (var carSpawn in carSpawnRefs)
                     {
-                        if (carSpawn.AllowSpawnCar && !carSpawn.HorOrVert)
+                        if (carSpawn.AllowSpawnCar && !carSpawn.IsHorizontal)
                         {
                             horSpawn.Add(carSpawn);
                         }
@@ -299,7 +305,7 @@ public class Control : MonoBehaviour
 
                     foreach (var carSpawn in carSpawnRefs)
                     {
-                        if (carSpawn.AllowSpawnCar && carSpawn.HorOrVert)
+                        if (carSpawn.AllowSpawnCar && carSpawn.IsHorizontal)
                         {
                             verSpawn.Add(carSpawn);
                         }
@@ -314,7 +320,7 @@ public class Control : MonoBehaviour
                 {
                     foreach (var carSpawn in carSpawnRefs)
                     {
-                        if (carSpawn.AllowSpawnCar && carSpawn.HorOrVert)
+                        if (carSpawn.AllowSpawnCar && carSpawn.IsHorizontal)
                         {
                             verSpawn.Add(carSpawn);
                         }
@@ -332,7 +338,7 @@ public class Control : MonoBehaviour
 
                     foreach (var carSpawn in carSpawnRefs)
                     {
-                        if (carSpawn.AllowSpawnCar && !carSpawn.HorOrVert)
+                        if (carSpawn.AllowSpawnCar && !carSpawn.IsHorizontal)
                         {
                             horSpawn.Add(carSpawn);
                         }

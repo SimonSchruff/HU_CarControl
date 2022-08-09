@@ -22,11 +22,13 @@ public class TrialStartLogic : MonoBehaviour
     {
         ScoreSimple.sco.ResetScore();
 
-        group = SQLSaveManager.instance.group;
+        if(SQLSaveManager.instance)
+            group = SQLSaveManager.instance.group;
+        else
+            print("No SaveManager found; TrialStartLogic.cs:29");
+        
         trialName = gameObject.name;
-
-
-
+        
         Control c = Control.instance;
 
         ScoreSimple.sco.ChangeScoreVisibility(showUI);

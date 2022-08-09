@@ -30,7 +30,7 @@ public class SimplAssis : MonoBehaviour
             Destroy(this);
     }
 
-    public void ChangeAssistanceMode (AssiState changeStateTo)
+    public void ChangeAssistanceMode(AssiState changeStateTo)
     {
         ResetHighlightAreas();
 
@@ -42,7 +42,7 @@ public class SimplAssis : MonoBehaviour
         UpdateAssistance();
     }
 
-    public void UpdateAssistance ()
+    public void UpdateAssistance()
     {
         switch (actualAssistance)
         {
@@ -55,14 +55,12 @@ public class SimplAssis : MonoBehaviour
                     ResetHighlightAreas();
 
                     var tempCrossToChange = SearchForNextRecommendations();
-                    if(tempCrossToChange.Count>0)
+                    if(tempCrossToChange.Count > 0)
                     {
                         SpriteRenderer highlight = highlightSprites[FindHighlightAreaIndexFromCross(tempCrossToChange[0])];
                         highlight.gameObject.SetActive(true);
                                                     
                     }
-
-
                     break;
                 }
             case AssiState.specificHelp:
@@ -70,9 +68,7 @@ public class SimplAssis : MonoBehaviour
                     ResetHighlightedCrosses();
 
                     int counter = 0;
-
                     var tempCrossToChange = SearchForNextRecommendations();
-
                     foreach (var tempCross in tempCrossToChange)
                     {
                         tempCross.SetHighlighted(tempCross.tempHighlightPrio, true);
@@ -83,7 +79,6 @@ public class SimplAssis : MonoBehaviour
             case AssiState.auto:
                 {
                     StartCoroutine(DelayAutoUpdate());
-
                     break;
                 }
             default:
@@ -141,11 +136,11 @@ public class SimplAssis : MonoBehaviour
 
     private void Update()
     {
-        if(autoUpdateTimer>0)
+        if(autoUpdateTimer > 0)
         {
             autoUpdateTimer -= Time.deltaTime;
 
-            if (autoUpdateTimer<= 0)
+            if (autoUpdateTimer <= 0)
             {
                 UpdateAssistance();
             }
@@ -156,6 +151,7 @@ public class SimplAssis : MonoBehaviour
     {
         foreach (var cross in Control.instance.crossesRefs)
         {
+            // Calls method with default values -> Un-highlights all crosses
             cross.SetHighlighted();
         }
     }
@@ -167,32 +163,35 @@ public class SimplAssis : MonoBehaviour
         }
     }
 
-    List <Crosses>  SearchForNextRecommendations ()
+    private List<Crosses> SearchForNextRecommendations()
     {
+        // ToDo: Do this in Start()
         List<Crosses> crossList = new List<Crosses>();
         Crosses[] crossRef = Control.instance.crossesRefs;
 
         List<Crosses> excludeCrosses = new List<Crosses>();
 
-        int maxCount = 6; // How many Crosses should be checked in Row + Empty slots
+        // Why 6? Only 4 crosses per row
+        int maxCount = 6; //Marki: How many Crosses should be checked in Row + Empty slots
 
-        foreach (var cr in crossRef)
-        {
+        // Set highlight priority for every cross to 0
+        foreach (var cr in crossRef) {
             cr.tempHighlightPrio = 0;
         }
-
+        
         for (int i = 0; i < maxCount; i++)
         {
             foreach (var cross in crossRef)
             {
-                foreach (Vector2 vec in cross.crossedInTurns)
+                foreach (var vec in cross.crossedInTurnsDictionary)
                 {
+                    bool possible = true;
+
                     // Check if action might be needed in close turn
-                    if(vec.x == i) 
+                    if(vec.Value.x == i) 
                     {
-                        if(cross.actualState != (vec.y == 0))
+                        if(cross.actualState != (vec.Value .y == 0))
                         {
-                            bool possible = true;
                             if (i != 0)
                             {
                                 foreach (var usedCrosses in crossList)
@@ -211,6 +210,7 @@ public class SimplAssis : MonoBehaviour
                                     }
                                 }
                             }
+                            
                             if (possible)
                             {
                                 foreach (var exlCross in excludeCrosses)
@@ -221,25 +221,102 @@ public class SimplAssis : MonoBehaviour
                                         break;
                                     }
                                 }
-                                if (possible)
+                                
+                                if (possible && !vec.Key)
                                 {
                                     if(cross.tempHighlightPrio == 0)
                                     {
+                                        //print("Highlighted Cross: " + cross.gameObject.name);
+                                        cross.tempHighlightPrio = i + 1;
                                         crossList.Add(cross);
-                                        cross.tempHighlightPrio = i+1;
                                     }
                                 }
                             }
                         }
                         else    
                         {
-                            //Exclude when cross needs to be crossed and cross standing right
+                            //Marki: Exclude when cross needs to be crossed and cross standing right
+                            // Exclude cross when already in the correct position
+                            //print("Excluded Cross: " + cross.gameObject.name);
                             excludeCrosses.Add(cross);
                         }
                     }
                 }
             }
         }
+        
+        
+        
+        
+        
+
+        /*
+        for (int i = 0; i < maxCount; i++)
+        {
+            foreach (var cross in crossRef)
+            {
+                foreach (Vector2 vec in cross.crossedInTurns)
+                {
+                    bool possible = true;
+
+                    // Check if action might be needed in close turn
+                    if(vec.x == i) 
+                    {
+                        if(cross.actualState != (vec.y == 0))
+                        {
+                            if (i != 0)
+                            {
+                                foreach (var usedCrosses in crossList)
+                                {
+                                    foreach(var prevCross in (cross.actualState? cross.previousCrossH: cross.previousCrossV))
+                                    {
+                                        if(prevCross == usedCrosses)
+                                        {
+                                            possible = false;
+                                            break;
+                                        }
+                                    }
+                                    if (possible == false)
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                            
+                            if (possible)
+                            {
+                                foreach (var exlCross in excludeCrosses)
+                                {
+                                    if (cross == exlCross)
+                                    {
+                                        possible = false;
+                                        break;
+                                    }
+                                }
+                                
+                                if (possible)
+                                {
+                                    if(cross.tempHighlightPrio == 0)
+                                    {
+                                        //print("Highlighted Cross: " + cross.gameObject.name);
+                                        cross.tempHighlightPrio = i + 1;
+                                        crossList.Add(cross);
+                                    }
+                                }
+                            }
+                        }
+                        else    
+                        {
+                            //Marki: Exclude when cross needs to be crossed and cross standing right
+                            // Exclude cross when already in the correct position
+                            //print("Excluded Cross: " + cross.gameObject.name);
+                            excludeCrosses.Add(cross);
+                        }
+                    }
+                }
+            }
+        }
+        */
 
         return crossList;
     }

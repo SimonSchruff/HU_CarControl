@@ -6,24 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Build Scenes/DeclarationOfConsent.unity
-    guid: bb103a318259140f4b4e3c2de5f2843b
-  - enabled: 1
-    path: Assets/Scenes/Build Scenes/Fragebogen.unity
-    guid: 95e7f5f6d85544e898e14d2a516e58e6
-  - enabled: 1
-    path: Assets/Scenes/Build Scenes/NBackSpiel.unity
-    guid: 03d56d282640d45319dbafe1cabb33cc
-  - enabled: 1
-    path: Assets/Scenes/Build Scenes/Fragebogen -Teil 01 b.unity
-    guid: 60f6ee7c9a5964750894a46e96e89699
-  - enabled: 1
-    path: Assets/Scenes/Build Scenes/Introduction.unity
-    guid: 8795d2dab3355449cb0b0424089f1a36
-  - enabled: 1
-    path: Assets/Scenes/Build Scenes/Fragebogen - Teil 02.unity
-    guid: 945fd3a788b4446c2ae6fdcbedb0efc7
-  - enabled: 1
-    path: Assets/Scenes/Build Scenes/Introduction Part2.unity
-    guid: 4feaa6292b6f34a78be7152ab49719d9
+    path: Assets/Scenes/CarControlV2/CarControlNew.unity
+    guid: 297601f3150e35d45bb45c57b6e8d166
   m_configObjects: {}
