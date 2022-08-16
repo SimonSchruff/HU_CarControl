@@ -12,12 +12,22 @@ public class SimplAssis : MonoBehaviour
     [SerializeField] Crosses[] crossHightlightPair_1;
     [SerializeField] Crosses[] crossHightlightPair_2;
     [SerializeField] Crosses[] crossHightlightPair_3;
+    
+    [Header("Small Area Highlight")]
+    [SerializeField] SpriteRenderer[] sm_highlightSprites;
+    [SerializeField] Crosses[] sm_crossHightlightPair_0;
+    [SerializeField] Crosses[] sm_crossHightlightPair_1;
+    [SerializeField] Crosses[] sm_crossHightlightPair_2;
+    [SerializeField] Crosses[] sm_crossHightlightPair_3;
+    [SerializeField] Crosses[] sm_crossHightlightPair_4;
+    [SerializeField] Crosses[] sm_crossHightlightPair_5;
+
 
     float autoUpdateTimer = 0;
 
     public enum AssiState
     {
-        none, areaHelp, specificHelp, auto
+        none, areaHelp, specificHelp, smallAreaHelp, auto
     }
 
     // Singleton
@@ -32,11 +42,10 @@ public class SimplAssis : MonoBehaviour
 
     public void ChangeAssistanceMode(AssiState changeStateTo)
     {
+        ResetSmallHighlightAreas();
         ResetHighlightAreas();
-
         ResetHighlightedCrosses();
-
-
+        
         actualAssistance = changeStateTo;
 
         UpdateAssistance();
@@ -63,6 +72,22 @@ public class SimplAssis : MonoBehaviour
                     }
                     break;
                 }
+            
+            case AssiState.smallAreaHelp:
+                {
+                    // TODO: TEST
+                    ResetSmallHighlightAreas();
+                    print("Small Area Help;");
+                    var tempCrossToChange = SearchForNextRecommendations();
+                    if(tempCrossToChange.Count > 0)
+                    {
+                        SpriteRenderer highlight = sm_highlightSprites[FindSmallHighlightAreaIndexFromCross(tempCrossToChange[0])];
+                        highlight.gameObject.SetActive(true);
+                    }
+                    
+                    break;
+                }
+                
             case AssiState.specificHelp:
                 {
                     ResetHighlightedCrosses();
@@ -119,6 +144,54 @@ public class SimplAssis : MonoBehaviour
 
         return -1;
     }
+    
+    int FindSmallHighlightAreaIndexFromCross(Crosses crossToFindArea)
+    {
+        foreach (var area0 in sm_crossHightlightPair_0)
+        {
+            if (area0 == crossToFindArea)
+            {
+                return 0;
+            }
+        }
+        foreach (var area1 in sm_crossHightlightPair_1)
+        {
+            if (area1 == crossToFindArea)
+            {
+                return 1;
+            }
+        }
+        foreach (var area2 in sm_crossHightlightPair_2)
+        {
+            if (area2 == crossToFindArea)
+            {
+                return 2;
+            }
+        }
+        foreach (var area3 in sm_crossHightlightPair_3)
+        {
+            if (area3 == crossToFindArea)
+            {
+                return 3;
+            }
+        }
+        foreach (var area4 in sm_crossHightlightPair_4)
+        {
+            if (area4 == crossToFindArea)
+            {
+                return 4;
+            }
+        }
+        foreach (var area5 in sm_crossHightlightPair_5)
+        {
+            if (area5 == crossToFindArea)
+            {
+                return 5;
+            }
+        }
+
+        return -1;
+    }
 
     IEnumerator DelayAutoUpdate ()
     {
@@ -158,6 +231,14 @@ public class SimplAssis : MonoBehaviour
     void ResetHighlightAreas()
     {
         foreach (var sprite in highlightSprites)
+        {
+            sprite.gameObject.SetActive(false);
+        }
+    }
+    
+    void ResetSmallHighlightAreas()
+    {
+        foreach (var sprite in sm_highlightSprites)
         {
             sprite.gameObject.SetActive(false);
         }

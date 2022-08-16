@@ -18,7 +18,6 @@ public class Crosses : SimplifyParent
     public bool locked = false;
 
     public SpriteRenderer highlightSprite;
-
     public int tempHighlightPrio;
 
 
@@ -30,6 +29,7 @@ public class Crosses : SimplifyParent
 
     private void Start()
     {
+
         actualState = (Random.Range(0, 2) == 0);
         CrossClicked();
     }
@@ -72,7 +72,9 @@ public class Crosses : SimplifyParent
     {
         //priorityText.gameObject.SetActive(setHighlighted);
         highlightSprite.gameObject.SetActive(setHighlighted);
-
+    
+        
+        
         if (setHighlighted && priority != 0)
         {
             priorityText.text = priority.ToString();
@@ -104,6 +106,6 @@ public class Crosses : SimplifyParent
             var color = highlightSprite.color;
             highlightSprite.color = new Color(color.r, color.g, color.b, tempOpacity);
         }
-
+        
     }
 }

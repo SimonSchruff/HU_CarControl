@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,8 @@ public class SQLSaveManager : MonoBehaviour
     public Group group;
 
     public string playerID;
-    private string URL = "https://marki.fun/PHP/dataFL.php";
+    // 16.08 prolific Study Link: "https://marki.fun/PHP/dataFL.php"
+    public string URL = "https://marki.fun/PHP/dataFL.php";
 
     public struct Answer
     {
@@ -88,8 +90,8 @@ public class SQLSaveManager : MonoBehaviour
 
         List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
 
-        formData.Add(new MultipartFormDataSection("id", playerID));
-        formData.Add(new MultipartFormDataSection("startTime", startTime.ToString()));
+        formData.Add(new MultipartFormDataSection("id",playerID + "_" +  DateTime.Now.Day + "/" + DateTime.UtcNow.Month +"_"+ DateTime.UtcNow.Hour + ":" + DateTime.UtcNow.Minute  ));
+        formData.Add(new MultipartFormDataSection("startTime", startTime.ToString())); 
         formData.Add(new MultipartFormDataSection("timeSpent", timeSpent.ToString()));
 
         formData.Add(new MultipartFormDataSection("gr", group.ToString()));
@@ -140,6 +142,19 @@ public class SQLSaveManager : MonoBehaviour
                 formData.Add(new MultipartFormDataSection(data.trialName + "_carsTotal", data.carsTotal.ToString()));
                 formData.Add(new MultipartFormDataSection(data.trialName + "_carsSuccess", data.carsSuccessTotal.ToString()));
                 formData.Add(new MultipartFormDataSection(data.trialName + "_carsCrashed", data.carsCrashedTotal.ToString()));
+                // Car 00
+                formData.Add(new MultipartFormDataSection(data.trialName + "_car00Total", data.cars00Total.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_car00Success", data.cars00Success.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_car00Crashed", data.cars00Crashed.ToString()));
+                // Car 01
+                formData.Add(new MultipartFormDataSection(data.trialName + "_car01Total", data.cars01Total.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_car01Success", data.cars01Success.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_car01Crashed", data.cars01Crashed.ToString()));
+                // Car 02
+                formData.Add(new MultipartFormDataSection(data.trialName + "_car02Total", data.cars02Total.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_car02Success", data.cars02Success.ToString()));
+                formData.Add(new MultipartFormDataSection(data.trialName + "_car02Crashed", data.cars02Crashed.ToString()));
+                
                 formData.Add(new MultipartFormDataSection(data.trialName + "_crossesCrossed", data.crossesCrossed.ToString()));
                 formData.Add(new MultipartFormDataSection(data.trialName + "_crossesCrossedHorizontal", data.crossesCrossedHorizontal.ToString()));
                 formData.Add(new MultipartFormDataSection(data.trialName + "_crossesCrossedVertical", data.crossesCrossedVertical.ToString()));

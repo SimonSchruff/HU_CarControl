@@ -129,6 +129,11 @@ public class FragebogenManager : MonoBehaviour
         
     }
 
+    public void SaveData()
+    {
+        SQLSaveManager.instance.StartPostCoroutine();
+    }
+
 
     public bool AllowedToContinue(int currentID)
     {
@@ -184,10 +189,12 @@ public class FragebogenManager : MonoBehaviour
 
                     if(answer.gameObject.name == "prolificID")
                     {
+                        /*
                             if(answer.currentAnswer.Length != 4)
                             {
                                 return false; 
                             }
+                        */
                     }
                 }
 

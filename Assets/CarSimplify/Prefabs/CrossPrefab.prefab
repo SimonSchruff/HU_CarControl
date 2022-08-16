@@ -53,9 +53,11 @@ MonoBehaviour:
   TurnToLockSpwanPairs: 
   carSpawnLock: []
   actualState: 0
+  displayError: 0
   locked: 0
   highlightSprite: {fileID: 3725708681191688670}
-  crossedInTurns: []
+  anim: {fileID: 2164287393536047147}
+  tempHighlightPrio: 0
   priorityText: {fileID: 9190286003983399795}
 --- !u!58 &5715438244824443799
 CircleCollider2D:
@@ -276,7 +278,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &1918154851444584808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7632001329259842468}
   - component: {fileID: 3725708681191688670}
+  - component: {fileID: 2164287393536047147}
   m_Layer: 0
   m_Name: HighlightCrossSprite
   m_TagString: Untagged
@@ -376,6 +379,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2164287393536047147
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858961030269604564}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8c9cb5372baa64926aac1062f679bebc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8610557165008523910
 GameObject:
   m_ObjectHideFlags: 0

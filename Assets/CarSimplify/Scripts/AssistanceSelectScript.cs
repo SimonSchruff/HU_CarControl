@@ -19,7 +19,7 @@ public class AssistanceSelectScript : MonoBehaviour
 
     public enum AssiSelectStates
     {
-        Debug, None, Area, Specific, Select
+        Debug, None, Area, SmallArea, Specific, Select
     }
 
     private void Awake()
@@ -70,6 +70,12 @@ public class AssistanceSelectScript : MonoBehaviour
                 AssistanceDisplayText.color = Color.green;
                 SimplAssis.instance.ChangeAssistanceMode(SimplAssis.AssiState.areaHelp);
                 break;
+            case AssiSelectStates.SmallArea:
+                AssistanceDisplayText.gameObject.SetActive(true);
+                AssistanceDisplayText.text = "Area assistance ON";
+                AssistanceDisplayText.color = Color.green;
+                SimplAssis.instance.ChangeAssistanceMode(SimplAssis.AssiState.smallAreaHelp);
+                break;
             case AssiSelectStates.Specific:
                 AssistanceDisplayText.gameObject.SetActive(true);
                 AssistanceDisplayText.text = "Specific assistance ON";
@@ -113,6 +119,9 @@ public class AssistanceSelectScript : MonoBehaviour
                 break;
             case SimplAssis.AssiState.auto:
                 break;
+            case SimplAssis.AssiState.smallAreaHelp:
+                ChangeAssistanceToSmallArea();
+                break;
             default:
                 break;
         }
@@ -146,6 +155,19 @@ public class AssistanceSelectScript : MonoBehaviour
         }
         catch {}
     }
+    
+    public void ChangeAssistanceToSmallArea()
+    {
+        ClearHighlightOfAllBut();
+
+        SimplAssis.instance.ChangeAssistanceMode(SimplAssis.AssiState.smallAreaHelp);
+        areaBut.color = Color.green;
+        
+        if(Control.instance)
+            Control.instance.actualSaveClass.ChangeAssitanceInGame(true);
+       
+    }
+    
     public void ChangeAssistanceToSpecific ()
     {
         ClearHighlightOfAllBut();

@@ -151,7 +151,7 @@ MonoBehaviour:
   actualStep: 0
   carType: 2
   CanBeMissedByAssiSystem: 1
-  ErrorProbability: 1
+  ErrorProbability: 0.5
 --- !u!61 &3719110588339022827
 BoxCollider2D:
   m_ObjectHideFlags: 0
