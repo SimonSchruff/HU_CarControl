@@ -89,6 +89,7 @@ public class SQLSaveManager : MonoBehaviour
         timeSpent = System.DateTime.UtcNow - startTime; 
 
         List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
+        
 
         formData.Add(new MultipartFormDataSection("id",playerID + "_" +  DateTime.Now.Day + "/" + DateTime.UtcNow.Month +"_"+ DateTime.UtcNow.Hour + ":" + DateTime.UtcNow.Minute  ));
         formData.Add(new MultipartFormDataSection("startTime", startTime.ToString())); 
@@ -179,6 +180,10 @@ public class SQLSaveManager : MonoBehaviour
 
         using (UnityWebRequest webRequest = UnityWebRequest.Post(URL, formData))
         {
+            // Hopefully allow for https transfer
+            webRequest.SetRequestHeader("Access-Control-Allow-Origin", "*");
+            webRequest.certificateHandler = new BybassHTTPSCertificate(); 
+            
             yield return webRequest.SendWebRequest();
 
             switch (webRequest.result)
