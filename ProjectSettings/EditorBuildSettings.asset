@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/CarControlV2/CarControlNew.unity
-    guid: 297601f3150e35d45bb45c57b6e8d166
+    path: Assets/Scenes/SmallAssiTest/IntroScreen.unity
+    guid: c796709b5496b446eb2b31f1920a9319
+  - enabled: 1
+    path: Assets/Scenes/SmallAssiTest/TR_SmallArea.unity
+    guid: 0201982fb7fc4426b86bbd053868d661
+  - enabled: 1
+    path: Assets/Scenes/SmallAssiTest/TR_Area.unity
+    guid: e0e451d4a91674f2b9d890253482dded
+  - enabled: 1
+    path: Assets/Scenes/SmallAssiTest/TR_None.unity
+    guid: b9291bbe81d384711ad94d0db19d78ec
+  - enabled: 1
+    path: Assets/Scenes/SmallAssiTest/EndScreen.unity
+    guid: ea981a678bc9a4ae3bc6e3784d264a00
   m_configObjects: {}

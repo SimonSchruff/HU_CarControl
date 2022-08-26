@@ -9,20 +9,22 @@ using UnityEngine.SceneManagement;
 
 public class FragebogenManager : MonoBehaviour
 {
-    [SerializeField] private int questionNumber; // Counted up with each button "Continue" Button Click
+    [SerializeField] private int _questionNumber; // Counted up with each button "Continue" Button Click
     [SerializeField] private GameObject ineligableScreen;
 
     [Serializable]
     public struct Questions
     {
-        public int id;
-        public string name;
-        public GameObject questionObj;
+        //public int id;
+        //public string name;
+        [Tooltip("Parent Question GameObject; Has to be set in inspector;")] public GameObject questionObj;
+        [Tooltip("Error Text Obj that is shown when wrong answer is given; Has to be set in inspector;")] public GameObject errorText;
     }
 
     public static FragebogenManager instance;
     public Questions[] questions;
 
+    /*
     [Serializable]
     public struct ErrorText
     {
@@ -30,8 +32,9 @@ public class FragebogenManager : MonoBehaviour
         public GameObject obj;
     }
     [Tooltip("Set the parent objects name of the Question Obj and the corresponding Error Text Game Object")]
-    public ErrorText[] errorTexts;
-
+     public ErrorText[] errorTexts;
+    */
+    
     /*
      * 
      * If all Answers have been given / valid -> Disable current Question and enable next question
@@ -44,28 +47,19 @@ public class FragebogenManager : MonoBehaviour
     private void Awake()
     {
         if(instance == null)
-        {
             instance = this;
-        }
-        else
-        {
+        else 
             Destroy(this);
-        }
-    }
 
+    }
+    
     public void NextQuestion() //Called by Continue Button
     {
-        bool isAllowedToChange;
-
-        foreach (ErrorText et in errorTexts)
-            et.obj.SetActive(false);
-
-
-        int currentID = questions[questionNumber].id;
-        isAllowedToChange = AllowedToContinue(currentID);
-        //print(isAllowedToChange);
-
+        DisableAllErrorTexts();
         
+        int currentID = _questionNumber;
+        bool isAllowedToChange = AllowedToContinue(currentID);
+
         if (isAllowedToChange)
         {
             SaveAnswer(currentID);
@@ -107,24 +101,25 @@ public class FragebogenManager : MonoBehaviour
                 if(obj.TryGetComponent<TrialStartLogic>(out tr) == true)
                 {
                     tr.ActivateSession();
-
                 }
-                
             }
 
-            questionNumber++;
+            _questionNumber++;
         }
         else
         {
-            //print(questions[currentID].questionObj.gameObject.name);
-
             //Displays Error Text if not all Answers have been answered
+            if(questions[currentID].errorText)
+                questions[currentID].errorText.gameObject.SetActive(true);
+            
+            
+            /* ==== old version ====
             foreach (ErrorText t in errorTexts)
             {
                 if (questions[currentID].questionObj.gameObject.name == t.parentObjectName)
                     t.obj.SetActive(true);
             }
-
+            */
         }
         
     }
@@ -134,7 +129,15 @@ public class FragebogenManager : MonoBehaviour
         SQLSaveManager.instance.StartPostCoroutine();
     }
 
-
+    private void DisableAllErrorTexts()
+    {
+        foreach (var q in questions)
+        {
+            if(q.errorText)
+                q.errorText.gameObject.SetActive(false);
+        }
+    }
+    
     public bool AllowedToContinue(int currentID)
     {
         if (questions[currentID].questionObj.gameObject.GetComponentInChildren<AnswerSaver>() != null)
@@ -238,8 +241,7 @@ public class FragebogenManager : MonoBehaviour
             return; 
         }
 
-        foreach (ErrorText et in errorTexts)
-            et.obj.SetActive(false);
+        DisableAllErrorTexts();
 
         foreach (Questions q in questions)
             q.questionObj.SetActive(false);
@@ -247,6 +249,13 @@ public class FragebogenManager : MonoBehaviour
         ineligableScreen.SetActive(true); 
 
 
+    }
+
+    public void LoadRandScene()
+    {
+        if (!RandSceneLoader.instance) { print("No Rand Scene Loader in Scene!"); return; }
+        
+        RandSceneLoader.instance.LoadSceneRandomly();
     }
 
    
