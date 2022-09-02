@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,16 @@ public class SimplAssis : MonoBehaviour
         none, areaHelp, specificHelp, smallAreaHelp, auto
     }
 
+    [Serializable]
+    public struct DebugData
+    {
+        public int totalAssiRecommendations;
+        public int assiRecommendationsMissed;
+        public int totalExcludedCrosses;
+    }
+    [Header("Debug Data")]
+    public DebugData debugData;
+
     // Singleton
     public static SimplAssis instance;
     private void Awake()
@@ -38,6 +49,8 @@ public class SimplAssis : MonoBehaviour
             instance = this;
         else
             Destroy(this);
+
+        debugData = new DebugData();
     }
 
     public void ChangeAssistanceMode(AssiState changeStateTo)
@@ -72,12 +85,10 @@ public class SimplAssis : MonoBehaviour
                     }
                     break;
                 }
-            
             case AssiState.smallAreaHelp:
                 {
                     // TODO: TEST
                     ResetSmallHighlightAreas();
-                    print("Small Area Help;");
                     var tempCrossToChange = SearchForNextRecommendations();
                     if(tempCrossToChange.Count > 0)
                     {
@@ -303,13 +314,20 @@ public class SimplAssis : MonoBehaviour
                                     }
                                 }
                                 
-                                if (possible && !vec.Key)
+                                if (possible )
                                 {
-                                    if(cross.tempHighlightPrio == 0)
+                                    
+                                    if(cross.tempHighlightPrio == 0 && !vec.Key)
                                     {
                                         //print("Highlighted Cross: " + cross.gameObject.name);
                                         cross.tempHighlightPrio = i + 1;
+                                        debugData.totalAssiRecommendations++;
                                         crossList.Add(cross);
+                                    }
+
+                                    if (vec.Key)
+                                    {
+                                        debugData.assiRecommendationsMissed++;
                                     }
                                 }
                             }
@@ -319,6 +337,7 @@ public class SimplAssis : MonoBehaviour
                             //Marki: Exclude when cross needs to be crossed and cross standing right
                             // Exclude cross when already in the correct position
                             //print("Excluded Cross: " + cross.gameObject.name);
+                            debugData.totalExcludedCrosses++;
                             excludeCrosses.Add(cross);
                         }
                     }

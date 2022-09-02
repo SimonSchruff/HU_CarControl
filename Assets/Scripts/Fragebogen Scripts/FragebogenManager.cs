@@ -192,12 +192,12 @@ public class FragebogenManager : MonoBehaviour
 
                     if(answer.gameObject.name == "prolificID")
                     {
-                        /*
+                        
                             if(answer.currentAnswer.Length != 4)
                             {
                                 return false; 
                             }
-                        */
+                        
                     }
                 }
 

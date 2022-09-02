@@ -90,7 +90,7 @@ public class SecondaryTask : MonoBehaviour
         //Timer; For first time reset is only possible after 10sec to give player time to settle
         timer = Random.Range(5, timeRange); 
         cooldownTimer = timeRange - timer; 
-        print("Timer: " + timer + "; Cooldown: " + cooldownTimer); 
+        //print("Timer: " + timer + "; Cooldown: " + cooldownTimer); 
 
         currentState = CurrentState.baseState; 
 

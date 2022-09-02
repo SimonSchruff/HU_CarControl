@@ -149,6 +149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actualStep: 0
+  carType: 0
+  CanBeMissedByAssiSystem: 0
+  ErrorProbability: 0
 --- !u!61 &3719110588339022827
 BoxCollider2D:
   m_ObjectHideFlags: 0

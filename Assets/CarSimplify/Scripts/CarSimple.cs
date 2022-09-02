@@ -72,7 +72,7 @@ public class CarSimple : SimplifyParent
                 if (CanBeMissedByAssiSystem) 
                 {
                     float randProbability = Random.Range(0f, 1f);
-                    if (randProbability <= ErrorProbability) { isError = true; }
+                    if (randProbability < ErrorProbability) { isError = true; }
                 }
                 
                 crossLane[i].crossedInTurnsDictionary.Add(new KeyValuePair<bool, Vector2>(isError, new Vector2(i - actualStep, horOrVert ? 0 : 1)));

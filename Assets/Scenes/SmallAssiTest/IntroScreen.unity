@@ -762,8 +762,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 29}
-  m_SizeDelta: {x: 650.8557, y: 219.4725}
+  m_AnchoredPosition: {x: 0, y: 19.368}
+  m_SizeDelta: {x: 650.8557, y: 238.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &44720153
 MonoBehaviour:
@@ -2143,8 +2143,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 692479358}
   m_HandleRect: {fileID: 692479357}
   m_Direction: 2
-  m_Value: 0.9842472
-  m_Size: 0.41943347
+  m_Value: 0.9842471
+  m_Size: 0.41943341
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2223,8 +2223,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -73.51896}
-  m_SizeDelta: {x: 688.95, y: 587.0378}
+  m_AnchoredPosition: {x: 0, y: -95.95404}
+  m_SizeDelta: {x: 688.95, y: 631.9079}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &251569493
 GameObject:
@@ -3104,7 +3104,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Training finished!
+  m_text: Second Training finished!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3330,7 +3330,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter a name...
+  m_Text: Please enter a 4 letter code...
 --- !u!222 &343967743
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4170,7 +4170,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2300551871633921630, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: CarPrefabs.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300551871633921630, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: CarPrefabs.Array.data[0]
@@ -4186,7 +4186,7 @@ PrefabInstance:
       objectReference: {fileID: 7469770253480302540, guid: ae760141e5705457790b97919549770b, type: 3}
     - target: {fileID: 2300551871745466216, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: CarPrefabs.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300551871745466216, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: CarPrefabs.Array.data[0]
@@ -4202,7 +4202,7 @@ PrefabInstance:
       objectReference: {fileID: 7469770253480302540, guid: ae760141e5705457790b97919549770b, type: 3}
     - target: {fileID: 2300551871968611711, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: CarPrefabs.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300551871968611711, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: CarPrefabs.Array.data[0]
@@ -4218,7 +4218,7 @@ PrefabInstance:
       objectReference: {fileID: 7469770253480302540, guid: ae760141e5705457790b97919549770b, type: 3}
     - target: {fileID: 2300551872585318553, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: CarPrefabs.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300551872585318553, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: CarPrefabs.Array.data[0]
@@ -4234,7 +4234,7 @@ PrefabInstance:
       objectReference: {fileID: 7469770253480302540, guid: ae760141e5705457790b97919549770b, type: 3}
     - target: {fileID: 2300551872624670225, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: CarPrefabs.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300551872624670225, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: CarPrefabs.Array.data[0]
@@ -4250,7 +4250,7 @@ PrefabInstance:
       objectReference: {fileID: 7469770253480302540, guid: ae760141e5705457790b97919549770b, type: 3}
     - target: {fileID: 2300551873124766381, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: CarPrefabs.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300551873124766381, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: CarPrefabs.Array.data[0]
@@ -4326,7 +4326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3619266538909398949, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: CarPrefabs.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3619266538909398949, guid: f03c9bf582ef4f141b827b4bd099f2ad, type: 3}
       propertyPath: CarPrefabs.Array.data[0]
@@ -4400,13 +4400,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1552302613}
-  m_Father: {fileID: 767640749}
-  m_RootOrder: 5
+  m_Father: {fileID: 492424851}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -53}
-  m_SizeDelta: {x: 290, y: 25.6741}
+  m_AnchoredPosition: {x: 0, y: 108}
+  m_SizeDelta: {x: 290, y: 33.6392}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &443967968
 MonoBehaviour:
@@ -4663,6 +4663,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 443967967}
   - {fileID: 1316802532}
   m_Father: {fileID: 767640749}
   m_RootOrder: 3
@@ -5607,8 +5608,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -70.305, y: -116.85263}
-  m_SizeDelta: {x: 548.34, y: 224.4361}
+  m_AnchoredPosition: {x: -70.305, y: -130.2598}
+  m_SizeDelta: {x: 548.34, y: 251.2504}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &602719157
 MonoBehaviour:
@@ -6432,12 +6433,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You will now play through three 5min trials, with differing assistance-systems
+  m_text: You will now play through three 4 min trials, with differing assistance-systems
     or no assistance-system. Your performance will be measured in all three trials.
-
-
-    <b>Important:</b>
-    Red Cars have a 50% chance of getting missed by the assistance-system!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6863,7 +6860,6 @@ RectTransform:
   - {fileID: 1659158955}
   - {fileID: 492424851}
   - {fileID: 1536102586}
-  - {fileID: 443967967}
   m_Father: {fileID: 887939110}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7037,7 +7033,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.0002594, y: -356}
+  m_AnchoredPosition: {x: 0.0000031455, y: -401}
   m_SizeDelta: {x: 688.95, y: 222.55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &775260389
@@ -7148,7 +7144,7 @@ RectTransform:
   m_Father: {fileID: 397804934}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.2504742}
+  m_AnchorMin: {x: 0, y: 0.30369598}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -9300,8 +9296,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: -40, y: -120}
+  m_AnchoredPosition: {x: 0, y: -15}
+  m_SizeDelta: {x: -40, y: -70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1122210801
 MonoBehaviour:
@@ -9323,9 +9319,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Training and Trial Duration:</b> 1min \n<b>Red Car Error Percentage:
-    </b>50%\n<b>Trials: </b>Area, Small Area, No Assistance-System (random order)\n\nPlease
-    specify your name with which you want your data to be saved."
+  m_text: "We ask you to leave a <b>code of 4 letters</b> so that your study data
+    can be clearly assigned to you in an anonymized way. Please enter the following
+    in the text field below: \n\t- 1st position: <u>Last letter</u> of the month
+    of your birth \n\t- 2nd position: <u>Second letter</u> of your mother's first
+    name \n\t- 3rd and 4th positions: The <u>last two letters</u> of your first name
+    \n\n<b>Example:</b> \nYour birthday is in Augus<b><u>t</u></b> => the last letter
+    here is a T \n2nd position: Your mother's first name is R<b><u>a</u></b>chel
+    => the second letter here is an A \n3rd and 4th position: Your first name is
+    Li<b><u>sa</u></b> => the last two letters here are S A \nSo, your code would
+    be: <b>TASA</b> "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9459,12 +9462,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'In addition to traffic control, there is a second task. You have to monitor
-    the pointer movements of a gauge. If the pointer oscillates in a red region,
-    you have to correct it within 10 seconds by pressing the spacebar. If you fail
-    to do so, the pointer is centralized by the program and a missed detection is
-    counted. <b>This leads to a point deduction of 2 points.</b> If you press the
-    spacebar <b>incorrectly, a point deduction of 1 is counted.</b> '
+  m_text: "In addition to traffic control, there is a second task. You have to monitor
+    the movements of a gauge, which will be shown on the right side of the screen.
+    If the pointer oscillates in a red region, you have to correct it within 10 seconds
+    by pressing the spacebar. If you fail to do so, the pointer is centralized by
+    the program and a missed detection is counted. <b>This leads to a point deduction
+    of 2 points.</b> If you press the spacebar <b>incorrectly, a point deduction
+    of 1 is counted.</b> \nIn the following screen, you can try out this task."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10029,8 +10033,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 779048756}
   m_HandleRect: {fileID: 779048755}
   m_Direction: 2
-  m_Value: 1.0000008
-  m_Size: 0.74952596
+  m_Value: 1.0000005
+  m_Size: 0.696304
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10918,7 +10922,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 492424851}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -12441,7 +12445,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 526987828501213660, guid: 9aab624bccd7b40c8be74922a6b19179, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -155
+      value: -171
       objectReference: {fileID: 0}
     - target: {fileID: 526987828501213660, guid: 9aab624bccd7b40c8be74922a6b19179, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -12625,7 +12629,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
@@ -12635,7 +12639,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Please enter a valid name.
+  m_Text: Please enter a valid four letter code.
 --- !u!222 &1552302615
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13452,7 +13456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -65}
+  m_AnchoredPosition: {x: 0, y: -83}
   m_SizeDelta: {x: 290, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1659158956
@@ -13505,7 +13509,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 3
-  m_CharacterLimit: 24
+  m_CharacterLimit: 4
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -14204,7 +14208,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Training finished!
+  m_text: First Training finished!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14769,8 +14773,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 70}
-  m_SizeDelta: {x: -20, y: -160}
+  m_AnchoredPosition: {x: 0, y: 90}
+  m_SizeDelta: {x: -20, y: -190}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1820171547
 MonoBehaviour:
@@ -14792,7 +14796,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <b>Car Control 2.1 Developer Version</b>
+  m_text: <b>Car Control 2.2 Developer Version</b>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14819,8 +14823,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
